@@ -2,7 +2,7 @@ import React from 'react';
 import {Image, Text, View} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 
-import styles from './splash.style';
+import styles from './Splash.style';
 import colorScheme from '../../../resources/Colors/theme';
 
 const SplashScreen = () => {
@@ -14,7 +14,7 @@ const SplashScreen = () => {
       colors={[colorScheme.tertiary_color, colorScheme.secondary_color]}>
       <View style={styles.logoContainer}>
         <Image
-          source={require('../../../resources/images/caracakes4.png')}
+          source={require('../../../resources/images/favicon.png')}
           style={styles.appLogo}
         />
       </View>
