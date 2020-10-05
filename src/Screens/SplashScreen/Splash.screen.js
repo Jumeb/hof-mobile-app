@@ -1,11 +1,17 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Image, Text, View} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 
 import styles from './Splash.style';
 import colorScheme from '../../../resources/Colors/theme';
+import {Actions} from 'react-native-router-flux';
 
 const SplashScreen = () => {
+  useEffect(() => {
+    setTimeout(() => {
+      Actions.Welcome();
+    }, 600);
+  });
   return (
     <LinearGradient
       style={styles.mainContainer}

@@ -11,10 +11,10 @@ const Routes = () => {
   return (
     <Router>
       <Stack key="root">
+        <Scene key="splash" component={SplashScreen} hideNavBar />
         <Scene key="Welcome" component={WelcomeScreen} hideNavBar />
         <Scene key="Login" component={LoginScreen} hideNavBar />
         <Scene key="SignUp" component={SignUpScreen} hideNavBar />
-        <Scene key="splash" component={SplashScreen} hideNavBar />
       </Stack>
     </Router>
   );

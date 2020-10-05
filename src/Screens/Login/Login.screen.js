@@ -20,7 +20,7 @@ const Login = () => {
   let h = useWindowDimensions().height;
 
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('initialState');
+  const [password, setPassword] = useState('');
   const [emailError, setEmailError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
 
