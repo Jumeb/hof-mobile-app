@@ -15,6 +15,7 @@ import Icons from 'react-native-vector-icons/Ionicons';
 import styles from './Login.style';
 import theme from '../../../resources/Colors/theme';
 import {InputComponent} from '../../Components/index';
+import {AuthMail} from '../../utils/';
 
 const Login = () => {
   let h = useWindowDimensions().height;
@@ -25,18 +26,18 @@ const Login = () => {
   const [passwordError, setPasswordError] = useState(false);
 
   const authenticate = () => {
-    if (email.length < 5) {
+    if (!AuthMail(email)) {
       setEmailError(true);
     }
     if (password.length < 5) {
       setPasswordError(true);
     } else if (
       password.length > 4 &&
-      email.length > 4 &&
       !passwordError &&
-      !emailError
+      !emailError &&
+      AuthMail(email)
     ) {
-      Actions.splash();
+      Actions.Home();
     }
   };
 

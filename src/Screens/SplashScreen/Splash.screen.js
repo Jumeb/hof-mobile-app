@@ -10,7 +10,7 @@ const SplashScreen = () => {
   useEffect(() => {
     setTimeout(() => {
       Actions.Welcome();
-    }, 600);
+    }, 2500);
   });
   return (
     <LinearGradient
