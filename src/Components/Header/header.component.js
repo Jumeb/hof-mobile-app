@@ -13,7 +13,7 @@ const Header = (props) => {
       <TouchableOpacity style={styles.eventsIndicator}>
         <Icons
           name="ios-bookmark-outline"
-          size={30}
+          size={25}
           color={theme.primary_color}
         />
         <View style={styles.eventsCountContainer}>

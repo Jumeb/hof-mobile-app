@@ -1,6 +1,9 @@
 import React, {useEffect, useState} from 'react';
-import {SafeAreaView, Text, View} from 'react-native';
+import {SafeAreaView, ScrollView, Text, View} from 'react-native';
+
+import {Baker} from '../../Components';
 import {Notification} from '../../modals';
+import styles from './Home.style';
 
 const Home = () => {
   const [notify, setNotify] = useState(true);
@@ -11,10 +14,10 @@ const Home = () => {
   });
 
   return (
-    <SafeAreaView>
-      <View>
-        <Text></Text>
-      </View>
+    <SafeAreaView style={styles.mainContainer}>
+      <ScrollView>
+        <Baker />
+      </ScrollView>
       <Notification notify={notify} message="Welcome Jume Brice" />
     </SafeAreaView>
   );

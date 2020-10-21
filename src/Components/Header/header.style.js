@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.8,
     elevation: 2,
     alignItems: 'center',
-    padding: 6,
+    padding: 10,
     marginHorizontal: 0,
   },
   headerText: {
