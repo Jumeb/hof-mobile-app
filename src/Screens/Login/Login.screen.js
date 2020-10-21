@@ -37,7 +37,7 @@ const Login = () => {
       !emailError &&
       AuthMail(email)
     ) {
-      Actions.Home();
+      Actions.main();
     }
   };
 

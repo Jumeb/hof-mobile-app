@@ -11,10 +11,11 @@ import {
 } from 'react-native';
 import {Actions} from 'react-native-router-flux';
 import Icons from 'react-native-vector-icons/Ionicons';
-import {InputComponent} from '../../Components/index';
 
+import {InputComponent} from '../../Components/index';
 import styles from './SignUp.style';
 import theme from '../../../resources/Colors/theme';
+import {AuthMail} from '../../utils';
 
 const SignUp = () => {
   let h = useWindowDimensions().height + 240;
@@ -30,7 +31,7 @@ const SignUp = () => {
   const [conPasswordError, setConPasswordError] = useState(false);
 
   const authenticate = () => {
-    if (email.length < 5) {
+    if (!AuthMail(email) < 5) {
       setEmailError(true);
     }
     if (userName.length < 5) {
@@ -44,7 +45,7 @@ const SignUp = () => {
       setConPasswordError(true);
     } else if (
       password.length > 4 &&
-      email.length > 4 &&
+      AuthMail(email) &&
       tel.length !== 9 &&
       userName.length > 4 &&
       !telError &&

@@ -6,17 +6,23 @@ import {
   WelcomeScreen,
   SignUpScreen,
   Home,
-} from '../Screens/index';
+} from '../Screens';
+
+import {Header} from '../Components';
 
 const Routes = () => {
   return (
     <Router>
-      <Stack key="root">
-        <Scene key="splash" component={SplashScreen} hideNavBar />
-        <Scene key="Welcome" component={WelcomeScreen} hideNavBar />
-        <Scene key="Login" component={LoginScreen} hideNavBar />
-        <Scene key="SignUp" component={SignUpScreen} hideNavBar />
-        <Scene key="Home" component={Home} hideNavBar />
+      <Stack key="root" hideNavBar>
+        <Scene key="main">
+          <Scene key="Home" component={Home} navBar={Header} title="Home" />
+        </Scene>
+        <Scene key="onboard" hideNavBar>
+          <Scene key="splash" component={SplashScreen} />
+          <Scene key="Welcome" component={WelcomeScreen} />
+          <Scene key="Login" component={LoginScreen} />
+          <Scene key="SignUp" component={SignUpScreen} />
+        </Scene>
       </Stack>
     </Router>
   );

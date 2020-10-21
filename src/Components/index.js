@@ -1,4 +1,4 @@
 import InputComponent from './AuthInputs/Input.component';
-import NotifyComponent from './NotificationModal/Notify.component';
+import Header from './Header/header.component';
 
-export {InputComponent, NotifyComponent};
+export {InputComponent, Header};
