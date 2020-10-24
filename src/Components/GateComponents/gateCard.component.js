@@ -5,12 +5,14 @@ import theme from '../../../resources/Colors/theme';
 
 import styles from './gateCard.style';
 
-const Bakers = () => {
+const Bakers = (props) => {
+  const {baker, color} = props;
+  console.log(color);
   return (
     <LinearGradient
       start={{x: 0, y: 0}}
       end={{x: 1, y: 1}}
-      colors={[theme.primary_color, theme.tertiary_color]}
+      colors={[color.start, color.end]}
       style={styles.mainContainer}>
       <TouchableOpacity activeOpacity={1}>
         <View style={styles.companyInfo}>
@@ -19,11 +21,11 @@ const Bakers = () => {
             source={require('../../../resources/images/bds-1.jpg')}
           />
           <View style={styles.companyCredentials}>
-            <Text style={styles.companyFounder}>Noella Cara</Text>
-            <Text style={styles.companyName}>CEO: Cara Cakes</Text>
+            <Text style={styles.companyFounder}>{baker.company_name}</Text>
+            <Text style={styles.companyName}>CEO: {baker.ceo_name}</Text>
           </View>
           <View style={styles.rankContainer}>
-            <Text style={styles.rankNumber}>1</Text>
+            <Text style={styles.rankNumber}>{baker.rank}</Text>
             <Text style={styles.rankText}>Ranking</Text>
           </View>
         </View>

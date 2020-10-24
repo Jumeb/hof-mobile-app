@@ -1,0 +1,40 @@
+[
+    {
+      "id": 0,
+      "rank": 1,
+      "company_name": "Cara Cakes",
+      "ceo_name": "Noella Cara"
+    },
+    {
+      "id": 1,
+      "rank": 2,
+      "company_name": "Mah's Yummies",
+      "ceo_name": "Ngeche Mah"
+    },
+    {
+      "id": 2,
+      "rank": 3,
+      "company_name": "Flora Cakes",
+      "ceo_name": "Ndi Flora"
+    },
+    {
+      "id": 3,
+      "rank": 4,
+      "company_name": "Cara Cakes"
+    },
+    {
+      "id": 4,
+      "rank": 5,
+      "company_name": "Cara Cakes"
+    },
+    {
+      "id": 5,
+      "rank": 6,
+      "company_name": "Cara Cakes"
+    },
+    {
+      "id": 6,
+      "rank": 7,
+      "company_name": "Cara Cakes"
+    }
+  ]

@@ -27,6 +27,11 @@ const styles = StyleSheet.create({
     borderColor: 'transparent',
     borderRadius: 50,
     marginLeft: 18,
+    shadowOffset: {width: 0, height: 2},
+    shadowColor: theme.light_grey,
+    shadowOpacity: 0.8,
+    shadowRadius: 6,
+    elevation: 3,
   },
   companyCredentials: {
     marginLeft: 16,
@@ -60,7 +65,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-around',
-    marginLeft: 72,
+    marginLeft: 83,
     marginTop: 12,
   },
   companyOrders: {
