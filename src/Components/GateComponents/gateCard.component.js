@@ -1,25 +1,27 @@
 import React from 'react';
 import {Image, Text, TouchableOpacity, View} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import theme from '../../../resources/Colors/theme';
+import {Actions} from 'react-native-router-flux';
 
+import theme from '../../../resources/Colors/theme';
 import styles from './gateCard.style';
 
 const Bakers = (props) => {
   const {baker, color} = props;
-  console.log(color);
   return (
     <LinearGradient
-      start={{x: 0, y: 0}}
+      start={{x: 0, y: 1}}
       end={{x: 1, y: 1}}
       colors={[color.start, color.end]}
       style={styles.mainContainer}>
-      <TouchableOpacity activeOpacity={1}>
+      <TouchableOpacity activeOpacity={1} onPress={() => Actions.Shop()}>
         <View style={styles.companyInfo}>
-          <Image
-            style={styles.companyImage}
-            source={require('../../../resources/images/bds-1.jpg')}
-          />
+          <View style={styles.companyImageContainer}>
+            <Image
+              style={styles.companyImage}
+              source={require('../../../resources/images/bds-1.jpg')}
+            />
+          </View>
           <View style={styles.companyCredentials}>
             <Text style={styles.companyFounder}>{baker.company_name}</Text>
             <Text style={styles.companyName}>CEO: {baker.ceo_name}</Text>
@@ -40,7 +42,7 @@ const Bakers = (props) => {
           </View>
           <View style={styles.companySign}>
             <Image
-              style={styles.companyLogo}
+              style={[styles.companyLogo, {tintColor: color.end}]}
               source={require('../../../resources/images/favicon.png')}
             />
           </View>

@@ -18,20 +18,25 @@ const styles = StyleSheet.create({
   companyInfo: {
     flexDirection: 'row',
     alignItems: 'center',
-    // justifyContent: 'space-around',
   },
-  companyImage: {
+  companyImageContainer: {
     height: 65,
     width: 65,
-    borderWidth: 1,
-    borderColor: 'transparent',
     borderRadius: 50,
-    marginLeft: 18,
+    marginLeft: 15,
+    borderWidth: 2,
+    borderColor: theme.white_color,
     shadowOffset: {width: 0, height: 2},
     shadowColor: theme.light_grey,
     shadowOpacity: 0.8,
     shadowRadius: 6,
     elevation: 3,
+    overflow: 'hidden',
+  },
+  companyImage: {
+    height: 65,
+    width: 65,
+    resizeMode: 'cover',
   },
   companyCredentials: {
     marginLeft: 16,
@@ -89,12 +94,16 @@ const styles = StyleSheet.create({
     backgroundColor: theme.white_color,
     justifyContent: 'center',
     alignItems: 'center',
-    marginLeft: 30,
+    marginLeft: 28,
+    shadowOffset: {width: 0, height: 2},
+    shadowColor: theme.light_grey,
+    shadowOpacity: 0.8,
+    shadowRadius: 6,
+    elevation: 3,
   },
   companyLogo: {
     height: 25,
     width: 25,
-    tintColor: theme.primary_color,
   },
 });
 

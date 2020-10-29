@@ -26,8 +26,12 @@ const Home = () => {
     {start: theme.mix_primary_color_15, end: theme.mix_primary_color_16},
   ];
 
-  const rand = () => {
-    return Math.floor(Math.random() * Math.floor(8));
+  let rank = 0;
+  const rotate = () => {
+    if (rank === 8) {
+      rank = 0;
+    }
+    return rank++;
   };
 
   return (
@@ -37,8 +41,8 @@ const Home = () => {
         renderItem={({item, key}) => (
           <Baker
             baker={item}
-            color={gradient_colors[rand()]}
-            keyExtractor={item.id}
+            color={gradient_colors[rotate()]}
+            keyExtractor={item.id.toString()}
           />
         )}
       />
