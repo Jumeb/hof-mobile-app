@@ -12,14 +12,12 @@ const styles = StyleSheet.create({
   },
   bestContainer: {
     width: 160,
-    borderWidth: 1.2,
-    borderColor: theme.primary_color,
+    borderWidth: 1.8,
     borderRadius: 8,
     overflow: 'hidden',
   },
   bestBackground: {
     height: 105,
-    // width: 105,
     borderTopLeftRadius: 8,
     borderTopRightRadius: 8,
     borderRadius: 8,
@@ -31,15 +29,16 @@ const styles = StyleSheet.create({
     color: theme.dark_grey,
   },
   pastryLikes: {
-    fontSize: theme.font_size_normal,
+    fontSize: 14,
   },
   likesContainer: {
     marginTop: 'auto',
+    marginBottom: 3,
     justifyContent: 'space-around',
     alignItems: 'baseline',
     paddingHorizontal: 6,
     flexDirection: 'row',
-    width: 80,
+    width: 60,
   },
 });
 

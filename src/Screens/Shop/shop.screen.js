@@ -1,20 +1,123 @@
-import React from 'react';
-import {View, Text, SafeAreaView, FlatList} from 'react-native';
+import React, {useState} from 'react';
+import {
+  View,
+  Text,
+  SafeAreaView,
+  FlatList,
+  ScrollView,
+  TouchableOpacity,
+} from 'react-native';
+import Icons from 'react-native-vector-icons/Ionicons';
 
-import {Best} from '../../Components';
+import {Best, Categories, PastryCard} from '../../Components';
 import styles from './shop.style';
 import best from '../../../resources/Dummy/best.json';
+import theme from '../../../resources/Colors/theme';
 
 const Shop = () => {
+  const [color, setColor] = useState(colors[0]);
+  const [layout, setLayout] = useState(0);
+  let rank = 0;
+  const rotate = () => {
+    if (rank === 8) {
+      rank = 0;
+    }
+    return rank++;
+  };
+
+  const renderHeader = () => {
+    return (
+      <View>
+        <View style={styles.paddingContent}>
+          <FlatList
+            horizontal={true}
+            showsHorizontalScrollIndicator={false}
+            data={best}
+            renderItem={({item, key}) => <Best data={item} color={color} />}
+            keyExtractor={(item) => item.id.toString()}
+          />
+        </View>
+        <View style={[styles.variety, styles.paddingContent]}>
+          <Text style={styles.varietyText}>Varieties</Text>
+        </View>
+        <ScrollView
+          horizontal={true}
+          showsHorizontalScrollIndicator={false}
+          style={styles.paddingContent}>
+          {varieties.map((variety, key) => {
+            return (
+              <Categories
+                key={key}
+                variety={variety}
+                color={colors[rotate()]}
+                setColor={setColor}
+              />
+            );
+          })}
+        </ScrollView>
+        <View style={styles.pastriesContainer}>
+          <Text style={styles.pastriesText}>Pastries</Text>
+          <View style={styles.pastriesLayout}>
+            <TouchableOpacity
+              style={styles.pastriesLayoutButton}
+              onPress={() => setLayout(0)}>
+              <Icons
+                name="grid-outline"
+                size={20}
+                color={layout === 0 ? color.start : theme.dark_grey}
+              />
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.pastriesLayoutButton}
+              onPress={() => setLayout(1)}>
+              <Icons
+                name="square-outline"
+                size={20}
+                color={layout === 1 ? color.start : theme.dark_grey}
+              />
+            </TouchableOpacity>
+          </View>
+        </View>
+      </View>
+    );
+  };
+
   return (
     <SafeAreaView style={styles.mainContainer}>
       <FlatList
-        horizontal={true}
+        ListHeaderComponent={renderHeader()}
+        horizontal={false}
+        numColumns={layout === 0 ? 2 : 1}
         data={best}
-        renderItem={({item, key}) => <Best data={item} />}
+        renderItem={({item, key}) => (
+          <PastryCard color={color} layout={layout} />
+        )}
+        keyExtractor={(item) => item.id.toString()}
+        showsVerticalScrollIndicator={false}
+        key={layout === 0 ? 'grid' : 'flat'}
       />
     </SafeAreaView>
   );
 };
 
 export default Shop;
+
+const varieties = [
+  {id: 1, type: 'Birthday Cakes'},
+  {id: 2, type: 'Wedding Cakes'},
+  {id: 3, type: 'Cookies'},
+  {id: 4, type: 'Pancakes'},
+  {id: 5, type: 'Valentine'},
+  {id: 6, type: 'Doughnuts'},
+  {id: 7, type: 'Cup Cakes'},
+];
+
+const colors = [
+  {start: theme.mix_primary_color_1, end: theme.mix_primary_color_2},
+  {start: theme.mix_primary_color_3, end: theme.mix_primary_color_4},
+  {start: theme.mix_primary_color_5, end: theme.mix_primary_color_6},
+  {start: theme.mix_primary_color_7, end: theme.mix_primary_color_8},
+  {start: theme.mix_primary_color_9, end: theme.mix_primary_color_10},
+  {start: theme.mix_primary_color_11, end: theme.mix_primary_color_12},
+  {start: theme.mix_primary_color_13, end: theme.mix_primary_color_14},
+];

@@ -20,7 +20,7 @@ export default {
   mix_primary_color_16: '#D24D2D',
   secondary_color: '#ad005e',
   danger_color: '#FF141D',
-  white_color: '#F6DDDF',
+  white_color: '#FFFFFF',
   tertiary_color: '#470026',
   text_color: '#231F20',
   dark_overlays: '#1A2026',

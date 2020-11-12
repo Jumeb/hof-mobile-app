@@ -39,12 +39,9 @@ const Home = () => {
       <FlatList
         data={bakers}
         renderItem={({item, key}) => (
-          <Baker
-            baker={item}
-            color={gradient_colors[rotate()]}
-            keyExtractor={item.id.toString()}
-          />
+          <Baker baker={item} color={gradient_colors[rotate()]} />
         )}
+        keyExtractor={(item) => item.id.toString()}
       />
       <Notification notify={notify} message="Welcome Jume Brice" />
     </SafeAreaView>
