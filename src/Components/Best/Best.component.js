@@ -2,7 +2,7 @@ import React from 'react';
 import {ImageBackground, Text, TouchableOpacity, View} from 'react-native';
 import Icons from 'react-native-vector-icons/Entypo';
 
-import styles from './best.style';
+import styles from './Best.style';
 
 const Best = (props) => {
   const {data, color} = props;

@@ -1,16 +1,22 @@
 import InputComponent from './AuthInputs/Input.component';
-import Header from './Header/header.component';
-import Baker from './GateComponents/gateCard.component';
-import Best from './Best/best.component';
-import Categories from './Categories/categories.component';
-import PastryCard from './PastryCard/pastrycard.component';
-import EventCard from './EventCard/eventCard.component';
-import ActionButton from './ActionButton/actionButton.component';
-import ModalButton from './modalButtons/modalButton.component';
+import NavBar from './NavBar/NavBar.component';
+import Baker from './GateComponents/GateCard.component';
+import Best from './Best/Best.component';
+import Categories from './Categories/Categories.component';
+import PastryCard from './PastryCard/Pastrycard.component';
+import EventCard from './EventCard/EventCard.component';
+import ActionButton from './ActionButton/ActionButton.component';
+import ModalButton from './modalButtons/ModalButton.component';
+import TabBar from './TabBar/TabBar.component';
+import TabBarTwo from './TabBar2/TabBar.component';
+import ReviewCard from './ReviewCard/ReviewCard.component';
+import Spacer from './Spacer/Space.component';
+import Header from './Header/Header.component';
+import TabIcon from './TabIcon/TabIcon.component';
 
 export {
   InputComponent,
-  Header,
+  NavBar,
   Baker,
   Best,
   Categories,
@@ -18,4 +24,10 @@ export {
   EventCard,
   ActionButton,
   ModalButton,
+  TabBar,
+  TabBarTwo,
+  ReviewCard,
+  Spacer,
+  TabIcon,
+  Header,
 };

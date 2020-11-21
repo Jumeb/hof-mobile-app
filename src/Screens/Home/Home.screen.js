@@ -1,8 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {FlatList, SafeAreaView} from 'react-native';
 
-import {Baker} from '../../Components';
-import {Notification} from '../../modals';
+import {Baker, Spacer, TabBar, TabBarTwo} from '../../Components';
 import styles from './Home.style';
 import bakers from '../../../resources/Dummy/bakers.json';
 import theme from '../../../resources/Colors/theme';
@@ -42,8 +41,8 @@ const Home = () => {
           <Baker baker={item} color={gradient_colors[rotate()]} />
         )}
         keyExtractor={(item) => item.id.toString()}
+        ListFooterComponent={Spacer}
       />
-      <Notification notify={notify} message="Welcome Jume Brice" />
     </SafeAreaView>
   );
 };

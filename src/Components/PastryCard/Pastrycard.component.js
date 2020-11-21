@@ -2,7 +2,7 @@ import React from 'react';
 import {Image, Text, TouchableOpacity, View} from 'react-native';
 import Icons from 'react-native-vector-icons/Entypo';
 
-import styles from './pastrycard.style';
+import styles from './Pastrycard.style';
 
 const PastryCard = (props) => {
   const {color, layout} = props;

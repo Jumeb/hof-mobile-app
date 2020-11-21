@@ -39,18 +39,16 @@ const styles = StyleSheet.create({
   eventCostText: {
     fontSize: 11,
     color: theme.dark_grey,
+    textAlign: 'center',
   },
   eventMessage: {
     flexDirection: 'row',
-  },
-  eventMessageLabel: {
-    fontSize: 15,
-    color: theme.light_grey + 'aa',
+    marginHorizontal: 30,
   },
   eventMessageInfo: {
     fontSize: 15,
-    color: theme.dark_grey,
-    fontWeight: '600',
+    color: theme.primary_color,
+    fontWeight: '700',
   },
   eventDate: {
     flexDirection: 'row',
@@ -61,8 +59,8 @@ const styles = StyleSheet.create({
     color: theme.light_grey + 'aa',
   },
   eventDateInfo: {
-    fontSize: 13,
-    color: theme.dark_grey + 'ee',
+    fontSize: 10,
+    color: theme.light_grey + 'ee',
     fontWeight: '600',
   },
   eventTime: {
@@ -87,26 +85,27 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   eventCountDownDaysNumber: {
-    fontSize: 16,
+    fontSize: 25,
     color: theme.dark_grey,
     fontWeight: '700',
   },
   eventCountDownDaysText: {
-    fontSize: 15,
+    fontSize: 13,
     color: theme.light_grey,
     fontWeight: '400',
     marginTop: -3,
   },
   eventCountDownTime: {
     alignItems: 'center',
+    marginTop: 8,
   },
   eventCountDownTimeNumber: {
-    fontSize: 13,
+    fontSize: 15,
     color: theme.dark_grey,
     fontWeight: '700',
   },
   eventCountDownTimeText: {
-    fontSize: 11,
+    fontSize: 10,
     color: theme.light_grey,
     fontWeight: '400',
     marginTop: 4.5,
@@ -124,7 +123,7 @@ const styles = StyleSheet.create({
   },
   deleteButton: {
     marginLeft: 'auto',
-    marginBottom: 4,
+    // marginBottom: 2,
   },
 });
 

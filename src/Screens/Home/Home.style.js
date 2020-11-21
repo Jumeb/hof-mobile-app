@@ -4,7 +4,7 @@ import theme from '../../../resources/Colors/theme';
 const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
-    paddingVertical: 10,
+    paddingTop: 10,
     backgroundColor: theme.light_grey + '22',
   },
 });

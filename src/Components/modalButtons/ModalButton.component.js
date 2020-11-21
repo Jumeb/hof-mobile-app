@@ -2,13 +2,15 @@ import React from 'react';
 import {TouchableOpacity} from 'react-native';
 import Icons from 'react-native-vector-icons/Ionicons';
 
-import styles from './actionButton.style';
+import styles from './ModalButton.style';
 import theme from '../../../resources/Colors/theme';
 
-const Action = (props) => {
+const ModalButton = (props) => {
   const {name, color, closeModal} = props;
   return (
-    <TouchableOpacity style={styles.mainButton}>
+    <TouchableOpacity
+      onPress={() => closeModal()}
+      style={[styles.mainButton, {borderColor: color ? color : ''}]}>
       <Icons
         name={name}
         size={18}
@@ -19,4 +21,4 @@ const Action = (props) => {
   );
 };
 
-export default Action;
+export default ModalButton;

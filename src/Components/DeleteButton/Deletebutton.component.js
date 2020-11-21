@@ -3,7 +3,7 @@ import {TouchableOpacity} from 'react-native';
 import Icons from 'react-native-vector-icons/Ionicons';
 
 import theme from '../../../resources/Colors/theme';
-import styles from './deletebutton.style';
+import styles from './Deletebutton.style';
 
 const Delete = (props) => {
   const {openModal} = props;

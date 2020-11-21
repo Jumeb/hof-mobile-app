@@ -18,7 +18,7 @@ import {InputComponent} from '../../Components/index';
 import {AuthMail} from '../../utils/';
 
 const Login = () => {
-  let h = useWindowDimensions().height;
+  let h = useWindowDimensions().height + 100;
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');

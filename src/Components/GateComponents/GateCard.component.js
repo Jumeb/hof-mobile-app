@@ -4,7 +4,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import {Actions} from 'react-native-router-flux';
 
 import theme from '../../../resources/Colors/theme';
-import styles from './gateCard.style';
+import styles from './GateCard.style';
 
 const Bakers = (props) => {
   const {baker, color} = props;

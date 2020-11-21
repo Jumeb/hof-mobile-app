@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import Icons from 'react-native-vector-icons/Ionicons';
 
-import {Best, Categories, PastryCard} from '../../Components';
+import {Best, Categories, PastryCard, Spacer} from '../../Components';
 import styles from './shop.style';
 import best from '../../../resources/Dummy/best.json';
 import theme from '../../../resources/Colors/theme';
@@ -95,6 +95,7 @@ const Shop = () => {
         keyExtractor={(item) => item.id.toString()}
         showsVerticalScrollIndicator={false}
         key={layout === 0 ? 'grid' : 'flat'}
+        ListFooterComponent={Spacer}
       />
     </SafeAreaView>
   );

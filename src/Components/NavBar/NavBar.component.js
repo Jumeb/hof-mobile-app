@@ -3,7 +3,7 @@ import {View, Text, TouchableOpacity} from 'react-native';
 import Icons from 'react-native-vector-icons/Ionicons';
 import theme from '../../../resources/Colors/theme';
 
-import styles from './header.style';
+import styles from './NavBar.style';
 
 const Header = (props) => {
   const {title} = props;

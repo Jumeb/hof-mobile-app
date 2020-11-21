@@ -2,11 +2,10 @@ import React from 'react';
 import {Text, TouchableOpacity, View} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 
-import styles from './categories.style';
+import styles from './Categories.style';
 
 const Categories = (props) => {
   const {variety, color, setColor} = props;
-  console.log(color);
   return (
     <View style={styles.mainContainer}>
       <LinearGradient

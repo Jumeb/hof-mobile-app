@@ -2,15 +2,20 @@ import React from 'react';
 import {TouchableOpacity} from 'react-native';
 import Icons from 'react-native-vector-icons/Ionicons';
 
-import styles from './modalButton.style';
+import styles from './ActionButton.style';
 import theme from '../../../resources/Colors/theme';
+import {Actions} from 'react-native-router-flux';
 
-const ModalButton = (props) => {
-  const {name, color, closeModal} = props;
+const Action = (props) => {
+  const {name, color, shop} = props;
+  const execute = () => {
+    if (shop) {
+      return Actions.Home();
+    }
+  };
+
   return (
-    <TouchableOpacity
-      onPress={() => closeModal()}
-      style={[styles.mainButton, {borderColor: color ? color : ''}]}>
+    <TouchableOpacity style={styles.mainButton} onPress={() => execute()}>
       <Icons
         name={name}
         size={18}
@@ -21,4 +26,4 @@ const ModalButton = (props) => {
   );
 };
 
-export default ModalButton;
+export default Action;

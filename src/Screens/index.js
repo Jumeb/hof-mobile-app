@@ -5,6 +5,8 @@ import SignUpScreen from './SignUp/SignUp.screen';
 import Home from './Home/Home.screen';
 import Shop from './Shop/shop.screen';
 import Event from './Event/events.screen';
+import Reviews from './Review/Review.screen';
+import Settings from './Settings/Setting.screen';
 
 export {
   Home,
@@ -14,4 +16,6 @@ export {
   SignUpScreen,
   Shop,
   Event,
+  Reviews,
+  Settings,
 };
