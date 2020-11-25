@@ -3,11 +3,12 @@ import theme from '../../../resources/Colors/theme';
 
 const styles = StyleSheet.create({
   mainContainer: {
-    paddingVertical: 10,
-    backgroundColor: theme.primary_color + '11',
+    flex: 1,
+    backgroundColor: theme.white_color,
   },
   variety: {
-    paddingVertical: 10,
+    paddingTop: 10,
+    paddingBottom: 5,
     paddingHorizontal: 8,
   },
   varietyText: {
@@ -16,7 +17,7 @@ const styles = StyleSheet.create({
   },
   pastriesContainer: {
     flexDirection: 'row',
-    marginVertical: 25,
+    marginVertical: 10,
     justifyContent: 'space-between',
     alignItems: 'center',
     paddingHorizontal: 15,
@@ -33,6 +34,9 @@ const styles = StyleSheet.create({
   },
   paddingContent: {
     paddingHorizontal: 15,
+  },
+  spacer: {
+    width: 35,
   },
 });
 

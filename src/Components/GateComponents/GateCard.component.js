@@ -9,36 +9,47 @@ import styles from './GateCard.style';
 const Bakers = (props) => {
   const {baker, color} = props;
   return (
-    <LinearGradient
-      start={{x: 0, y: 1}}
-      end={{x: 1, y: 1}}
-      colors={[color.start, color.end]}
-      style={styles.mainContainer}>
+    <View style={[styles.mainCard, {borderColor: color.start}]}>
       <TouchableOpacity activeOpacity={1} onPress={() => Actions.shop()}>
         <View style={styles.companyInfo}>
-          <View style={styles.companyImageContainer}>
+          <View
+            style={[styles.companyImageContainer, {borderColor: color.start}]}>
             <Image
               style={styles.companyImage}
-              source={require('../../../resources/images/bds-1.jpg')}
+              source={require('../../../resources/images/vals-3.jpg')}
             />
           </View>
           <View style={styles.companyCredentials}>
-            <Text style={styles.companyFounder}>{baker.company_name}</Text>
-            <Text style={styles.companyName}>CEO: {baker.ceo_name}</Text>
+            <Text style={[styles.companyFounder, {color: color.start}]}>
+              {baker.company_name}
+            </Text>
+            <Text style={[styles.companyName, {color: color.start}]}>
+              CEO: {baker.ceo_name}
+            </Text>
           </View>
           <View style={styles.rankContainer}>
-            <Text style={styles.rankNumber}>{baker.rank}</Text>
-            <Text style={styles.rankText}>Ranking</Text>
+            <Text style={[styles.rankNumber, {color: color.end}]}>
+              {baker.rank}
+            </Text>
+            <Text style={[styles.rankText, {color: color.end}]}>Ranking</Text>
           </View>
         </View>
         <View style={styles.companyStats}>
           <View style={styles.companyOrders}>
-            <Text style={styles.companyOrdersNumber}>234</Text>
-            <Text style={styles.companyOrdersText}>Orders</Text>
+            <Text style={[styles.companyOrdersNumber, {color: color.start}]}>
+              234
+            </Text>
+            <Text style={[styles.companyOrdersText, {color: color.end}]}>
+              Orders
+            </Text>
           </View>
           <View style={styles.companyOrders}>
-            <Text style={styles.companyOrdersNumber}>234</Text>
-            <Text style={styles.companyOrdersText}>Likes</Text>
+            <Text style={[styles.companyOrdersNumber, {color: color.start}]}>
+              234
+            </Text>
+            <Text style={[styles.companyOrdersText, {color: color.end}]}>
+              Likes
+            </Text>
           </View>
           <View style={styles.companySign}>
             <Image
@@ -48,7 +59,7 @@ const Bakers = (props) => {
           </View>
         </View>
       </TouchableOpacity>
-    </LinearGradient>
+    </View>
   );
 };
 

@@ -28,7 +28,10 @@ const Shop = () => {
   const renderHeader = () => {
     return (
       <View>
-        <View style={styles.paddingContent}>
+        <View>
+          <View style={styles.pastriesContainer}>
+            <Text style={styles.pastriesText}>Varieties</Text>
+          </View>
           <FlatList
             horizontal={true}
             showsHorizontalScrollIndicator={false}
@@ -54,6 +57,7 @@ const Shop = () => {
               />
             );
           })}
+          <View style={styles.spacer} />
         </ScrollView>
         <View style={styles.pastriesContainer}>
           <Text style={styles.pastriesText}>Pastries</Text>
@@ -94,6 +98,7 @@ const Shop = () => {
         )}
         keyExtractor={(item) => item.id.toString()}
         showsVerticalScrollIndicator={false}
+        columnWrapperStyle={{justifyContent: 'space-evenly'}}
         key={layout === 0 ? 'grid' : 'flat'}
         ListFooterComponent={Spacer}
       />

@@ -2,7 +2,7 @@ import {StyleSheet} from 'react-native';
 import theme from '../../../resources/Colors/theme';
 
 const styles = StyleSheet.create({
-  mainContainer: {
+  mainCard: {
     marginHorizontal: 15,
     borderRadius: 8,
     shadowOffset: {width: 0, height: 2},
@@ -14,6 +14,8 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
     paddingHorizontal: 12,
     marginVertical: 8,
+    backgroundColor: theme.white_color,
+    borderWidth: 1.8,
   },
   companyInfo: {
     flexDirection: 'row',
@@ -25,7 +27,6 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     marginLeft: 10,
     borderWidth: 2,
-    borderColor: theme.white_color,
     shadowOffset: {width: 0, height: 2},
     shadowColor: theme.light_grey,
     shadowOpacity: 0.8,

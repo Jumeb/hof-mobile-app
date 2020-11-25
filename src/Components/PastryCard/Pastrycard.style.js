@@ -4,35 +4,37 @@ import theme from '../../../resources/Colors/theme';
 const styles = StyleSheet.create({
   mainContainer: {
     borderWidth: 2,
-    marginHorizontal: 15,
+    marginHorizontal: 12,
     flexDirection: 'row',
-    marginVertical: 4,
+    marginVertical: 6,
     borderRadius: 8,
     elevation: 2,
     backgroundColor: theme.white_color,
   },
   mainContainer2: {
-    width: '48%',
+    width: '46%',
     borderWidth: 2,
     borderRadius: 8,
     elevation: 2,
     backgroundColor: theme.white_color,
-    marginHorizontal: 3.5,
-    marginVertical: 4,
+    marginVertical: 5,
   },
   pastryImage: {
-    borderRadius: 8,
+    borderTopLeftRadius: 8,
+    borderBottomLeftRadius: 8,
     height: 120,
     width: 140,
   },
   pastryImage2: {
-    borderRadius: 8,
+    borderTopLeftRadius: 8,
+    borderTopRightRadius: 8,
     height: 120,
     width: '100%',
   },
   pastryDetails: {
-    paddingHorizontal: 20,
-    paddingVertical: 6,
+    flex: 1,
+    paddingTop: 6,
+    paddingBottom: 2,
     marginLeft: 'auto',
   },
   pastryDetails2: {
@@ -45,16 +47,17 @@ const styles = StyleSheet.create({
     color: theme.mix_primary_color_1,
   },
   pastryName2: {
-    fontSize: 15,
+    fontSize: theme.font_size_normal,
     color: theme.mix_primary_color_1,
     textAlign: 'center',
     marginVertical: 2,
   },
   likesContainer: {
+    flex: 2,
+    // borderWidth: 1,
     flexDirection: 'row',
-    alignItems: 'center',
     justifyContent: 'space-around',
-    marginTop: 5,
+    marginTop: 20,
   },
   likesContainer2: {
     margin: 'auto',
@@ -62,8 +65,9 @@ const styles = StyleSheet.create({
   pastryStats: {
     flexDirection: 'row',
     alignItems: 'flex-end',
-    alignSelf: 'flex-end',
+    alignSelf: 'center',
     marginTop: 4,
+    justifyContent: 'center',
   },
   pastryStats2: {
     flexDirection: 'row',
@@ -90,6 +94,7 @@ const styles = StyleSheet.create({
   },
   pastryLikes: {
     color: theme.dark_grey,
+    fontWeight: '700',
     fontSize: 12,
   },
   pastryLikes2: {

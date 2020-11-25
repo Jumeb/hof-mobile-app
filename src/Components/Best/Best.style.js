@@ -20,7 +20,6 @@ const styles = StyleSheet.create({
     height: 105,
     borderTopLeftRadius: 8,
     borderTopRightRadius: 8,
-    borderRadius: 8,
   },
   pastryName: {
     fontSize: theme.font_size_normal,
