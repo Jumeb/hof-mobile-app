@@ -20,6 +20,12 @@ const styles = StyleSheet.create({
   subMenusText: {
     fontSize: theme.font_size_extra_small + 1,
   },
+  separator: {
+    marginHorizontal: -8,
+    height: 0.6,
+    backgroundColor: theme.light_grey,
+    marginVertical: 1,
+  },
 });
 
 export default styles;
