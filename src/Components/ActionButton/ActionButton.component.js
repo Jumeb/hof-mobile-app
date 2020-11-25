@@ -10,7 +10,7 @@ const Action = (props) => {
   const {name, color, shop} = props;
   const execute = () => {
     if (shop) {
-      return Actions.Home();
+      return Actions.home();
     }
   };
 

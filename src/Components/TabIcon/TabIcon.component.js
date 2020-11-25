@@ -1,12 +1,12 @@
 import React from 'react';
-import {Text, View, TouchableOpacity} from 'react-native';
+import {Text, TouchableOpacity} from 'react-native';
 import Icons from 'react-native-vector-icons/Ionicons';
 import {Actions} from 'react-native-router-flux';
 
 import theme from '../../../resources/Colors/theme';
 import styles from './TabIcon.styles';
 
-const TabIcon = ({title, activeTabIndex, selected, element}) => {
+const TabIcon = ({title, activeTabIndex, element}) => {
   let icon = '';
   let index = -1;
   if (title === 'events') {
@@ -28,8 +28,6 @@ const TabIcon = ({title, activeTabIndex, selected, element}) => {
     icon = 'ios-book-outline';
     index = 1;
   }
-
-  console.log('focused', activeTabIndex);
 
   return (
     <TouchableOpacity

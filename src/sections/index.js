@@ -1,3 +1,3 @@
-import EventDetails from './EventDetails/eventDetails.section';
+import EventDetails from './EventDetails/EventDetails.section';
 
 export {EventDetails};

@@ -7,7 +7,7 @@ import {ReviewCard} from '../../Components';
 
 const Review = () => {
   return (
-    <SafeAreaView>
+    <SafeAreaView style={styles.mainContainer}>
       <ReviewCard />
     </SafeAreaView>
   );

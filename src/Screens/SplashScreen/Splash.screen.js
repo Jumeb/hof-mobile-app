@@ -9,7 +9,7 @@ import {Actions} from 'react-native-router-flux';
 const SplashScreen = () => {
   useEffect(() => {
     setTimeout(() => {
-      Actions.Welcome();
+      Actions.welcome();
     }, 2500);
   });
   return (

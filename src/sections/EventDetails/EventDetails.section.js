@@ -3,7 +3,7 @@ import {ScrollView, Text, View, Image} from 'react-native';
 import theme from '../../../resources/Colors/theme';
 
 import {ModalButton} from '../../Components';
-import styles from './eventDetails.style';
+import styles from './EventDetails.style';
 
 const EventDetails = () => {
   return (

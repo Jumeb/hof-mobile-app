@@ -3,10 +3,11 @@ import theme from '../../../resources/Colors/theme';
 
 const styles = StyleSheet.create({
   mainContainer: {
-    marginHorizontal: 8,
+    margin: 8,
     borderWidth: 1.8,
     borderColor: 'transparent',
     borderRadius: 8,
+    backgroundColor: theme.white_color,
     paddingTop: 7,
     paddingLeft: 10,
     paddingRight: 10,

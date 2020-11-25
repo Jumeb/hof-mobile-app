@@ -5,7 +5,7 @@ const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
     paddingTop: 10,
-    backgroundColor: theme.light_grey + '22',
+     backgroundColor: theme.faint_grey,
   },
 });
 

@@ -54,7 +54,7 @@ const SignUp = () => {
       !passwordError &&
       !emailError
     ) {
-      Actions.Login();
+      Actions.login();
     }
   };
 
@@ -153,7 +153,7 @@ const SignUp = () => {
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.Button}
-            onPress={() => Actions.Welcome()}>
+            onPress={() => Actions.welcome()}>
             <Text style={styles.ButtonText}>START</Text>
             <Icons
               name="ios-return-up-back-outline"

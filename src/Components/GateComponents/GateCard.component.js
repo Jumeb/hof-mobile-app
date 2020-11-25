@@ -14,7 +14,7 @@ const Bakers = (props) => {
       end={{x: 1, y: 1}}
       colors={[color.start, color.end]}
       style={styles.mainContainer}>
-      <TouchableOpacity activeOpacity={1} onPress={() => Actions.Shop()}>
+      <TouchableOpacity activeOpacity={1} onPress={() => Actions.shop()}>
         <View style={styles.companyInfo}>
           <View style={styles.companyImageContainer}>
             <Image

@@ -3,6 +3,7 @@ import {Text, View} from 'react-native';
 
 import {EventCard} from '../../Components';
 import {Confirm} from '../../modals';
+import styles from './Events.style';
 
 const Events = () => {
   const [confirm, setConfirm] = useState(false);
@@ -14,7 +15,7 @@ const Events = () => {
   };
 
   return (
-    <View>
+    <View style={styles.events}>
       <EventCard openModal={openModal} />
       <Confirm confirm={confirm} closeModal={closeModal} />
     </View>

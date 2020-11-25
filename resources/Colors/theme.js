@@ -26,7 +26,7 @@ export default {
   dark_overlays: '#1A2026',
   dark_grey: '#58595B',
   light_grey: '#6D6E71',
-  faint_grey: '#939598',
+  faint_grey: '#eeeeee',
 
   //Values
   border_image: 8,

@@ -10,7 +10,7 @@ import {
 import Icons from 'react-native-vector-icons/Ionicons';
 
 import {Best, Categories, PastryCard, Spacer} from '../../Components';
-import styles from './shop.style';
+import styles from './Shop.style';
 import best from '../../../resources/Dummy/best.json';
 import theme from '../../../resources/Colors/theme';
 

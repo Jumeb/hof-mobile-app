@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 8,
     paddingVertical: 6,
     borderRadius: 25,
-    backgroundColor: theme.white_color + 'ee',
+    backgroundColor: theme.white_color,
     shadowOffset: {width: 0, height: 2},
     shadowOpacity: 0.8,
     shadowColor: theme.light_grey,

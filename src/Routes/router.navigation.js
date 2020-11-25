@@ -12,8 +12,7 @@ import {
   Settings,
 } from '../Screens';
 import {EventDetails} from '../sections';
-import {Header, TabBarTwo, NavBar} from '../Components';
-import styles from './routes.style';
+import {TabBarTwo, NavBar} from '../Components';
 
 const Routes = () => {
   return (
@@ -47,8 +46,8 @@ const Routes = () => {
           <Scene
             key="settings"
             component={Settings}
-            navBar={NavBar}
             title="Settings"
+            hideNavBar
           />
         </Scene>
         <Scene key="onboard" hideNavBar>
