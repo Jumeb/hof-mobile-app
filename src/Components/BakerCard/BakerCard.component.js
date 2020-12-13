@@ -1,16 +1,13 @@
 import React from 'react';
 import {Image, Text, TouchableOpacity, View} from 'react-native';
-import LinearGradient from 'react-native-linear-gradient';
-import {Actions} from 'react-native-router-flux';
 
-import theme from '../../../resources/Colors/theme';
-import styles from './GateCard.style';
+import styles from './BakerCard.style';
 
 const Bakers = (props) => {
-  const {baker, color} = props;
+  const {baker, color, onPress, about} = props;
   return (
     <View style={[styles.mainCard, {borderColor: color.start}]}>
-      <TouchableOpacity activeOpacity={1} onPress={() => Actions.shop()}>
+      <TouchableOpacity activeOpacity={1} onPress={() => onPress()}>
         <View style={styles.companyInfo}>
           <View
             style={[styles.companyImageContainer, {borderColor: color.start}]}>
@@ -31,7 +28,7 @@ const Bakers = (props) => {
             <Text style={[styles.rankNumber, {color: color.end}]}>
               {baker.rank}
             </Text>
-            <Text style={[styles.rankText, {color: color.end}]}>Ranking</Text>
+            <Text style={[styles.rankText, {color: color.end}]}>{about}</Text>
           </View>
         </View>
         <View style={styles.companyStats}>

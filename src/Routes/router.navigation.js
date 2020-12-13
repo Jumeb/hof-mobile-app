@@ -10,15 +10,20 @@ import {
   Event,
   Reviews,
   Settings,
+  Review,
 } from '../Screens';
 import {EventDetails} from '../sections';
-import {TabBarTwo, NavBar} from '../Components';
+import {TabBarTwo, TabBar, NavBar} from '../Components';
 
 const Routes = () => {
   return (
     <Router>
       <Stack key="root" hideNavBar>
-        <Scene key="main" tabs tabBarComponent={TabBarTwo}>
+        <Scene key="main" tabs tabBarComponent={TabBarTwo} initial>
+          <Scene key="bakers" hideNavBar>
+            <Scene key="bakers" component={Home} navBar={NavBar} title="Home" />
+            <Scene key="shop" component={Shop} navBar={NavBar} title="Pantry" />
+          </Scene>
           <Scene key="events" hideNavBar>
             <Scene
               key="events"
@@ -33,16 +38,22 @@ const Routes = () => {
               title="Event Details"
             />
           </Scene>
-          <Scene key="bakers" hideNavBar>
-            <Scene key="bakers" component={Home} navBar={NavBar} title="Home" />
-            <Scene key="shop" component={Shop} navBar={NavBar} title="Pantry" />
+          <Scene key="review">
+            <Scene
+              key="review"
+              component={Review}
+              navBar={NavBar}
+              title="Review"
+            />
+            <Scene
+              key="reviews"
+              component={Reviews}
+              navBar={NavBar}
+              title="Reviews"
+              inner={true}
+              hideTabBar
+            />
           </Scene>
-          <Scene
-            key="review"
-            component={Reviews}
-            navBar={NavBar}
-            title="Reviews"
-          />
           <Scene
             key="settings"
             component={Settings}
@@ -52,7 +63,7 @@ const Routes = () => {
         </Scene>
         <Scene key="onboard" hideNavBar>
           <Scene key="splash" component={SplashScreen} />
-          <Scene key="Welcome" component={WelcomeScreen} />
+          <Scene key="welcome" component={WelcomeScreen} />
           <Scene key="Login" component={LoginScreen} />
           <Scene key="SignUp" component={SignUpScreen} />
         </Scene>

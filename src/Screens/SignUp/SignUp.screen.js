@@ -30,31 +30,28 @@ const SignUp = () => {
   const [telError, setTelError] = useState(false);
   const [conPasswordError, setConPasswordError] = useState(false);
 
+  let hasError = false;
+
   const authenticate = () => {
-    if (!AuthMail(email) < 5) {
+    if (!AuthMail(email)) {
       setEmailError(true);
+      hasError = true;
     }
     if (userName.length < 5) {
       setUserNameError(true);
+      hasError = true;
     }
     if (tel.length !== 9) {
       setTelError(true);
+      hasError = true;
     }
     if (password.length !== conPassword.length || password.length < 6) {
       setPasswordError(true);
       setConPasswordError(true);
-    } else if (
-      password.length > 4 &&
-      AuthMail(email) &&
-      tel.length !== 9 &&
-      userName.length > 4 &&
-      !telError &&
-      !userNameError &&
-      !conPasswordError &&
-      !passwordError &&
-      !emailError
-    ) {
-      Actions.login();
+      hasError = true;
+    }
+    if (!hasError) {
+      Actions.main();
     }
   };
 
@@ -76,7 +73,7 @@ const SignUp = () => {
             </View>
             <View style={styles.inputsContainer}>
               <InputComponent
-                holder="User Name"
+                holder="Name"
                 type="default"
                 capitalize="words"
                 secure={false}

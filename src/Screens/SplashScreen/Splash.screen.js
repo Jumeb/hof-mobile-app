@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {Component, useEffect} from 'react';
 import {Image, Text, View} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 
@@ -6,27 +6,36 @@ import styles from './Splash.style';
 import colorScheme from '../../../resources/Colors/theme';
 import {Actions} from 'react-native-router-flux';
 
-const SplashScreen = () => {
-  useEffect(() => {
+class SplashScreen extends Component {
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     Actions.welcome();
+  //   }, 2500);
+  // });
+
+  componentDidMount() {
     setTimeout(() => {
       Actions.welcome();
     }, 2500);
-  });
-  return (
-    <LinearGradient
-      style={styles.mainContainer}
-      start={{x: 0, y: 0}}
-      end={{x: 1, y: 1}}
-      colors={[colorScheme.tertiary_color, colorScheme.secondary_color]}>
-      <View style={styles.logoContainer}>
-        <Image
-          source={require('../../../resources/images/favicon.png')}
-          style={styles.appLogo}
-        />
-      </View>
-      <Text style={styles.madeText}>Made by JB Inc</Text>
-    </LinearGradient>
-  );
-};
+  }
+
+  render() {
+    return (
+      <LinearGradient
+        style={styles.mainContainer}
+        start={{x: 0, y: 0}}
+        end={{x: 1, y: 1}}
+        colors={[colorScheme.tertiary_color, colorScheme.secondary_color]}>
+        <View style={styles.logoContainer}>
+          <Image
+            source={require('../../../resources/images/favicon.png')}
+            style={styles.appLogo}
+          />
+        </View>
+        <Text style={styles.madeText}>Made by JB Inc</Text>
+      </LinearGradient>
+    );
+  }
+}
 
 export default SplashScreen;

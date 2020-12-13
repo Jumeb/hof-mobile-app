@@ -1,13 +1,27 @@
 import React from 'react';
-import {View, useWindowDimensions} from 'react-native';
+import {
+  View,
+  useWindowDimensions,
+  Text,
+  Platform,
+  UIManager,
+} from 'react-native';
 
 import styles from './TabBar.style';
 import TabIcon from '../TabIcon/TabIcon.component';
+import {connect} from 'react-redux';
+
+if (
+  Platform.OS === 'android' &&
+  UIManager.setLayoutAnimationEnabledExperimental
+) {
+  UIManager.setLayoutAnimationEnabledExperimental(true);
+}
 
 const TabBarTwo = (props) => {
   const {state} = props.navigation;
+  const {scrolling} = props;
   const activeTabIndex = state.index;
-
   let wide = useWindowDimensions().width - 30;
   return (
     <View style={[styles.tabBar, {width: wide}]}>
@@ -19,8 +33,15 @@ const TabBarTwo = (props) => {
           key={element.key}
         />
       ))}
+      <Text>{scrolling && 'Hello'}</Text>
     </View>
   );
 };
 
-export default TabBarTwo;
+const mapStateToProps = ({scroll}) => {
+  return {
+    scrolling: scroll.scrolling,
+  };
+};
+
+export default connect(mapStateToProps)(TabBarTwo);

@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
     shadowRadius: 8,
     elevation: 2,
     position: 'absolute',
-    bottom: 12,
+    bottom: 10,
   },
   tabTab: {
     justifyContent: 'center',

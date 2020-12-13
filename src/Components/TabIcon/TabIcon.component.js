@@ -10,8 +10,8 @@ const TabIcon = ({title, activeTabIndex, element}) => {
   let icon = '';
   let index = -1;
   if (title === 'events') {
-    icon = 'ios-home';
-    index = 0;
+    icon = 'ios-book-outline';
+    index = 1;
   }
   if (title === 'review') {
     icon = 'ios-chatbubbles-sharp';
@@ -25,8 +25,8 @@ const TabIcon = ({title, activeTabIndex, element}) => {
     icon = 'ios-receipt-outline';
   }
   if (title === 'bakers') {
-    icon = 'ios-book-outline';
-    index = 1;
+    icon = 'ios-home';
+    index = 0;
   }
 
   return (

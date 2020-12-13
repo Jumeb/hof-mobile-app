@@ -59,7 +59,7 @@ const Login = () => {
             </View>
             <View style={styles.inputsContainer}>
               <InputComponent
-                holder="User Email"
+                holder="Email"
                 type="email-address"
                 capitalize="none"
                 secure={false}
@@ -106,7 +106,7 @@ const Login = () => {
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.Button}
-            onPress={() => Actions.Welcome()}>
+            onPress={() => Actions.welcome()}>
             <Text style={styles.ButtonText}>START</Text>
             <Icons
               name="ios-return-up-back-outline"

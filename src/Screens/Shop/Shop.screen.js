@@ -98,7 +98,9 @@ const Shop = () => {
         )}
         keyExtractor={(item) => item.id.toString()}
         showsVerticalScrollIndicator={false}
-        columnWrapperStyle={{justifyContent: 'space-evenly'}}
+        columnWrapperStyle={
+          layout === 0 ? {justifyContent: 'space-evenly'} : null
+        }
         key={layout === 0 ? 'grid' : 'flat'}
         ListFooterComponent={Spacer}
       />
