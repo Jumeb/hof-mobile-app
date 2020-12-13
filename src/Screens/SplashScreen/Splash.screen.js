@@ -7,12 +7,6 @@ import colorScheme from '../../../resources/Colors/theme';
 import {Actions} from 'react-native-router-flux';
 
 class SplashScreen extends Component {
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     Actions.welcome();
-  //   }, 2500);
-  // });
-
   componentDidMount() {
     setTimeout(() => {
       Actions.welcome();

@@ -1,10 +1,10 @@
-import React from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {
   View,
   useWindowDimensions,
-  Text,
   Platform,
   UIManager,
+  Animated,
 } from 'react-native';
 
 import styles from './TabBar.style';
@@ -23,8 +23,44 @@ const TabBarTwo = (props) => {
   const {scrolling} = props;
   const activeTabIndex = state.index;
   let wide = useWindowDimensions().width - 30;
+  let height = useWindowDimensions().height / 1.16;
+  let _height = height + 60;
+
+  const _bottom = useRef(new Animated.Value(height + 60)).current;
+
+  const slideUp = () => {
+    Animated.timing(_bottom, {
+      toValue: height,
+      duration: 500,
+      useNativeDriver: true,
+    }).start();
+  };
+
+  const slideDown = () => {
+    Animated.timing(_bottom, {
+      toValue: _height,
+      duration: 500,
+      velocity: 3,
+      tension: 2,
+      friction: 6,
+      useNativeDriver: true,
+    }).start();
+  };
+
+  useEffect(() => {
+    if (scrolling) {
+      slideUp();
+    }
+    setTimeout(() => {
+      slideDown();
+    }, 5000);
+  }, [scrolling]);
   return (
-    <View style={[styles.tabBar, {width: wide}]}>
+    <Animated.View
+      style={[
+        styles.tabBar,
+        {width: wide, transform: [{translateY: _bottom}]},
+      ]}>
       {state.routes.map((element) => (
         <TabIcon
           element={element}
@@ -33,8 +69,7 @@ const TabBarTwo = (props) => {
           key={element.key}
         />
       ))}
-      <Text>{scrolling && 'Hello'}</Text>
-    </View>
+    </Animated.View>
   );
 };
 

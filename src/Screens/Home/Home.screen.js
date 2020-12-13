@@ -59,7 +59,7 @@ const Home = (props) => {
           />
         )}
         keyExtractor={(item) => item.id.toString()}
-        ListFooterComponent={Spacer}
+        // ListFooterComponent={Spacer}
         onScrollBeginDrag={(event) => handle(event)}
         onScrollEndDrag={(event) => hide(event)}
       />
