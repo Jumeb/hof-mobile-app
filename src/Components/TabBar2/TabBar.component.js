@@ -23,10 +23,10 @@ const TabBarTwo = (props) => {
   const {scrolling} = props;
   const activeTabIndex = state.index;
   let wide = useWindowDimensions().width - 30;
-  let height = useWindowDimensions().height / 1.16;
-  let _height = height + 60;
+  let height = useWindowDimensions().height - 75;
+  let _height = height + 90;
 
-  const _bottom = useRef(new Animated.Value(height + 60)).current;
+  const _bottom = useRef(new Animated.Value(height + 75)).current;
 
   const slideUp = () => {
     Animated.timing(_bottom, {

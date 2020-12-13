@@ -19,6 +19,7 @@ const styles = StyleSheet.create({
     elevation: 2,
     // transform: [{translateY: useWindowDimensions().height}],
     position: 'absolute',
+    backfaceVisibility: 'hidden',
   },
   tabBarHide: {
     flex: 1,
