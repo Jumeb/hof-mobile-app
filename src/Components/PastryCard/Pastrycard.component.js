@@ -1,6 +1,6 @@
 import React from 'react';
 import {Image, Text, TouchableOpacity, View} from 'react-native';
-import Icons from 'react-native-vector-icons/Entypo';
+import Icons from 'react-native-vector-icons/Ionicons';
 
 import styles from './Pastrycard.style';
 
@@ -48,16 +48,16 @@ const PastryCard = (props) => {
             <View style={styles.likesContainer2}>
               <View style={styles.pastryIconDetails}>
                 <Icons
-                  name="thumbs-up"
+                  name="heart"
                   size={15}
                   style={{marginRight: 7}}
                   color={color.end}
                 />
-                <Text style={styles.pastryLikes}>200</Text>
+                <Text style={styles.pastryLikes}>55</Text>
               </View>
               <View style={styles.pastryIconDetails}>
                 <Icons
-                  name="line-graph"
+                  name="stats-chart"
                   size={15}
                   style={{marginRight: 7}}
                   color={color.end}
@@ -67,8 +67,8 @@ const PastryCard = (props) => {
             </View>
           ) : (
             <View style={styles.likesContainer}>
-              <Text style={styles.pastryLikes}>Ordered: 30</Text>
-              <Text style={styles.pastryLikes}>Likes: 200</Text>
+              <Text style={styles.pastryLikes}>Likes: 55</Text>
+              <Text style={styles.pastryLikes}>Ordered: 200</Text>
             </View>
           )}
         </View>

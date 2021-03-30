@@ -9,12 +9,15 @@ import {
 } from 'react-native';
 import Icons from 'react-native-vector-icons/Ionicons';
 
-import {Best, Categories, PastryCard, Spacer} from '../../Components';
+import {Best, Categories, PastryCard} from '../../Components';
 import styles from './Shop.style';
 import best from '../../../resources/Dummy/best.json';
 import theme from '../../../resources/Colors/theme';
+import {scrolling} from '../../redux/actions/ScrollActions';
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
 
-const Shop = () => {
+const Shop = (props) => {
   const [color, setColor] = useState(colors[0]);
   const [layout, setLayout] = useState(0);
   let rank = 0;
@@ -25,12 +28,20 @@ const Shop = () => {
     return rank++;
   };
 
+  const handle = (event) => {
+    props.scrolling(true);
+  };
+
+  const hide = (event) => {
+    props.scrolling(false);
+  };
+
   const renderHeader = () => {
     return (
       <View>
         <View>
           <View style={styles.pastriesContainer}>
-            <Text style={styles.pastriesText}>Varieties</Text>
+            <Text style={styles.pastriesText}>Pastries of the Week</Text>
           </View>
           <FlatList
             horizontal={true}
@@ -102,13 +113,18 @@ const Shop = () => {
           layout === 0 ? {justifyContent: 'space-evenly'} : null
         }
         key={layout === 0 ? 'grid' : 'flat'}
-        ListFooterComponent={Spacer}
+        onScrollBeginDrag={(event) => handle(event)}
+        onScrollEndDrag={(event) => hide(event)}
       />
     </SafeAreaView>
   );
 };
 
-export default Shop;
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({scrolling}, dispatch);
+};
+
+export default connect(null, mapDispatchToProps)(Shop);
 
 const varieties = [
   {id: 1, type: 'Birthday Cakes'},

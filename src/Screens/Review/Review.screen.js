@@ -1,19 +1,30 @@
 import React, {useEffect, useState} from 'react';
 import {FlatList, SafeAreaView} from 'react-native';
 import {Actions} from 'react-native-router-flux';
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
 
 import {ReviewCard, Spacer} from '../../Components';
 import styles from './Review.style';
 import bakers from '../../../resources/Dummy/bakers.json';
 import theme from '../../../resources/Colors/theme';
+import {scrolling} from '../../redux/actions/ScrollActions';
 
-const Review = () => {
+const Review = (props) => {
   const [notify, setNotify] = useState(true);
   useEffect(() => {
     setTimeout(() => {
       setNotify(false);
     }, 2000);
   });
+
+  const handle = (event) => {
+    props.scrolling(true);
+  };
+
+  const hide = (event) => {
+    props.scrolling(false);
+  };
 
   const gradient_colors = [
     {start: theme.mix_primary_color_1, end: theme.mix_primary_color_2},
@@ -48,9 +59,15 @@ const Review = () => {
         )}
         keyExtractor={(item) => item.id.toString()}
         ListFooterComponent={Spacer}
+        onScrollBeginDrag={(event) => handle(event)}
+        onScrollEndDrag={(event) => hide(event)}
       />
     </SafeAreaView>
   );
 };
 
-export default Review;
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({scrolling}, dispatch);
+};
+
+export default connect(null, mapDispatchToProps)(Review);

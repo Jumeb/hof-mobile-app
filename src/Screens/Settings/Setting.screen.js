@@ -1,11 +1,18 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Text, View, TouchableOpacity, ScrollView} from 'react-native';
 import Icons from 'react-native-vector-icons/Ionicons';
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
 
 import styles from './Setting.style';
 import {Header, Spacer} from '../../Components';
+import {scrolling} from '../../redux/actions/ScrollActions';
 
-const Setting = () => {
+const Setting = (props) => {
+  useEffect(() => {
+    props.scrolling(false);
+  });
+
   return (
     <ScrollView style={styles.settings}>
       <Header />
@@ -38,4 +45,8 @@ const Setting = () => {
   );
 };
 
-export default Setting;
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({scrolling}, dispatch);
+};
+
+export default connect(null, mapDispatchToProps)(Setting);

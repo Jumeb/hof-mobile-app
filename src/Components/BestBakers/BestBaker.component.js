@@ -1,10 +1,16 @@
 import React from 'react';
-import {ImageBackground, Text, TouchableOpacity, View} from 'react-native';
+import {
+  Image,
+  ImageBackground,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import Icons from 'react-native-vector-icons/Ionicons';
 
-import styles from './Best.style';
+import styles from './BestBaker.style.js';
 
-const Best = (props) => {
+const BestBaker = (props) => {
   const {data, color} = props;
   return (
     <View style={styles.mainContainer}>
@@ -14,9 +20,15 @@ const Best = (props) => {
           imageStyle={styles.bestBackground}
           style={styles.bestBackground}
           source={require('../../../resources/images/cups-12.jpg')}>
-          <View style={styles.likesContainer}>
-            <Icons name="heart" size={18} color={color.end} />
-            <Text style={styles.pastryLikes}>{data.rank}</Text>
+          <View style={styles.infoContainer}>
+            <View style={styles.likesContainer}>
+              <Icons name="heart" size={18} color={color.end} />
+              <Text style={styles.pastryLikes}>{data.rank}</Text>
+            </View>
+            <Image
+              source={require('../../../resources/images/favicon.png')}
+              style={styles.logo}
+            />
           </View>
         </ImageBackground>
         <View style={styles.bestDetail}>
@@ -28,4 +40,4 @@ const Best = (props) => {
   );
 };
 
-export default Best;
+export default BestBaker;

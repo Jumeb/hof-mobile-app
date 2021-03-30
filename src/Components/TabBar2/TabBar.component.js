@@ -1,32 +1,20 @@
-import React, {useEffect, useRef, useState} from 'react';
-import {
-  View,
-  useWindowDimensions,
-  Platform,
-  UIManager,
-  Animated,
-} from 'react-native';
+import React, {useEffect, useRef} from 'react';
+import {useWindowDimensions, Animated} from 'react-native';
 
 import styles from './TabBar.style';
 import TabIcon from '../TabIcon/TabIcon.component';
 import {connect} from 'react-redux';
-
-if (
-  Platform.OS === 'android' &&
-  UIManager.setLayoutAnimationEnabledExperimental
-) {
-  UIManager.setLayoutAnimationEnabledExperimental(true);
-}
 
 const TabBarTwo = (props) => {
   const {state} = props.navigation;
   const {scrolling} = props;
   const activeTabIndex = state.index;
   let wide = useWindowDimensions().width - 30;
-  let height = useWindowDimensions().height - 75;
-  let _height = height + 90;
+  let height = useWindowDimensions().height * 0.892;
+  let _height = height * 1.148;
 
-  const _bottom = useRef(new Animated.Value(height + 75)).current;
+  const _bottom = useRef(new Animated.Value(height / 0.892)).current;
+  const _opacity = useRef(new Animated.Value(0.5)).current;
 
   const slideUp = () => {
     Animated.timing(_bottom, {
@@ -47,19 +35,52 @@ const TabBarTwo = (props) => {
     }).start();
   };
 
+  const fadeIn = () => {
+    Animated.timing(_opacity, {
+      toValue: 1,
+      duration: 900,
+      useNativeDriver: true,
+    }).start();
+  };
+
+  const fadeOut = () => {
+    Animated.timing(_opacity, {
+      toValue: 0.5,
+      duration: 300,
+      velocity: 3,
+      tension: 2,
+      friction: 6,
+      useNativeDriver: true,
+    }).start();
+  };
+
   useEffect(() => {
-    if (scrolling) {
+    if (!scrolling) {
       slideUp();
+      fadeIn();
     }
     setTimeout(() => {
       slideDown();
-    }, 5000);
+      fadeOut();
+    }, 4000);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [scrolling]);
+
   return (
     <Animated.View
       style={[
         styles.tabBar,
-        {width: wide, transform: [{translateY: _bottom}]},
+        state.index === 3
+          ? {
+              width: wide,
+              opacity: 1,
+              transform: [{translateY: height}],
+            }
+          : {
+              width: wide,
+              opacity: _opacity,
+              transform: [{translateY: _bottom}],
+            },
       ]}>
       {state.routes.map((element) => (
         <TabIcon

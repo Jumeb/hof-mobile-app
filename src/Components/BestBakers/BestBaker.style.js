@@ -3,18 +3,20 @@ import theme from '../../../resources/Colors/theme';
 
 const styles = StyleSheet.create({
   mainContainer: {
-    shadowOffset: {width: 0, height: 2},
-    shadowColor: theme.light_grey,
-    shadowRadius: 8,
-    shadowOpacity: 0.8,
-    elevation: 3,
-    marginHorizontal: 9,
+    marginHorizontal: 8,
+    paddingVertical: 8,
   },
   bestContainer: {
     width: 290,
     borderWidth: 1.8,
     borderRadius: 8,
     overflow: 'hidden',
+    backgroundColor: theme.white_color,
+    shadowOffset: {width: 0, height: 2},
+    shadowColor: theme.light_grey,
+    shadowRadius: 8,
+    shadowOpacity: 0.8,
+    elevation: 3,
   },
   bestBackground: {
     height: 150,
@@ -30,21 +32,32 @@ const styles = StyleSheet.create({
   },
   pastryLikes: {
     fontSize: 14,
+    marginLeft: 8,
   },
   likesContainer: {
-    marginTop: 'auto',
-    marginBottom: 3,
     justifyContent: 'space-around',
     alignItems: 'baseline',
     paddingHorizontal: 6,
     flexDirection: 'row',
-    width: 60,
   },
   bestDetail: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
     paddingHorizontal: 8,
+  },
+  logo: {
+    height: 30,
+    width: 30,
+    tintColor: theme.white_color,
+  },
+  infoContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginTop: 'auto',
+    marginBottom: 3,
+    marginHorizontal: 10,
   },
 });
 

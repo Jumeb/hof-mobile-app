@@ -15,6 +15,7 @@ import Header from './Header/Header.component';
 import TabIcon from './TabIcon/TabIcon.component';
 import SendMessage from './SendMessage/SendMessage.component';
 import ReviewCard from './ReviewCard/ReviewCard.component';
+import BestBaker from './BestBakers/BestBaker.component';
 
 export {
   InputComponent,
@@ -34,4 +35,5 @@ export {
   Header,
   SendMessage,
   ReviewsCard,
+  BestBaker,
 };
