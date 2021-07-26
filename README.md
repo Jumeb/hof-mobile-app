@@ -1,2 +1,2 @@
 # hof-mobile-app
-The mobile application for Home of Flavour reactJs web application using react-native
+The mobile application for Home of Flavours reactJs web application using react-native
