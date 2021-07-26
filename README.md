@@ -1,2 +1,2 @@
-# Cara-cakes-mobile
-The mobile application for Cara-cakes-web application
+# hof-mobile-app
+The mobile application for Home of Flavour reactJs web application using react-native
