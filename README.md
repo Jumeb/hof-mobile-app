@@ -1,2 +1,2 @@
-# Cara-cakes-mobile
-The mobile application for Cara-cakes-web application
+# Flavours-mobile
+The mobile application for Flavours-web application

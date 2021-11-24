@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
   pastryImage: {
     borderTopLeftRadius: 8,
     borderBottomLeftRadius: 8,
-    height: 120,
+    height: 130,
     width: 140,
   },
   pastryImage2: {
@@ -44,11 +44,11 @@ const styles = StyleSheet.create({
   },
   pastryName: {
     fontSize: 18,
-    color: theme.mix_primary_color_1,
+    color: theme.light_grey,
   },
   pastryName2: {
     fontSize: theme.font_size_normal,
-    color: theme.mix_primary_color_1,
+    color: theme.light_grey,
     textAlign: 'center',
     marginVertical: 2,
   },
@@ -77,20 +77,20 @@ const styles = StyleSheet.create({
   },
   pastryPrice: {
     fontSize: 30,
-    color: theme.mix_primary_color_2,
+    color: theme.light_grey,
   },
   pastryPrice2: {
     fontSize: 22,
-    color: theme.mix_primary_color_2,
+    color: theme.light_grey,
   },
   currency: {
     paddingBottom: 3,
     fontSize: 18,
-    color: theme.mix_primary_color_2,
+    color: theme.light_grey,
   },
   currency2: {
     fontSize: 15,
-    color: theme.mix_primary_color_2,
+    color: theme.light_grey,
   },
   pastryLikes: {
     color: theme.dark_grey,

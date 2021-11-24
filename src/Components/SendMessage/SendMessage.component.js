@@ -18,7 +18,7 @@ const SendMessage = (props) => {
         />
       ) : (
         <Text style={styles.reviewText}>
-          Cara Cakes is the best in town, absolutely nothing test better than
+          Flavours is the best in town, absolutely nothing test better than
           theirs.
         </Text>
       )}

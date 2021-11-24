@@ -3,7 +3,7 @@ import theme from '../../../resources/Colors/theme';
 
 const styles = StyleSheet.create({
   mainContainer: {
-    width: 135,
+    width: 100,
     backgroundColor: theme.white_color,
     borderRadius: 8,
     marginHorizontal: 8,
@@ -20,8 +20,8 @@ const styles = StyleSheet.create({
     borderRadius: 8,
   },
   varietyButton: {
-    paddingVertical: 22,
-    paddingHorizontal: 8,
+    paddingVertical: 8,
+    paddingHorizontal: 4,
   },
   varietyButtonText: {
     color: theme.white_color,

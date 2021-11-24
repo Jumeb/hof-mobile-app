@@ -2,7 +2,7 @@
     {
       "id": 0,
       "rank": 1,
-      "company_name": "Cara Cakes",
+      "company_name": "Flavours",
       "ceo_name": "Noella Cara"
     },
     {
@@ -20,16 +20,16 @@
     {
       "id": 3,
       "rank": 4,
-      "company_name": "Cara Cakes"
+      "company_name": "Flavours"
     },
     {
       "id": 4,
       "rank": 5,
-      "company_name": "Cara Cakes"
+      "company_name": "Flavours"
     },
     {
       "id": 5,
       "rank": 6,
-      "company_name": "Cara Cakes"
+      "company_name": "Flavours"
     }
   ]

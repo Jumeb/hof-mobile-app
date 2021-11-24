@@ -19,7 +19,7 @@ const Routes = () => {
   return (
     <Router>
       <Stack key="root" hideNavBar>
-        <Scene key="main" tabs tabBarComponent={TabBarTwo} initial>
+        <Scene key="main" tabs tabBarComponent={TabBarTwo}>
           <Scene key="bakers" hideNavBar>
             <Scene key="bakers" component={Home} navBar={NavBar} title="Home" />
             <Scene key="shop" component={Shop} navBar={NavBar} title="Pantry" />
@@ -61,7 +61,7 @@ const Routes = () => {
             hideNavBar
           />
         </Scene>
-        <Scene key="onboard" hideNavBar>
+        <Scene key="onboard" hideNavBar initial>
           <Scene key="splash" component={SplashScreen} />
           <Scene key="welcome" component={WelcomeScreen} />
           <Scene key="Login" component={LoginScreen} />

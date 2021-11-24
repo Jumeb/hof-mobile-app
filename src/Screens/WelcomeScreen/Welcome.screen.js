@@ -40,7 +40,7 @@ const WelcomeScreen = () => {
             <View style={styles.welcomeContainer}>
               <Text style={styles.welcomeTitle}>Welcome</Text>
               <Text style={styles.welcomeSlogan}>
-                to Cara Cakes, home of bakers & pastries.
+                to Flavours, home of bakers & pastries.
               </Text>
             </View>
             <View style={styles.welcomeInfo}>
