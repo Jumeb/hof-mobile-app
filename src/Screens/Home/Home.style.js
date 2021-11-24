@@ -4,7 +4,7 @@ import theme from '../../../resources/Colors/theme';
 const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
-    backgroundColor: theme.faint_grey,
+    backgroundColor: theme.FAINT_GREY,
   },
   pastriesContainer: {
     marginBottom: 2,
@@ -12,8 +12,8 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
   },
   pastriesText: {
-    fontSize: theme.font_size_large,
-    color: theme.dark_grey,
+    fontSize: theme.FONT_SIZE_LARGE,
+    color: theme.DARK_GREY,
     marginVertical: 8,
     paddingHorizontal: 15,
   },

@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
     // justifyContent: 'center',
     alignItems: 'center',
     borderBottomWidth: 0.8,
-    borderBottomColor: theme.light_grey,
+    borderBottomColor: theme.LIGHT_GREY,
   },
   bakerImageContainer: {
     height: 75,
@@ -37,20 +37,20 @@ const styles = StyleSheet.create({
   reviewsNumber: {
     fontSize: theme.font_size_normal + 4,
     textAlign: 'center',
-    color: theme.dark_grey,
+    color: theme.DARK_GREY,
   },
   reviewsText: {
-    color: theme.light_grey,
+    color: theme.LIGHT_GREY,
     fontSize: theme.font_size_small,
   },
   bakerName: {
     fontSize: theme.font_size_normal + 3,
     textAlign: 'center',
-    color: theme.dark_grey,
+    color: theme.DARK_GREY,
   },
   bakerCompany: {
     fontSize: theme.font_size_normal - 2,
-    color: theme.light_grey,
+    color: theme.LIGHT_GREY,
   },
   reviewStats: {
     flexDirection: 'row',

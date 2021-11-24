@@ -9,14 +9,14 @@ const styles = StyleSheet.create({
     marginVertical: 6,
     borderRadius: 8,
     elevation: 2,
-    backgroundColor: theme.white_color,
+    backgroundColor: theme.WHITE_COLOR,
   },
   mainContainer2: {
     width: '46%',
     borderWidth: 2,
     borderRadius: 8,
     elevation: 2,
-    backgroundColor: theme.white_color,
+    backgroundColor: theme.WHITE_COLOR,
     marginVertical: 5,
   },
   pastryImage: {
@@ -44,11 +44,11 @@ const styles = StyleSheet.create({
   },
   pastryName: {
     fontSize: 18,
-    color: theme.light_grey,
+    color: theme.LIGHT_GREY,
   },
   pastryName2: {
     fontSize: theme.font_size_normal,
-    color: theme.light_grey,
+    color: theme.LIGHT_GREY,
     textAlign: 'center',
     marginVertical: 2,
   },
@@ -77,28 +77,28 @@ const styles = StyleSheet.create({
   },
   pastryPrice: {
     fontSize: 30,
-    color: theme.light_grey,
+    color: theme.LIGHT_GREY,
   },
   pastryPrice2: {
     fontSize: 22,
-    color: theme.light_grey,
+    color: theme.LIGHT_GREY,
   },
   currency: {
     paddingBottom: 3,
     fontSize: 18,
-    color: theme.light_grey,
+    color: theme.LIGHT_GREY,
   },
   currency2: {
     fontSize: 15,
-    color: theme.light_grey,
+    color: theme.LIGHT_GREY,
   },
   pastryLikes: {
-    color: theme.dark_grey,
+    color: theme.DARK_GREY,
     fontWeight: '700',
     fontSize: 12,
   },
   pastryLikes2: {
-    color: theme.dark_grey,
+    color: theme.DARK_GREY,
   },
   grid2: {
     flexDirection: 'row-reverse',

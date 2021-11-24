@@ -11,10 +11,10 @@ const styles = StyleSheet.create({
     paddingVertical: 6,
     borderTopLeftRadius: 8,
     borderTopRightRadius: 8,
-    backgroundColor: theme.white_color,
+    backgroundColor: theme.WHITE_COLOR,
     shadowOffset: {width: 0, height: 2},
     shadowOpacity: 0.8,
-    shadowColor: theme.light_grey,
+    shadowColor: theme.LIGHT_GREY,
     shadowRadius: 8,
     elevation: 2,
   },
@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
   tabTabSelected: {
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: theme.primary_color,
+    backgroundColor: theme.PRIMARY_COLOR,
     paddingHorizontal: 10,
     borderRadius: 8,
     marginTop: -15,
@@ -34,12 +34,12 @@ const styles = StyleSheet.create({
   },
   tabTabText: {
     fontSize: 8,
-    color: theme.light_grey,
+    color: theme.LIGHT_GREY,
     fontWeight: '700',
   },
   tabTabTextSelected: {
     fontSize: 8,
-    color: theme.white_color,
+    color: theme.WHITE_COLOR,
     fontWeight: '700',
   },
 });

@@ -52,7 +52,7 @@ const WelcomeScreen = () => {
               <Icons
                 name="ios-chevron-down-outline"
                 size={25}
-                color={theme.faint_grey}
+                color={theme.FAINT_GREY}
               />
             </View>
           </View>
@@ -65,14 +65,14 @@ const WelcomeScreen = () => {
             <Icons
               name="ios-arrow-forward-outline"
               size={25}
-              color={theme.white_color}
+              color={theme.WHITE_COLOR}
             />
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.Button}
             onPress={() => Actions.SignUp()}>
             <Text style={styles.ButtonText}>NEW</Text>
-            <Icons name="ios-add-sharp" size={25} color={theme.white_color} />
+            <Icons name="ios-add-sharp" size={25} color={theme.WHITE_COLOR} />
           </TouchableOpacity>
         </View>
       </ScrollView>

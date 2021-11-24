@@ -19,7 +19,7 @@ const Action = (props) => {
       <Icons
         name={name}
         size={18}
-        color={color ? color : theme.primary_color}
+        color={color ? color : theme.PRIMARY_COLOR}
         style={styles.buttonIcon}
       />
     </TouchableOpacity>

@@ -5,7 +5,7 @@ import theme from '../../../resources/Colors/theme';
 const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
-    backgroundColor: theme.tertiary_color + 'ea',
+    backgroundColor: theme.TERTIARY_COLOR + 'ea',
   },
   container: {
     flex: 1,
@@ -17,21 +17,21 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   welcomeImageStyle: {
-    borderBottomLeftRadius: theme.large_border_radius,
-    borderBottomRightRadius: theme.large_border_radius,
+    borderBottomLeftRadius: theme.LARGE_BORDER_RADIUS,
+    borderBottomRightRadius: theme.LARGE_BORDER_RADIUS,
   },
   messageContainer: {
     flex: 1,
     justifyContent: 'space-between',
     paddingVertical: 10,
-    backgroundColor: theme.dark_overlays + '75',
-    borderBottomLeftRadius: theme.large_border_radius,
-    borderBottomRightRadius: theme.large_border_radius,
+    backgroundColor: theme.DARK_OVERLAYS + '75',
+    borderBottomLeftRadius: theme.LARGE_BORDER_RADIUS,
+    borderBottomRightRadius: theme.LARGE_BORDER_RADIUS,
   },
   logoImage: {
     width: 120,
     height: 50,
-    tintColor: theme.white_color,
+    tintColor: theme.WHITE_COLOR,
     alignSelf: 'center',
   },
   welcomeContainer: {
@@ -41,21 +41,21 @@ const styles = StyleSheet.create({
     width: 130,
   },
   welcomeTitle: {
-    fontSize: theme.font_size_large,
+    fontSize: theme.FONT_SIZE_LARGE,
     textAlign: 'center',
     letterSpacing: 3.4,
     fontWeight: '700',
-    color: theme.white_color,
+    color: theme.WHITE_COLOR,
   },
   welcomeSlogan: {
     textAlign: 'center',
-    color: theme.white_color,
+    color: theme.WHITE_COLOR,
   },
   welcomeInfo: {
     alignSelf: 'center',
   },
   welcomeInfoText: {
-    color: theme.faint_grey,
+    color: theme.FAINT_GREY,
     textAlign: 'center',
     fontWeight: '700',
   },
@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
     marginBottom: 50,
   },
   welcomeIconText: {
-    color: theme.white_color,
+    color: theme.WHITE_COLOR,
   },
   actionsContainer: {
     flexDirection: 'row',
@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
   },
   ButtonText: {
     marginHorizontal: 6,
-    color: theme.white_color,
+    color: theme.WHITE_COLOR,
     fontWeight: '700',
   },
 });

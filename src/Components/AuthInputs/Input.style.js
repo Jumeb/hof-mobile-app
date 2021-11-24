@@ -8,20 +8,20 @@ const styles = StyleSheet.create({
   inputContainer: {
     borderBottomWidth: 1.5,
     marginHorizontal: 14,
-    borderBottomColor: theme.white_color + '88',
+    borderBottomColor: theme.WHITE_COLOR + '88',
   },
   inputContainerError: {
     borderBottomWidth: 1.5,
     marginHorizontal: 14,
-    borderBottomColor: theme.danger_color + '88',
+    borderBottomColor: theme.DANGER_COLOR + '88',
   },
   inputText: {
     textAlign: 'center',
     fontSize: theme.font_size_normal,
-    color: theme.white_color,
+    color: theme.WHITE_COLOR,
   },
   inputError: {
-    color: theme.danger_color,
+    color: theme.DANGER_COLOR,
     textAlign: 'center',
   },
 });

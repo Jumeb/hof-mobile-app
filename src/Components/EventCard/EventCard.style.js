@@ -7,13 +7,13 @@ const styles = StyleSheet.create({
     borderWidth: 1.8,
     borderColor: 'transparent',
     borderRadius: 8,
-    backgroundColor: theme.white_color,
+    backgroundColor: theme.WHITE_COLOR,
     paddingTop: 7,
     paddingLeft: 10,
     paddingRight: 10,
     paddingBottom: 2,
     shadowOffset: {width: 0, height: 2},
-    shadowColor: theme.dark_grey,
+    shadowColor: theme.DARK_GREY,
     shadowOpacity: 0.8,
     shadowRadius: 8,
     elevation: 2,
@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
   },
   eventName: {
     textAlign: 'center',
-    color: theme.dark_grey,
+    color: theme.DARK_GREY,
     fontSize: 12,
     marginTop: 5,
   },
@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
   },
   eventCostText: {
     fontSize: 11,
-    color: theme.dark_grey,
+    color: theme.DARK_GREY,
     textAlign: 'center',
   },
   eventMessage: {
@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
   },
   eventMessageInfo: {
     fontSize: 15,
-    color: theme.primary_color,
+    color: theme.PRIMARY_COLOR,
     fontWeight: '700',
   },
   eventDate: {
@@ -57,11 +57,11 @@ const styles = StyleSheet.create({
   },
   eventDateLabel: {
     fontSize: 13,
-    color: theme.light_grey + 'aa',
+    color: theme.LIGHT_GREY + 'aa',
   },
   eventDateInfo: {
     fontSize: 10,
-    color: theme.light_grey + 'ee',
+    color: theme.LIGHT_GREY + 'ee',
     fontWeight: '600',
   },
   eventTime: {
@@ -70,11 +70,11 @@ const styles = StyleSheet.create({
   },
   eventTimeLabel: {
     fontSize: 11,
-    color: theme.light_grey + 'aa',
+    color: theme.LIGHT_GREY + 'aa',
   },
   eventTimeInfo: {
     fontSize: 11,
-    color: theme.light_grey,
+    color: theme.LIGHT_GREY,
     fontWeight: '700',
   },
   eventCountDown: {
@@ -87,12 +87,12 @@ const styles = StyleSheet.create({
   },
   eventCountDownDaysNumber: {
     fontSize: 25,
-    color: theme.dark_grey,
+    color: theme.DARK_GREY,
     fontWeight: '700',
   },
   eventCountDownDaysText: {
     fontSize: 13,
-    color: theme.light_grey,
+    color: theme.LIGHT_GREY,
     fontWeight: '400',
     marginTop: -3,
   },
@@ -102,12 +102,12 @@ const styles = StyleSheet.create({
   },
   eventCountDownTimeNumber: {
     fontSize: 15,
-    color: theme.dark_grey,
+    color: theme.DARK_GREY,
     fontWeight: '700',
   },
   eventCountDownTimeText: {
     fontSize: 10,
-    color: theme.light_grey,
+    color: theme.LIGHT_GREY,
     fontWeight: '400',
     marginTop: 4.5,
   },

@@ -30,7 +30,7 @@ const InputComponentOne = (props) => {
           value={value}
           onFocus={() => toggleError()}
           onChangeText={(text) => setValue(text)}
-          placeholderTextColor={theme.white_color}
+          placeholderTextColor={theme.WHITE_COLOR}
         />
       </View>
       {inputError && <Text style={styles.inputError}>{errorMessage}</Text>}

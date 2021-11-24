@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     flexDirection: 'row',
     shadowOffset: {width: 0, height: 2},
-    shadowColor: theme.light_grey,
+    shadowColor: theme.LIGHT_GREY,
     shadowOpacity: 0.8,
     elevation: 2,
     alignItems: 'center',
@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
     width: 18,
     position: 'relative',
     borderRadius: 20,
-    backgroundColor: theme.primary_color,
+    backgroundColor: theme.PRIMARY_COLOR,
     justifyContent: 'center',
     alignItems: 'center',
     left: -13,
@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
   },
   eventsCount: {
     fontSize: 11,
-    color: theme.white_color,
+    color: theme.WHITE_COLOR,
   },
 });
 

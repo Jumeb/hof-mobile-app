@@ -14,14 +14,14 @@ const styles = StyleSheet.create({
   appLogo: {
     height: 170,
     width: 170,
-    tintColor: colorTheme.white_color,
+    tintColor: colorTheme.WHITE_COLOR,
     alignSelf: 'center',
   },
   madeText: {
     textAlign: 'center',
     padding: 12,
     fontSize: 18,
-    color: colorTheme.white_color,
+    color: colorTheme.WHITE_COLOR,
     fontWeight: '800',
     fontFamily: 'old-english-text-mt',
   },

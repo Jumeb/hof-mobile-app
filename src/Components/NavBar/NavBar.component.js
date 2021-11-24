@@ -14,7 +14,7 @@ const Header = (props) => {
         <Icons
           name="ios-bookmark-outline"
           size={25}
-          color={theme.primary_color}
+          color={theme.PRIMARY_COLOR}
         />
         <View style={styles.eventsCountContainer}>
           <Text style={styles.eventsCount}>1</Text>
@@ -25,7 +25,7 @@ const Header = (props) => {
           <Icons
             name="ios-bookmark-outline"
             size={25}
-            color={theme.primary_color}
+            color={theme.PRIMARY_COLOR}
           />
           <View style={styles.eventsCountContainer}>
             <Text style={styles.eventsCount}>1</Text>

@@ -38,7 +38,7 @@ const TabIcon = ({title, activeTabIndex, element}) => {
         name={icon}
         size={20}
         color={
-          activeTabIndex === index ? theme.primary_color : theme.light_grey
+          activeTabIndex === index ? theme.PRIMARY_COLOR : theme.LIGHT_GREY
         }
       />
       <Text

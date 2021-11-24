@@ -10,12 +10,12 @@ const styles = StyleSheet.create({
   },
   tabTabText: {
     fontSize: 8,
-    color: theme.light_grey,
+    color: theme.LIGHT_GREY,
     fontWeight: '700',
   },
   tabTabTextSelected: {
     fontSize: 8,
-    color: theme.primary_color,
+    color: theme.PRIMARY_COLOR,
     fontWeight: '700',
   },
 });

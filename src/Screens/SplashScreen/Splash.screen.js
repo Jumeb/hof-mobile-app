@@ -19,7 +19,7 @@ class SplashScreen extends Component {
         style={styles.mainContainer}
         start={{x: 0, y: 0}}
         end={{x: 1, y: 1}}
-        colors={[colorScheme.tertiary_color, colorScheme.secondary_color]}>
+        colors={[colorScheme.TERTIARY_COLOR, colorScheme.SECONDARY_COLOR]}>
         <View style={styles.logoContainer}>
           <Image
             source={require('../../../resources/images/favicon.png')}

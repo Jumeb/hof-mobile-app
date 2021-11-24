@@ -3,7 +3,7 @@ import theme from '../../../resources/Colors/theme';
 
 const styles = StyleSheet.create({
   events: {
-    backgroundColor: theme.faint_grey,
+    backgroundColor: theme.FAINT_GREY,
     flex: 1,
   },
 });

@@ -11,9 +11,9 @@ const styles = StyleSheet.create({
     borderWidth: 1.8,
     borderRadius: 8,
     overflow: 'hidden',
-    backgroundColor: theme.white_color,
+    backgroundColor: theme.WHITE_COLOR,
     shadowOffset: {width: 0, height: 2},
-    shadowColor: theme.light_grey,
+    shadowColor: theme.LIGHT_GREY,
     shadowRadius: 8,
     shadowOpacity: 0.8,
     elevation: 3,
@@ -24,10 +24,10 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 8,
   },
   pastryName: {
-    fontSize: theme.font_size_large - 6,
+    fontSize: theme.FONT_SIZE_LARGE - 6,
     padding: 5,
     textAlign: 'left',
-    color: theme.dark_grey,
+    color: theme.DARK_GREY,
     fontWeight: '700',
   },
   pastryLikes: {
@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
   logo: {
     height: 30,
     width: 30,
-    tintColor: theme.white_color,
+    tintColor: theme.WHITE_COLOR,
   },
   infoContainer: {
     flexDirection: 'row',

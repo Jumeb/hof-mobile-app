@@ -4,7 +4,7 @@ import theme from '../../../resources/Colors/theme';
 const styles = StyleSheet.create({
   mainButton: {
     borderWidth: 1.6,
-    borderColor: theme.primary_color,
+    borderColor: theme.PRIMARY_COLOR,
     justifyContent: 'center',
     alignItems: 'center',
     paddingVertical: 4,

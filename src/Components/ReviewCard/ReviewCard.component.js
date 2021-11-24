@@ -26,7 +26,7 @@ const ReviewCard = (props) => {
             <Icons
               name="stats-chart-outline"
               size={15}
-              color={theme.light_grey}
+              color={theme.LIGHT_GREY}
             />
             <Text style={styles.reviewsText}>Reviews</Text>
           </View>

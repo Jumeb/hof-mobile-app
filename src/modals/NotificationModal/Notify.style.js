@@ -11,14 +11,14 @@ const styles = StyleSheet.create({
   notifyContainer: {
     padding: 10,
     shadowOffset: {width: 0, height: 2},
-    shadowColor: theme.faint_grey,
+    shadowColor: theme.FAINT_GREY,
     shadowOpacity: 0.8,
     shadowRadius: 10,
     elevation: 2,
     borderRadius: 10,
   },
   notifyText: {
-    color: theme.white_color,
+    color: theme.WHITE_COLOR,
     fontSize: theme.font_size_normal,
     fontWeight: '600',
     letterSpacing: 1.5,

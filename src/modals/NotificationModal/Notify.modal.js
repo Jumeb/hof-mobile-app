@@ -19,7 +19,7 @@ const Notify = (props) => {
       animationOut="fadeOutUp">
       <LinearGradient
         style={styles.notifyContainer}
-        colors={[theme.primary_color, theme.secondary_color]}>
+        colors={[theme.PRIMARY_COLOR, theme.SECONDARY_COLOR]}>
         <Text style={styles.notifyText}>{message}</Text>
       </LinearGradient>
     </Modal>

@@ -54,18 +54,18 @@ const EventDetails = () => {
               </View>
               <View style={styles.eventCountDownTime}>
                 <Text style={styles.eventCountDownTimeNumber}>
-                  12  :  45  :  45
+                  12 : 45 : 45
                 </Text>
                 <Text style={styles.eventCountDownTimeText}>
-                  Hours    Mins    Secs
+                  Hours Mins Secs
                 </Text>
               </View>
             </View>
             <View style={styles.separator} />
             <View style={styles.eventCountDown}>
               <ModalButton name="pencil" color="green" />
-              <ModalButton name="trash-outline" color={theme.danger_color} />
-              <ModalButton name="gift-outline" color={theme.primary_color} />
+              <ModalButton name="trash-outline" color={theme.DANGER_COLOR} />
+              <ModalButton name="gift-outline" color={theme.PRIMARY_COLOR} />
             </View>
           </View>
         </View>

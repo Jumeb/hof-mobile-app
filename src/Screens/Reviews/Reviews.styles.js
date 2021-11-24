@@ -4,7 +4,7 @@ import theme from '../../../resources/Colors/theme';
 const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
-    backgroundColor: theme.faint_grey,
+    backgroundColor: theme.FAINT_GREY,
   },
 });
 

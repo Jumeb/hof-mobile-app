@@ -9,7 +9,7 @@ const Delete = (props) => {
   const {openModal} = props;
   return (
     <TouchableOpacity style={styles.mainButton} onPress={() => openModal()}>
-      <Icons name="ios-close-sharp" size={15} color={theme.danger_color} />
+      <Icons name="ios-close-sharp" size={15} color={theme.DANGER_COLOR} />
     </TouchableOpacity>
   );
 };

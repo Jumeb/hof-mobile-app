@@ -4,7 +4,7 @@ import theme from '../../../resources/Colors/theme';
 
 const styles = StyleSheet.create({
   settings: {
-    backgroundColor: theme.faint_grey,
+    backgroundColor: theme.FAINT_GREY,
   },
   userImage: {
     height: 60,
@@ -18,12 +18,12 @@ const styles = StyleSheet.create({
     marginVertical: 8,
   },
   subMenusText: {
-    fontSize: theme.font_size_extra_small + 1,
+    fontSize: theme.FONT_SIZE_EXTRA_SMALL + 1,
   },
   separator: {
     marginHorizontal: -8,
     height: 0.6,
-    backgroundColor: theme.light_grey,
+    backgroundColor: theme.LIGHT_GREY,
     marginVertical: 1,
   },
 });

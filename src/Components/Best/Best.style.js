@@ -4,7 +4,7 @@ import theme from '../../../resources/Colors/theme';
 const styles = StyleSheet.create({
   mainContainer: {
     shadowOffset: {width: 0, height: 2},
-    shadowColor: theme.light_grey,
+    shadowColor: theme.LIGHT_GREY,
     shadowRadius: 8,
     shadowOpacity: 0.8,
     elevation: 3,
@@ -22,10 +22,10 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 8,
   },
   pastryName: {
-    fontSize: theme.font_size_large - 6,
+    fontSize: theme.FONT_SIZE_LARGE - 6,
     padding: 5,
     textAlign: 'left',
-    color: theme.dark_grey,
+    color: theme.DARK_GREY,
     fontWeight: '700',
   },
   pastryLikes: {

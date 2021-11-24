@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 0,
   },
   confirmCard: {
-    backgroundColor: theme.white_color,
+    backgroundColor: theme.WHITE_COLOR,
     padding: 10,
     marginHorizontal: 12,
     borderRadius: 8,
@@ -27,17 +27,17 @@ const styles = StyleSheet.create({
   },
   eventMessageLabel: {
     fontSize: 14,
-    color: theme.light_grey + 'aa',
+    color: theme.LIGHT_GREY + 'aa',
   },
   eventMessageInfo: {
     fontSize: 14,
-    color: theme.dark_grey,
+    color: theme.DARK_GREY,
     fontWeight: '600',
   },
   confirmMessage: {
     fontSize: 15,
     marginBottom: 10,
-  }
+  },
 });
 
 export default styles;

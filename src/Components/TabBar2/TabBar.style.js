@@ -1,7 +1,6 @@
 import {StyleSheet, useWindowDimensions} from 'react-native';
 import theme from '../../../resources/Colors/theme';
 
-
 const styles = StyleSheet.create({
   tabBar: {
     flex: 1,
@@ -11,10 +10,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: 8,
     paddingVertical: 6,
     borderRadius: 25,
-    backgroundColor: theme.white_color,
+    backgroundColor: theme.WHITE_COLOR,
     shadowOffset: {width: 0, height: 2},
     shadowOpacity: 0.8,
-    shadowColor: theme.light_grey,
+    shadowColor: theme.LIGHT_GREY,
     shadowRadius: 8,
     elevation: 2,
     position: 'absolute',
@@ -27,12 +26,12 @@ const styles = StyleSheet.create({
   },
   tabTabText: {
     fontSize: 8,
-    color: theme.light_grey,
+    color: theme.LIGHT_GREY,
     fontWeight: '700',
   },
   tabTabTextSelected: {
     fontSize: 8,
-    color: theme.primary_color,
+    color: theme.PRIMARY_COLOR,
     fontWeight: '700',
   },
 });

@@ -131,7 +131,7 @@ const SignUp = () => {
                 <Icons
                   name="ios-chevron-down-outline"
                   size={25}
-                  color={theme.white_color}
+                  color={theme.WHITE_COLOR}
                 />
               </View>
             </View>
@@ -145,7 +145,7 @@ const SignUp = () => {
             <Icons
               name="ios-arrow-forward-outline"
               size={25}
-              color={theme.white_color}
+              color={theme.WHITE_COLOR}
             />
           </TouchableOpacity>
           <TouchableOpacity
@@ -155,7 +155,7 @@ const SignUp = () => {
             <Icons
               name="ios-return-up-back-outline"
               size={25}
-              color={theme.white_color}
+              color={theme.WHITE_COLOR}
             />
           </TouchableOpacity>
         </View>

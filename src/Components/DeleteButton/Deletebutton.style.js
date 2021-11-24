@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
     height: 25,
     borderRadius: 50,
     borderWidth: 1.4,
-    borderColor: theme.danger_color,
+    borderColor: theme.DANGER_COLOR,
     justifyContent: 'center',
     alignItems: 'center',
   },

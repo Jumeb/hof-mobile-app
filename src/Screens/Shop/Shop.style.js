@@ -4,7 +4,7 @@ import theme from '../../../resources/Colors/theme';
 const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
-    backgroundColor: theme.white_color,
+    backgroundColor: theme.WHITE_COLOR,
   },
   variety: {
     paddingTop: 10,
@@ -12,8 +12,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 8,
   },
   varietyText: {
-    fontSize: theme.font_size_large,
-    color: theme.dark_grey,
+    fontSize: theme.FONT_SIZE_LARGE,
+    color: theme.DARK_GREY,
   },
   pastriesContainer: {
     flexDirection: 'row',
@@ -23,8 +23,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
   },
   pastriesText: {
-    fontSize: theme.font_size_large,
-    color: theme.dark_grey,
+    fontSize: theme.FONT_SIZE_LARGE,
+    color: theme.DARK_GREY,
   },
   pastriesLayout: {
     flexDirection: 'row',

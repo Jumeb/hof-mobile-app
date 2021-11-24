@@ -27,14 +27,14 @@ const Review = (props) => {
   };
 
   const gradient_colors = [
-    {start: theme.mix_primary_color_1, end: theme.mix_primary_color_2},
-    {start: theme.mix_primary_color_3, end: theme.mix_primary_color_4},
-    {start: theme.mix_primary_color_5, end: theme.mix_primary_color_6},
-    {start: theme.mix_primary_color_11, end: theme.mix_primary_color_12},
-    {start: theme.mix_primary_color_9, end: theme.mix_primary_color_10},
-    {start: theme.mix_primary_color_7, end: theme.mix_primary_color_8},
-    {start: theme.mix_primary_color_13, end: theme.mix_primary_color_14},
-    {start: theme.mix_primary_color_15, end: theme.mix_primary_color_16},
+    {start: theme.MIX_PRIMARY_COLOR_1, end: theme.MIX_PRIMARY_COLOR_2},
+    {start: theme.MIX_PRIMARY_COLOR_3, end: theme.MIX_PRIMARY_COLOR_4},
+    {start: theme.MIX_PRIMARY_COLOR_5, end: theme.MIX_PRIMARY_COLOR_6},
+    {start: theme.MIX_PRIMARY_COLOR_11, end: theme.MIX_PRIMARY_COLOR_12},
+    {start: theme.MIX_PRIMARY_COLOR_9, end: theme.MIX_PRIMARY_COLOR_10},
+    {start: theme.MIX_PRIMARY_COLOR_7, end: theme.MIX_PRIMARY_COLOR_8},
+    {start: theme.MIX_PRIMARY_COLOR_13, end: theme.MIX_PRIMARY_COLOR_14},
+    {start: theme.MIX_PRIMARY_COLOR_15, end: theme.MIX_PRIMARY_COLOR_16},
   ];
 
   let rank = 0;
