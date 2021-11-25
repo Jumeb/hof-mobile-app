@@ -1,2 +1,2 @@
-# Flavours-mobile
-The mobile application for Flavours-web application
+# hof-mobile-app
+The mobile application for Home of Flavours reactJs web application using react-native
