@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
   },
   varietyButtonText: {
     color: theme.WHITE_COLOR,
-    fontSize: theme.font_size_small,
+    fontSize: theme.FONT_SIZE_SMALL,
     fontWeight: '700',
     textAlign: 'center',
   },

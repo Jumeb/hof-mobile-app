@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
   },
   notifyText: {
     color: theme.WHITE_COLOR,
-    fontSize: theme.font_size_normal,
+    fontSize: theme.FONT_SIZE_NORMAL,
     fontWeight: '600',
     letterSpacing: 1.5,
     textAlign: 'center',

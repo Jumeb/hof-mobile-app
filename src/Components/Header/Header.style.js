@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
     padding: 1,
   },
   userName: {
-    fontSize: theme.font_size_small - 1,
+    fontSize: theme.FONT_SIZE_SMALL - 1,
     fontWeight: '700',
     letterSpacing: 1.3,
     color: theme.DARK_OVERLAYS,

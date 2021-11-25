@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 import {Actions} from 'react-native-router-flux';
 import Icons from 'react-native-vector-icons/Ionicons';
+import LinearGradient from 'react-native-linear-gradient';
 
 import styles from './Login.style';
 import theme from '../../../resources/Colors/theme';
@@ -46,74 +47,62 @@ const Login = () => {
       <ScrollView style={styles.container}>
         <ImageBackground
           imageStyle={styles.welcomeImageStyle}
-          style={[{height: h}, styles.welcomeImageBackground]}
-          source={require('../../../resources/images/bds-7.jpg')}>
+          style={[{height: h / 2.7}, styles.welcomeImageBackground]}
+          source={require('../../../resources/images/weds-2.jpg')}>
           <View style={styles.messageContainer}>
             <Image
               source={require('../../../resources/images/caracakes8.png')}
               style={styles.logoImage}
             />
             <View style={styles.welcomeContainer}>
-              <Text style={styles.welcomeTitle}>ENTER</Text>
-              <Text style={styles.welcomeSlogan}>the gates of flavour</Text>
-            </View>
-            <View style={styles.inputsContainer}>
-              <InputComponent
-                holder="Email"
-                type="email-address"
-                capitalize="none"
-                secure={false}
-                inputError={emailError}
-                value={email}
-                toggleError={() => setEmailError(false)}
-                setValue={(text) => setEmail(text)}
-                errorMessage="Invalid mail format"
-              />
-              <InputComponent
-                holder="Password"
-                type="default"
-                capitalize="none"
-                secure={true}
-                inputError={passwordError}
-                value={password}
-                toggleError={() => setPasswordError(false)}
-                setValue={(text) => setPassword(text)}
-                errorMessage="Password required"
-              />
-              <TouchableOpacity>
-                <Text style={styles.forgotPasswordText}>FORGOT PASSWORD ?</Text>
-              </TouchableOpacity>
-              <View style={styles.indicatorIcon}>
-                <Icons
-                  name="ios-chevron-down-outline"
-                  size={25}
-                  color={theme.WHITE_COLOR}
-                />
-              </View>
+              <Text style={styles.welcomeTitle}>Flavours</Text>
+              <Text style={styles.welcomeSlogan}>
+                in the name of great taste
+              </Text>
             </View>
           </View>
         </ImageBackground>
-        <View style={styles.actionsContainer}>
+        <View style={styles.inputsContainer}>
+          <Text style={styles.welcomeText}>Welcome</Text>
+          <InputComponent
+            holder="Email"
+            type="email-address"
+            capitalize="none"
+            secure={false}
+            inputError={emailError}
+            value={email}
+            toggleError={() => setEmailError(false)}
+            setValue={(text) => setEmail(text)}
+            errorMessage="Invalid mail format"
+          />
+          <InputComponent
+            holder="Password"
+            type="default"
+            capitalize="none"
+            secure={true}
+            inputError={passwordError}
+            value={password}
+            toggleError={() => setPasswordError(false)}
+            setValue={(text) => setPassword(text)}
+            errorMessage="Password required"
+          />
           <TouchableOpacity
             style={styles.Button}
             onPress={() => authenticate()}>
             <Text style={styles.ButtonText}>LOG IN</Text>
-            <Icons
-              name="ios-arrow-forward-outline"
-              size={25}
-              color={theme.WHITE_COLOR}
-            />
           </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.Button}
-            onPress={() => Actions.welcome()}>
-            <Text style={styles.ButtonText}>START</Text>
-            <Icons
-              name="ios-return-up-back-outline"
-              size={25}
-              color={theme.WHITE_COLOR}
-            />
+          <TouchableOpacity>
+            <Text style={styles.forgotPasswordText}>FORGOT PASSWORD ?</Text>
           </TouchableOpacity>
+          <LinearGradient
+            style={styles.gradientButton}
+            start={{x: 0, y: 1}}
+            end={{x: 1, y: 1}}
+            colors={[theme.SECONDARY_COLOR, theme.TERTIARY_COLOR]}>
+            <TouchableOpacity onPress={() => Actions.SignUp()}>
+              <Text style={styles.gradientButtonText}>SIGN UP</Text>
+            </TouchableOpacity>
+          </LinearGradient>
         </View>
       </ScrollView>
     </SafeAreaView>

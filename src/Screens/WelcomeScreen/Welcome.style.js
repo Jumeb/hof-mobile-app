@@ -5,7 +5,6 @@ import theme from '../../../resources/Colors/theme';
 const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
-    backgroundColor: theme.TERTIARY_COLOR + 'ea',
   },
   container: {
     flex: 1,
@@ -15,10 +14,6 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
     flex: 1,
     justifyContent: 'center',
-  },
-  welcomeImageStyle: {
-    borderBottomLeftRadius: theme.LARGE_BORDER_RADIUS,
-    borderBottomRightRadius: theme.LARGE_BORDER_RADIUS,
   },
   messageContainer: {
     flex: 1,
@@ -38,7 +33,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     marginTop: 120,
     marginBottom: 120,
-    width: 130,
+    width: '100%',
   },
   welcomeTitle: {
     fontSize: theme.FONT_SIZE_LARGE,

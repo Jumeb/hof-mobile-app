@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
   },
   reviewText: {
     color: theme.DARK_GREY,
-    fontSize: theme.font_size_small + 1,
+    fontSize: theme.FONT_SIZE_SMALL + 1,
     lineHeight: 20,
   },
   reviewImage: {

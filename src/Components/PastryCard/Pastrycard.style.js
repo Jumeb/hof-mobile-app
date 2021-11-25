@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
     color: theme.LIGHT_GREY,
   },
   pastryName2: {
-    fontSize: theme.font_size_normal,
+    fontSize: theme.FONT_SIZE_NORMAL,
     color: theme.LIGHT_GREY,
     textAlign: 'center',
     marginVertical: 2,

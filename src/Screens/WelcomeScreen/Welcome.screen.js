@@ -22,8 +22,7 @@ const WelcomeScreen = () => {
     <SafeAreaView style={styles.mainContainer}>
       <ScrollView style={styles.container}>
         <ImageBackground
-          imageStyle={styles.welcomeImageStyle}
-          style={[styles.welcomeImageBackground, {height: h}]}
+          style={[styles.welcomeImageBackground, {height: h - 2}]}
           source={
             image
               ? require('../../../resources/images/vals-3.jpg')
@@ -38,43 +37,47 @@ const WelcomeScreen = () => {
               style={styles.logoImage}
             />
             <View style={styles.welcomeContainer}>
-              <Text style={styles.welcomeTitle}>Welcome</Text>
+              <Text style={styles.welcomeTitle}>Welcome to Flavours</Text>
               <Text style={styles.welcomeSlogan}>
-                to Flavours, home of bakers & pastries.
+                resting place of bakers & pastries.
               </Text>
             </View>
-            <View style={styles.welcomeInfo}>
+            {/* <View style={styles.welcomeInfo}>
               <Text style={styles.welcomeInfoText}>
                 GET STARTED OR CREATE AN ACCOUNT
               </Text>
-            </View>
-            <View style={styles.welcomeIcon}>
+            </View> */}
+            {/* <View style={styles.welcomeIcon}>
               <Icons
                 name="ios-chevron-down-outline"
                 size={25}
                 color={theme.FAINT_GREY}
               />
+            </View> */}
+            <View style={styles.actionsContainer}>
+              <TouchableOpacity
+                style={styles.Button}
+                onPress={() => Actions.SignUp()}>
+                <Text style={styles.ButtonText}>SIGN UP</Text>
+                <Icons
+                  name="ios-add-sharp"
+                  size={20}
+                  color={theme.WHITE_COLOR}
+                />
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.Button}
+                onPress={() => Actions.Login()}>
+                <Text style={styles.ButtonText}>LOG IN</Text>
+                <Icons
+                  name="ios-arrow-forward-outline"
+                  size={20}
+                  color={theme.WHITE_COLOR}
+                />
+              </TouchableOpacity>
             </View>
           </View>
         </ImageBackground>
-        <View style={styles.actionsContainer}>
-          <TouchableOpacity
-            style={styles.Button}
-            onPress={() => Actions.Login()}>
-            <Text style={styles.ButtonText}>LOG IN</Text>
-            <Icons
-              name="ios-arrow-forward-outline"
-              size={25}
-              color={theme.WHITE_COLOR}
-            />
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.Button}
-            onPress={() => Actions.SignUp()}>
-            <Text style={styles.ButtonText}>NEW</Text>
-            <Icons name="ios-add-sharp" size={25} color={theme.WHITE_COLOR} />
-          </TouchableOpacity>
-        </View>
       </ScrollView>
     </SafeAreaView>
   );

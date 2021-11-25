@@ -35,21 +35,21 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   reviewsNumber: {
-    fontSize: theme.font_size_normal + 4,
+    fontSize: theme.FONT_SIZE_NORMAL + 4,
     textAlign: 'center',
     color: theme.DARK_GREY,
   },
   reviewsText: {
     color: theme.LIGHT_GREY,
-    fontSize: theme.font_size_small,
+    fontSize: theme.FONT_SIZE_SMALL,
   },
   bakerName: {
-    fontSize: theme.font_size_normal + 3,
+    fontSize: theme.FONT_SIZE_NORMAL + 3,
     textAlign: 'center',
     color: theme.DARK_GREY,
   },
   bakerCompany: {
-    fontSize: theme.font_size_normal - 2,
+    fontSize: theme.FONT_SIZE_NORMAL - 2,
     color: theme.LIGHT_GREY,
   },
   reviewStats: {
