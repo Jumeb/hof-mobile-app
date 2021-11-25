@@ -11,7 +11,6 @@ const styles = StyleSheet.create({
   },
   inputContainerError: {
     borderBottomWidth: 1.5,
-    marginHorizontal: 14,
     borderBottomColor: theme.DANGER_COLOR + '88',
   },
   inputText: {
@@ -24,6 +23,7 @@ const styles = StyleSheet.create({
   inputError: {
     color: theme.DANGER_COLOR,
     textAlign: 'left',
+    marginBottom: -5,
   },
 });
 

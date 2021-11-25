@@ -28,6 +28,7 @@ const styles = StyleSheet.create({
     height: 50,
     tintColor: theme.WHITE_COLOR,
     alignSelf: 'center',
+    marginTop: 20,
   },
   welcomeContainer: {
     alignSelf: 'center',
@@ -64,7 +65,8 @@ const styles = StyleSheet.create({
   actionsContainer: {
     flexDirection: 'row',
     justifyContent: 'space-around',
-    marginVertical: 40,
+    marginBottom: 25,
+    marginTop: 40,
   },
   Button: {
     flexDirection: 'row',

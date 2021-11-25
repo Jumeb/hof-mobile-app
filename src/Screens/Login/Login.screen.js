@@ -8,9 +8,9 @@ import {
   View,
   TouchableOpacity,
   useWindowDimensions,
+  StatusBar,
 } from 'react-native';
 import {Actions} from 'react-native-router-flux';
-import Icons from 'react-native-vector-icons/Ionicons';
 import LinearGradient from 'react-native-linear-gradient';
 
 import styles from './Login.style';
@@ -44,6 +44,7 @@ const Login = () => {
 
   return (
     <SafeAreaView style={styles.mainContainer}>
+      <StatusBar animated={true} backgroundColor={theme.PRIMARY_COLOR} />
       <ScrollView style={styles.container}>
         <ImageBackground
           imageStyle={styles.welcomeImageStyle}

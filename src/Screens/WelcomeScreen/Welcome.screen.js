@@ -8,6 +8,7 @@ import {
   ScrollView,
   TouchableOpacity,
   useWindowDimensions,
+  StatusBar,
 } from 'react-native';
 import Icons from 'react-native-vector-icons/Ionicons';
 
@@ -20,9 +21,14 @@ const WelcomeScreen = () => {
   const [image, setImage] = useState(true);
   return (
     <SafeAreaView style={styles.mainContainer}>
+      <StatusBar
+        animated={true}
+        backgroundColor={'transparent'}
+        translucent={true}
+      />
       <ScrollView style={styles.container}>
         <ImageBackground
-          style={[styles.welcomeImageBackground, {height: h - 2}]}
+          style={[styles.welcomeImageBackground, {height: h + 30}]}
           source={
             image
               ? require('../../../resources/images/vals-3.jpg')

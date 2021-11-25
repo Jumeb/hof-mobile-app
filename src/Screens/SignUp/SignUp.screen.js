@@ -8,6 +8,7 @@ import {
   View,
   TouchableOpacity,
   useWindowDimensions,
+  StatusBar,
 } from 'react-native';
 import {Actions} from 'react-native-router-flux';
 
@@ -57,6 +58,7 @@ const SignUp = () => {
 
   return (
     <SafeAreaView style={styles.mainContainer}>
+      <StatusBar animated={true} backgroundColor={theme.PRIMARY_COLOR} />
       <ScrollView style={styles.container}>
         <ImageBackground
           imageStyle={styles.welcomeImageStyle}
@@ -143,7 +145,7 @@ const SignUp = () => {
             <Text style={styles.forgotPasswordText}>
               Already have an account?{' '}
             </Text>
-            <TouchableOpacity onPress={() => Actions.login()}>
+            <TouchableOpacity onPress={() => Actions.Login()}>
               <Text style={styles.loginText}>Login</Text>
             </TouchableOpacity>
           </View>

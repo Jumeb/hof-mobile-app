@@ -28,6 +28,7 @@ export default {
   DARK_GREY: '#58595B',
   LIGHT_GREY: '#999999',
   FAINT_GREY: '#eeeeee',
+  TRANSPARENT: 'transparent',
 
   //Values
   BORDER_IMAGE: 8,
