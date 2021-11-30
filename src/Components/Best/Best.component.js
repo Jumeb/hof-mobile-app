@@ -13,7 +13,7 @@ const Best = (props) => {
       <ImageBackground
         imageStyle={styles.bestBackground}
         style={styles.bestBackground}
-        source={require('../../../resources/images/cups-12.jpg')}>
+        source={require('../../../resources/images/pans-2.jpg')}>
         <LinearGradient
           style={styles.bestContainer}
           start={{x: 1, y: 0}}
@@ -56,6 +56,13 @@ const Best = (props) => {
                 color={theme.WHITE_COLOR}
               />
               <Text style={styles.pastryLikes}>{data.rank}</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.likesContainer2}>
+              <Icons
+                name="ios-heart-outline"
+                size={16}
+                color={theme.WHITE_COLOR}
+              />
             </TouchableOpacity>
           </View>
         </LinearGradient>

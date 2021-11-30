@@ -75,18 +75,21 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     marginVertical: 40,
   },
-  gradientButton: {
-    flex: 1,
-    alignItems: 'center',
-    marginTop: 20,
-    marginBottom: 15,
+  gradient: {
+    marginTop: 45,
     borderRadius: theme.LARGE_BORDER_RADIUS,
-    padding: 13,
+    marginBottom: 20,
     shadowOffset: {width: 0, height: 2},
     shadowColor: theme.LIGHT_GREY,
     shadowOpacity: 0.8,
     shadowRadius: 6,
     elevation: 3,
+    overflow: 'hidden',
+  },
+  gradientButton: {
+    flex: 1,
+    alignItems: 'center',
+    padding: 13,
   },
   gradientButtonText: {
     color: theme.WHITE_COLOR,

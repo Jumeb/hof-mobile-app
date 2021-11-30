@@ -16,22 +16,31 @@ const Bakers = (props) => {
               style={styles.companyImage}
               source={require('../../../resources/images/vals-3.jpg')}
             />
-            <TouchableOpacity style={styles.companyInfoButton}>
-              <Icons
-                name="ios-information-circle-outline"
-                size={16}
-                color={theme.WHITE_COLOR}
-              />
-            </TouchableOpacity>
-            <View style={styles.rankContainer}>
-              <Text style={styles.rankText}>Rank: {baker.rank}</Text>
-              <TouchableOpacity
-                style={styles.companySign}
-                activeOpacity={1}
-                onPress={() => onPress()}>
+            <View style={styles.chefInfo}>
+              <View style={styles.companySign}>
                 <Image
                   style={styles.companyLogo}
                   source={require('../../../resources/images/favicon.png')}
+                />
+              </View>
+              <TouchableOpacity style={styles.companyInfoButton}>
+                <Icons
+                  name="ios-information-circle-outline"
+                  size={16}
+                  color={theme.WHITE_COLOR}
+                />
+              </TouchableOpacity>
+            </View>
+            <View style={styles.rankContainer}>
+              <Text style={styles.rankText}>Rank: {baker.rank}</Text>
+              <TouchableOpacity
+                style={styles.shopSign}
+                activeOpacity={1}
+                onPress={() => onPress()}>
+                <Icons
+                  name="ios-cart-outline"
+                  size={16}
+                  color={theme.SECONDARY_COLOR}
                 />
               </TouchableOpacity>
             </View>

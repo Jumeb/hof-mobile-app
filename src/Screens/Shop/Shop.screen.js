@@ -12,6 +12,7 @@ import Icons from 'react-native-vector-icons/Ionicons';
 import {Best, Categories, PastryCard} from '../../Components';
 import styles from './Shop.style';
 import best from '../../../resources/Dummy/best.json';
+import bakers from '../../../resources/Dummy/bakers.json';
 import theme from '../../../resources/Colors/theme';
 import {scrolling} from '../../redux/actions/ScrollActions';
 import {bindActionCreators} from 'redux';
@@ -19,6 +20,7 @@ import {connect} from 'react-redux';
 
 const Shop = (props) => {
   const [color, setColor] = useState(colors[0]);
+  const [active, setActive] = useState(0);
   const [layout, setLayout] = useState(0);
   let rank = 0;
   const rotate = () => {
@@ -53,9 +55,7 @@ const Shop = (props) => {
             ListFooterComponent={() => <View style={styles.footerStyle} />}
           />
         </View>
-        <View style={[styles.variety, styles.paddingContent]}>
-          <Text style={styles.varietyText}>Varieties</Text>
-        </View>
+        <Text style={styles.varietyText}>Varieties</Text>
         <ScrollView
           horizontal={true}
           showsHorizontalScrollIndicator={false}
@@ -64,16 +64,17 @@ const Shop = (props) => {
             return (
               <Categories
                 key={key}
+                categoryIndex={key}
+                activeIndex={active}
                 variety={variety}
                 color={colors[rotate()]}
-                setColor={setColor}
+                setActiveIndex={setActive}
               />
             );
           })}
           <View style={styles.spacer} />
         </ScrollView>
         <View style={styles.pastriesContainer}>
-          <Text style={styles.pastriesText}>Pastries</Text>
           <View style={styles.pastriesLayout}>
             <TouchableOpacity
               style={styles.pastriesLayoutButton}
@@ -81,7 +82,7 @@ const Shop = (props) => {
               <Icons
                 name="grid-outline"
                 size={20}
-                color={layout === 0 ? color.start : theme.DARK_GREY}
+                color={layout === 0 ? theme.SECONDARY_COLOR : theme.DARK_GREY}
               />
             </TouchableOpacity>
             <TouchableOpacity
@@ -90,7 +91,7 @@ const Shop = (props) => {
               <Icons
                 name="square-outline"
                 size={20}
-                color={layout === 1 ? color.start : theme.DARK_GREY}
+                color={layout === 1 ? theme.SECONDARY_COLOR : theme.DARK_GREY}
               />
             </TouchableOpacity>
           </View>
@@ -105,15 +106,13 @@ const Shop = (props) => {
         ListHeaderComponent={renderHeader()}
         horizontal={false}
         numColumns={layout === 0 ? 2 : 1}
-        data={best}
+        data={bakers}
         renderItem={({item, key}) => (
-          <PastryCard color={color} layout={layout} />
+          <PastryCard color={color} layout={layout} key={key} />
         )}
         keyExtractor={(item) => item.id.toString()}
         showsVerticalScrollIndicator={false}
-        columnWrapperStyle={
-          layout === 0 ? {justifyContent: 'space-evenly'} : null
-        }
+        columnWrapperStyle={layout === 0 ? styles.columnWrapperStyle : null}
         key={layout === 0 ? 'grid' : 'flat'}
         onScrollBeginDrag={(event) => handle(event)}
         onScrollEndDrag={(event) => hide(event)}

@@ -16,16 +16,15 @@ const styles = StyleSheet.create({
     fontSize: theme.FONT_SIZE_LARGE,
     color: theme.DARK_GREY,
     marginVertical: 5,
-    paddingHorizontal: 15,
+    paddingHorizontal: 6,
   },
   chefText: {
     fontSize: theme.FONT_SIZE_LARGE,
     color: theme.DARK_GREY,
     marginVertical: 15,
-    paddingHorizontal: 15,
+    paddingHorizontal: 6,
   },
   listStyle: {
-    paddingHorizontal: 10,
     paddingTop: 10,
   },
   footerStyle: {

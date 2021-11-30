@@ -133,11 +133,13 @@ const SignUp = () => {
             errorMessage="Password mismatch"
           />
           <LinearGradient
-            style={styles.gradientButton}
+            style={styles.gradient}
             start={{x: 0, y: 1}}
             end={{x: 1, y: 1}}
             colors={[theme.SECONDARY_COLOR, theme.TERTIARY_COLOR]}>
-            <TouchableOpacity onPress={() => authenticate()}>
+            <TouchableOpacity
+              onPress={() => authenticate()}
+              style={styles.gradientButton}>
               <Text style={styles.gradientButtonText}>SIGN UP</Text>
             </TouchableOpacity>
           </LinearGradient>

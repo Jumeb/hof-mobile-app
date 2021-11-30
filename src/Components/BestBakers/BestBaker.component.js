@@ -30,6 +30,12 @@ const BestBaker = (props) => {
             theme.PRIMARY_COLOR + 'cd',
           ]}>
           <View style={styles.bestInfo}>
+            <View style={styles.companySign}>
+              <Image
+                source={require('../../../resources/images/favicon.png')}
+                style={styles.logo}
+              />
+            </View>
             <TouchableOpacity style={styles.bestInfoButton}>
               <Icons
                 name="ios-information-circle-outline"
@@ -68,12 +74,13 @@ const BestBaker = (props) => {
               <Text style={styles.chefLikes}>{data.rank}</Text>
             </TouchableOpacity>
             <TouchableOpacity
-              style={styles.companySign}
+              style={styles.shopSign}
               activeOpacity={1}
               onPress={() => onPress()}>
-              <Image
-                source={require('../../../resources/images/favicon.png')}
-                style={styles.logo}
+              <Icons
+                name="ios-cart-outline"
+                size={16}
+                color={theme.SECONDARY_COLOR}
               />
             </TouchableOpacity>
           </View>

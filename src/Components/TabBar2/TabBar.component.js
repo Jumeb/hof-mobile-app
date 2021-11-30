@@ -10,7 +10,7 @@ const TabBarTwo = (props) => {
   const {scrolling} = props;
   const activeTabIndex = state.index;
   let wide = useWindowDimensions().width - 30;
-  let height = useWindowDimensions().height * 0.892;
+  let height = useWindowDimensions().height * 0.953;
   let _height = height * 1.148;
 
   const _bottom = useRef(new Animated.Value(height / 0.892)).current;
@@ -56,13 +56,15 @@ const TabBarTwo = (props) => {
 
   useEffect(() => {
     if (!scrolling) {
-      slideUp();
-      fadeIn();
+      setTimeout(() => {
+        slideUp();
+        fadeIn();
+      }, 500);
     }
     setTimeout(() => {
       slideDown();
       fadeOut();
-    }, 4000);
+    }, 5000);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [scrolling]);
 

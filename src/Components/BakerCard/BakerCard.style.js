@@ -19,10 +19,14 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
-  companyInfoButton: {
+  chefInfo: {
     position: 'absolute',
     top: 9,
-    right: 7,
+    paddingHorizontal: 10,
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
   companyImageContainer: {
     width: '100%',
@@ -86,8 +90,8 @@ const styles = StyleSheet.create({
     marginTop: -4,
   },
   companySign: {
-    width: 30,
-    height: 30,
+    width: 28,
+    height: 28,
     borderRadius: 20,
     backgroundColor: theme.WHITE_COLOR,
     justifyContent: 'center',
@@ -99,8 +103,21 @@ const styles = StyleSheet.create({
     elevation: 3,
   },
   companyLogo: {
-    height: 25,
-    width: 25,
+    height: 23,
+    width: 23,
+  },
+  shopSign: {
+    width: 30,
+    height: 30,
+    borderRadius: 20,
+    backgroundColor: theme.WHITE_COLOR,
+    justifyContent: 'center',
+    alignItems: 'center',
+    shadowOffset: {width: 0, height: 2},
+    shadowColor: theme.LIGHT_GREY,
+    shadowOpacity: 0.8,
+    shadowRadius: 6,
+    elevation: 3,
   },
 });
 

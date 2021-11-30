@@ -81,18 +81,21 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: theme.LARGE_BORDER_RADIUS,
     borderTopRightRadius: theme.LARGE_BORDER_RADIUS,
   },
-  gradientButton: {
-    flex: 1,
-    alignItems: 'center',
+  gradient: {
     marginTop: 45,
-    marginBottom: 20,
     borderRadius: theme.LARGE_BORDER_RADIUS,
-    padding: 13,
+    marginBottom: 20,
     shadowOffset: {width: 0, height: 2},
     shadowColor: theme.LIGHT_GREY,
     shadowOpacity: 0.8,
     shadowRadius: 6,
     elevation: 3,
+    overflow: 'hidden',
+  },
+  gradientButton: {
+    flex: 1,
+    alignItems: 'center',
+    padding: 13,
   },
   gradientButtonText: {
     color: theme.WHITE_COLOR,

@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 6,
     flexDirection: 'row',
-    marginRight: 5,
+    marginRight: 20,
   },
   bestDetail: {
     flexDirection: 'row',
@@ -66,17 +66,19 @@ const styles = StyleSheet.create({
     elevation: 3,
   },
   infoContainer: {
+    width: '100%',
     flexDirection: 'row',
-    justifyContent: 'flex-start',
+    justifyContent: 'space-between',
     alignItems: 'center',
     marginTop: 'auto',
-    marginHorizontal: 10,
+    paddingHorizontal: 8,
   },
   bestInfo: {
     paddingHorizontal: 10,
     marginBottom: 'auto',
     flexDirection: 'row',
     justifyContent: 'space-between',
+    alignItems: 'center',
   },
   bestInfoButton: {
     textAlign: 'right',

@@ -1,3 +1,4 @@
+import Text from './Text/Text.component';
 import InputComponent from './AuthInputs/Input.component';
 import NavBar from './NavBar/NavBar.component';
 import BackBar from './BackBar/BackBar.component';
@@ -19,6 +20,7 @@ import ReviewCard from './ReviewCard/ReviewCard.component';
 import BestBaker from './BestBakers/BestBaker.component';
 
 export {
+  Text,
   InputComponent,
   NavBar,
   BackBar,

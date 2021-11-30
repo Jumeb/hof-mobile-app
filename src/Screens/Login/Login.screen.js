@@ -96,11 +96,13 @@ const Login = () => {
             <Text style={styles.forgotPasswordText}>FORGOT PASSWORD ?</Text>
           </TouchableOpacity>
           <LinearGradient
-            style={styles.gradientButton}
+            style={styles.gradient}
             start={{x: 0, y: 1}}
             end={{x: 1, y: 1}}
             colors={[theme.SECONDARY_COLOR, theme.TERTIARY_COLOR]}>
-            <TouchableOpacity onPress={() => Actions.SignUp()}>
+            <TouchableOpacity
+              onPress={() => Actions.SignUp()}
+              style={styles.gradientButton}>
               <Text style={styles.gradientButtonText}>SIGN UP</Text>
             </TouchableOpacity>
           </LinearGradient>

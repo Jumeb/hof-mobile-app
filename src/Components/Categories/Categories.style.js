@@ -3,11 +3,12 @@ import theme from '../../../resources/Colors/theme';
 
 const styles = StyleSheet.create({
   mainContainer: {
-    width: 120,
+    width: 'auto',
     backgroundColor: theme.WHITE_COLOR,
     borderRadius: 8,
     marginHorizontal: 8,
     marginVertical: 5,
+    marginBottom: 8,
     shadowOffset: {width: 0, height: 2},
     shadowOpacity: 0.8,
     shadowColor: theme.DARK_GREY,
@@ -21,7 +22,7 @@ const styles = StyleSheet.create({
   },
   varietyButton: {
     paddingVertical: 8,
-    paddingHorizontal: 6,
+    paddingHorizontal: 12,
   },
   varietyButtonText: {
     color: theme.WHITE_COLOR,

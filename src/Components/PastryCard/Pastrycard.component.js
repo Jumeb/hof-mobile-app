@@ -1,79 +1,179 @@
 import React from 'react';
-import {Image, Text, TouchableOpacity, View} from 'react-native';
+import {Image, TouchableOpacity, View} from 'react-native';
+import LinearGradient from 'react-native-linear-gradient';
 import Icons from 'react-native-vector-icons/Ionicons';
+import {Text} from '..';
+
+import theme from '../../../resources/Colors/theme';
 
 import styles from './Pastrycard.style';
 
 const PastryCard = (props) => {
   const {color, layout} = props;
   return (
-    <TouchableOpacity
-      style={[
-        layout === 0 ? styles.mainContainer2 : styles.mainContainer,
-        {borderColor: color.start},
-      ]}>
-      <View>
-        <Image
-          source={require('../../../resources/images/cups-12.jpg')}
-          imageStyle={layout === 0 ? styles.pastryImage2 : styles.pastryImage}
-          style={layout === 0 ? styles.pastryImage2 : styles.pastryImage}
-        />
-      </View>
-      <View style={layout === 0 ? styles.pastryDetails2 : styles.pastryDetails}>
-        <Text
-          style={[
-            layout === 0 ? styles.pastryName2 : styles.pastryName2,
-            {color: color.start},
-          ]}>
-          Banana cupcakes
-        </Text>
-        <View style={layout === 0 ? styles.grid2 : ''}>
-          <View style={layout === 0 ? styles.pastryStats2 : styles.pastryStats}>
-            <Text
-              style={[
-                layout === 0 ? styles.pastryPrice2 : styles.pastryPrice,
-                {color: color.end},
-              ]}>
-              90,000
-            </Text>
-            <Text
-              style={[
-                layout === 0 ? styles.currency2 : styles.currency,
-                {color: color.end},
-              ]}>
-              cfa
-            </Text>
+    <>
+      {layout === 0 ? (
+        <TouchableOpacity style={styles.mainContainer2}>
+          <View style={styles.pastryImageContainer2}>
+            <Image
+              source={require('../../../resources/images/weds-2.jpg')}
+              imageStyle={styles.pastryImage2}
+              style={styles.pastryImage2}
+            />
+            <View style={styles.bestInfo2}>
+              <View style={styles.bestDiscount2}>
+                <Icons
+                  name="ios-trending-down-outline"
+                  size={16}
+                  color={theme.SUCCESS_COLOR}
+                />
+                <Text style={styles.bestDiscountText2}>20%</Text>
+              </View>
+              <TouchableOpacity style={styles.bestInfoButton2}>
+                <Icons
+                  name="ios-information-circle-outline"
+                  size={16}
+                  color={theme.SECONDARY_COLOR}
+                />
+              </TouchableOpacity>
+            </View>
+            <View style={styles.infoContainer2}>
+              <TouchableOpacity style={styles.likesContainer2}>
+                <Icons
+                  name="ios-thumbs-up-outline"
+                  size={16}
+                  color={theme.WHITE_COLOR}
+                />
+                <Text style={styles.pastryLikes2}>{1}</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.likesContainer2}>
+                <Icons
+                  name="ios-thumbs-down-outline"
+                  size={16}
+                  color={theme.WHITE_COLOR}
+                />
+                <Text style={styles.pastryLikes2}>{3}</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.likesContainer2}>
+                <Icons
+                  name="ios-heart-outline"
+                  size={16}
+                  color={theme.WHITE_COLOR}
+                />
+              </TouchableOpacity>
+            </View>
+            <LinearGradient
+              style={styles.bestContainer2}
+              start={{x: 1, y: 0}}
+              end={{x: 1, y: 1}}
+              colors={[
+                theme.PRIMARY_COLOR + '05',
+                theme.PRIMARY_COLOR + '20',
+                theme.PRIMARY_COLOR + 'aa',
+              ]}
+            />
           </View>
-          {layout === 0 ? (
-            <View style={styles.likesContainer2}>
-              <View style={styles.pastryIconDetails}>
-                <Icons
-                  name="heart"
-                  size={15}
-                  style={{marginRight: 7}}
-                  color={color.end}
-                />
-                <Text style={styles.pastryLikes}>55</Text>
-              </View>
-              <View style={styles.pastryIconDetails}>
-                <Icons
-                  name="stats-chart"
-                  size={15}
-                  style={{marginRight: 7}}
-                  color={color.end}
-                />
-                <Text style={styles.pastryLikes}>200</Text>
+          <View style={styles.pastryDetails2}>
+            <View style={styles.grid2}>
+              <Text style={styles.pastryName2}>White Bridal</Text>
+              <View style={styles.pastryStats2}>
+                <Text style={styles.pastryPrice2}>250,000</Text>
+                <Text style={styles.currency2}>FCFA</Text>
               </View>
             </View>
-          ) : (
-            <View style={styles.likesContainer}>
-              <Text style={styles.pastryLikes}>Likes: 55</Text>
-              <Text style={styles.pastryLikes}>Ordered: 200</Text>
+            <TouchableOpacity style={styles.addToCartButton}>
+              <Icons
+                name="ios-add-outline"
+                size={16}
+                color={theme.WHITE_COLOR}
+              />
+            </TouchableOpacity>
+          </View>
+        </TouchableOpacity>
+      ) : (
+        <TouchableOpacity style={styles.mainContainer}>
+          <View style={styles.pastryImageContainer}>
+            <Image
+              source={require('../../../resources/images/vals-3.jpg')}
+              imageStyle={styles.pastryImage}
+              style={styles.pastryImage}
+            />
+          </View>
+          <View style={styles.infoContainer}>
+            <View style={styles.pastryDetails}>
+              <Text style={styles.pastryName}>Love Aurora</Text>
+              <TouchableOpacity style={styles.bestInfoButton}>
+                <Icons
+                  name="ios-information-circle-outline"
+                  size={16}
+                  color={theme.SECONDARY_COLOR}
+                />
+              </TouchableOpacity>
             </View>
-          )}
-        </View>
-      </View>
-    </TouchableOpacity>
+            <View style={styles.pastryDetails}>
+              <View style={styles.pastryStats}>
+                <Text style={styles.pastryPrice}>250,000</Text>
+                <Text style={styles.currency}>FCFA</Text>
+              </View>
+              {/* <View style={styles.bestInfo}> */}
+              <View style={styles.bestDiscount}>
+                <Icons
+                  name="ios-trending-down-outline"
+                  size={16}
+                  color={theme.WHITE_COLOR}
+                />
+                <Text style={styles.bestDiscountText}>20%</Text>
+              </View>
+              {/* </View> */}
+            </View>
+            <View style={styles.pastryDetails}>
+              <TouchableOpacity style={styles.likesContainer}>
+                <Icons
+                  name="ios-thumbs-up-outline"
+                  size={16}
+                  color={theme.SECONDARY_COLOR}
+                />
+                <Text style={styles.pastryLikes}>{1}</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.likesContainer}>
+                <Icons
+                  name="ios-thumbs-down-outline"
+                  size={16}
+                  color={theme.SECONDARY_COLOR}
+                />
+                <Text style={styles.pastryLikes}>{3}</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.likesContainer}>
+                <Icons
+                  name="ios-heart-outline"
+                  size={16}
+                  color={theme.SECONDARY_COLOR}
+                />
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.addToCartButton}>
+                <Icons
+                  name="ios-add-outline"
+                  size={16}
+                  color={theme.WHITE_COLOR}
+                />
+              </TouchableOpacity>
+            </View>
+          </View>
+          {/* <View style={styles.pastryDetails}>
+            <View style={styles.grid}>
+
+            </View>
+
+          </View> */}
+          {/*
+
+          </View> */}
+          {/* <View style={styles.infoContainer}>
+
+          </View> */}
+        </TouchableOpacity>
+      )}
+    </>
   );
 };
 

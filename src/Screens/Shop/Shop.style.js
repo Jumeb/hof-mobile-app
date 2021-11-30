@@ -7,17 +7,15 @@ const styles = StyleSheet.create({
     backgroundColor: theme.WHITE_COLOR,
     marginTop: 32,
   },
-  variety: {
-    paddingTop: 10,
-    paddingBottom: 5,
-    paddingHorizontal: 8,
-  },
   varietyText: {
     fontSize: theme.FONT_SIZE_LARGE,
     color: theme.DARK_GREY,
+    marginVertical: 15,
+    paddingHorizontal: 6,
   },
   pastriesContainer: {
-    marginBottom: 2,
+    marginVertical: 8,
+    paddingRight: 8,
     justifyContent: 'space-between',
     alignItems: 'flex-start',
   },
@@ -25,26 +23,28 @@ const styles = StyleSheet.create({
     fontSize: theme.FONT_SIZE_LARGE,
     color: theme.DARK_GREY,
     marginVertical: 5,
-    paddingHorizontal: 15,
+    paddingHorizontal: 6,
   },
   pastriesLayout: {
+    width: '100%',
     flexDirection: 'row',
+    justifyContent: 'flex-end',
+    alignItems: 'flex-end',
   },
   pastriesLayoutButton: {
-    marginLeft: 7,
-  },
-  paddingContent: {
-    paddingHorizontal: 15,
+    marginLeft: 10,
   },
   spacer: {
     width: 35,
   },
   listStyle: {
-    paddingHorizontal: 10,
     paddingTop: 10,
   },
   footerStyle: {
     width: 20,
+  },
+  columnWrapperStyle: {
+    justifyContent: 'space-around',
   },
 });
 
