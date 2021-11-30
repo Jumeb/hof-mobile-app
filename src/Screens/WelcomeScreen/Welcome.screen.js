@@ -39,7 +39,7 @@ const WelcomeScreen = () => {
           }>
           <View style={styles.messageContainer}>
             <Image
-              source={require('../../../resources/images/caracakes8.png')}
+              source={require('../../../resources/images/favicon-1.png')}
               style={styles.logoImage}
             />
             <View style={styles.welcomeContainer}>

@@ -24,8 +24,9 @@ const styles = StyleSheet.create({
     borderBottomRightRadius: theme.LARGE_BORDER_RADIUS,
   },
   logoImage: {
-    width: 120,
-    height: 50,
+    resizeMode: 'contain',
+    width: 110,
+    height: 60,
     tintColor: theme.WHITE_COLOR,
     alignSelf: 'center',
     marginTop: 20,

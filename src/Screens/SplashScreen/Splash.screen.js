@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
-import {Image, SafeAreaView, StatusBar, Text, View} from 'react-native';
+import {Image, SafeAreaView, StatusBar, View} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 
 import styles from './Splash.style';
 import colorScheme from '../../../resources/Colors/theme';
 import {Actions} from 'react-native-router-flux';
+import {Text} from '../../Components';
 
 class SplashScreen extends Component {
   componentDidMount() {
@@ -28,9 +29,10 @@ class SplashScreen extends Component {
           colors={[colorScheme.TERTIARY_COLOR, colorScheme.SECONDARY_COLOR]}>
           <View style={styles.logoContainer}>
             <Image
-              source={require('../../../resources/images/favicon.png')}
+              source={require('../../../resources/images/logo-1.png')}
               style={styles.appLogo}
             />
+            <Text style={styles.appName}>Flavours</Text>
           </View>
           <Text style={styles.madeText}>JB Inc.</Text>
         </LinearGradient>

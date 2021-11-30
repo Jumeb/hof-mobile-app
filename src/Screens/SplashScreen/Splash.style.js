@@ -1,4 +1,5 @@
 import {StyleSheet} from 'react-native';
+import theme from '../../../resources/Colors/theme';
 
 import colorTheme from '../../../resources/Colors/theme';
 
@@ -12,10 +13,19 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   appLogo: {
-    height: 170,
-    width: 170,
+    resizeMode: 'contain',
+    height: 100,
+    width: 100,
     tintColor: colorTheme.WHITE_COLOR,
     alignSelf: 'center',
+  },
+  appName: {
+    fontSize: theme.FONT_SIZE_LARGE,
+    color: theme.WHITE_COLOR,
+    textAlign: 'center',
+    letterSpacing: 3,
+    marginTop: 3,
+    fontWeight: theme.FONT_WEIGHT_BOLD,
   },
   madeText: {
     textAlign: 'center',

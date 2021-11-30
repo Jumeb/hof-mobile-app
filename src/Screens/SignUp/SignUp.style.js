@@ -33,8 +33,9 @@ const styles = StyleSheet.create({
     backgroundColor: theme.DARK_OVERLAYS + '37',
   },
   logoImage: {
+    resizeMode: 'contain',
     width: 120,
-    height: 50,
+    height: 60,
     tintColor: theme.WHITE_COLOR,
     alignSelf: 'flex-end',
   },
