@@ -1,5 +1,6 @@
 import InputComponent from './AuthInputs/Input.component';
 import NavBar from './NavBar/NavBar.component';
+import BackBar from './BackBar/BackBar.component';
 import Baker from './BakerCard/BakerCard.component';
 import Best from './Best/Best.component';
 import Categories from './Categories/Categories.component';
@@ -20,6 +21,7 @@ import BestBaker from './BestBakers/BestBaker.component';
 export {
   InputComponent,
   NavBar,
+  BackBar,
   Baker,
   Best,
   Categories,

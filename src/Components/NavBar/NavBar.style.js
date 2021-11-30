@@ -12,6 +12,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 10,
     marginHorizontal: 0,
+    marginTop: 32,
+    backgroundColor: 'transparent',
   },
   headerText: {
     fontSize: 22,

@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
   },
   welcomeContainer: {
     alignSelf: 'flex-end',
-    marginBottom: 120,
+    marginBottom: 30,
     width: 130,
   },
   welcomeTitle: {
@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
   welcomeInfoText: {
     color: theme.FAINT_GREY,
     textAlign: 'center',
-    fontWeight: '700',
+    fontWeight: theme.FONT_WEIGHT_BOLD,
   },
   welcomeIcon: {
     alignSelf: 'center',

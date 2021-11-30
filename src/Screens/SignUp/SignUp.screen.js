@@ -137,7 +137,7 @@ const SignUp = () => {
             start={{x: 0, y: 1}}
             end={{x: 1, y: 1}}
             colors={[theme.SECONDARY_COLOR, theme.TERTIARY_COLOR]}>
-            <TouchableOpacity onPress={() => Actions.SignUp()}>
+            <TouchableOpacity onPress={() => authenticate()}>
               <Text style={styles.gradientButtonText}>SIGN UP</Text>
             </TouchableOpacity>
           </LinearGradient>

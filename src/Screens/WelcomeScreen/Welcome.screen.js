@@ -45,21 +45,9 @@ const WelcomeScreen = () => {
             <View style={styles.welcomeContainer}>
               <Text style={styles.welcomeTitle}>Welcome to Flavours</Text>
               <Text style={styles.welcomeSlogan}>
-                resting place of bakers & pastries.
+                resting place of chefs & aromas.
               </Text>
             </View>
-            {/* <View style={styles.welcomeInfo}>
-              <Text style={styles.welcomeInfoText}>
-                GET STARTED OR CREATE AN ACCOUNT
-              </Text>
-            </View> */}
-            {/* <View style={styles.welcomeIcon}>
-              <Icons
-                name="ios-chevron-down-outline"
-                size={25}
-                color={theme.FAINT_GREY}
-              />
-            </View> */}
             <View style={styles.actionsContainer}>
               <TouchableOpacity
                 style={styles.Button}

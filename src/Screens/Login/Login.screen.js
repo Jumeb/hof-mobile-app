@@ -56,7 +56,7 @@ const Login = () => {
               style={styles.logoImage}
             />
             <View style={styles.welcomeContainer}>
-              <Text style={styles.welcomeTitle}>Flavours</Text>
+              <Text style={styles.welcomeTitle}>FLAVØURS</Text>
               <Text style={styles.welcomeSlogan}>
                 in the name of great taste
               </Text>

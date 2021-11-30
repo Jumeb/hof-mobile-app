@@ -1,29 +1,74 @@
 import React from 'react';
 import {ImageBackground, Text, TouchableOpacity, View} from 'react-native';
+import LinearGradient from 'react-native-linear-gradient';
 import Icons from 'react-native-vector-icons/Ionicons';
+import theme from '../../../resources/Colors/theme';
 
 import styles from './Best.style';
 
 const Best = (props) => {
-  const {data, color} = props;
+  const {data} = props;
   return (
     <View style={styles.mainContainer}>
-      <TouchableOpacity
-        style={[styles.bestContainer, {borderColor: color.start}]}>
-        <ImageBackground
-          imageStyle={styles.bestBackground}
-          style={styles.bestBackground}
-          source={require('../../../resources/images/cups-12.jpg')}>
-          <View style={styles.likesContainer}>
-            <Icons name="heart" size={18} color={color.end} />
-            <Text style={styles.pastryLikes}>{data.rank}</Text>
+      <ImageBackground
+        imageStyle={styles.bestBackground}
+        style={styles.bestBackground}
+        source={require('../../../resources/images/cups-12.jpg')}>
+        <LinearGradient
+          style={styles.bestContainer}
+          start={{x: 1, y: 0}}
+          end={{x: 1, y: 1}}
+          colors={[
+            theme.PRIMARY_COLOR + '05',
+            theme.PRIMARY_COLOR + '20',
+            theme.PRIMARY_COLOR + 'aa',
+          ]}>
+          <View style={styles.bestInfo}>
+            <View style={styles.bestDiscount}>
+              <Icons
+                name="ios-trending-down-outline"
+                size={16}
+                color={theme.SUCCESS_COLOR}
+              />
+              <Text style={styles.bestDiscountText}>20%</Text>
+            </View>
+            <TouchableOpacity style={styles.bestInfoButton}>
+              <Icons
+                name="ios-information-circle-outline"
+                size={16}
+                color={theme.SECONDARY_COLOR}
+              />
+            </TouchableOpacity>
           </View>
-        </ImageBackground>
-        <View style={styles.bestDetail}>
+          <View style={styles.infoContainer}>
+            <TouchableOpacity style={styles.likesContainer}>
+              <Icons
+                name="ios-thumbs-up-outline"
+                size={16}
+                color={theme.WHITE_COLOR}
+              />
+              <Text style={styles.pastryLikes}>{data.rank}</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.likesContainer}>
+              <Icons
+                name="ios-thumbs-down-outline"
+                size={16}
+                color={theme.WHITE_COLOR}
+              />
+              <Text style={styles.pastryLikes}>{data.rank}</Text>
+            </TouchableOpacity>
+          </View>
+        </LinearGradient>
+      </ImageBackground>
+      <View style={styles.bestDetail}>
+        <View>
           <Text style={styles.pastryName}>{data.ceo_name}</Text>
-          <Text style={styles.pastryName}>2000 FCFA</Text>
+          <Text style={styles.pastryPrice}>2000 FCFA</Text>
         </View>
-      </TouchableOpacity>
+        <TouchableOpacity style={styles.addToCartButton}>
+          <Icons name="ios-add-outline" size={16} color={theme.WHITE_COLOR} />
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };

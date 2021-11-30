@@ -1,5 +1,6 @@
 import React from 'react';
 import {Router, Scene, Stack} from 'react-native-router-flux';
+
 import {
   LoginScreen,
   SplashScreen,
@@ -13,16 +14,16 @@ import {
   Review,
 } from '../Screens';
 import {EventDetails} from '../sections';
-import {TabBarTwo, TabBar, NavBar} from '../Components';
+import {TabBarTwo, BackBar, NavBar} from '../Components';
 
 const Routes = () => {
   return (
     <Router>
       <Stack key="root" hideNavBar>
         <Scene key="main" tabs tabBarComponent={TabBarTwo}>
-          <Scene key="bakers" hideNavBar>
-            <Scene key="bakers" component={Home} navBar={NavBar} title="Home" />
-            <Scene key="shop" component={Shop} navBar={NavBar} title="Pantry" />
+          <Scene key="bakers">
+            <Scene key="bakers" hideNavBar component={Home} title="Home" />
+            <Scene key="shop" component={Shop} hideNavBar />
           </Scene>
           <Scene key="events" hideNavBar>
             <Scene

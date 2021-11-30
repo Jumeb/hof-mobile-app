@@ -3,7 +3,7 @@ import theme from '../../../resources/Colors/theme';
 
 const styles = StyleSheet.create({
   mainContainer: {
-    width: 100,
+    width: 120,
     backgroundColor: theme.WHITE_COLOR,
     borderRadius: 8,
     marginHorizontal: 8,
@@ -21,12 +21,12 @@ const styles = StyleSheet.create({
   },
   varietyButton: {
     paddingVertical: 8,
-    paddingHorizontal: 4,
+    paddingHorizontal: 6,
   },
   varietyButtonText: {
     color: theme.WHITE_COLOR,
     fontSize: theme.FONT_SIZE_SMALL,
-    fontWeight: '700',
+    fontWeight: theme.FONT_WEIGHT_BOLD,
     textAlign: 'center',
   },
 });

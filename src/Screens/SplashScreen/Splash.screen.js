@@ -1,5 +1,5 @@
-import React, {Component, useEffect} from 'react';
-import {Image, Text, View} from 'react-native';
+import React, {Component} from 'react';
+import {Image, SafeAreaView, StatusBar, Text, View} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 
 import styles from './Splash.style';
@@ -15,19 +15,26 @@ class SplashScreen extends Component {
 
   render() {
     return (
-      <LinearGradient
-        style={styles.mainContainer}
-        start={{x: 0, y: 0}}
-        end={{x: 1, y: 1}}
-        colors={[colorScheme.TERTIARY_COLOR, colorScheme.SECONDARY_COLOR]}>
-        <View style={styles.logoContainer}>
-          <Image
-            source={require('../../../resources/images/favicon.png')}
-            style={styles.appLogo}
-          />
-        </View>
-        <Text style={styles.madeText}>Made by JB Inc</Text>
-      </LinearGradient>
+      <SafeAreaView style={styles.mainContainer}>
+        <StatusBar
+          animated={true}
+          translucent={true}
+          backgroundColor={'transparent'}
+        />
+        <LinearGradient
+          style={styles.mainContainer}
+          start={{x: 0, y: 0}}
+          end={{x: 1, y: 1}}
+          colors={[colorScheme.TERTIARY_COLOR, colorScheme.SECONDARY_COLOR]}>
+          <View style={styles.logoContainer}>
+            <Image
+              source={require('../../../resources/images/favicon.png')}
+              style={styles.appLogo}
+            />
+          </View>
+          <Text style={styles.madeText}>JB Inc.</Text>
+        </LinearGradient>
+      </SafeAreaView>
     );
   }
 }

@@ -39,13 +39,13 @@ const styles = StyleSheet.create({
   },
   welcomeContainer: {
     alignSelf: 'flex-end',
-    marginBottom: 120,
+    marginBottom: 30,
     width: 130,
   },
   welcomeTitle: {
     fontSize: theme.FONT_SIZE_LARGE,
     textAlign: 'center',
-    letterSpacing: 6,
+    letterSpacing: 3,
     fontWeight: theme.FONT_WEIGHT_BOLD,
     color: theme.PRIMARY_COLOR,
   },

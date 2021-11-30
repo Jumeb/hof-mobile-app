@@ -41,14 +41,16 @@ const Shop = (props) => {
       <View>
         <View>
           <View style={styles.pastriesContainer}>
-            <Text style={styles.pastriesText}>Pastries of the Week</Text>
+            <Text style={styles.topPastries}>Most Liked</Text>
           </View>
           <FlatList
             horizontal={true}
+            style={styles.listStyle}
             showsHorizontalScrollIndicator={false}
             data={best}
             renderItem={({item, key}) => <Best data={item} color={color} />}
             keyExtractor={(item) => item.id.toString()}
+            ListFooterComponent={() => <View style={styles.footerStyle} />}
           />
         </View>
         <View style={[styles.variety, styles.paddingContent]}>

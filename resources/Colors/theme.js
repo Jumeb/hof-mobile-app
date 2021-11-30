@@ -33,7 +33,7 @@ export default {
   //Values
   BORDER_IMAGE: 8,
   LARGE_BORDER_RADIUS: 30,
-  CIRCLE_BORDER_RADIUS: 60,
+  CIRCLE_BORDER_RADIUS: 20,
 
   //fonts
   FONT_SIZE_EXTRA_LARGE: 25,

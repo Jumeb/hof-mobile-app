@@ -4,7 +4,7 @@ import {Actions} from 'react-native-router-flux';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
-import {Baker, BestBaker, Spacer} from '../../Components';
+import {Baker, BestBaker} from '../../Components';
 import styles from './Home.style';
 import best from '../../../resources/Dummy/best.json';
 import bakers from '../../../resources/Dummy/bakers.json';
@@ -47,22 +47,24 @@ const Home = (props) => {
     return rank++;
   };
 
-  const render = (color) => {
+  const render = (data) => {
     return (
       <View>
-        <View style={styles.pastriesContainer}>
-          <Text style={styles.pastriesText}>Best Bakers</Text>
+        <View style={styles.chefsContainer}>
+          <Text style={styles.topChefText}>Top Chefs</Text>
         </View>
         <FlatList
           horizontal={true}
-          style={{paddingHorizontal: 10}}
+          style={styles.listStyle}
           showsHorizontalScrollIndicator={false}
           data={best}
-          renderItem={({item, key}) => <BestBaker data={item} color={color} />}
+          renderItem={({item, key}) => (
+            <BestBaker data={item} onPress={() => Actions.shop()} />
+          )}
           keyExtractor={(item) => item.id.toString()}
-          ListFooterComponent={() => <View style={{width: 20}} />}
+          ListFooterComponent={() => <View style={styles.footerStyle} />}
         />
-        <Text style={styles.pastriesText}>Best Bakers</Text>
+        <Text style={styles.chefText}>Our Chefs</Text>
       </View>
     );
   };
@@ -71,7 +73,10 @@ const Home = (props) => {
     <SafeAreaView style={styles.mainContainer}>
       <FlatList
         ListHeaderComponent={render(gradient_colors[rotate()])}
+        numColumns={2}
         data={bakers}
+        columnWrapperStyle={styles.columnWrapperStyle}
+        key={'flat'}
         renderItem={({item, key}) => (
           <Baker
             baker={item}

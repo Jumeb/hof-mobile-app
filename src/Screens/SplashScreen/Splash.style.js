@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
   madeText: {
     textAlign: 'center',
     padding: 12,
-    fontSize: 18,
+    fontSize: colorTheme.FONT_SIZE_SMALL + 1,
     color: colorTheme.WHITE_COLOR,
     fontWeight: '800',
     fontFamily: 'old-english-text-mt',

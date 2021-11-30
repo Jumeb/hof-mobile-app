@@ -1,5 +1,6 @@
 import React from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
+import {Actions} from 'react-native-router-flux';
 import Icons from 'react-native-vector-icons/Ionicons';
 import theme from '../../../resources/Colors/theme';
 
@@ -10,7 +11,9 @@ const Header = (props) => {
   return (
     <View style={styles.headerContainer}>
       <Text style={styles.headerText}>{title}</Text>
-      <TouchableOpacity style={styles.eventsIndicator}>
+      <TouchableOpacity
+        style={styles.eventsIndicator}
+        onPress={() => Actions.pop()}>
         <Icons
           name="ios-bookmark-outline"
           size={25}

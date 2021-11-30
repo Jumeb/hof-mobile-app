@@ -46,6 +46,7 @@ const styles = StyleSheet.create({
   welcomeSlogan: {
     textAlign: 'center',
     color: theme.WHITE_COLOR,
+    letterSpacing: 1,
   },
   welcomeInfo: {
     alignSelf: 'center',

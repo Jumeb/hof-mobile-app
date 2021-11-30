@@ -4,12 +4,9 @@ import theme from '../../../resources/Colors/theme';
 const styles = StyleSheet.create({
   mainContainer: {
     marginHorizontal: 8,
-    paddingVertical: 8,
-  },
-  bestContainer: {
-    width: 290,
-    borderWidth: 1.8,
-    borderRadius: 8,
+    marginBottom: 5,
+    width: 210,
+    borderRadius: theme.BORDER_IMAGE,
     overflow: 'hidden',
     backgroundColor: theme.WHITE_COLOR,
     shadowOffset: {width: 0, height: 2},
@@ -18,46 +15,73 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.8,
     elevation: 3,
   },
+  bestContainer: {
+    flex: 1,
+    paddingVertical: 10,
+  },
   bestBackground: {
-    height: 150,
-    borderTopLeftRadius: 8,
-    borderTopRightRadius: 8,
+    height: 250,
   },
-  pastryName: {
-    fontSize: theme.FONT_SIZE_LARGE - 6,
-    padding: 5,
+  chefRank: {
+    color: theme.WHITE_COLOR,
+    fontWeight: theme.FONT_WEIGHT_BOLD,
+    fontSize: theme.FONT_SIZE_SMALL - 1,
+    marginBottom: -1,
+  },
+  chefName: {
+    fontSize: theme.FONT_SIZE_LARGE + 2,
+    letterSpacing: 1,
     textAlign: 'left',
-    color: theme.DARK_GREY,
-    fontWeight: '700',
+    color: theme.WHITE_COLOR,
+    fontWeight: theme.FONT_WEIGHT_BOLD,
   },
-  pastryLikes: {
-    fontSize: 14,
+  chefLikes: {
+    fontSize: theme.FONT_SIZE_EXTRA_SMALL,
     marginLeft: 8,
+    color: theme.WHITE_COLOR,
   },
   likesContainer: {
     justifyContent: 'space-around',
-    alignItems: 'baseline',
+    alignItems: 'center',
     paddingHorizontal: 6,
     flexDirection: 'row',
   },
   bestDetail: {
+    paddingHorizontal: 10,
+    marginTop: 'auto',
+  },
+  bestInfo: {
+    paddingHorizontal: 10,
+    marginBottom: 'auto',
     flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingHorizontal: 8,
+    justifyContent: 'flex-end',
+  },
+  bestInfoButton: {
+    textAlign: 'right',
   },
   logo: {
-    height: 30,
-    width: 30,
-    tintColor: theme.WHITE_COLOR,
+    height: 25,
+    width: 25,
+    tintColor: theme.SECONDARY_COLOR,
   },
   infoContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginTop: 'auto',
-    marginBottom: 3,
     marginHorizontal: 10,
+  },
+  companySign: {
+    width: 30,
+    height: 30,
+    borderRadius: 20,
+    backgroundColor: theme.WHITE_COLOR,
+    justifyContent: 'center',
+    alignItems: 'center',
+    shadowOffset: {width: 0, height: 2},
+    shadowColor: theme.LIGHT_GREY,
+    shadowOpacity: 0.8,
+    shadowRadius: 6,
+    elevation: 3,
   },
 });
 
