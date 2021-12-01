@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     elevation: 2,
     backgroundColor: theme.WHITE_COLOR,
-    marginVertical: 5,
+    marginVertical: 7.5,
   },
   pastryImageContainer2: {
     position: 'relative',
@@ -122,7 +122,7 @@ const styles = StyleSheet.create({
   mainContainer: {
     marginHorizontal: 12,
     flexDirection: 'row',
-    marginVertical: 10,
+    marginVertical: 7.5,
     borderRadius: theme.BORDER_IMAGE,
     shadowOffset: {width: 0, height: 2},
     shadowColor: theme.SECONDARY_COLOR,

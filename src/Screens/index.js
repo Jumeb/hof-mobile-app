@@ -8,6 +8,7 @@ import Event from './Event/Events.screen';
 import Reviews from './Reviews/Reviews.screen';
 import Settings from './Settings/Setting.screen';
 import Review from './Review/Review.screen';
+import Cart from './Cart/Cart.screen';
 
 export {
   Home,
@@ -20,4 +21,5 @@ export {
   Reviews,
   Settings,
   Review,
+  Cart,
 };

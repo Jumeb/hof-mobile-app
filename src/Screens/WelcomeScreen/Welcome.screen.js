@@ -22,7 +22,7 @@ const WelcomeScreen = () => {
   return (
     <SafeAreaView style={styles.mainContainer}>
       <StatusBar
-        animated={true}
+        // animated={true}
         backgroundColor={'transparent'}
         translucent={true}
       />

@@ -13,7 +13,7 @@ const PastryCard = (props) => {
   return (
     <>
       {layout === 0 ? (
-        <TouchableOpacity style={styles.mainContainer2}>
+        <View style={styles.mainContainer2}>
           <View style={styles.pastryImageContainer2}>
             <Image
               source={require('../../../resources/images/weds-2.jpg')}
@@ -89,9 +89,9 @@ const PastryCard = (props) => {
               />
             </TouchableOpacity>
           </View>
-        </TouchableOpacity>
+        </View>
       ) : (
-        <TouchableOpacity style={styles.mainContainer}>
+        <View style={styles.mainContainer}>
           <View style={styles.pastryImageContainer}>
             <Image
               source={require('../../../resources/images/vals-3.jpg')}
@@ -159,19 +159,7 @@ const PastryCard = (props) => {
               </TouchableOpacity>
             </View>
           </View>
-          {/* <View style={styles.pastryDetails}>
-            <View style={styles.grid}>
-
-            </View>
-
-          </View> */}
-          {/*
-
-          </View> */}
-          {/* <View style={styles.infoContainer}>
-
-          </View> */}
-        </TouchableOpacity>
+        </View>
       )}
     </>
   );

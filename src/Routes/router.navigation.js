@@ -12,44 +12,36 @@ import {
   Reviews,
   Settings,
   Review,
+  Cart,
 } from '../Screens';
 import {EventDetails} from '../sections';
-import {TabBarTwo, BackBar, NavBar} from '../Components';
+import {TabBarTwo} from '../Components';
 
 const Routes = () => {
   return (
     <Router>
       <Stack key="root" hideNavBar>
         <Scene key="main" tabs tabBarComponent={TabBarTwo}>
-          <Scene key="bakers">
-            <Scene key="bakers" hideNavBar component={Home} title="Home" />
-            <Scene key="shop" component={Shop} hideNavBar />
+          <Scene key="bakers" hideNavBar>
+            <Scene key="bakers" component={Home} title="Home" />
+            <Scene key="shop" component={Shop} />
+            <Scene key="cart" component={Cart} />
           </Scene>
           <Scene key="events" hideNavBar>
-            <Scene
-              key="events"
-              component={Event}
-              navBar={NavBar}
-              title="Events"
-            />
+            <Scene key="events" component={Event} hideNavBar title="Events" />
             <Scene
               key="eventDetails"
               component={EventDetails}
-              navBar={NavBar}
+              hideNavBar
               title="Event Details"
             />
           </Scene>
           <Scene key="review">
-            <Scene
-              key="review"
-              component={Review}
-              navBar={NavBar}
-              title="Review"
-            />
+            <Scene key="review" component={Review} hideNavBar title="Review" />
             <Scene
               key="reviews"
               component={Reviews}
-              navBar={NavBar}
+              hideNavBar
               title="Reviews"
               inner={true}
               hideTabBar

@@ -14,6 +14,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 6,
   },
   pastriesContainer: {
+    marginTop: 40,
     marginVertical: 8,
     paddingRight: 8,
     justifyContent: 'space-between',

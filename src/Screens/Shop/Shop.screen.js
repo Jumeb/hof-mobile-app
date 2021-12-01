@@ -8,15 +8,15 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import Icons from 'react-native-vector-icons/Ionicons';
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
 
-import {Best, Categories, PastryCard} from '../../Components';
+import {Best, Categories, NavBar, PastryCard} from '../../Components';
 import styles from './Shop.style';
 import best from '../../../resources/Dummy/best.json';
 import bakers from '../../../resources/Dummy/bakers.json';
 import theme from '../../../resources/Colors/theme';
 import {scrolling} from '../../redux/actions/ScrollActions';
-import {bindActionCreators} from 'redux';
-import {connect} from 'react-redux';
 
 const Shop = (props) => {
   const [color, setColor] = useState(colors[0]);
@@ -102,6 +102,7 @@ const Shop = (props) => {
 
   return (
     <SafeAreaView style={styles.mainContainer}>
+      <NavBar screen={'Shop'} search={true} />
       <FlatList
         ListHeaderComponent={renderHeader()}
         horizontal={false}
