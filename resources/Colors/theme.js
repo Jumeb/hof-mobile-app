@@ -1,3 +1,5 @@
+import {Dimensions} from 'react-native';
+const {width} = Dimensions.get('window');
 export default {
   //Colors
 
@@ -19,7 +21,7 @@ export default {
   MIX_PRIMARY_COLOR_15: '#DB7157',
   MIX_PRIMARY_COLOR_16: '#D24D2D',
   SECONDARY_COLOR: '#4693cd',
-  DANGER_COLOR: '#e81732',
+  DANGER_COLOR: '#e94359',
   SUCCESS_COLOR: '#20df69',
   WHITE_COLOR: '#FFFFFF',
   TERTIARY_COLOR: '#14334a',
@@ -45,4 +47,7 @@ export default {
   FONT_WEIGHT_NORMAL: '400',
   FONT_WEIGHT_BOLD: '700',
   FONT_WEIGHT_HEAVY: '900',
+
+  //Dimensions
+  WIDTH_100: width,
 };

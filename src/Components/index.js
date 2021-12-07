@@ -19,6 +19,8 @@ import SendMessage from './SendMessage/SendMessage.component';
 import ReviewCard from './ReviewCard/ReviewCard.component';
 import BestBaker from './BestBakers/BestBaker.component';
 import CartCard from './CartCard/CartCard.component';
+import GradientButton from './Button/Button.component';
+import RateButton from './Button/RateButton.component';
 
 export {
   Text,
@@ -42,4 +44,6 @@ export {
   ReviewsCard,
   BestBaker,
   CartCard,
+  GradientButton,
+  RateButton,
 };

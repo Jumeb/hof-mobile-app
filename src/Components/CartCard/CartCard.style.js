@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
   infoContainer: {
     flex: 2,
     flexDirection: 'column',
-    justifyContent: 'center',
+    justifyContent: 'space-between',
     paddingHorizontal: 8,
     paddingVertical: 4,
     marginBottom: 4,
@@ -36,6 +36,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     marginLeft: 2,
+  },
+  cardControls: {
+    width: '100%',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginTop: 'auto',
   },
   cardPastryName: {
     fontSize: theme.FONT_SIZE_LARGE,
@@ -53,15 +60,11 @@ const styles = StyleSheet.create({
     marginRight: 2,
   },
   quantity: {
+    marginHorizontal: 16,
     fontSize: theme.FONT_SIZE_SMALL,
-    color: theme.LIGHT_GREY,
+    fontWeight: theme.FONT_WEIGHT_BOLD,
   },
-  actionContainer: {
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'flex-end',
-    paddingHorizontal: 8,
-  },
+
   actionButton: {
     height: 30,
     width: 30,
@@ -75,12 +78,11 @@ const styles = StyleSheet.create({
     shadowRadius: 8,
     shadowOpacity: 0.6,
     elevation: 3,
-    marginVertical: 6,
   },
   trashButton: {
-    height: 20,
-    width: 20,
-    backgroundColor: theme.SECONDARY_COLOR,
+    height: 30,
+    width: 30,
+    backgroundColor: theme.DANGER_COLOR,
     borderRadius: theme.CIRCLE_BORDER_RADIUS,
     flexDirection: 'row',
     justifyContent: 'center',
@@ -90,7 +92,6 @@ const styles = StyleSheet.create({
     shadowRadius: 8,
     shadowOpacity: 0.6,
     elevation: 3,
-    marginVertical: 6,
   },
 });
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import {Image, TouchableOpacity, View} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
+import {Actions} from 'react-native-router-flux';
 import Icons from 'react-native-vector-icons/Ionicons';
 import {Text} from '..';
 
@@ -9,7 +10,7 @@ import theme from '../../../resources/Colors/theme';
 import styles from './Pastrycard.style';
 
 const PastryCard = (props) => {
-  const {color, layout} = props;
+  const {layout, onPress} = props;
   return (
     <>
       {layout === 0 ? (
@@ -29,7 +30,9 @@ const PastryCard = (props) => {
                 />
                 <Text style={styles.bestDiscountText2}>20%</Text>
               </View>
-              <TouchableOpacity style={styles.bestInfoButton2}>
+              <TouchableOpacity
+                onPress={() => onPress()}
+                style={styles.bestInfoButton2}>
                 <Icons
                   name="ios-information-circle-outline"
                   size={16}
@@ -78,7 +81,7 @@ const PastryCard = (props) => {
               <Text style={styles.pastryName2}>White Bridal</Text>
               <View style={styles.pastryStats2}>
                 <Text style={styles.pastryPrice2}>250,000</Text>
-                <Text style={styles.currency2}>FCFA</Text>
+                <Text style={styles.currency2}>XAF</Text>
               </View>
             </View>
             <TouchableOpacity style={styles.addToCartButton}>
@@ -102,7 +105,9 @@ const PastryCard = (props) => {
           <View style={styles.infoContainer}>
             <View style={styles.pastryDetails}>
               <Text style={styles.pastryName}>Love Aurora</Text>
-              <TouchableOpacity style={styles.bestInfoButton}>
+              <TouchableOpacity
+                style={styles.bestInfoButton}
+                onPress={() => onPress()}>
                 <Icons
                   name="ios-information-circle-outline"
                   size={16}
@@ -113,7 +118,7 @@ const PastryCard = (props) => {
             <View style={styles.pastryDetails}>
               <View style={styles.pastryStats}>
                 <Text style={styles.pastryPrice}>250,000</Text>
-                <Text style={styles.currency}>FCFA</Text>
+                <Text style={styles.currency}>XAF</Text>
               </View>
               {/* <View style={styles.bestInfo}> */}
               <View style={styles.bestDiscount}>

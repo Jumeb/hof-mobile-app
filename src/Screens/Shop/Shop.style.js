@@ -20,6 +20,13 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'flex-start',
   },
+  gridContainer: {
+    marginVertical: 10,
+    paddingRight: 8,
+    justifyContent: 'space-between',
+    // marginTop: 14,
+    alignItems: 'flex-start',
+  },
   topPastries: {
     fontSize: theme.FONT_SIZE_LARGE,
     color: theme.DARK_GREY,

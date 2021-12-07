@@ -47,7 +47,7 @@ const Home = (props) => {
     return rank++;
   };
 
-  const render = (data) => {
+  const render = () => {
     return (
       <View>
         <View style={styles.chefsContainer}>
@@ -72,7 +72,7 @@ const Home = (props) => {
   return (
     <SafeAreaView style={styles.mainContainer}>
       <FlatList
-        ListHeaderComponent={render(gradient_colors[rotate()])}
+        ListHeaderComponent={render()}
         numColumns={2}
         data={bakers}
         columnWrapperStyle={styles.columnWrapperStyle}

@@ -17,6 +17,7 @@ import best from '../../../resources/Dummy/best.json';
 import bakers from '../../../resources/Dummy/bakers.json';
 import theme from '../../../resources/Colors/theme';
 import {scrolling} from '../../redux/actions/ScrollActions';
+import {Actions} from 'react-native-router-flux';
 
 const Shop = (props) => {
   const [color, setColor] = useState(colors[0]);
@@ -50,7 +51,13 @@ const Shop = (props) => {
             style={styles.listStyle}
             showsHorizontalScrollIndicator={false}
             data={best}
-            renderItem={({item, key}) => <Best data={item} color={color} />}
+            renderItem={({item, key}) => (
+              <Best
+                data={item}
+                color={color}
+                onPress={() => Actions.pastryInfo()}
+              />
+            )}
             keyExtractor={(item) => item.id.toString()}
             ListFooterComponent={() => <View style={styles.footerStyle} />}
           />
@@ -67,14 +74,13 @@ const Shop = (props) => {
                 categoryIndex={key}
                 activeIndex={active}
                 variety={variety}
-                color={colors[rotate()]}
                 setActiveIndex={setActive}
               />
             );
           })}
           <View style={styles.spacer} />
         </ScrollView>
-        <View style={styles.pastriesContainer}>
+        <View style={styles.gridContainer}>
           <View style={styles.pastriesLayout}>
             <TouchableOpacity
               style={styles.pastriesLayoutButton}
@@ -109,7 +115,11 @@ const Shop = (props) => {
         numColumns={layout === 0 ? 2 : 1}
         data={bakers}
         renderItem={({item, key}) => (
-          <PastryCard color={color} layout={layout} key={key} />
+          <PastryCard
+            layout={layout}
+            key={key}
+            onPress={() => Actions.pastryInfo()}
+          />
         )}
         keyExtractor={(item) => item.id.toString()}
         showsVerticalScrollIndicator={false}

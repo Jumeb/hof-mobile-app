@@ -43,6 +43,30 @@ const Header = (props) => {
           </View>
         </TouchableOpacity>
       )}
+      {screen.toString() === 'pastryInfo' && (
+        <TouchableOpacity
+          style={styles.searchIndicator}
+          // onPress={() => Actions.pop()}
+        >
+          <Icons
+            name="ios-heart-outline"
+            size={20}
+            color={theme.PRIMARY_COLOR}
+          />
+        </TouchableOpacity>
+      )}
+      {screen.toString() === 'chefInfo' && (
+        <TouchableOpacity
+          style={styles.searchIndicator}
+          // onPress={() => Actions.pop()}
+        >
+          <Icons
+            name="ios-person-add-outline"
+            size={20}
+            color={theme.PRIMARY_COLOR}
+          />
+        </TouchableOpacity>
+      )}
       {screen.toString() === 'Shop' && (
         <TouchableOpacity
           style={styles.eventsIndicator}

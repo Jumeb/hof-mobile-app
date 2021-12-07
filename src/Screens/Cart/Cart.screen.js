@@ -45,20 +45,20 @@ const Cart = (props) => {
             <Text style={styles.paymentTitle}>Payment Details</Text>
             <View style={styles.budgetContainer}>
               <Text style={styles.budgetTitle}>Subtotal</Text>
-              <Text style={styles.budgetPrice}>FCFA 50,000</Text>
+              <Text style={styles.budgetPrice}>XAF 50,000</Text>
             </View>
             <View style={styles.budgetContainer}>
               <Text style={styles.budgetTitle}>Delivery</Text>
-              <Text style={styles.budgetPrice}>FCFA 50,000</Text>
+              <Text style={styles.budgetPrice}>XAF 50,000</Text>
             </View>
             <View style={styles.budgetContainer}>
               <Text style={styles.budgetTitle}>Estimated Tax</Text>
-              <Text style={styles.budgetPrice}>FCFA 50,000</Text>
+              <Text style={styles.budgetPrice}>XAF 50,000</Text>
             </View>
             <View style={styles.horizontalLine} />
             <View style={styles.budgetContainer}>
               <Text style={styles.budgetTitleTotal}>Total</Text>
-              <Text style={styles.budgetPriceTotal}>FCFA 50,000</Text>
+              <Text style={styles.budgetPriceTotal}>XAF 50,000</Text>
             </View>
             <LinearGradient
               style={styles.gradient}

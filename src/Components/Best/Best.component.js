@@ -7,7 +7,7 @@ import theme from '../../../resources/Colors/theme';
 import styles from './Best.style';
 
 const Best = (props) => {
-  const {data} = props;
+  const {data, onPress} = props;
   return (
     <View style={styles.mainContainer}>
       <ImageBackground
@@ -32,7 +32,9 @@ const Best = (props) => {
               />
               <Text style={styles.bestDiscountText}>20%</Text>
             </View>
-            <TouchableOpacity style={styles.bestInfoButton}>
+            <TouchableOpacity
+              style={styles.bestInfoButton}
+              onPress={() => onPress()}>
               <Icons
                 name="ios-information-circle-outline"
                 size={16}
@@ -70,7 +72,7 @@ const Best = (props) => {
       <View style={styles.bestDetail}>
         <View>
           <Text style={styles.pastryName}>{data.ceo_name}</Text>
-          <Text style={styles.pastryPrice}>2000 FCFA</Text>
+          <Text style={styles.pastryPrice}>2000 XAF</Text>
         </View>
         <TouchableOpacity style={styles.addToCartButton}>
           <Icons name="ios-add-outline" size={16} color={theme.WHITE_COLOR} />

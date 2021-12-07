@@ -17,7 +17,11 @@ class SplashScreen extends Component {
   render() {
     return (
       <SafeAreaView style={styles.mainContainer}>
-        <StatusBar animated={true} translucent={true} />
+        <StatusBar
+          animated={true}
+          translucent={true}
+          backgroundColor={'transparent'}
+        />
         <LinearGradient
           style={styles.mainContainer}
           start={{x: 0, y: 0}}

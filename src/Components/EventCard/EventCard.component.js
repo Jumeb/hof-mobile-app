@@ -35,7 +35,7 @@ const EventCard = (props) => {
             </View>
           </View>
           <View style={styles.eventCost}>
-            <Text style={styles.eventCostText}>Total: 50,000 FCFA</Text>
+            <Text style={styles.eventCostText}>Total: 50,000 XAF</Text>
           </View>
         </View>
       </View>

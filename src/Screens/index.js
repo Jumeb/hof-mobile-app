@@ -9,6 +9,8 @@ import Reviews from './Reviews/Reviews.screen';
 import Settings from './Settings/Setting.screen';
 import Review from './Review/Review.screen';
 import Cart from './Cart/Cart.screen';
+import PastryInfo from './Pastry Info/PastryInfo.screen';
+import ChefInfo from './ChefInfo/ChefInfo.screen';
 
 export {
   Home,
@@ -22,4 +24,6 @@ export {
   Settings,
   Review,
   Cart,
+  PastryInfo,
+  ChefInfo,
 };

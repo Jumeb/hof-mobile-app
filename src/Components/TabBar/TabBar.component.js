@@ -1,14 +1,18 @@
 import React from 'react';
 import {Text, TouchableOpacity, View} from 'react-native';
+import {Actions} from 'react-native-router-flux';
 import Icons from 'react-native-vector-icons/Ionicons';
 import theme from '../../../resources/Colors/theme';
 
 import styles from './TabBar.style';
 
-const TabBar = () => {
+const TabBar = (props) => {
+  const {state} = props.navigation;
+  const activeTabIndex = state.index;
+
   return (
     <View style={styles.tabBar}>
-      <TouchableOpacity style={styles.tabTabSelected}>
+      {/* <TouchableOpacity style={styles.tabTabSelected}>
         <Icons name="ios-home" size={20} color={theme.WHITE_COLOR} />
         <Text style={styles.tabTabTextSelected}>HOME</Text>
       </TouchableOpacity>
@@ -31,9 +35,65 @@ const TabBar = () => {
           color={theme.LIGHT_GREY}
         />
         <Text style={styles.tabTabText}>PROFILE</Text>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
+      {state.routes.map((element) => (
+        <TabIcon
+          element={element}
+          title={element.key}
+          activeTabIndex={activeTabIndex}
+          key={element.key}
+        />
+      ))}
     </View>
   );
 };
 
 export default TabBar;
+
+const TabIcon = (props) => {
+  const {title, activeTabIndex, element} = props;
+  let icon = '';
+  let index = -1;
+  if (title === 'favourites') {
+    icon = 'ios-heart-outline';
+    index = 1;
+  }
+  if (title === 'review') {
+    icon = 'ios-chatbubbles-sharp';
+    index = 2;
+  }
+  if (title === 'settings') {
+    icon = 'ios-cog-outline';
+    index = 3;
+  }
+  if (title === 'orders') {
+    icon = 'ios-receipt-outline';
+  }
+  if (title === 'bakers') {
+    icon = 'ios-home';
+    index = 0;
+  }
+
+  return (
+    <TouchableOpacity
+      style={activeTabIndex === index ? styles.tabTabSelected : styles.tabTab}
+      onPress={() => Actions[title]()}
+      key={element.key}>
+      <Icons
+        name={icon}
+        size={18}
+        color={
+          activeTabIndex === index ? theme.WHITE_COLOR : theme.SECONDARY_COLOR
+        }
+      />
+      <Text
+        style={
+          activeTabIndex === index
+            ? styles.tabTabTextSelected
+            : styles.tabTabText
+        }>
+        {title.toUpperCase()}
+      </Text>
+    </TouchableOpacity>
+  );
+};

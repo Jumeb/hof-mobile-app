@@ -7,6 +7,7 @@ import {
   View,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
+import {Actions} from 'react-native-router-flux';
 import Icons from 'react-native-vector-icons/Ionicons';
 import theme from '../../../resources/Colors/theme.js';
 
@@ -36,7 +37,9 @@ const BestBaker = (props) => {
                 style={styles.logo}
               />
             </View>
-            <TouchableOpacity style={styles.bestInfoButton}>
+            <TouchableOpacity
+              style={styles.bestInfoButton}
+              onPress={() => Actions.chefInfo()}>
               <Icons
                 name="ios-information-circle-outline"
                 size={16}

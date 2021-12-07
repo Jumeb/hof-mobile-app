@@ -1,5 +1,6 @@
 import React from 'react';
 import {Image, Text, TouchableOpacity, View} from 'react-native';
+import {Actions} from 'react-native-router-flux';
 import Icons from 'react-native-vector-icons/Ionicons';
 
 import theme from '../../../resources/Colors/theme';
@@ -23,7 +24,9 @@ const Bakers = (props) => {
                   source={require('../../../resources/images/favicon.png')}
                 />
               </View>
-              <TouchableOpacity style={styles.companyInfoButton}>
+              <TouchableOpacity
+                style={styles.companyInfoButton}
+                onPress={() => Actions.chefInfo()}>
                 <Icons
                   name="ios-information-circle-outline"
                   size={16}
