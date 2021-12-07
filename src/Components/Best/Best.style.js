@@ -98,6 +98,20 @@ const styles = StyleSheet.create({
     color: theme.SUCCESS_COLOR,
     marginLeft: 6,
   },
+  trashButton: {
+    height: 30,
+    width: 30,
+    backgroundColor: theme.DANGER_COLOR,
+    borderRadius: theme.CIRCLE_BORDER_RADIUS,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    shadowOffset: {width: 0, height: 2},
+    shadowColor: theme.LIGHT_GREY,
+    shadowRadius: 8,
+    shadowOpacity: 0.6,
+    elevation: 3,
+  },
 });
 
 export default styles;

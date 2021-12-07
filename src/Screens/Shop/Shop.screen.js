@@ -108,7 +108,7 @@ const Shop = (props) => {
 
   return (
     <SafeAreaView style={styles.mainContainer}>
-      <NavBar screen={'Shop'} search={true} />
+      <NavBar screen={'Shop'} search={true} pop={true} />
       <FlatList
         ListHeaderComponent={renderHeader()}
         horizontal={false}

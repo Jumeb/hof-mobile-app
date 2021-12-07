@@ -1,4 +1,5 @@
 import {StyleSheet} from 'react-native';
+
 import theme from '../../../resources/Colors/theme';
 
 const styles = StyleSheet.create({
@@ -7,22 +8,17 @@ const styles = StyleSheet.create({
     backgroundColor: theme.WHITE_COLOR,
     marginTop: 32,
   },
-  chefsContainer: {
-    marginBottom: 2,
+  pastriesContainer: {
+    marginTop: 8,
+    marginVertical: 8,
+    paddingRight: 8,
     justifyContent: 'space-between',
     alignItems: 'flex-start',
-    marginTop: 9,
   },
-  topChefText: {
+  topPastries: {
     fontSize: theme.FONT_SIZE_LARGE,
     color: theme.DARK_GREY,
     marginVertical: 5,
-    paddingHorizontal: 6,
-  },
-  chefText: {
-    fontSize: theme.FONT_SIZE_LARGE,
-    color: theme.DARK_GREY,
-    marginVertical: 15,
     paddingHorizontal: 6,
   },
   listStyle: {
@@ -31,8 +27,11 @@ const styles = StyleSheet.create({
   footerStyle: {
     width: 20,
   },
-  columnWrapperStyle: {
-    justifyContent: 'space-around',
+  varietyText: {
+    fontSize: theme.FONT_SIZE_LARGE,
+    color: theme.DARK_GREY,
+    marginVertical: 15,
+    paddingHorizontal: 6,
   },
 });
 

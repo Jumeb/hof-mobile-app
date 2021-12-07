@@ -34,7 +34,7 @@ const ChefInfo = (props) => {
 
   return (
     <SafeAreaView style={styles.mainContainer}>
-      <NavBar screen="chefInfo" />
+      <NavBar screen="chefInfo" pop={true} />
       <ScrollView
         horizontal={false}
         showsHorizontalScrollIndicator={false}

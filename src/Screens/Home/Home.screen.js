@@ -4,11 +4,10 @@ import {Actions} from 'react-native-router-flux';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
-import {Baker, BestBaker} from '../../Components';
+import {Baker, BestBaker, NavBar} from '../../Components';
 import styles from './Home.style';
 import best from '../../../resources/Dummy/best.json';
 import bakers from '../../../resources/Dummy/bakers.json';
-import theme from '../../../resources/Colors/theme';
 import {scrolling} from '../../redux/actions/ScrollActions';
 
 const Home = (props) => {
@@ -26,25 +25,6 @@ const Home = (props) => {
 
   const hide = (event) => {
     props.scrolling(false);
-  };
-
-  const gradient_colors = [
-    {start: theme.MIX_PRIMARY_COLOR_1, end: theme.MIX_PRIMARY_COLOR_2},
-    {start: theme.MIX_PRIMARY_COLOR_3, end: theme.MIX_PRIMARY_COLOR_4},
-    {start: theme.MIX_PRIMARY_COLOR_5, end: theme.MIX_PRIMARY_COLOR_6},
-    {start: theme.MIX_PRIMARY_COLOR_11, end: theme.MIX_PRIMARY_COLOR_12},
-    {start: theme.MIX_PRIMARY_COLOR_9, end: theme.MIX_PRIMARY_COLOR_10},
-    {start: theme.MIX_PRIMARY_COLOR_7, end: theme.MIX_PRIMARY_COLOR_8},
-    {start: theme.MIX_PRIMARY_COLOR_13, end: theme.MIX_PRIMARY_COLOR_14},
-    {start: theme.MIX_PRIMARY_COLOR_15, end: theme.MIX_PRIMARY_COLOR_16},
-  ];
-
-  let rank = 0;
-  const rotate = () => {
-    if (rank === 8) {
-      rank = 0;
-    }
-    return rank++;
   };
 
   const render = () => {
@@ -71,6 +51,7 @@ const Home = (props) => {
 
   return (
     <SafeAreaView style={styles.mainContainer}>
+      <NavBar screen="Home" search={true} />
       <FlatList
         ListHeaderComponent={render()}
         numColumns={2}
@@ -78,12 +59,7 @@ const Home = (props) => {
         columnWrapperStyle={styles.columnWrapperStyle}
         key={'flat'}
         renderItem={({item, key}) => (
-          <Baker
-            baker={item}
-            color={gradient_colors[rotate()]}
-            onPress={() => Actions.shop()}
-            about="Ranking"
-          />
+          <Baker baker={item} onPress={() => Actions.shop()} about="Ranking" />
         )}
         keyExtractor={(item) => item.id.toString()}
         onScrollBeginDrag={(event) => handle(event)}

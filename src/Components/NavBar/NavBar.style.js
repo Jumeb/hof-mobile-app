@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
     top: 0,
     left: 0,
     right: 0,
-    width: '100%',
+    width: theme.WIDTH_100,
     justifyContent: 'center',
     flexDirection: 'row',
     alignItems: 'center',
@@ -16,8 +16,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
   },
   backIndicator: {
-    marginRight: 'auto',
-    marginLeft: 6,
     height: 33,
     width: 33,
     justifyContent: 'center',
@@ -74,6 +72,14 @@ const styles = StyleSheet.create({
   eventsCount: {
     fontSize: 11,
     color: theme.WHITE_COLOR,
+  },
+  marginLeft: {
+    marginLeft: 'auto',
+    marginRight: 6,
+  },
+  marginRight: {
+    marginRight: 'auto',
+    marginLeft: 6,
   },
 });
 

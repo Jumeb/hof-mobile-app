@@ -11,6 +11,7 @@ import Review from './Review/Review.screen';
 import Cart from './Cart/Cart.screen';
 import PastryInfo from './Pastry Info/PastryInfo.screen';
 import ChefInfo from './ChefInfo/ChefInfo.screen';
+import Favourite from './Favourites/Favourite.screen';
 
 export {
   Home,
@@ -26,4 +27,5 @@ export {
   Cart,
   PastryInfo,
   ChefInfo,
+  Favourite,
 };

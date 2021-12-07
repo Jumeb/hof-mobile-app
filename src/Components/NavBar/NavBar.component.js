@@ -7,18 +7,23 @@ import theme from '../../../resources/Colors/theme';
 import styles from './NavBar.style';
 
 const Header = (props) => {
-  const {screen, search} = props;
+  const {screen, search, pop, right} = props;
   return (
     <View style={styles.headerContainer}>
-      <TouchableOpacity
-        style={styles.backIndicator}
-        onPress={() => Actions.pop()}>
-        <Icons
-          name="ios-chevron-back-outline"
-          size={20}
-          color={theme.PRIMARY_COLOR}
-        />
-      </TouchableOpacity>
+      {pop && (
+        <TouchableOpacity
+          style={[
+            styles.backIndicator,
+            right ? styles.marginLeft : styles.marginRight,
+          ]}
+          onPress={() => Actions.pop()}>
+          <Icons
+            name="ios-chevron-back-outline"
+            size={20}
+            color={theme.PRIMARY_COLOR}
+          />
+        </TouchableOpacity>
+      )}
       {/* <TouchableOpacity
         style={styles.screenIndicator}
         onPress={() => Actions.pop()}>
@@ -31,6 +36,17 @@ const Header = (props) => {
           <Text style={styles.eventsCount}>1</Text>
         </View>
       </TouchableOpacity> */}
+      {screen.toString() === 'Home' && (
+        <TouchableOpacity
+          style={[styles.searchIndicator, styles.marginLeft]}
+          onPress={() => Actions.favourites()}>
+          <Icons
+            name="ios-heart-outline"
+            size={20}
+            color={theme.PRIMARY_COLOR}
+          />
+        </TouchableOpacity>
+      )}
       {screen.toString() === 'Reviews' && (
         <TouchableOpacity style={styles.eventsIndicator}>
           <Icons

@@ -48,7 +48,7 @@ const PastryInfo = (props) => {
 
   return (
     <SafeAreaView style={styles.mainContainer}>
-      <NavBar screen="pastryInfo" />
+      <NavBar screen="pastryInfo" pop={true} />
       <ScrollView
         horizontal={false}
         showsHorizontalScrollIndicator={false}

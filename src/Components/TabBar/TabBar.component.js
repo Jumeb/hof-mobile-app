@@ -54,23 +54,23 @@ const TabIcon = (props) => {
   const {title, activeTabIndex, element} = props;
   let icon = '';
   let index = -1;
-  if (title === 'favourites') {
-    icon = 'ios-heart-outline';
+  if (title === 'orders') {
+    icon = 'ios-file-tray-full-outline';
     index = 1;
   }
-  if (title === 'review') {
-    icon = 'ios-chatbubbles-sharp';
+  if (title === 'wallet') {
+    icon = 'ios-wallet-outline';
     index = 2;
   }
   if (title === 'settings') {
     icon = 'ios-cog-outline';
     index = 3;
   }
-  if (title === 'orders') {
-    icon = 'ios-receipt-outline';
-  }
-  if (title === 'bakers') {
-    icon = 'ios-home';
+  // if (title === 'orders') {
+  //   icon = 'ios-receipt-outline';
+  // }
+  if (title === 'home') {
+    icon = 'ios-home-outline';
     index = 0;
   }
 

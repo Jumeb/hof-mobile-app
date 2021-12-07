@@ -21,6 +21,8 @@ import BestBaker from './BestBakers/BestBaker.component';
 import CartCard from './CartCard/CartCard.component';
 import GradientButton from './Button/Button.component';
 import RateButton from './Button/RateButton.component';
+import BestFavourite from './Best/FBest.component';
+import FavouriteCard from './PastryCard/FavouriteCard.component';
 
 export {
   Text,
@@ -46,4 +48,6 @@ export {
   CartCard,
   GradientButton,
   RateButton,
+  BestFavourite,
+  FavouriteCard,
 };

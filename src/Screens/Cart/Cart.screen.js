@@ -21,7 +21,7 @@ const Cart = (props) => {
 
   return (
     <SafeAreaView style={styles.mainContainer}>
-      <NavBar screen={'Cart'} search={false} />
+      <NavBar screen={'Cart'} pop={true} right={true} search={true} />
       <ScrollView
         horizontal={false}
         showsHorizontalScrollIndicator={false}

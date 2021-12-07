@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   cartContainer: {
-    marginTop: 45,
+    marginTop: 5,
   },
   cartTitleContainer: {
     flex: 1,
