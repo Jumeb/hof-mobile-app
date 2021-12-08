@@ -99,7 +99,10 @@ const Header = (props) => {
       )}
       {search && (
         <TouchableOpacity
-          style={styles.searchIndicator}
+          style={[
+            styles.searchIndicator,
+            screen.toString() === 'Order' && styles.marginLeft,
+          ]}
           // onPress={() => Actions.pop()}
         >
           <Icons

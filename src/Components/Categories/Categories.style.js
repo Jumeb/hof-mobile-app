@@ -5,9 +5,10 @@ const styles = StyleSheet.create({
   mainContainer: {
     width: 'auto',
     backgroundColor: theme.WHITE_COLOR,
-    borderRadius: 8,
+    borderRadius: theme.BORDER_IMAGE,
     marginHorizontal: 8,
     marginVertical: 5,
+    overflow: 'hidden',
     marginBottom: 8,
     shadowOffset: {width: 0, height: 2},
     shadowOpacity: 0.8,
@@ -18,11 +19,10 @@ const styles = StyleSheet.create({
   },
   variety: {
     flex: 1,
-    borderRadius: 8,
   },
   varietyButton: {
-    paddingVertical: 8,
-    paddingHorizontal: 12,
+    paddingVertical: 5,
+    paddingHorizontal: 14,
   },
   varietyButtonText: {
     color: theme.WHITE_COLOR,

@@ -5,7 +5,7 @@ const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
     backgroundColor: theme.WHITE_COLOR,
-    marginTop: 32,
+    marginTop: 30,
   },
   chefsContainer: {
     marginBottom: 2,

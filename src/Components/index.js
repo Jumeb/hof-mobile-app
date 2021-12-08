@@ -23,6 +23,8 @@ import GradientButton from './Button/Button.component';
 import RateButton from './Button/RateButton.component';
 import BestFavourite from './Best/FBest.component';
 import FavouriteCard from './PastryCard/FavouriteCard.component';
+import OrderCard from './OrderCard/OrderCard.component';
+import OrderDetailsCard from './OrderCard/OrderDetailsCard.component';
 
 export {
   Text,
@@ -50,4 +52,6 @@ export {
   RateButton,
   BestFavourite,
   FavouriteCard,
+  OrderCard,
+  OrderDetailsCard,
 };

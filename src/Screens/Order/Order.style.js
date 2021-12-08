@@ -8,30 +8,22 @@ const styles = StyleSheet.create({
     backgroundColor: theme.WHITE_COLOR,
     marginTop: 30,
   },
-  pastriesContainer: {
-    marginTop: 8,
+  tabBarContainer: {
     marginVertical: 8,
-    paddingRight: 8,
     justifyContent: 'space-between',
     alignItems: 'flex-start',
   },
-  topPastries: {
+  tabBarTitle: {
     fontSize: theme.FONT_SIZE_LARGE,
     color: theme.DARK_GREY,
     marginVertical: 5,
     paddingHorizontal: 6,
   },
-  listStyle: {
-    paddingTop: 10,
+  tabViewContainer: {
+    marginTop: 10,
   },
-  footerStyle: {
-    width: 20,
-  },
-  varietyText: {
-    fontSize: theme.FONT_SIZE_LARGE,
-    color: theme.DARK_GREY,
-    marginVertical: 15,
-    paddingHorizontal: 6,
+  spacer: {
+    width: 35,
   },
 });
 

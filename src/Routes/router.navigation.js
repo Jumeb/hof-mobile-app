@@ -16,8 +16,9 @@ import {
   PastryInfo,
   ChefInfo,
   Favourite,
+  Order,
 } from '../Screens';
-import {EventDetails} from '../sections';
+import {EventDetails, OrderDetails} from '../sections';
 import {TabBarTwo, TabBar} from '../Components';
 
 const Routes = () => {
@@ -38,7 +39,12 @@ const Routes = () => {
             <Scene key="favourites" component={Favourite} hideNavBar />
           </Scene>
           <Scene key="orders" hideNavBar>
-            <Scene key="orders" component={Event} hideNavBar title="orders" />
+            <Scene key="orders" component={Order} hideNavBar title="orders" />
+            <Scene
+              key="orderDetails"
+              component={OrderDetails}
+              title="orderDetails"
+            />
             <Scene
               key="eventDetails"
               component={EventDetails}

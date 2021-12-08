@@ -12,6 +12,7 @@ import Cart from './Cart/Cart.screen';
 import PastryInfo from './Pastry Info/PastryInfo.screen';
 import ChefInfo from './ChefInfo/ChefInfo.screen';
 import Favourite from './Favourites/Favourite.screen';
+import Order from './Order/Order.screen';
 
 export {
   Home,
@@ -28,4 +29,5 @@ export {
   PastryInfo,
   ChefInfo,
   Favourite,
+  Order,
 };
