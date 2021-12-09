@@ -13,6 +13,7 @@ import PastryInfo from './Pastry Info/PastryInfo.screen';
 import ChefInfo from './ChefInfo/ChefInfo.screen';
 import Favourite from './Favourites/Favourite.screen';
 import Order from './Order/Order.screen';
+import Wallet from './Wallet/Wallet.screen';
 
 export {
   Home,
@@ -30,4 +31,5 @@ export {
   ChefInfo,
   Favourite,
   Order,
+  Wallet,
 };

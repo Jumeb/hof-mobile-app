@@ -4,7 +4,9 @@ import theme from '../../../resources/Colors/theme';
 
 const styles = StyleSheet.create({
   settings: {
+    flex: 1,
     backgroundColor: theme.FAINT_GREY,
+    marginTop: 30,
   },
   userImage: {
     height: 60,

@@ -16,6 +16,7 @@ const OrderSection = (props) => {
         horizontal={false}
         data={best}
         renderItem={({item, key}) => <OrderCard />}
+        keyExtractor={(item) => item.id.toString()}
       />
       <View style={styles.actionButtonContainer}>
         <TouchableOpacity style={styles.actionButton}>

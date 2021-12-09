@@ -17,6 +17,7 @@ import {
   ChefInfo,
   Favourite,
   Order,
+  Wallet,
 } from '../Screens';
 import {EventDetails, OrderDetails} from '../sections';
 import {TabBarTwo, TabBar} from '../Components';
@@ -53,7 +54,7 @@ const Routes = () => {
             />
           </Scene>
           <Scene key="wallet">
-            <Scene key="wallet" component={Review} hideNavBar title="wallet" />
+            <Scene key="wallet" component={Wallet} hideNavBar title="wallet" />
             <Scene
               key="reviews"
               component={Reviews}
