@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   Image,
   SafeAreaView,
@@ -13,8 +13,10 @@ import styles from './Wallet.style';
 import {Text} from '../../Components';
 import LinearGradient from 'react-native-linear-gradient';
 import theme from '../../../resources/Colors/theme';
+import {AromaDetails} from '../../sections';
 
 const Wallet = () => {
+  const [details, setDetails] = useState(false);
   return (
     <SafeAreaView style={styles.mainContainer}>
       <View style={styles.idContainer}>
@@ -65,17 +67,7 @@ const Wallet = () => {
           horizontal={true}
           showsHorizontalScrollIndicator={false}
           bounces>
-          <TouchableOpacity style={styles.opContainer}>
-            <View style={styles.opCard}>
-              <Icons
-                name="ios-swap-horizontal-outline"
-                size={25}
-                color={theme.PRIMARY_COLOR}
-              />
-            </View>
-            <Text style={styles.opText}>Transfer</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.opContainer}>
+          <TouchableOpacity style={styles.opContainer} activeOpacity={0.7}>
             <View style={styles.opCard}>
               <Icons
                 name="ios-cart-outline"
@@ -88,12 +80,12 @@ const Wallet = () => {
           <TouchableOpacity style={styles.opContainer}>
             <View style={styles.opCard}>
               <Icons
-                name="ios-warning-outline"
+                name="ios-swap-horizontal-outline"
                 size={25}
                 color={theme.PRIMARY_COLOR}
               />
             </View>
-            <Text style={styles.opText}>Set Limit</Text>
+            <Text style={styles.opText}>Transfer</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.opContainer}>
             <View style={styles.opCard}>
@@ -114,6 +106,18 @@ const Wallet = () => {
           <TouchableOpacity style={styles.opContainer}>
             <View style={styles.opCard}>
               <Icons
+                name="ios-warning-outline"
+                size={25}
+                color={theme.PRIMARY_COLOR}
+              />
+            </View>
+            <Text style={styles.opText}>Set Limit</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.opContainer}
+            onPress={() => setDetails(true)}>
+            <View style={styles.opCard}>
+              <Icons
                 name="ios-information-outline"
                 size={25}
                 color={theme.PRIMARY_COLOR}
@@ -125,37 +129,40 @@ const Wallet = () => {
         <View style={styles.opTitle}>
           <Text style={styles.scrollTitle}>Transactions</Text>
         </View>
-        <View style={styles.transContainer}>
-          <View style={styles.transIcon}>
-            <Icon name="phone" size={20} color={theme.WHITE_COLOR} />
+        <View style={styles.transactionContainer}>
+          <View style={styles.transContainer}>
+            <View style={styles.transIcon}>
+              <Icon name="phone" size={20} color={theme.WHITE_COLOR} />
+            </View>
+            <View style={styles.transPurpose}>
+              <Text style={styles.transTitle}>Airtime</Text>
+              <Text style={styles.transDate}>08 Dec 2021</Text>
+            </View>
+            <View style={styles.transDebit}>
+              <Text style={styles.transDebitText}>-500 AC</Text>
+            </View>
           </View>
-          <View style={styles.transPurpose}>
-            <Text style={styles.transTitle}>Airtime</Text>
-            <Text style={styles.transDate}>08 Dec 2021</Text>
+          <TransactionCard />
+          <View style={styles.transContainer}>
+            <View style={styles.transIcon}>
+              <Icons
+                name="ios-swap-horizontal-outline"
+                size={20}
+                color={theme.WHITE_COLOR}
+              />
+            </View>
+            <View style={styles.transPurpose}>
+              <Text style={styles.transTitle}>Transfer</Text>
+              <Text style={styles.transDate}>08 Dec 2021</Text>
+            </View>
+            <View style={styles.transDebit}>
+              <Text style={styles.transDebitText}>-10,000 AC</Text>
+            </View>
           </View>
-          <View style={styles.transDebit}>
-            <Text style={styles.transDebitText}>-500 AC</Text>
-          </View>
+          <TransactionCard />
         </View>
-        <TransactionCard />
-        <View style={styles.transContainer}>
-          <View style={styles.transIcon}>
-            <Icons
-              name="ios-swap-horizontal-outline"
-              size={20}
-              color={theme.WHITE_COLOR}
-            />
-          </View>
-          <View style={styles.transPurpose}>
-            <Text style={styles.transTitle}>Transfer</Text>
-            <Text style={styles.transDate}>08 Dec 2021</Text>
-          </View>
-          <View style={styles.transDebit}>
-            <Text style={styles.transDebitText}>-10,000 AC</Text>
-          </View>
-        </View>
-        <TransactionCard />
       </ScrollView>
+      <AromaDetails details={details} setDetails={setDetails} />
     </SafeAreaView>
   );
 };
@@ -171,7 +178,7 @@ const TransactionCard = () => {
         <Icons name="ios-cart-outline" size={20} color={theme.WHITE_COLOR} />
       </View>
       <View style={styles.transPurpose}>
-        <Text style={styles.transTitle}>Shopping Payment</Text>
+        <Text style={styles.transTitle}>Shopping</Text>
         <Text style={styles.transDate}>09 Dec 2021</Text>
       </View>
       <View style={styles.transDebit}>

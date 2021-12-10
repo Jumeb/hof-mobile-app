@@ -15,7 +15,10 @@ const GradientButton = (props) => {
       start={{x: 0, y: 1}}
       end={{x: 1, y: 1}}
       colors={[theme.SECONDARY_COLOR, theme.TERTIARY_COLOR]}>
-      <TouchableOpacity style={styles.Button}>
+      <TouchableOpacity
+        style={styles.Button}
+        // onPress={() => onPress()}
+      >
         <Text style={styles.ButtonText}>{title}</Text>
         <Icons name={icon} size={16} color={theme.WHITE_COLOR} />
       </TouchableOpacity>

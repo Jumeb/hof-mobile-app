@@ -10,10 +10,16 @@ const styles = StyleSheet.create({
   },
   idContainer: {
     flexDirection: 'row',
-    marginTop: 14,
+    paddingVertical: 8,
     justifyContent: 'flex-start',
     alignItems: 'center',
     paddingHorizontal: 8,
+    backgroundColor: theme.WHITE_COLOR,
+    shadowOffset: {width: 0, height: 2},
+    shadowOpacity: 0.8,
+    shadowRadius: 8,
+    shadowColor: theme.PRIMARY_COLOR,
+    elevation: 3,
   },
   idImage: {
     height: 42,
@@ -35,8 +41,8 @@ const styles = StyleSheet.create({
   },
   scrollContainer: {
     // marginTop: 25,
-    paddingTop: 20,
-    paddingBottom: 40,
+    paddingTop: 5,
+    // paddingBottom: ,
   },
   scrollTitle: {
     fontWeight: theme.FONT_WEIGHT_BOLD,
@@ -50,6 +56,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderRadius: theme.BORDER_IMAGE + 10,
     paddingVertical: 30,
+    shadowOffset: {width: 0, height: 2},
+    shadowOpacity: 0.8,
+    shadowRadius: 8,
+    shadowColor: theme.PRIMARY_COLOR,
+    elevation: 5,
   },
   walletText: {
     fontSize: theme.FONT_SIZE_SMALL,
@@ -161,6 +172,9 @@ const styles = StyleSheet.create({
   transDebitText: {
     fontSize: theme.FONT_SIZE_SMALL - 1,
     color: theme.WHITE_COLOR,
+  },
+  transactionContainer: {
+    paddingBottom: 30,
   },
 });
 
