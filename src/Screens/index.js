@@ -14,6 +14,7 @@ import ChefInfo from './ChefInfo/ChefInfo.screen';
 import Favourite from './Favourites/Favourite.screen';
 import Order from './Order/Order.screen';
 import Wallet from './Wallet/Wallet.screen';
+import ForgotPassword from './ForgotPassword/ForgotPassword.screen';
 
 export {
   Home,
@@ -32,4 +33,5 @@ export {
   Favourite,
   Order,
   Wallet,
+  ForgotPassword,
 };

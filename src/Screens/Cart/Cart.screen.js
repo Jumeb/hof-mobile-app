@@ -1,16 +1,18 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {SafeAreaView, ScrollView, TouchableOpacity, View} from 'react-native';
 import Icons from 'react-native-vector-icons/Ionicons';
 import {bindActionCreators} from 'redux';
+import LinearGradient from 'react-native-linear-gradient';
+import {connect} from 'react-redux';
 
 import styles from './Cart.style';
 import {CartCard, NavBar, Text} from '../../Components';
 import theme from '../../../resources/Colors/theme';
-import LinearGradient from 'react-native-linear-gradient';
+import {ItemDetail} from '../../sections';
 import {scrolling} from '../../redux/actions/ScrollActions';
-import {connect} from 'react-redux';
 
 const Cart = (props) => {
+  const [info, setInfo] = useState(false);
   const handle = (event) => {
     props.scrolling(true);
   };
@@ -33,14 +35,13 @@ const Cart = (props) => {
             <Text style={styles.cartTitle}>My</Text>
             <Text style={styles.cartSubTitle}>Cart List</Text>
           </View>
-          <CartCard />
-          <CartCard />
-          <CartCard />
-          <CartCard />
-          <CartCard />
-          <CartCard />
-          <CartCard />
-          <CartCard />
+          <CartCard setShow={setInfo} />
+          <CartCard setShow={setInfo} />
+          <CartCard setShow={setInfo} />
+          <CartCard setShow={setInfo} />
+          <CartCard setShow={setInfo} />
+          <CartCard setShow={setInfo} />
+          <CartCard setShow={setInfo} />
           <View style={styles.paymentContainer}>
             <Text style={styles.paymentTitle}>Payment Details</Text>
             <View style={styles.budgetContainer}>
@@ -77,6 +78,7 @@ const Cart = (props) => {
           </View>
         </View>
       </ScrollView>
+      <ItemDetail info={info} setInfo={setInfo} />
     </SafeAreaView>
   );
 };

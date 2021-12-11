@@ -12,13 +12,15 @@ import {
 } from 'react-native';
 import {Actions} from 'react-native-router-flux';
 import LinearGradient from 'react-native-linear-gradient';
+import {connect} from 'react-redux';
 
 import styles from './Login.style';
 import theme from '../../../resources/Colors/theme';
 import {InputComponent} from '../../Components/index';
 import {AuthMail} from '../../utils/';
 
-const Login = () => {
+const Login = (props) => {
+  const {i18n} = props;
   let h = useWindowDimensions().height + 100;
 
   const [email, setEmail] = useState('');
@@ -58,15 +60,15 @@ const Login = () => {
             <View style={styles.welcomeContainer}>
               <Text style={styles.welcomeTitle}>FLAVØURS</Text>
               <Text style={styles.welcomeSlogan}>
-                in the name of great taste
+                {i18n.t('phrases.inTheNameOf')}
               </Text>
             </View>
           </View>
         </ImageBackground>
         <View style={styles.inputsContainer}>
-          <Text style={styles.welcomeText}>Welcome</Text>
+          <Text style={styles.welcomeText}>{i18n.t('words.welcome')}</Text>
           <InputComponent
-            holder="Email"
+            holder={i18n.t('words.email')}
             type="email-address"
             capitalize="none"
             secure={false}
@@ -74,10 +76,10 @@ const Login = () => {
             value={email}
             toggleError={() => setEmailError(false)}
             setValue={(text) => setEmail(text)}
-            errorMessage="Invalid mail format"
+            errorMessage={i18n.t('phrases.invalidMail')}
           />
           <InputComponent
-            holder="Password"
+            holder={i18n.t('words.password')}
             type="default"
             capitalize="none"
             secure={true}
@@ -85,16 +87,23 @@ const Login = () => {
             value={password}
             toggleError={() => setPasswordError(false)}
             setValue={(text) => setPassword(text)}
-            errorMessage="Password required"
+            errorMessage={i18n.t('phrases.passwordRequired')}
           />
           <TouchableOpacity
             style={styles.Button}
             onPress={() => authenticate()}>
-            <Text style={styles.ButtonText}>LOG IN</Text>
+            <Text style={styles.ButtonText}>
+              {i18n.t('phrases.login').toUpperCase()}
+            </Text>
           </TouchableOpacity>
-          <TouchableOpacity>
-            <Text style={styles.forgotPasswordText}>FORGOT PASSWORD ?</Text>
-          </TouchableOpacity>
+          <View style={styles.forgotContainer}>
+            <Text style={styles.forgotPasswordText}>
+              {i18n.t('phrases.forgotPassword')}
+            </Text>
+            <TouchableOpacity onPress={() => Actions.forgotPassword()}>
+              <Text style={styles.loginText}>{i18n.t('words.yes')}</Text>
+            </TouchableOpacity>
+          </View>
           <LinearGradient
             style={styles.gradient}
             start={{x: 0, y: 1}}
@@ -103,7 +112,9 @@ const Login = () => {
             <TouchableOpacity
               onPress={() => Actions.SignUp()}
               style={styles.gradientButton}>
-              <Text style={styles.gradientButtonText}>SIGN UP</Text>
+              <Text style={styles.gradientButtonText}>
+                {i18n.t('phrases.signUp').toUpperCase()}
+              </Text>
             </TouchableOpacity>
           </LinearGradient>
         </View>
@@ -112,4 +123,10 @@ const Login = () => {
   );
 };
 
-export default Login;
+const mapStateToProps = ({i18n}) => {
+  return {
+    i18n: i18n.i18n,
+  };
+};
+
+export default connect(mapStateToProps)(Login);

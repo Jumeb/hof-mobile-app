@@ -73,6 +73,18 @@ const styles = StyleSheet.create({
     fontSize: theme.FONT_SIZE_EXTRA_SMALL,
     textAlign: 'center',
     color: theme.LIGHT_GREY,
+    marginBottom: 25,
+  },
+  forgotContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    flexDirection: 'row',
+  },
+  loginText: {
+    color: theme.SECONDARY_COLOR,
+    fontSize: theme.FONT_SIZE_EXTRA_SMALL,
+    fontWeight: theme.FONT_WEIGHT_BOLD,
+    marginLeft: 4,
   },
   inputsContainer: {
     marginTop: -40,

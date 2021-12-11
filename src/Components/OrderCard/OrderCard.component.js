@@ -6,7 +6,8 @@ import {Text} from '..';
 import theme from '../../../resources/Colors/theme';
 import styles from './OrderCard.style';
 
-const OrderCard = () => {
+const OrderCard = (props) => {
+  const {onPress} = props;
   return (
     <View style={styles.mainContainer}>
       <View style={styles.orderImageContainer}>
@@ -47,7 +48,9 @@ const OrderCard = () => {
           <Text style={styles.quantityText}>Qty: 1</Text>
         </View>
         <View style={styles.pastryDetails}>
-          <TouchableOpacity style={styles.addToCartButton}>
+          <TouchableOpacity
+            style={styles.addToCartButton}
+            onPress={() => onPress()}>
             <Icons
               name="ios-document-outline"
               size={16}

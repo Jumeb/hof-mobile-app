@@ -4,16 +4,42 @@ import theme from '../../../resources/Colors/theme';
 
 const styles = StyleSheet.create({
   mainContainer: {
-    flex: 1,
+    justifyContent: 'flex-end',
+    margin: 0,
+    backgroundColor: theme.TRANSPARENT,
+  },
+  detailContainer: {
+    borderTopLeftRadius: theme.BORDER_IMAGE + 6,
+    borderTopRightRadius: theme.BORDER_IMAGE + 6,
     backgroundColor: theme.WHITE_COLOR,
-    marginTop: 30,
+    paddingBottom: 12,
+    overflow: 'hidden',
+    height: 'auto',
   },
-  scrollView: {
-    flex: 1,
+  downIndicator: {
+    position: 'absolute',
+    top: 4,
+    left: '50%',
+    paddingTop: 2.5,
+    backgroundColor: theme.WHITE_COLOR,
+    borderRadius: theme.LARGE_BORDER_RADIUS,
+    height: 20,
+    width: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+    shadowOffset: {width: 0, height: 2},
+    shadowRadius: 8,
+    shadowColor: theme.LIGHT_GREY,
+    shadowOpacity: 0.8,
+    elevation: 3,
+    zIndex: 999,
   },
-  infoContainer: {
-    paddingHorizontal: 8,
-    paddingVertical: 10,
+  title: {
+    fontSize: theme.FONT_SIZE_LARGE,
+    color: theme.TERTIARY_COLOR,
+    fontWeight: theme.FONT_WEIGHT_BOLD,
+    marginBottom: 5,
+    marginTop: 12,
   },
   pastryContainer: {},
   pastryImage: {
@@ -55,12 +81,6 @@ const styles = StyleSheet.create({
     color: theme.SECONDARY_COLOR,
     fontWeight: theme.FONT_WEIGHT_BOLD,
   },
-  detailContainer: {
-    flexDirection: 'row',
-    alignItems: 'baseline',
-    justifyContent: 'space-between',
-    marginBottom: 10,
-  },
   pastryName: {
     fontSize: theme.FONT_SIZE_EXTRA_LARGE - 3,
     color: theme.DARK_GREY,
@@ -69,20 +89,28 @@ const styles = StyleSheet.create({
   pastryPrice: {
     lineHeight: 20,
     color: theme.DARK_GREY,
-    // fontSize: theme.FONT_SIZE_SMALL,
     fontWeight: theme.FONT_WEIGHT_BOLD,
+  },
+  infoContainer: {
+    paddingHorizontal: 8,
+    paddingVertical: 10,
+  },
+  detsContainer: {
+    flexDirection: 'row',
+    alignItems: 'baseline',
+    justifyContent: 'space-between',
+    // marginBottom: 1,
   },
   aboutTitle: {
     fontSize: theme.FONT_SIZE_NORMAL + 1,
     color: theme.DARK_GREY,
     fontWeight: theme.FONT_WEIGHT_BOLD,
-    marginTop: 10,
+    marginTop: 5,
   },
   aboutText: {
-    marginTop: 7,
+    marginTop: 4,
     fontSize: theme.FONT_SIZE_SMALL + 1,
     lineHeight: 20,
-    marginBottom: 8,
   },
   date: {
     fontSize: theme.FONT_SIZE_SMALL + 1,
@@ -91,7 +119,7 @@ const styles = StyleSheet.create({
   },
   rateContainer: {
     flexDirection: 'row',
-    justifyContent: 'flex-start',
+    justifyContent: 'flex-end',
     alignItems: 'center',
     marginVertical: 10,
   },

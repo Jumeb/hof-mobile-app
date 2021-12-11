@@ -5,14 +5,13 @@ import theme from '../../../resources/Colors/theme';
 const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
-    backgroundColor: theme.TERTIARY_COLOR + 'ea',
+    backgroundColor: theme.WHITE_COLOR,
   },
   container: {
     flex: 1,
     flexDirection: 'column',
   },
   welcomeImageBackground: {
-    resizeMode: 'contain',
     flex: 1,
     justifyContent: 'center',
   },
@@ -47,7 +46,7 @@ const styles = StyleSheet.create({
   welcomeTitle: {
     fontSize: theme.FONT_SIZE_LARGE,
     textAlign: 'center',
-    letterSpacing: 6,
+    letterSpacing: 3,
     fontWeight: theme.FONT_WEIGHT_BOLD,
     color: theme.PRIMARY_COLOR,
   },
@@ -56,25 +55,44 @@ const styles = StyleSheet.create({
     color: theme.WHITE_COLOR,
     fontSize: theme.FONT_SIZE_EXTRA_SMALL,
   },
-  welcomeInfo: {
-    alignSelf: 'center',
+  Button: {
+    flex: 1,
+    alignItems: 'center',
+    marginVertical: 25,
+    borderWidth: 2,
+    borderColor: theme.PRIMARY_COLOR,
+    borderRadius: theme.LARGE_BORDER_RADIUS,
+    padding: 10,
   },
-  welcomeInfoText: {
-    color: theme.FAINT_GREY,
-    textAlign: 'center',
+  ButtonText: {
+    color: theme.PRIMARY_COLOR,
     fontWeight: theme.FONT_WEIGHT_BOLD,
   },
-  welcomeIcon: {
-    alignSelf: 'center',
-    marginBottom: 50,
+  forgotPasswordText: {
+    fontWeight: theme.FONT_WEIGHT_BOLD,
+    fontSize: theme.FONT_SIZE_EXTRA_SMALL,
+    textAlign: 'center',
+    color: theme.LIGHT_GREY,
+    marginBottom: 25,
   },
-  welcomeIconText: {
-    color: theme.WHITE_COLOR,
-  },
-  actionsContainer: {
+  forgotContainer: {
+    flex: 1,
+    justifyContent: 'center',
     flexDirection: 'row',
-    justifyContent: 'space-around',
-    marginVertical: 40,
+  },
+  loginText: {
+    color: theme.SECONDARY_COLOR,
+    fontSize: theme.FONT_SIZE_EXTRA_SMALL,
+    fontWeight: theme.FONT_WEIGHT_BOLD,
+    marginLeft: 4,
+  },
+  inputsContainer: {
+    marginTop: -40,
+    paddingTop: 55,
+    paddingHorizontal: 25,
+    backgroundColor: theme.WHITE_COLOR,
+    borderTopLeftRadius: theme.LARGE_BORDER_RADIUS,
+    borderTopRightRadius: theme.LARGE_BORDER_RADIUS,
   },
   gradient: {
     marginTop: 45,
@@ -96,31 +114,11 @@ const styles = StyleSheet.create({
     color: theme.WHITE_COLOR,
     fontWeight: theme.FONT_WEIGHT_BOLD,
   },
-  forgotPasswordText: {
-    fontWeight: theme.FONT_WEIGHT_BOLD,
-    fontSize: theme.FONT_SIZE_EXTRA_SMALL,
-    textAlign: 'center',
-    color: theme.LIGHT_GREY,
-    marginBottom: 25,
-  },
-  forgotContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    flexDirection: 'row',
-  },
-  inputsContainer: {
-    marginTop: -40,
-    paddingTop: 55,
-    paddingHorizontal: 25,
-    backgroundColor: theme.WHITE_COLOR,
-    borderTopLeftRadius: theme.LARGE_BORDER_RADIUS,
-    borderTopRightRadius: theme.LARGE_BORDER_RADIUS,
-  },
-  loginText: {
-    color: theme.SECONDARY_COLOR,
-    fontSize: theme.FONT_SIZE_EXTRA_SMALL,
-    fontWeight: theme.FONT_WEIGHT_BOLD,
-    marginLeft: 4,
+  instructions: {
+    fontSize: theme.FONT_SIZE_SMALL,
+    color: theme.TERTIARY_COLOR,
+    marginTop: -12,
+    marginBottom: 12,
   },
 });
 

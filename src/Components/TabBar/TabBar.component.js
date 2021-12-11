@@ -2,12 +2,14 @@ import React from 'react';
 import {Text, TouchableOpacity, View} from 'react-native';
 import {Actions} from 'react-native-router-flux';
 import Icons from 'react-native-vector-icons/Ionicons';
+import {connect} from 'react-redux';
 import theme from '../../../resources/Colors/theme';
 
 import styles from './TabBar.style';
 
 const TabBar = (props) => {
   const {state} = props.navigation;
+  const {i18n} = props;
   const activeTabIndex = state.index;
 
   return (
@@ -42,16 +44,23 @@ const TabBar = (props) => {
           title={element.key}
           activeTabIndex={activeTabIndex}
           key={element.key}
+          i18n={i18n}
         />
       ))}
     </View>
   );
 };
 
-export default TabBar;
+const mapStateToProps = ({i18n}) => {
+  return {
+    i18n: i18n.i18n,
+  };
+};
+
+export default connect(mapStateToProps)(TabBar);
 
 const TabIcon = (props) => {
-  const {title, activeTabIndex, element} = props;
+  const {title, activeTabIndex, element, i18n} = props;
   let icon = '';
   let index = -1;
   if (title === 'orders') {
@@ -92,7 +101,13 @@ const TabIcon = (props) => {
             ? styles.tabTabTextSelected
             : styles.tabTabText
         }>
-        {title.toUpperCase()}
+        {title === 'home'
+          ? i18n.t('words.home').toUpperCase()
+          : title === 'settings'
+          ? i18n.t('words.settings').toUpperCase()
+          : title === 'wallet'
+          ? i18n.t('words.wallet').toUpperCase()
+          : i18n.t('words.orders').toUpperCase()}
       </Text>
     </TouchableOpacity>
   );

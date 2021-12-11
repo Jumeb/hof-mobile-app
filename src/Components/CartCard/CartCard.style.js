@@ -41,7 +41,6 @@ const styles = StyleSheet.create({
     width: '100%',
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between',
     marginTop: 'auto',
   },
   cardPastryName: {
@@ -52,6 +51,8 @@ const styles = StyleSheet.create({
   amountContainer: {
     flexDirection: 'row',
     alignItems: 'center',
+    marginLeft: 'auto',
+    marginRight: 'auto',
   },
   amount: {
     fontSize: theme.FONT_SIZE_SMALL,

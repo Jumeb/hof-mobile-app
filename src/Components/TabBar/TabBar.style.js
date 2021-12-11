@@ -31,6 +31,7 @@ const styles = StyleSheet.create({
     borderRadius: theme.BORDER_IMAGE,
     marginTop: -18,
     width: 50,
+    overflow: 'hidden',
   },
   tabTabText: {
     fontSize: theme.FONT_SIZE_EXTRA_SMALL - 4,
@@ -43,6 +44,7 @@ const styles = StyleSheet.create({
     color: theme.WHITE_COLOR,
     fontWeight: theme.FONT_WEIGHT_BOLD,
     marginTop: 1.5,
+    flexWrap: 'nowrap',
   },
 });
 

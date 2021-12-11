@@ -74,6 +74,7 @@ const styles = StyleSheet.create({
     marginTop: 25,
     marginBottom: 13,
     borderColor: theme.LIGHT_GREY,
+    backgroundColor: theme.LIGHT_GREY,
   },
   statusContainer: {
     marginTop: 12,

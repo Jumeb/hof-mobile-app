@@ -4,6 +4,7 @@ import Modal from 'react-native-modal';
 
 import styles from './Terms.style';
 import {GradientButton, Text} from '../../Components';
+import theme from '../../../resources/Colors/theme';
 
 const Terms = (props) => {
   const {terms, setTerms} = props;
@@ -14,6 +15,8 @@ const Terms = (props) => {
       style={styles.mainContainer}
       animationInTiming={500}
       animationOutTiming={400}
+      backdropOpacity={0.55}
+      backdropColor={theme.SECONDARY_COLOR}
       onBackdropPress={() => setTerms(false)}
       onBackButtonPress={() => setTerms(false)}>
       <ScrollView horizontal={false} showsVerticalScrollIndicator={false}>

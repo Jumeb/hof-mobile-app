@@ -1,69 +1,102 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {TouchableOpacity, View} from 'react-native';
 import Modal from 'react-native-modal';
 import Icons from 'react-native-vector-icons/Ionicons';
-import theme from '../../../resources/Colors/theme';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
 
+import theme from '../../../resources/Colors/theme';
 import {Text} from '../../Components';
+import {setLanguage} from '../../redux/actions/TranslationAction';
+import {Storage} from '../../utils';
 import styles from './Language.styles';
 
 const Language = (props) => {
-  const {lang, setLang} = props;
+  const {lang, setLang, i18n} = props;
   const [active, setActive] = useState(0);
+  const [language, _setLanguage] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+
+  const languages = [
+    {name: i18n.t('words.english'), key: 'en'},
+    {name: i18n.t('words.french'), key: 'fr'},
+    {name: i18n.t('words.german'), key: 'dm', loading: true},
+  ];
+
+  useEffect(() => {
+    Storage.load({key: 'LOCALE'})
+      .then((res) => {
+        _setLanguage(res);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
+  const changeLanguage = (_lang) => {
+    console.log(_lang);
+    _setLanguage(_lang);
+    props.setLanguage(_lang);
+  };
+
   return (
     <Modal
       isVisible={lang}
       style={styles.mainContainer}
       animationInTiming={500}
       animationOutTiming={400}
+      backdropOpacity={0.55}
+      backdropColor={theme.SECONDARY_COLOR}
       onBackdropPress={() => setLang(false)}
       onBackButtonPress={() => setLang(false)}
-      swipeDirection={['down', 'left']}
+      swipeDirection={'down'}
       onSwipeComplete={() => setLang(false)}>
       <View style={styles.langContainer}>
-        <Text style={styles.title}>Choose Language</Text>
-        <TouchableOpacity style={styles.avLang} onPress={() => setActive(0)}>
-          <Text style={styles.lang}>English</Text>
+        <TouchableOpacity
+          style={styles.downIndicator}
+          onPress={() => setLang(false)}>
           <Icons
-            name={
-              active === 0
-                ? 'ios-radio-button-on-outline'
-                : 'ios-radio-button-off-outline'
-            }
-            size={18}
-            color={theme.SECONESSS_COLOR}
+            name="ios-chevron-down-outline"
+            size={16}
+            color={theme.TERTIARY_COLOR}
           />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.avLang} onPress={() => setActive(1)}>
-          <Text style={styles.lang}>French</Text>
-          <Icons
-            name={
-              active === 1
-                ? 'ios-radio-button-on-outline'
-                : 'ios-radio-button-off-outline'
-            }
-            size={18}
-            color={theme.SECONESSS_COLOR}
-          />
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.avLang}>
-          <View style={styles.loadingContainer}>
-            <Text style={styles.lang}>German</Text>
-            <Text style={styles.loadingLang}>Loading</Text>
-          </View>
-          <Icons
-            name={
-              active === 2
-                ? 'ios-radio-button-on-outline'
-                : 'ios-radio-button-off-outline'
-            }
-            size={18}
-            color={theme.SECONESSS_COLOR}
-          />
-        </TouchableOpacity>
+        <Text style={styles.title}>{i18n.t('phrases.chooseLanguage')}</Text>
+        {languages.map((langue, key) => (
+          <TouchableOpacity
+            style={styles.avLang}
+            key={key}
+            onPress={() => changeLanguage(langue.key)}>
+            <View style={styles.loadingContainer}>
+              <Text style={styles.lang}>{langue.name}</Text>
+              {langue.loading && (
+                <Text style={styles.loadingLang}>
+                  {i18n.t('words.loading')}
+                </Text>
+              )}
+            </View>
+            <Icons
+              name={
+                langue.key === language
+                  ? 'ios-radio-button-on-outline'
+                  : 'ios-radio-button-off-outline'
+              }
+              size={18}
+              color={theme.SECONESSS_COLOR}
+            />
+          </TouchableOpacity>
+        ))}
       </View>
     </Modal>
   );
 };
 
-export default Language;
+const mapStateToProps = ({i18n}) => {
+  return {
+    i18n: i18n.i18n,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({setLanguage}, dispatch);
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Language);

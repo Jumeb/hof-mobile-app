@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {FlatList, SafeAreaView, ScrollView, View} from 'react-native';
 
 import styles from './OrderDetails.style';
@@ -7,8 +7,10 @@ import best from '../../../resources/Dummy/best.json';
 import LinearGradient from 'react-native-linear-gradient';
 import theme from '../../../resources/Colors/theme';
 import Icons from 'react-native-vector-icons/Ionicons';
+import ItemsDetail from '../ItemDetail/ItemsDetail.section';
 
 const OrderDetails = () => {
+  const [info, setInfo] = useState(false);
   return (
     <SafeAreaView style={styles.mainContainer}>
       <NavBar screen="orderDetails" right={true} pop={true} />
@@ -25,7 +27,9 @@ const OrderDetails = () => {
           data={best}
           numColumns={1}
           key={'flat'}
-          renderItem={({item, key}) => <OrderDetailsCard key={key} />}
+          renderItem={({item, key}) => (
+            <OrderDetailsCard key={key} onPress={() => setInfo(true)} />
+          )}
           keyExtractor={(item) => item.id.toString()}
         />
         <View style={styles.paymentContainer}>
@@ -104,6 +108,7 @@ const OrderDetails = () => {
           </View>
         </View>
       </ScrollView>
+      <ItemsDetail info={info} setInfo={setInfo} />
     </SafeAreaView>
   );
 };

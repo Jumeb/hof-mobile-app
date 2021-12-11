@@ -9,11 +9,18 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
   },
   langContainer: {
-    borderTopLeftRadius: theme.BORDER_IMAGE + 4,
-    borderTopRightRadius: theme.BORDER_IMAGE + 4,
+    borderTopLeftRadius: theme.BORDER_IMAGE + 6,
+    borderTopRightRadius: theme.BORDER_IMAGE + 6,
     backgroundColor: theme.WHITE_COLOR,
     paddingHorizontal: 8,
-    height: 340,
+    paddingBottom: 12,
+    height: 'auto',
+  },
+  downIndicator: {
+    position: 'absolute',
+    top: 0,
+    left: '50%',
+    paddingTop: 2.5,
   },
   title: {
     fontSize: theme.FONT_SIZE_LARGE,
@@ -46,6 +53,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   button: {
+    width: 80,
     paddingHorizontal: 10,
     paddingVertical: 2,
     borderRadius: theme.BORDER_IMAGE,
@@ -58,6 +66,7 @@ const styles = StyleSheet.create({
   buttonText: {
     fontSize: theme.FONT_SIZE_SMALL,
     color: theme.WHITE_COLOR,
+    textAlign: 'center',
   },
   whatsapp: {
     backgroundColor: theme.WHATSAPP,
@@ -76,6 +85,9 @@ const styles = StyleSheet.create({
   },
   call: {
     backgroundColor: theme.SECONDARY_COLOR,
+  },
+  sms: {
+    backgroundColor: theme.SECONESSS_COLOR,
   },
 });
 

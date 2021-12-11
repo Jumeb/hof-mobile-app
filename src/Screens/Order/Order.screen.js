@@ -2,12 +2,13 @@ import React, {useState} from 'react';
 import {FlatList, SafeAreaView, TouchableOpacity, View} from 'react-native';
 import {TabView, TabBar} from 'react-native-tab-view';
 import LinearGradient from 'react-native-linear-gradient';
+import {Actions} from 'react-native-router-flux';
+import {connect} from 'react-redux';
 
 import styles from './Order.style';
 import {NavBar, Text} from '../../Components';
 import bakers from '../../../resources/Dummy/bakers.json';
-import {OrderSection} from '../../sections';
-import {Actions} from 'react-native-router-flux';
+import {ItemsDetail, OrderSection} from '../../sections';
 import theme from '../../../resources/Colors/theme';
 
 const colors = {
@@ -15,18 +16,21 @@ const colors = {
   activeCategory: [theme.SECONDARY_COLOR, theme.PRIMARY_COLOR],
 };
 
-const Order = () => {
+const Order = (props) => {
+  const {i18n} = props;
   const [index, setIndex] = useState(0);
+  const [info, setInfo] = useState(false);
   const [routes] = useState([
-    {key: 'all', title: 'All'},
-    {key: 'new', title: 'New'},
-    {key: 'processing', title: 'Processing'},
-    {key: 'ontheway', title: 'On the way'},
-    {key: 'delivered', title: 'Delivered'},
-    {key: 'cancelled', title: 'Cancelled'},
+    {key: 'all', title: i18n.t('words.all')},
+    {key: 'new', title: i18n.t('words.new')},
+    {key: 'processing', title: i18n.t('words.processing')},
+    {key: 'ontheway', title: i18n.t('phrases.onTheWay')},
+    {key: 'delivered', title: i18n.t('words.delivered')},
+    {key: 'cancelled', title: i18n.t('words.cancelled')},
   ]);
 
-  const OrderScene = () => {
+  const OrderScene = (_props) => {
+    const {onPress} = _props;
     return (
       <FlatList
         horizontal={false}
@@ -34,7 +38,11 @@ const Order = () => {
         numColumns={1}
         data={bakers}
         renderItem={({item, key}) => (
-          <OrderSection key={key} onPress={() => Actions.orderDetails()} />
+          <OrderSection
+            key={key}
+            onPress={() => Actions.orderDetails()}
+            onDet={() => onPress()}
+          />
         )}
         keyExtractor={(item) => item.id.toString()}
         key={'flat'}
@@ -45,17 +53,17 @@ const Order = () => {
   const renderScene = ({route}) => {
     switch (route.key) {
       case 'all':
-        return <OrderScene call={'hahah'} />;
+        return <OrderScene onPress={() => setInfo(true)} />;
       case 'new':
-        return <OrderScene />;
+        return <OrderScene onPress={() => setInfo(true)} />;
       case 'processing':
-        return <OrderScene />;
+        return <OrderScene onPress={() => setInfo(true)} />;
       case 'ontheway':
-        return <OrderScene />;
+        return <OrderScene onPress={() => setInfo(true)} />;
       case 'delivered':
-        return <OrderScene />;
+        return <OrderScene onPress={() => setInfo(true)} />;
       case 'cancelled':
-        return <OrderScene />;
+        return <OrderScene onPress={() => setInfo(true)} />;
       default:
         return null;
     }
@@ -65,7 +73,7 @@ const Order = () => {
     <SafeAreaView style={styles.mainContainer}>
       <NavBar screen="Order" search={true} />
       <View style={styles.tabTitle}>
-        <Text style={styles.tabBarTitle}>My Orders</Text>
+        <Text style={styles.tabBarTitle}>{i18n.t('phrases.myOrders')}</Text>
       </View>
       <TabView
         navigationState={{index, routes}}
@@ -105,8 +113,15 @@ const Order = () => {
           />
         )}
       />
+      <ItemsDetail info={info} setInfo={setInfo} />
     </SafeAreaView>
   );
 };
 
-export default Order;
+const mapStateToProps = ({i18n}) => {
+  return {
+    i18n: i18n.i18n,
+  };
+};
+
+export default connect(mapStateToProps)(Order);

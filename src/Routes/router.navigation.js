@@ -18,6 +18,7 @@ import {
   Favourite,
   Order,
   Wallet,
+  ForgotPassword,
 } from '../Screens';
 import {EventDetails, OrderDetails} from '../sections';
 import {TabBarTwo, TabBar} from '../Components';
@@ -29,6 +30,7 @@ const Routes = () => {
         <Scene key="splash" component={SplashScreen} hideNavBar />
         <Scene key="welcome" component={WelcomeScreen} hideNavBar />
         <Scene key="Login" component={LoginScreen} hideNavBar />
+        <Scene key="forgotPassword" component={ForgotPassword} hideNavBar />
         <Scene key="SignUp" component={SignUpScreen} hideNavBar />
         <Scene key="main" tabs tabBarComponent={TabBar} hideNavBar>
           <Scene key="home" hideNavBar>

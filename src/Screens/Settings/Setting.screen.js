@@ -16,10 +16,12 @@ import {scrolling} from '../../redux/actions/ScrollActions';
 import {Contact, FAQs, Language, Terms} from '../../sections';
 
 const Setting = (props) => {
+  const {i18n} = props;
   const [lang, setLang] = useState(false);
   const [terms, setTerms] = useState(false);
   const [faqs, setFaqs] = useState(false);
   const [contact, setContact] = useState(false);
+
   useEffect(() => {
     props.scrolling(false);
   });
@@ -28,7 +30,7 @@ const Setting = (props) => {
     <SafeAreaView style={styles.mainContainer}>
       <ScrollView style={styles.settings}>
         <View style={styles.settingsContainer}>
-          <Text style={styles.settingsText}>Settings</Text>
+          <Text style={styles.settingsText}>{i18n.t('words.settings')}</Text>
         </View>
         <View style={styles.userProfile}>
           <View style={styles.userImageBorder}>
@@ -52,19 +54,21 @@ const Setting = (props) => {
           <TouchableOpacity
             style={styles.subMenus}
             onPress={() => setLang(true)}>
-            <Text style={styles.subMenusText}>Languages</Text>
+            <Text style={styles.subMenusText}>{i18n.t('words.languages')}</Text>
             <Icons name="ios-language-outline" size={20} />
           </TouchableOpacity>
           <View style={styles.separator} />
           <TouchableOpacity style={styles.subMenus}>
-            <Text style={styles.subMenusText}>History</Text>
+            <Text style={styles.subMenusText}>{i18n.t('words.history')}</Text>
             <Icons name="ios-analytics-outline" size={20} />
           </TouchableOpacity>
           <View style={styles.separator} />
           <TouchableOpacity
             style={styles.subMenus}
             onPress={() => setContact(true)}>
-            <Text style={styles.subMenusText}>Contact us</Text>
+            <Text style={styles.subMenusText}>
+              {i18n.t('phrases.contactUs')}
+            </Text>
             <Icons name="ios-phone-portrait-outline" size={20} />
           </TouchableOpacity>
           <View style={styles.separator} />
@@ -72,7 +76,7 @@ const Setting = (props) => {
             style={styles.subMenus}
             onPress={() => setTerms(true)}>
             <Text style={styles.subMenusText}>
-              Privacy Policy, Terms and Conditions
+              {i18n.t('phrases.privacyPolicy')}
             </Text>
             <Icons name="ios-shield-checkmark-outline" size={20} />
           </TouchableOpacity>
@@ -80,7 +84,7 @@ const Setting = (props) => {
           <TouchableOpacity
             style={styles.subMenus}
             onPress={() => setFaqs(true)}>
-            <Text style={styles.subMenusText}>FAQ</Text>
+            <Text style={styles.subMenusText}>{i18n.t('words.faq')}</Text>
             <Icons name="ios-help-outline" size={20} />
           </TouchableOpacity>
         </View>
@@ -94,8 +98,14 @@ const Setting = (props) => {
   );
 };
 
+const mapStateToProps = ({i18n}) => {
+  return {
+    i18n: i18n.i18n,
+  };
+};
+
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({scrolling}, dispatch);
 };
 
-export default connect(null, mapDispatchToProps)(Setting);
+export default connect(mapStateToProps, mapDispatchToProps)(Setting);

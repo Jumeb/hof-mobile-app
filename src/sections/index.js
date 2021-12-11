@@ -6,6 +6,8 @@ import Language from './Language/Language.section';
 import Terms from './Terms/Terms.section';
 import FAQs from './FAQs/FAQs.section';
 import Contact from './Contact/Contact.section';
+import ItemDetail from './ItemDetail/ItemDetail.section';
+import ItemsDetail from './ItemDetail/ItemsDetail.section';
 
 export {
   EventDetails,
@@ -16,4 +18,6 @@ export {
   Terms,
   FAQs,
   Contact,
+  ItemDetail,
+  ItemsDetail,
 };

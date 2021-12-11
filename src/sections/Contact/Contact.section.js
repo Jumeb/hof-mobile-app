@@ -98,11 +98,22 @@ const Contact = (props) => {
       style={styles.mainContainer}
       animationInTiming={500}
       animationOutTiming={400}
+      backdropOpacity={0.55}
+      backdropColor={theme.SECONDARY_COLOR}
       onBackdropPress={() => setContact(false)}
       onBackButtonPress={() => setContact(false)}
-      swipeDirection={['down', 'left']}
+      swipeDirection={'down'}
       onSwipeComplete={() => setContact(false)}>
       <View style={styles.langContainer}>
+        <TouchableOpacity
+          style={styles.downIndicator}
+          onPress={() => setContact(false)}>
+          <Icons
+            name="ios-chevron-down-outline"
+            size={16}
+            color={theme.TERTIARY_COLOR}
+          />
+        </TouchableOpacity>
         <Text style={styles.title}>Contacts</Text>
         <View style={styles.avLang}>
           <Icons name="ios-logo-whatsapp" size={18} color={theme.WHATSAPP} />
@@ -164,13 +175,13 @@ const Contact = (props) => {
         </View>
         <View style={styles.avLang}>
           <Icons
-            name="os-chatbox-ellipses-outline"
+            name="ios-chatbox-ellipses-outline"
             size={18}
             color={theme.SECONESSS_COLOR}
           />
           <Text style={styles.lang}>Message</Text>
           <TouchableOpacity
-            style={[styles.button, styles.call]}
+            style={[styles.button, styles.sms]}
             onPress={() => chatSms(`sms:${whatsappNo}?body=${whatsappMsg}`)}>
             <Text style={styles.buttonText}>SMS</Text>
           </TouchableOpacity>

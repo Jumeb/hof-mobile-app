@@ -17,8 +17,10 @@ import styles from './SignUp.style';
 import theme from '../../../resources/Colors/theme';
 import {AuthMail} from '../../utils';
 import LinearGradient from 'react-native-linear-gradient';
+import {connect} from 'react-redux';
 
-const SignUp = () => {
+const SignUp = (props) => {
+  const {i18n} = props;
   let h = useWindowDimensions().height + 240;
   const [userName, setUserName] = useState('');
   const [tel, setTel] = useState('');
@@ -71,14 +73,18 @@ const SignUp = () => {
             />
             <View style={styles.welcomeContainer}>
               <Text style={styles.welcomeTitle}>ARØMA</Text>
-              <Text style={styles.welcomeSlogan}>the gates of flavour</Text>
+              <Text style={styles.welcomeSlogan}>
+                {i18n.t('phrases.exchangeValues')}
+              </Text>
             </View>
           </View>
         </ImageBackground>
         <View style={styles.inputsContainer}>
-          <Text style={styles.welcomeText}>Sign Up</Text>
+          <Text style={styles.welcomeText}>
+            {i18n.t('phrases.signUp').toUpperCase()}
+          </Text>
           <InputComponent
-            holder="Name"
+            holder={i18n.t('words.name')}
             type="default"
             capitalize="words"
             secure={false}
@@ -86,10 +92,10 @@ const SignUp = () => {
             value={userName}
             toggleError={() => setUserNameError(false)}
             setValue={(text) => setUserName(text)}
-            errorMessage="User name short"
+            errorMessage={i18n.t('phrases.userNameShort')}
           />
           <InputComponent
-            holder="Phone Number"
+            holder={i18n.t('phrases.phoneNumber')}
             type="phone-pad"
             capitalize="none"
             secure={false}
@@ -97,10 +103,10 @@ const SignUp = () => {
             value={tel}
             toggleError={() => setTelError(false)}
             setValue={(text) => setTel(text)}
-            errorMessage="Invalid phone number"
+            errorMessage={i18n.t('phrases.invalidPhoneNumber')}
           />
           <InputComponent
-            holder="User Email"
+            holder={i18n.t('words.email')}
             type="email-address"
             capitalize="none"
             secure={false}
@@ -108,10 +114,10 @@ const SignUp = () => {
             value={email}
             toggleError={() => setEmailError(false)}
             setValue={(text) => setEmail(text)}
-            errorMessage="Invalid mail format"
+            errorMessage={i18n.t('phrases.invalidMail')}
           />
           <InputComponent
-            holder="Password"
+            holder={i18n.t('words.password')}
             type="default"
             capitalize="none"
             secure={true}
@@ -119,10 +125,10 @@ const SignUp = () => {
             toggleError={() => setPasswordError(false)}
             value={password}
             setValue={(text) => setPassword(text)}
-            errorMessage="Password too short"
+            errorMessage={i18n.t('phrases.passwordTooShort')}
           />
           <InputComponent
-            holder="Confirm Password"
+            holder={i18n.t('phrases.confirmPassword')}
             type="default"
             capitalize="none"
             secure={true}
@@ -130,7 +136,7 @@ const SignUp = () => {
             toggleError={() => setConPasswordError(false)}
             value={conPassword}
             setValue={(text) => setConPassword(text)}
-            errorMessage="Password mismatch"
+            errorMessage={i18n.t('phrases.passwordMismatch')}
           />
           <LinearGradient
             style={styles.gradient}
@@ -140,15 +146,17 @@ const SignUp = () => {
             <TouchableOpacity
               onPress={() => authenticate()}
               style={styles.gradientButton}>
-              <Text style={styles.gradientButtonText}>SIGN UP</Text>
+              <Text style={styles.gradientButtonText}>
+                {i18n.t('phrases.signUp').toUpperCase()}
+              </Text>
             </TouchableOpacity>
           </LinearGradient>
           <View style={styles.forgotContainer}>
             <Text style={styles.forgotPasswordText}>
-              Already have an account?{' '}
+              {i18n.t('phrases.alreadyHaveAnAccount')}
             </Text>
             <TouchableOpacity onPress={() => Actions.Login()}>
-              <Text style={styles.loginText}>Login</Text>
+              <Text style={styles.loginText}>{i18n.t('words.login')}</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -157,4 +165,10 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+const mapStateToProps = ({i18n}) => {
+  return {
+    i18n: i18n.i18n,
+  };
+};
+
+export default connect(mapStateToProps)(SignUp);

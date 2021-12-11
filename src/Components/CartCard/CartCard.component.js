@@ -7,7 +7,7 @@ import {Text} from '..';
 import theme from '../../../resources/Colors/theme';
 
 const CartCard = (props) => {
-  const {onPress} = props;
+  const {onPress, setShow} = props;
   return (
     <View style={styles.cardContainer}>
       <View style={styles.cardImageContainer}>
@@ -21,7 +21,7 @@ const CartCard = (props) => {
         <View style={styles.cardDetails}>
           <Text style={styles.cardPastryName}>Love Aurora</Text>
           <TouchableOpacity
-            // onPress={() => onPress()}
+            onPress={() => setShow(true)}
             style={styles.bestInfoButton2}>
             <Icons
               name="ios-information-circle-outline"
@@ -31,10 +31,7 @@ const CartCard = (props) => {
           </TouchableOpacity>
         </View>
         <View style={styles.cardDetails}>
-          <View style={styles.amountContainer}>
-            <Text style={styles.amount}>XAF 3,000</Text>
-            {/* <Text style={styles.quantity}>&times; 2</Text> */}
-          </View>
+          <Text style={styles.amount}>XAF 3,000</Text>
         </View>
         <View style={styles.cardControls}>
           <View style={styles.amountContainer}>

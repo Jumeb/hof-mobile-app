@@ -4,6 +4,7 @@ import Modal from 'react-native-modal';
 
 import styles from './FAQs.style';
 import {GradientButton, Text} from '../../Components';
+import theme from '../../../resources/Colors/theme';
 
 const FAQs = (props) => {
   const {faqs, setFaqs} = props;
@@ -14,6 +15,8 @@ const FAQs = (props) => {
       style={styles.mainContainer}
       animationInTiming={500}
       animationOutTiming={400}
+      backdropOpacity={0.55}
+      backdropColor={theme.SECONDARY_COLOR}
       onBackdropPress={() => setFaqs(false)}
       onBackButtonPress={() => setFaqs(false)}>
       <ScrollView horizontal={false} showsVerticalScrollIndicator={false}>

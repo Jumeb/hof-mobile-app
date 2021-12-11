@@ -6042,6 +6042,11 @@
   "resolved" "https://registry.npmjs.org/react-native-linear-gradient/-/react-native-linear-gradient-2.5.6.tgz"
   "version" "2.5.6"
 
+"react-native-localize@^2.1.5":
+  "integrity" "sha512-1ADxILk78P1iA5vdhfD/UsrlliINA1iuExu0n7l+0XpYsNIo5S68HFAkhGiZqO8cZUPNlpx75klZkAu9c3iMXw=="
+  "resolved" "https://registry.npmjs.org/react-native-localize/-/react-native-localize-2.1.5.tgz"
+  "version" "2.1.5"
+
 "react-native-modal@^11.5.6":
   "integrity" "sha512-APGNfbvgC4hXbJqcSADu79GLoMKIHUmgR3fDQ7rCGZNBypkStSP8imZ4PKK/OzIZZfjGU9aP49jhMgGbhY9KHA=="
   "resolved" "https://registry.npmjs.org/react-native-modal/-/react-native-modal-11.5.6.tgz"
@@ -6135,7 +6140,7 @@
     "prop-types" "^15.7.2"
     "yargs" "^15.0.2"
 
-"react-native@*", "react-native@>=0.55", "react-native@>=0.59", "react-native@>=0.59.0", "react-native@>=0.62.0-rc.0 <0.64.0", "react-native@0.63.2":
+"react-native@*", "react-native@>=0.55", "react-native@>=0.59", "react-native@>=0.59.0", "react-native@>=0.60.0", "react-native@>=0.62.0-rc.0 <0.64.0", "react-native@0.63.2":
   "integrity" "sha512-MkxHeJorUDzmQwKJrTfrFYMDRLyu9GSBpsFFMDX7X+HglVnaZi3CTzW2mRv1eIcazoseBOP2eJe+bnkyLl8Y2A=="
   "resolved" "https://registry.npmjs.org/react-native/-/react-native-0.63.2.tgz"
   "version" "0.63.2"

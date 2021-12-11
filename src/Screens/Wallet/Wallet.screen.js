@@ -7,6 +7,7 @@ import {
   View,
 } from 'react-native';
 import Icons from 'react-native-vector-icons/Ionicons';
+import {connect} from 'react-redux';
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
 
 import styles from './Wallet.style';
@@ -14,8 +15,10 @@ import {Text} from '../../Components';
 import LinearGradient from 'react-native-linear-gradient';
 import theme from '../../../resources/Colors/theme';
 import {AromaDetails} from '../../sections';
+import {Actions} from 'react-native-router-flux';
 
-const Wallet = () => {
+const Wallet = (props) => {
+  const {i18n} = props;
   const [details, setDetails] = useState(false);
   return (
     <SafeAreaView style={styles.mainContainer}>
@@ -33,7 +36,7 @@ const Wallet = () => {
         showsVerticalScrollIndicator={false}
         style={styles.scrollContainer}>
         <View style={styles.opTitle}>
-          <Text style={styles.scrollTitle}>My Wallet</Text>
+          <Text style={styles.scrollTitle}>{i18n.t('phrases.myWallet')}</Text>
         </View>
         <LinearGradient
           style={styles.walletCard}
@@ -46,7 +49,9 @@ const Wallet = () => {
             theme.SECONDARY_COLOR,
             // theme.TERTIARY_COLOR,
           ]}>
-          <Text style={styles.walletText}>Total Balance,</Text>
+          <Text style={styles.walletText}>
+            {i18n.t('phrases.totalBalance')}
+          </Text>
           <View style={styles.infoContainer}>
             <Text style={styles.walletInfo}>9,394</Text>
             <Text style={styles.walletCoin}> AC</Text>
@@ -57,17 +62,20 @@ const Wallet = () => {
           </View>
           <TouchableOpacity style={styles.topupButton}>
             <Icons name="ios-add-outline" size={16} color={theme.WHITE_COLOR} />
-            <Text style={styles.topupText}>Top up</Text>
+            <Text style={styles.topupText}>{i18n.t('phrases.topUp')}</Text>
           </TouchableOpacity>
         </LinearGradient>
         <View style={styles.opTitle}>
-          <Text style={styles.scrollTitle}>Operations</Text>
+          <Text style={styles.scrollTitle}>{i18n.t('words.operations')}</Text>
         </View>
         <ScrollView
           horizontal={true}
           showsHorizontalScrollIndicator={false}
           bounces>
-          <TouchableOpacity style={styles.opContainer} activeOpacity={0.7}>
+          <TouchableOpacity
+            style={styles.opContainer}
+            activeOpacity={0.7}
+            onPress={() => Actions.home()}>
             <View style={styles.opCard}>
               <Icons
                 name="ios-cart-outline"
@@ -75,7 +83,7 @@ const Wallet = () => {
                 color={theme.PRIMARY_COLOR}
               />
             </View>
-            <Text style={styles.opText}>Shop</Text>
+            <Text style={styles.opText}>{i18n.t('words.shop')}</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.opContainer}>
             <View style={styles.opCard}>
@@ -85,7 +93,7 @@ const Wallet = () => {
                 color={theme.PRIMARY_COLOR}
               />
             </View>
-            <Text style={styles.opText}>Transfer</Text>
+            <Text style={styles.opText}>{i18n.t('words.transfer')}</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.opContainer}>
             <View style={styles.opCard}>
@@ -95,13 +103,13 @@ const Wallet = () => {
                 color={theme.PRIMARY_COLOR}
               />
             </View>
-            <Text style={styles.opText}>Withdraw</Text>
+            <Text style={styles.opText}>{i18n.t('words.withdraw')}</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.opContainer}>
             <View style={styles.opCard}>
               <Icon name="phone" size={25} color={theme.PRIMARY_COLOR} />
             </View>
-            <Text style={styles.opText}>Airtime</Text>
+            <Text style={styles.opText}>{i18n.t('words.airtime')}</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.opContainer}>
             <View style={styles.opCard}>
@@ -111,7 +119,7 @@ const Wallet = () => {
                 color={theme.PRIMARY_COLOR}
               />
             </View>
-            <Text style={styles.opText}>Set Limit</Text>
+            <Text style={styles.opText}>{i18n.t('phrases.setLimit')}</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.opContainer}
@@ -123,11 +131,11 @@ const Wallet = () => {
                 color={theme.PRIMARY_COLOR}
               />
             </View>
-            <Text style={styles.opText}>Info</Text>
+            <Text style={styles.opText}>{i18n.t('words.info')}</Text>
           </TouchableOpacity>
         </ScrollView>
         <View style={styles.opTitle}>
-          <Text style={styles.scrollTitle}>Transactions</Text>
+          <Text style={styles.scrollTitle}>{i18n.t('words.transactions')}</Text>
         </View>
         <View style={styles.transactionContainer}>
           <View style={styles.transContainer}>
@@ -167,11 +175,18 @@ const Wallet = () => {
   );
 };
 
-export default Wallet;
+const mapStateToProps = ({i18n}) => {
+  return {
+    i18n: i18n.i18n,
+  };
+};
+
+export default connect(mapStateToProps)(Wallet);
 
 // Transfer Top up setLimits withdraw help
 
-const TransactionCard = () => {
+const TransactionCard = (props) => {
+  const {i18n} = props;
   return (
     <View style={styles.transContainer}>
       <View style={styles.transIcon}>

@@ -9,11 +9,18 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
   },
   langContainer: {
-    borderTopLeftRadius: theme.BORDER_IMAGE + 4,
-    borderTopRightRadius: theme.BORDER_IMAGE + 4,
+    borderTopLeftRadius: theme.BORDER_IMAGE + 6,
+    borderTopRightRadius: theme.BORDER_IMAGE + 6,
     backgroundColor: theme.WHITE_COLOR,
     paddingHorizontal: 8,
-    height: 180,
+    paddingBottom: 12,
+    height: 'auto',
+  },
+  downIndicator: {
+    position: 'absolute',
+    top: 0,
+    left: '50%',
+    paddingTop: 2.5,
   },
   title: {
     fontSize: theme.FONT_SIZE_LARGE,

@@ -131,10 +131,23 @@ const styles = StyleSheet.create({
     resizeMode: 'cover',
   },
   detailText: {
-    padding: 8,
-    textAlign: 'center',
+    paddingTop: 8,
+    // textAlign: 'center',
     fontSize: theme.FONT_SIZE_SMALL,
     fontWeight: theme.FONT_WEIGHT_BOLD,
+  },
+  detailTextPrice: {
+    paddingBottom: 8,
+    fontSize: theme.FONT_SIZE_EXTRA_SMALL,
+  },
+  detailTextQty: {
+    paddingBottom: 8,
+    fontWeight: theme.FONT_WEIGHT_BOLD,
+    fontSize: theme.FONT_SIZE_EXTRA_SMALL,
+  },
+  infoContain: {
+    alignItems: 'flex-start',
+    paddingHorizontal: 8,
   },
 });
 

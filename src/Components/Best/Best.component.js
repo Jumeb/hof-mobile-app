@@ -3,6 +3,8 @@ import {ImageBackground, Text, TouchableOpacity, View} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import Icons from 'react-native-vector-icons/Ionicons';
 import theme from '../../../resources/Colors/theme';
+import {FormatUnits} from '../../utils';
+import Thousand from '../../utils/kSeparator';
 
 import styles from './Best.style';
 
@@ -57,7 +59,7 @@ const Best = (props) => {
                 size={16}
                 color={theme.WHITE_COLOR}
               />
-              <Text style={styles.pastryLikes}>{data.rank}</Text>
+              <Text style={styles.pastryLikes}>{FormatUnits(data.rank)}</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.likesContainer2}>
               <Icons
@@ -72,7 +74,7 @@ const Best = (props) => {
       <View style={styles.bestDetail}>
         <View>
           <Text style={styles.pastryName}>{data.ceo_name}</Text>
-          <Text style={styles.pastryPrice}>2000 XAF</Text>
+          <Text style={styles.pastryPrice}>{Thousand(2000)} XAF</Text>
         </View>
         <TouchableOpacity style={styles.addToCartButton}>
           <Icons name="ios-add-outline" size={16} color={theme.WHITE_COLOR} />
