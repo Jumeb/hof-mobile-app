@@ -102,6 +102,10 @@ export default {
     pleaseEnterToken: 'Please enter the token and fill in your new password.',
     tokenNotValid: 'Token not valid.',
     addToCart: 'Add to cart',
+    orderDetails: 'Order details',
+    deliveryAddress: 'Delivery address',
+    orderStatus: 'orderStatus',
+    arrivedAt: 'Arrived at',
     //New
   },
 };

@@ -1,15 +1,17 @@
 import React, {useState} from 'react';
 import {FlatList, SafeAreaView, ScrollView, View} from 'react-native';
+import LinearGradient from 'react-native-linear-gradient';
+import Icons from 'react-native-vector-icons/Ionicons';
+import {connect} from 'react-redux';
 
 import styles from './OrderDetails.style';
 import {NavBar, OrderDetailsCard, Text} from '../../Components';
 import best from '../../../resources/Dummy/best.json';
-import LinearGradient from 'react-native-linear-gradient';
 import theme from '../../../resources/Colors/theme';
-import Icons from 'react-native-vector-icons/Ionicons';
 import ItemsDetail from '../ItemDetail/ItemsDetail.section';
 
-const OrderDetails = () => {
+const OrderDetails = (props) => {
+  const {i18n} = props;
   const [info, setInfo] = useState(false);
   return (
     <SafeAreaView style={styles.mainContainer}>
@@ -19,7 +21,9 @@ const OrderDetails = () => {
         showsHorizontalScrollIndicator={false}
         style={styles.scrollView}>
         <View style={styles.orderContainer}>
-          <Text style={styles.orderTitle}>Order Details</Text>
+          <Text style={styles.orderTitle}>
+            {i18n.t('phrases.orderDetails')}
+          </Text>
         </View>
         <FlatList
           horizontal={true}
@@ -35,7 +39,7 @@ const OrderDetails = () => {
         <View style={styles.paymentContainer}>
           <Text style={styles.orderId}>Order #03973492</Text>
           <View style={styles.budgetContainer}>
-            <Text style={styles.budgetTitle}>SubTotal</Text>
+            <Text style={styles.budgetTitle}>{i18n.t('words.subtotal')}</Text>
             <Text style={styles.budgetPrice}>XAF 250,000</Text>
           </View>
           <View style={styles.budgetContainer}>
@@ -44,12 +48,14 @@ const OrderDetails = () => {
           </View>
           <View style={styles.horizontalLine} />
           <View style={styles.budgetContainer}>
-            <Text style={styles.budgetTitleTotal}>Total</Text>
+            <Text style={styles.budgetTitleTotal}>{i18n.t('words.total')}</Text>
             <Text style={styles.budgetPriceTotal}>XAF 250,000</Text>
           </View>
           <View style={styles.horizontal} />
           <View style={styles.statusContainer}>
-            <Text style={styles.orderSubTitle}>Order status</Text>
+            <Text style={styles.orderSubTitle}>
+              {i18n.t('phrases.orderStatus')}
+            </Text>
             <View style={styles.progressBar}>
               <LinearGradient
                 style={styles.gradient}
@@ -93,13 +99,17 @@ const OrderDetails = () => {
               </View>
             </View>
             <View style={styles.dateContainer}>
-              <Text style={styles.location}>Arrived at Malingo Street</Text>
+              <Text style={styles.location}>
+                {i18n.t('phrases.arrivedAt')} Malingo Street
+              </Text>
               <Text style={styles.dateArrival}>07 Dec 2020</Text>
             </View>
           </View>
           <View style={styles.horizontal} />
           <View style={styles.statusContainer}>
-            <Text style={styles.orderSubTitle}>Delivery address</Text>
+            <Text style={styles.orderSubTitle}>
+              {i18n.t('phrases.deliveryAddress')}
+            </Text>
             <View style={styles.addressContainer}>
               <Text style={styles.addressText}>Malingo Street</Text>
               <Text style={styles.addressText}>Buea</Text>
@@ -113,4 +123,10 @@ const OrderDetails = () => {
   );
 };
 
-export default OrderDetails;
+const mapStateToProps = ({i18n}) => {
+  return {
+    i18n: i18n.i18n,
+  };
+};
+
+export default connect(mapStateToProps)(OrderDetails);

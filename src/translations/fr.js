@@ -30,7 +30,7 @@ export default {
     email: 'Email',
     password: 'Password',
     from: 'From',
-    name: 'Name',
+    name: 'Nom',
     login: 'Login',
     categories: 'Categories',
     rank: 'Rank',
@@ -103,5 +103,9 @@ export default {
     pleaseEnterToken: 'Please enter the token and fill in your new password.',
     tokenNotValid: 'Token not valid.',
     addToCart: 'Add to cart',
+    orderDetails: 'Order details',
+    deliveryAddress: 'Delivery address',
+    orderStatus: 'orderStatus',
+    arrivedAt: 'Arrived at',
   },
 };
