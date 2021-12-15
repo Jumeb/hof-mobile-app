@@ -4,20 +4,24 @@ import {Actions} from 'react-native-router-flux';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
-import {Baker, BestBaker, NavBar} from '../../Components';
+import {Baker, BestBaker, NavBar, Notification} from '../../Components';
 import styles from './Home.style';
 import best from '../../../resources/Dummy/best.json';
 import bakers from '../../../resources/Dummy/bakers.json';
 import {scrolling} from '../../redux/actions/ScrollActions';
 
 const Home = (props) => {
-  const [notify, setNotify] = useState(true);
+  const {i18n} = props;
+  const [notify, setNotify] = useState(false);
 
-  useEffect(() => {
-    setTimeout(() => {
-      setNotify(false);
-    }, 2000);
-  });
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     setNotify(true);
+  //   }, 800);
+  //   setTimeout(() => {
+  //     setNotify(false);
+  //   }, 5000);
+  // }, []);
 
   const handle = (event) => {
     props.scrolling(true);
@@ -65,12 +69,24 @@ const Home = (props) => {
         onScrollBeginDrag={(event) => handle(event)}
         onScrollEndDrag={(event) => hide(event)}
       />
+      <Notification
+        notify={notify}
+        setNotify={setNotify}
+        msg={i18n.t('phrases.welcomeBack') + ', ' + 'Jume Brice'}
+        type={'success'}
+      />
     </SafeAreaView>
   );
+};
+
+const mapStateToProps = ({i18n}) => {
+  return {
+    i18n: i18n.i18n,
+  };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({scrolling}, dispatch);
 };
 
-export default connect(null, mapDispatchToProps)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

@@ -120,7 +120,7 @@ const styles = StyleSheet.create({
     color: theme.LIGHT_GREY,
   },
   mainContainer: {
-    marginHorizontal: 12,
+    marginHorizontal: 10,
     flexDirection: 'row',
     marginVertical: 7.5,
     borderRadius: theme.BORDER_IMAGE,

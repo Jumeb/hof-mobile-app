@@ -1,8 +1,8 @@
 import React from 'react';
-import {FlatList, ScrollView, TouchableOpacity, View} from 'react-native';
+import {FlatList, TouchableOpacity, View} from 'react-native';
 
 import styles from './Order.style';
-import {OrderCard, Text} from '../../Components';
+import {OrderCard, Status, Text} from '../../Components';
 import best from '../../../resources/Dummy/best.json';
 import LinearGradient from 'react-native-linear-gradient';
 import theme from '../../../resources/Colors/theme';
@@ -12,12 +12,15 @@ const OrderSection = (props) => {
   const {onPress, onDet, i18n} = props;
   return (
     <View style={styles.mainContainer}>
-      <Text style={styles.orderId}>Order #3462655</Text>
+      <View style={styles.orderInfo}>
+        <Text style={styles.orderId}>Order #3462655</Text>
+        <Status status={'processing'} i18n={i18n} />
+      </View>
       <FlatList
         horizontal={false}
         data={best}
         renderItem={({item, key}) => (
-          <OrderCard onPress={() => onDet()} key={key} />
+          <OrderCard onPress={() => onDet()} key={key} i18n={i18n} />
         )}
         keyExtractor={(item) => item.id.toString()}
       />

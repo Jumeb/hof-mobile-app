@@ -7,7 +7,7 @@ import theme from '../../../resources/Colors/theme';
 import styles from './Best.style';
 
 const BestFavourite = (props) => {
-  const {data, onPress} = props;
+  const {data, onPress, setDelete} = props;
   return (
     <View style={styles.mainContainer}>
       <ImageBackground
@@ -32,7 +32,9 @@ const BestFavourite = (props) => {
               />
               <Text style={styles.bestDiscountText}>20%</Text>
             </View>
-            <TouchableOpacity style={styles.trashButton}>
+            <TouchableOpacity
+              style={styles.trashButton}
+              onPress={() => setDelete()}>
               <Icons
                 name="ios-trash-outline"
                 size={16}

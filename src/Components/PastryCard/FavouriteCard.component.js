@@ -9,7 +9,7 @@ import theme from '../../../resources/Colors/theme';
 import styles from './Pastrycard.style';
 
 const FavouriteCard = (props) => {
-  const {onPress} = props;
+  const {onPress, setNotify, setInfo, setDelete} = props;
   return (
     <View style={styles.mainContainer}>
       <View style={styles.pastryImageContainer}>
@@ -22,7 +22,9 @@ const FavouriteCard = (props) => {
       <View style={styles.infoContainer}>
         <View style={styles.pastryDetails}>
           <Text style={styles.pastryName}>Love Aurora</Text>
-          <TouchableOpacity style={styles.bestInfoButton}>
+          <TouchableOpacity
+            style={styles.bestInfoButton}
+            onPress={() => setDelete()}>
             <Icons
               name="ios-trash-outline"
               size={16}
@@ -72,7 +74,9 @@ const FavouriteCard = (props) => {
               color={theme.SECONDARY_COLOR}
             />
           </TouchableOpacity>
-          <TouchableOpacity style={styles.addToCartButton}>
+          <TouchableOpacity
+            style={styles.addToCartButton}
+            onPress={() => setNotify(true)}>
             <Icons name="ios-add-outline" size={16} color={theme.WHITE_COLOR} />
           </TouchableOpacity>
         </View>

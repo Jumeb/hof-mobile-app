@@ -10,7 +10,7 @@ import theme from '../../../resources/Colors/theme';
 import styles from './Pastrycard.style';
 
 const PastryCard = (props) => {
-  const {layout, onPress} = props;
+  const {layout, onPress, setNotify} = props;
   return (
     <>
       {layout === 0 ? (
@@ -84,7 +84,9 @@ const PastryCard = (props) => {
                 <Text style={styles.currency2}>XAF</Text>
               </View>
             </View>
-            <TouchableOpacity style={styles.addToCartButton}>
+            <TouchableOpacity
+              style={styles.addToCartButton}
+              onPress={() => setNotify(true)}>
               <Icons
                 name="ios-add-outline"
                 size={16}
@@ -155,7 +157,9 @@ const PastryCard = (props) => {
                   color={theme.SECONDARY_COLOR}
                 />
               </TouchableOpacity>
-              <TouchableOpacity style={styles.addToCartButton}>
+              <TouchableOpacity
+                style={styles.addToCartButton}
+                onPress={() => setNotify(true)}>
                 <Icons
                   name="ios-add-outline"
                   size={16}

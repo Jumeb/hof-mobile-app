@@ -3,13 +3,14 @@ import {Image, TouchableOpacity, View} from 'react-native';
 import Modal from 'react-native-modal';
 import SwiperFlatList from 'react-native-swiper-flatlist';
 import Icons from 'react-native-vector-icons/Ionicons';
+import {connect} from 'react-redux';
 
 import theme from '../../../resources/Colors/theme';
 import {RateButton, Text} from '../../Components';
 import styles from './ItemDetail.style';
 
 const ItemDetail = (props) => {
-  const {info, setInfo} = props;
+  const {info, setInfo, i18n} = props;
 
   const [data] = useState([
     {
@@ -68,12 +69,15 @@ const ItemDetail = (props) => {
             <Text style={styles.pastryName}>Pastry Name</Text>
             <Text style={styles.pastryPrice}>3,000 XAF</Text>
           </View>
-          <Text style={styles.aboutTitle}>Your Message</Text>
+          <Text style={styles.aboutTitle}>{i18n.t('phrases.yourMessage')}</Text>
           <Text style={styles.aboutText}>Diner at 7PM. I love you. </Text>
-          <Text style={styles.aboutTitle}>Required days</Text>
+          <Text style={styles.aboutTitle}>
+            {i18n.t('phrases.requiredDays')}
+          </Text>
           <Text style={styles.aboutText}>
-            A minimum of <Text style={styles.date}>2 days</Text> is required for
-            delivery.
+            {i18n.t('phrases.aMinimumOf')}{' '}
+            <Text style={styles.date}>2 days</Text>{' '}
+            {i18n.t('phrases.isRequiredForDelivery')}
           </Text>
           <View style={styles.rateContainer}>
             <RateButton title={120} icon={'ios-thumbs-up-outline'} />
@@ -101,14 +105,18 @@ const ItemDetail = (props) => {
               </TouchableOpacity>
             </View>
           </View>
-          {/* <GradientButton title={'Add to Cart'} /> */}
         </View>
       </View>
     </Modal>
   );
 };
+const mapStateToProps = ({i18n}) => {
+  return {
+    i18n: i18n.i18n,
+  };
+};
 
-export default ItemDetail;
+export default connect(mapStateToProps)(ItemDetail);
 
 const Header = (props) => {
   const {length, index, data} = props;

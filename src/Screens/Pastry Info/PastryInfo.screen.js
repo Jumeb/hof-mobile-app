@@ -13,10 +13,31 @@ import {SwiperFlatList} from 'react-native-swiper-flatlist';
 
 import styles from './PastryInfo.style';
 import {scrolling} from '../../redux/actions/ScrollActions';
-import {GradientButton, NavBar, RateButton, Text} from '../../Components';
+import {
+  GradientButton,
+  NavBar,
+  Notification,
+  RateButton,
+  Text,
+} from '../../Components';
 import theme from '../../../resources/Colors/theme';
+import Thousand from '../../utils/kSeparator';
 
 const PastryInfo = (props) => {
+  const {i18n} = props;
+  const [notify, setNotify] = useState(false);
+  const [msg, setMsg] = useState('');
+
+  const AddToCart = () => {
+    setNotify(true);
+    setMsg(i18n.t('phrases.addedToCart'));
+  };
+
+  const AddToFavourite = () => {
+    setNotify(true);
+    setMsg(i18n.t('phrases.addedToFavourite'));
+  };
+
   const handle = (event) => {
     props.scrolling(true);
   };
@@ -48,7 +69,7 @@ const PastryInfo = (props) => {
 
   return (
     <SafeAreaView style={styles.mainContainer}>
-      <NavBar screen="pastryInfo" pop={true} />
+      <NavBar screen="pastryInfo" pop={true} action={AddToFavourite} />
       <ScrollView
         horizontal={false}
         showsHorizontalScrollIndicator={false}
@@ -68,7 +89,7 @@ const PastryInfo = (props) => {
             <Text style={styles.pastryName}>Pastry Name</Text>
             <Text style={styles.pastryPrice}>3,000 XAF</Text>
           </View>
-          <Text style={styles.aboutTitle}>Description</Text>
+          <Text style={styles.aboutTitle}>{i18n.t('words.description')}</Text>
           <Text style={styles.aboutText}>
             Voluptate consequat in magna anim consectetur qui exercitation
             voluptate mollit laboris sint eiusmod eiusmod proident. Commodo amet
@@ -76,12 +97,15 @@ const PastryInfo = (props) => {
             reprehenderit mollit officia cupidatat consectetur aute. Mollit duis
             anim minim ipsum.
           </Text>
-          <Text style={styles.aboutTitle}>Required days</Text>
-          <Text style={styles.aboutText}>
-            A minimum of <Text style={styles.date}>2 days</Text> is required for
-            delivery.
+          <Text style={styles.aboutTitle}>
+            {i18n.t('phrases.requiredDays')}
           </Text>
-          <Text style={styles.aboutTitle}>Stats</Text>
+          <Text style={styles.aboutText}>
+            {i18n.t('phrases.aMinimumOf')}{' '}
+            <Text style={styles.date}> 2 days </Text>{' '}
+            {i18n.t('phrases.isRequiredForDelivery')}
+          </Text>
+          <Text style={styles.aboutTitle}>{i18n.t('words.stats')}</Text>
           <View style={styles.rateContainer}>
             <RateButton title={120} icon={'ios-thumbs-up-outline'} />
             <RateButton title={14} icon={'ios-thumbs-down-outline'} />
@@ -89,7 +113,7 @@ const PastryInfo = (props) => {
         </View>
         <View style={styles.controlsContainer}>
           <View style={styles.qtyContainer}>
-            <Text style={styles.accumelatedPrice}>6,000 XAF</Text>
+            <Text style={styles.accumelatedPrice}>{Thousand(6000)} XAF</Text>
             <View style={styles.buttonContainer}>
               <TouchableOpacity style={styles.qtyButton}>
                 <Icons
@@ -108,18 +132,33 @@ const PastryInfo = (props) => {
               </TouchableOpacity>
             </View>
           </View>
-          <GradientButton title={'Add to Cart'} />
+          <GradientButton
+            title={i18n.t('phrases.addToCart')}
+            onPress={() => AddToCart()}
+          />
         </View>
       </ScrollView>
+      <Notification
+        notify={notify}
+        setNotify={setNotify}
+        type="success"
+        msg={msg}
+      />
     </SafeAreaView>
   );
+};
+
+const mapStateToProps = ({i18n}) => {
+  return {
+    i18n: i18n.i18n,
+  };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({scrolling}, dispatch);
 };
 
-export default connect(null, mapDispatchToProps)(PastryInfo);
+export default connect(mapStateToProps, mapDispatchToProps)(PastryInfo);
 
 const Header = (props) => {
   const {length, index, data} = props;

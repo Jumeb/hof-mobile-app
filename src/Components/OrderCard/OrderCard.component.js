@@ -7,7 +7,7 @@ import theme from '../../../resources/Colors/theme';
 import styles from './OrderCard.style';
 
 const OrderCard = (props) => {
-  const {onPress} = props;
+  const {onPress, i18n} = props;
   return (
     <View style={styles.mainContainer}>
       <View style={styles.orderImageContainer}>
@@ -45,7 +45,7 @@ const OrderCard = (props) => {
           {/* </View> */}
         </View>
         <View style={styles.pastryDetails}>
-          <Text style={styles.quantityText}>Qty: 1</Text>
+          <Text style={styles.quantityText}>{i18n.t('words.quantity')}: 1</Text>
         </View>
         <View style={styles.pastryDetails}>
           <TouchableOpacity

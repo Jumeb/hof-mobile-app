@@ -22,6 +22,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginVertical: 14,
   },
+  orderInfo: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
   actionButton: {
     width: theme.WIDTH_100 * 0.45,
     borderWidth: 1.5,

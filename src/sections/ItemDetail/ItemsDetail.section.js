@@ -3,13 +3,14 @@ import {Image, TouchableOpacity, View} from 'react-native';
 import Modal from 'react-native-modal';
 import SwiperFlatList from 'react-native-swiper-flatlist';
 import Icons from 'react-native-vector-icons/Ionicons';
+import {connect} from 'react-redux';
 
 import theme from '../../../resources/Colors/theme';
-import {RateButton, Text} from '../../Components';
+import {RateButton, Status, Text} from '../../Components';
 import styles from './ItemDetail.style';
 
 const ItemsDetail = (props) => {
-  const {info, setInfo} = props;
+  const {info, setInfo, i18n} = props;
 
   const [data] = useState([
     {
@@ -68,45 +69,29 @@ const ItemsDetail = (props) => {
             <Text style={styles.pastryName}>Pastry Name</Text>
             <Text style={styles.pastryPrice}>3,000 XAF</Text>
           </View>
-          <Text style={styles.aboutTitle}>Your Message</Text>
+          <Text style={styles.aboutTitle}>{i18n.t('phrases.yourMessage')}</Text>
           <Text style={styles.aboutText}>Diner at 7PM. I love you. </Text>
-          <Text style={styles.aboutText}>
-            Status: <Text style={styles.date}>New</Text>
-          </Text>
+          <View style={styles.aboutContainer}>
+            <Text style={styles.status}>{i18n.t('words.status')}:</Text>
+            <Status status={'onTheWay'} i18n={i18n} />
+          </View>
           <View style={styles.rateContainer}>
             <RateButton title={120} icon={'ios-thumbs-up-outline'} />
             <RateButton title={14} icon={'ios-thumbs-down-outline'} />
           </View>
         </View>
-        {/* <View style={styles.controlsContainer}>
-          <View style={styles.qtyContainer}>
-            <Text style={styles.accumelatedPrice}>6,000 XAF</Text>
-            <View style={styles.buttonContainer}>
-              <TouchableOpacity style={styles.qtyButton}>
-                <Icons
-                  name="ios-remove-outline"
-                  size={16}
-                  color={theme.WHITE_COLOR}
-                />
-              </TouchableOpacity>
-              <Text style={styles.qtyText}>2</Text>
-              <TouchableOpacity style={styles.qtyButton}>
-                <Icons
-                  name="ios-add-outline"
-                  size={16}
-                  color={theme.WHITE_COLOR}
-                />
-              </TouchableOpacity>
-            </View>
-          </View>
-          <GradientButton title={'Add to Cart'} />
-        </View> */}
       </View>
     </Modal>
   );
 };
 
-export default ItemsDetail;
+const mapStateToProps = ({i18n}) => {
+  return {
+    i18n: i18n.i18n,
+  };
+};
+
+export default connect(mapStateToProps)(ItemsDetail);
 
 const Header = (props) => {
   const {length, index, data} = props;

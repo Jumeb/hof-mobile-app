@@ -9,7 +9,7 @@ import Thousand from '../../utils/kSeparator';
 import styles from './Best.style';
 
 const Best = (props) => {
-  const {data, onPress} = props;
+  const {data, onPress, setNotify} = props;
   return (
     <View style={styles.mainContainer}>
       <ImageBackground
@@ -76,7 +76,9 @@ const Best = (props) => {
           <Text style={styles.pastryName}>{data.ceo_name}</Text>
           <Text style={styles.pastryPrice}>{Thousand(2000)} XAF</Text>
         </View>
-        <TouchableOpacity style={styles.addToCartButton}>
+        <TouchableOpacity
+          style={styles.addToCartButton}
+          onPress={() => setNotify(true)}>
           <Icons name="ios-add-outline" size={16} color={theme.WHITE_COLOR} />
         </TouchableOpacity>
       </View>

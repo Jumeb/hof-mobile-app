@@ -21,6 +21,7 @@ const styles = StyleSheet.create({
     top: 0,
     left: '50%',
     paddingTop: 2.5,
+    zIndex: 9999,
   },
   title: {
     fontSize: theme.FONT_SIZE_LARGE,

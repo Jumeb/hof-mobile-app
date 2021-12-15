@@ -6,6 +6,7 @@ import Icons from 'react-native-vector-icons/Ionicons';
 
 import {Text, NavBar, RateButton, GradientButton} from '../../Components';
 import styles from './ChefInfo.styles';
+import {Actions} from 'react-native-router-flux';
 
 const ChefInfo = (props) => {
   const [data] = useState([
@@ -86,7 +87,11 @@ const ChefInfo = (props) => {
             />
             <Text style={styles.contactText}>: twitter handle</Text>
           </View>
-          <GradientButton title={'Shop'} icon={'ios-cart-outline'} />
+          <GradientButton
+            title={'Shop'}
+            icon={'ios-cart-outline'}
+            onPress={() => Actions.shop()}
+          />
         </View>
       </ScrollView>
     </SafeAreaView>

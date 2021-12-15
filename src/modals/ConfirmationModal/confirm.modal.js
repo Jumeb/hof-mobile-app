@@ -34,7 +34,7 @@ const Confirm = (props) => {
         <View style={styles.confirmOptions}>
           <ModalButton
             name="ios-close-sharp"
-            color={theme.MIX_PRIMARY_COLOR_6}
+            color={theme.SECONESSS_COLOR}
             closeModal={closeModal}
           />
           <ModalButton name="ios-checkmark-sharp" color={theme.DANGER_COLOR} />

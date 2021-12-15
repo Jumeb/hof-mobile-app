@@ -1,13 +1,55 @@
-import React from 'react';
-import {View, Text, TouchableOpacity} from 'react-native';
+import React, {useState} from 'react';
+import {
+  Platform,
+  UIManager,
+  LayoutAnimation,
+  View,
+  Text,
+  TouchableOpacity,
+  TextInput,
+} from 'react-native';
 import {Actions} from 'react-native-router-flux';
 import Icons from 'react-native-vector-icons/Ionicons';
+import {connect} from 'react-redux';
 import theme from '../../../resources/Colors/theme';
 
 import styles from './NavBar.style';
 
+if (
+  Platform.OS === 'android' &&
+  UIManager.setLayoutAnimationEnabledExperimental
+) {
+  UIManager.setLayoutAnimationEnabledExperimental(true);
+}
+
 const Header = (props) => {
-  const {screen, search, pop, right} = props;
+  const {screen, search, pop, right, i18n, action} = props;
+  const [showSearch, setShowSearch] = useState(false);
+  const searchScreen =
+    screen.toString() === 'Home'
+      ? i18n.t('words.chefs')
+      : screen.toString() === 'Shop'
+      ? i18n.t('words.shop')
+      : screen.toString() === 'Order'
+      ? i18n.t('phrases.myOrders')
+      : i18n.t('words.cart');
+
+  const animatedWidth = {
+    width: showSearch ? 180 : 0,
+    opacity: showSearch ? 1 : 0,
+  };
+
+  const toggleShow = () => {
+    LayoutAnimation.configureNext(
+      LayoutAnimation.create(
+        500,
+        LayoutAnimation.Types.linear,
+        LayoutAnimation.Properties.opacity,
+      ),
+    );
+    setShowSearch(!showSearch);
+  };
+
   return (
     <View style={styles.headerContainer}>
       {pop && (
@@ -15,6 +57,7 @@ const Header = (props) => {
           style={[
             styles.backIndicator,
             right ? styles.marginLeft : styles.marginRight,
+            showSearch && styles.marginRight,
           ]}
           onPress={() => Actions.pop()}>
           <Icons
@@ -36,9 +79,9 @@ const Header = (props) => {
           <Text style={styles.eventsCount}>1</Text>
         </View>
       </TouchableOpacity> */}
-      {screen.toString() === 'Home' && (
+      {screen.toString() === 'Home' && !showSearch && (
         <TouchableOpacity
-          style={[styles.searchIndicator, styles.marginLeft]}
+          style={[styles.actionIndicator, styles.marginLeft]}
           onPress={() => Actions.favourites()}>
           <Icons
             name="ios-heart-outline"
@@ -47,7 +90,7 @@ const Header = (props) => {
           />
         </TouchableOpacity>
       )}
-      {screen.toString() === 'Reviews' && (
+      {screen.toString() === 'Reviews' && !showSearch && (
         <TouchableOpacity style={styles.eventsIndicator}>
           <Icons
             name="ios-bookmark-outline"
@@ -59,11 +102,10 @@ const Header = (props) => {
           </View>
         </TouchableOpacity>
       )}
-      {screen.toString() === 'pastryInfo' && (
+      {screen.toString() === 'pastryInfo' && !showSearch && (
         <TouchableOpacity
-          style={styles.searchIndicator}
-          // onPress={() => Actions.pop()}
-        >
+          style={styles.actionIndicator}
+          onPress={() => action()}>
           <Icons
             name="ios-heart-outline"
             size={20}
@@ -71,9 +113,9 @@ const Header = (props) => {
           />
         </TouchableOpacity>
       )}
-      {screen.toString() === 'chefInfo' && (
+      {screen.toString() === 'chefInfo' && !showSearch && (
         <TouchableOpacity
-          style={styles.searchIndicator}
+          style={styles.actionIndicator}
           // onPress={() => Actions.pop()}
         >
           <Icons
@@ -83,7 +125,7 @@ const Header = (props) => {
           />
         </TouchableOpacity>
       )}
-      {screen.toString() === 'Shop' && (
+      {screen.toString() === 'Shop' && !showSearch && (
         <TouchableOpacity
           style={styles.eventsIndicator}
           onPress={() => Actions.cart()}>
@@ -98,22 +140,40 @@ const Header = (props) => {
         </TouchableOpacity>
       )}
       {search && (
-        <TouchableOpacity
+        <View
           style={[
-            styles.searchIndicator,
-            screen.toString() === 'Order' && styles.marginLeft,
-          ]}
-          // onPress={() => Actions.pop()}
-        >
-          <Icons
-            name="ios-search-outline"
-            size={20}
-            color={theme.PRIMARY_COLOR}
-          />
-        </TouchableOpacity>
+            styles.searchTextInputContainer,
+            (screen.toString() === 'Order' || showSearch) && styles.marginLeft,
+          ]}>
+          <View style={animatedWidth}>
+            <TextInput
+              placeholder={i18n.t('words.search') + ' ' + searchScreen}
+              placeholderTextColor={theme.LIGHT_GREY}
+              style={[
+                styles.searchBar,
+                showSearch ? styles.showSearch : styles.hideSearch,
+              ]}
+            />
+          </View>
+          <TouchableOpacity
+            style={styles.searchIndicator}
+            onPress={() => toggleShow()}>
+            <Icons
+              name="ios-search-outline"
+              size={20}
+              color={theme.PRIMARY_COLOR}
+            />
+          </TouchableOpacity>
+        </View>
       )}
     </View>
   );
 };
 
-export default Header;
+const mapStateToProps = ({i18n}) => {
+  return {
+    i18n: i18n.i18n,
+  };
+};
+
+export default connect(mapStateToProps)(Header);

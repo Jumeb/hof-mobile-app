@@ -10,26 +10,26 @@ import {
 import Icons from 'react-native-vector-icons/Ionicons';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
+import {Actions} from 'react-native-router-flux';
 
-import {Best, Categories, NavBar, PastryCard} from '../../Components';
+import {
+  Best,
+  Categories,
+  NavBar,
+  Notification,
+  PastryCard,
+} from '../../Components';
 import styles from './Shop.style';
 import best from '../../../resources/Dummy/best.json';
 import bakers from '../../../resources/Dummy/bakers.json';
 import theme from '../../../resources/Colors/theme';
 import {scrolling} from '../../redux/actions/ScrollActions';
-import {Actions} from 'react-native-router-flux';
 
 const Shop = (props) => {
-  const [color, setColor] = useState(colors[0]);
+  const {i18n} = props;
   const [active, setActive] = useState(0);
   const [layout, setLayout] = useState(0);
-  let rank = 0;
-  const rotate = () => {
-    if (rank === 8) {
-      rank = 0;
-    }
-    return rank++;
-  };
+  const [notify, setNotify] = useState(false);
 
   const handle = (event) => {
     props.scrolling(true);
@@ -54,8 +54,8 @@ const Shop = (props) => {
             renderItem={({item, key}) => (
               <Best
                 data={item}
-                color={color}
                 onPress={() => Actions.pastryInfo()}
+                setNotify={setNotify}
               />
             )}
             keyExtractor={(item) => item.id.toString()}
@@ -118,6 +118,7 @@ const Shop = (props) => {
           <PastryCard
             layout={layout}
             key={key}
+            setNotify={setNotify}
             onPress={() => Actions.pastryInfo()}
           />
         )}
@@ -128,15 +129,27 @@ const Shop = (props) => {
         onScrollBeginDrag={(event) => handle(event)}
         onScrollEndDrag={(event) => hide(event)}
       />
+      <Notification
+        notify={notify}
+        setNotify={setNotify}
+        msg={i18n.t('phrases.addedToCart')}
+        type="success"
+      />
     </SafeAreaView>
   );
+};
+
+const mapStateToProps = ({i18n}) => {
+  return {
+    i18n: i18n.i18n,
+  };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({scrolling}, dispatch);
 };
 
-export default connect(null, mapDispatchToProps)(Shop);
+export default connect(mapStateToProps, mapDispatchToProps)(Shop);
 
 const varieties = [
   {id: 1, type: 'Birthday Cakes'},
@@ -146,14 +159,4 @@ const varieties = [
   {id: 5, type: 'Valentine'},
   {id: 6, type: 'Doughnuts'},
   {id: 7, type: 'Cup Cakes'},
-];
-
-const colors = [
-  {start: theme.MIX_PRIMARY_COLOR_1, end: theme.MIX_PRIMARY_COLOR_2},
-  {start: theme.MIX_PRIMARY_COLOR_3, end: theme.MIX_PRIMARY_COLOR_4},
-  {start: theme.MIX_PRIMARY_COLOR_5, end: theme.MIX_PRIMARY_COLOR_6},
-  {start: theme.MIX_PRIMARY_COLOR_7, end: theme.MIX_PRIMARY_COLOR_8},
-  {start: theme.MIX_PRIMARY_COLOR_9, end: theme.MIX_PRIMARY_COLOR_10},
-  {start: theme.MIX_PRIMARY_COLOR_11, end: theme.MIX_PRIMARY_COLOR_12},
-  {start: theme.MIX_PRIMARY_COLOR_13, end: theme.MIX_PRIMARY_COLOR_14},
 ];

@@ -8,7 +8,6 @@ import Categories from './Categories/Categories.component';
 import PastryCard from './PastryCard/Pastrycard.component';
 import EventCard from './EventCard/EventCard.component';
 import ActionButton from './ActionButton/ActionButton.component';
-import ModalButton from './modalButtons/ModalButton.component';
 import TabBar from './TabBar/TabBar.component';
 import TabBarTwo from './TabBar2/TabBar.component';
 import ReviewsCard from './ReviewsCard/ReviewCard.component';
@@ -25,6 +24,9 @@ import BestFavourite from './Best/FBest.component';
 import FavouriteCard from './PastryCard/FavouriteCard.component';
 import OrderCard from './OrderCard/OrderCard.component';
 import OrderDetailsCard from './OrderCard/OrderDetailsCard.component';
+import Notification from './Notification/Notification.component';
+import DeleteModal from './DeleteModal/DeleteModal.component';
+import Status from './Status/Status.component';
 
 export {
   Text,
@@ -37,7 +39,6 @@ export {
   PastryCard,
   EventCard,
   ActionButton,
-  ModalButton,
   TabBar,
   TabBarTwo,
   ReviewCard,
@@ -54,4 +55,7 @@ export {
   FavouriteCard,
   OrderCard,
   OrderDetailsCard,
+  Notification,
+  DeleteModal,
+  Status,
 };

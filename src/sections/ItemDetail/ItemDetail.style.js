@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
     shadowColor: theme.LIGHT_GREY,
     shadowOpacity: 0.8,
     elevation: 3,
-    zIndex: 999,
+    zIndex: 9999,
   },
   title: {
     fontSize: theme.FONT_SIZE_LARGE,
@@ -112,9 +112,16 @@ const styles = StyleSheet.create({
     fontSize: theme.FONT_SIZE_SMALL + 1,
     lineHeight: 20,
   },
-  date: {
+  aboutContainer: {
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    marginTop: 5,
+  },
+  status: {
     fontSize: theme.FONT_SIZE_SMALL + 1,
     color: theme.DARK_GREY,
+    marginRight: 5,
     fontWeight: theme.FONT_WEIGHT_BOLD,
   },
   rateContainer: {
@@ -122,6 +129,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     alignItems: 'center',
     marginVertical: 10,
+    marginBottom: 5,
   },
   controlsContainer: {
     paddingHorizontal: 8,
