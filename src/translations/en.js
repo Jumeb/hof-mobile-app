@@ -105,7 +105,7 @@ export default {
     forgotLogin: 'Forgot Password',
     justCantHaveEnough: "just can't have enough",
     pleaseEnterYourEmail:
-      'Please enter your email. You will recieve a 6 digit token which you will use to reset your password to a new one.',
+      'Please enter your email. You will receive a 6 digit token which you will use to reset your password to a new one.',
     changePassword: 'Change Password',
     pleaseEnterToken: 'Please enter the token and fill in your new password.',
     tokenNotValid: 'Token not valid.',
@@ -124,7 +124,7 @@ export default {
     isRequiredForDelivery: 'is required for delivery.',
     addedToFavourite: 'Added to Favourites',
     areYouSureYouWant: 'Are you sure you want to remove',
-    removedFromCart: 'removed from car.',
+    removedFromCart: 'removed from cart.',
     removedFromFavourites: 'removed from favourites.',
     fromFavourites: 'from favourites.',
     fromCart: 'from cart.',
