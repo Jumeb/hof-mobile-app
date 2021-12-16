@@ -21,6 +21,7 @@ const styles = StyleSheet.create({
   tabTab: {
     justifyContent: 'center',
     width: 50,
+    flexWrap: 'nowrap',
     alignItems: 'center',
   },
   tabTabSelected: {
@@ -31,6 +32,7 @@ const styles = StyleSheet.create({
     borderRadius: theme.BORDER_IMAGE,
     marginTop: -18,
     width: 50,
+    flexWrap: 'nowrap',
     overflow: 'hidden',
   },
   tabTabText: {
@@ -38,6 +40,7 @@ const styles = StyleSheet.create({
     color: theme.SECONDARY_COLOR,
     fontWeight: theme.FONT_WEIGHT_BOLD,
     marginTop: 1,
+    flexWrap: 'nowrap',
   },
   tabTabTextSelected: {
     fontSize: theme.FONT_SIZE_EXTRA_SMALL - 4,

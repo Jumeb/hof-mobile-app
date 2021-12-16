@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text, TouchableOpacity, View} from 'react-native';
+import {KeyboardAvoidingView, Text, TouchableOpacity, View} from 'react-native';
 import {Actions} from 'react-native-router-flux';
 import Icons from 'react-native-vector-icons/Ionicons';
 import {connect} from 'react-redux';
@@ -13,7 +13,7 @@ const TabBar = (props) => {
   const activeTabIndex = state.index;
 
   return (
-    <View style={styles.tabBar}>
+    <KeyboardAvoidingView style={styles.tabBar}>
       {/* <TouchableOpacity style={styles.tabTabSelected}>
         <Icons name="ios-home" size={20} color={theme.WHITE_COLOR} />
         <Text style={styles.tabTabTextSelected}>HOME</Text>
@@ -47,7 +47,7 @@ const TabBar = (props) => {
           i18n={i18n}
         />
       ))}
-    </View>
+    </KeyboardAvoidingView>
   );
 };
 
@@ -96,6 +96,7 @@ const TabIcon = (props) => {
         }
       />
       <Text
+        numberOfLines={1}
         style={
           activeTabIndex === index
             ? styles.tabTabTextSelected

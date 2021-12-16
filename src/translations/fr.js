@@ -55,7 +55,10 @@ export default {
     delete: 'Supprimer',
     cancel: 'Annuler',
     remove: 'Supprimer',
+    status: 'Statut',
     //Translate
+    variety: 'Variety',
+    category: 'Category',
   },
   phrases: {
     welcomeToFlavours: 'Bienvenue à Flavours',
@@ -131,5 +134,6 @@ export default {
     fromFavourites: 'des favoris.',
     fromCart: 'du panier.',
     fromThisGroup: 'de ce groupe.',
+    yourMessage: 'Votre message',
   },
 };

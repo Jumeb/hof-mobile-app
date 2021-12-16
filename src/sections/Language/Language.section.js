@@ -20,7 +20,7 @@ const Language = (props) => {
   const languages = [
     {name: i18n.t('words.english'), key: 'en'},
     {name: i18n.t('words.french'), key: 'fr'},
-    {name: i18n.t('words.german'), key: 'dm', loading: true},
+    {name: i18n.t('words.german'), key: 'de', loading: true},
   ];
 
   useEffect(() => {

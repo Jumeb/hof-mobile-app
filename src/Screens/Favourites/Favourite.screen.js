@@ -36,7 +36,9 @@ const Favourite = (props) => {
       <View>
         <View>
           <View style={styles.pastriesContainer}>
-            <Text style={styles.topPastries}>Top Favourites</Text>
+            <Text style={styles.topPastries}>
+              {i18n.t('phrases.topFavourites')}
+            </Text>
           </View>
           <FlatList
             horizontal={true}
@@ -54,7 +56,7 @@ const Favourite = (props) => {
             ListFooterComponent={() => <View style={styles.footerStyle} />}
           />
         </View>
-        <Text style={styles.varietyText}>My Favourites</Text>
+        <Text style={styles.varietyText}>{i18n.t('phrases.myFavourites')}</Text>
       </View>
     );
   };

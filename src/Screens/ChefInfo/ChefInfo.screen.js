@@ -7,8 +7,10 @@ import Icons from 'react-native-vector-icons/Ionicons';
 import {Text, NavBar, RateButton, GradientButton} from '../../Components';
 import styles from './ChefInfo.styles';
 import {Actions} from 'react-native-router-flux';
+import {connect} from 'react-redux';
 
 const ChefInfo = (props) => {
+  const {i18n} = props;
   const [data] = useState([
     {
       image: require('../../../resources/images/chef1.jpg'),
@@ -50,7 +52,7 @@ const ChefInfo = (props) => {
         <View style={styles.infoContainer}>
           <Text style={styles.companyName}>Company Name</Text>
           <Text style={styles.ceoName}>Ceo Name</Text>
-          <Text style={styles.aboutTitle}>About</Text>
+          <Text style={styles.aboutTitle}>{i18n.t('words.about')}</Text>
           <Text style={styles.aboutText}>
             Voluptate consequat in magna anim consectetur qui exercitation
             voluptate mollit laboris sint eiusmod eiusmod proident. Commodo amet
@@ -58,19 +60,19 @@ const ChefInfo = (props) => {
             reprehenderit mollit officia cupidatat consectetur aute. Mollit duis
             anim minim ipsum.
           </Text>
-          <Text style={styles.aboutTitle}>Categories</Text>
+          <Text style={styles.aboutTitle}>{i18n.t('words.categories')}</Text>
           <View style={styles.contactContainer}>
             <Text style={styles.contactText}>Birthday cakes</Text>
           </View>
           <View style={styles.contactContainer}>
             <Text style={styles.contactText}>Pies</Text>
           </View>
-          <Text style={styles.aboutTitle}>Stats</Text>
+          <Text style={styles.aboutTitle}>{i18n.t('words.stats')}</Text>
           <View style={styles.rateContainer}>
             <RateButton title={120} icon={'ios-thumbs-up-outline'} />
             <RateButton title={14} icon={'ios-thumbs-down-outline'} />
           </View>
-          <Text style={styles.aboutTitle}>Contacts</Text>
+          <Text style={styles.aboutTitle}>{i18n.t('words.contacts')}</Text>
           <View style={styles.contactContainer}>
             <Icons
               name="ios-logo-twitter"
@@ -98,7 +100,13 @@ const ChefInfo = (props) => {
   );
 };
 
-export default ChefInfo;
+const mapStateToProps = ({i18n}) => {
+  return {
+    i18n: i18n.i18n,
+  };
+};
+
+export default connect(mapStateToProps)(ChefInfo);
 
 const Header = (props) => {
   const {length, index, data} = props;
