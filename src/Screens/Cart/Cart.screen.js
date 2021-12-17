@@ -17,6 +17,7 @@ import theme from '../../../resources/Colors/theme';
 import {ItemDetail} from '../../sections';
 import {scrolling} from '../../redux/actions/ScrollActions';
 import Thousand from '../../utils/kSeparator';
+import {Actions} from 'react-native-router-flux';
 
 const Cart = (props) => {
   const {i18n} = props;
@@ -95,7 +96,9 @@ const Cart = (props) => {
               start={{x: 0, y: 1}}
               end={{x: 1, y: 1}}
               colors={[theme.SECONDARY_COLOR, theme.TERTIARY_COLOR]}>
-              <TouchableOpacity style={styles.checkoutButton}>
+              <TouchableOpacity
+                style={styles.checkoutButton}
+                onPress={() => Actions.checkout()}>
                 <Text style={styles.checkoutButtonText}>
                   {i18n.t('words.checkout')}
                 </Text>

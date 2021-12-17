@@ -16,6 +16,7 @@ import Order from './Order/Order.screen';
 import Wallet from './Wallet/Wallet.screen';
 import ForgotPassword from './ForgotPassword/ForgotPassword.screen';
 import Profile from './Profile/Profile.screen';
+import Checkout from './Checkout/Checkout.screen';
 
 export {
   Home,
@@ -36,4 +37,5 @@ export {
   Wallet,
   ForgotPassword,
   Profile,
+  Checkout,
 };

@@ -10,6 +10,7 @@ import ItemDetail from './ItemDetail/ItemDetail.section';
 import ItemsDetail from './ItemDetail/ItemsDetail.section';
 import ChangePassword from './ChangePassword/ChangePassword.section';
 import ImageCapture from './Image/ImageCapture.section';
+import Location from './Locations/Location.section';
 
 export {
   EventDetails,
@@ -24,4 +25,5 @@ export {
   ItemsDetail,
   ChangePassword,
   ImageCapture,
+  Location,
 };

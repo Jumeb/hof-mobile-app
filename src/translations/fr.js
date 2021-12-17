@@ -62,6 +62,9 @@ export default {
     days: 'jours',
     save: 'Sauver',
     gallery: 'Galerie',
+    contacts: 'Contacts',
+    items: 'Articles',
+    confirm: 'Confirm',
     //Translate
   },
   phrases: {
@@ -144,8 +147,14 @@ export default {
       'Ajouter une image de profil facultative et modifier les informations personnelles',
     takeAPhoto: 'Prendre une photo',
     changeImage: "Changer l'image",
+    privacyPolicy: 'Politique de confidentialité',
+    termsAndConditions: 'Termes et conditions',
+    shippingAddress: 'Adresse de livraison',
+    currentLocation: 'Localisation actuelle',
+    selectAddress: "Sélectionnez l'adresse",
+    searchAddress: "Rechercher  l'adresse",
+    paymentMethod: 'Mode de paiement',
+    cashOnDelivery: 'Paiement à la livraison',
     //Translate
-    privacyPolicy: 'Privacy Policy',
-    termsAndConditions: 'Terms and Conditions',
   },
 };

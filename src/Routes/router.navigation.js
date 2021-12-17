@@ -20,6 +20,7 @@ import {
   Wallet,
   ForgotPassword,
   Profile,
+  Checkout,
 } from '../Screens';
 import {EventDetails, OrderDetails} from '../sections';
 import {TabBarTwo, TabBar} from '../Components';
@@ -38,6 +39,7 @@ const Routes = () => {
             <Scene key="home" component={Home} title="home" />
             <Scene key="shop" component={Shop} />
             <Scene key="cart" component={Cart} />
+            <Scene key="checkout" component={Checkout} />
             <Scene key="pastryInfo" component={PastryInfo} hideNavBar />
             <Scene key="chefInfo" component={ChefInfo} hideNavBar />
             <Scene key="favourites" component={Favourite} hideNavBar />

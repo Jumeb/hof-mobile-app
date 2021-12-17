@@ -61,8 +61,10 @@ export default {
     days: 'Days',
     save: 'Save',
     gallery: 'Gallery',
-    //New
     contacts: 'Contacts',
+    items: 'Items',
+    confirm: 'Confirm',
+    //New
   },
   phrases: {
     welcomeToFlavours: 'Welcome to Flavours',
@@ -144,6 +146,12 @@ export default {
     changeImage: 'Change Image',
     privacyPolicy: 'Privacy Policy',
     termsAndConditions: 'Terms and Conditions',
+    shippingAddress: 'Shipping Address',
+    currentLocation: 'Current Location',
+    selectAddress: 'Select address',
+    searchAddress: 'Search address',
+    paymentMethod: 'Payment Method',
+    cashOnDelivery: 'Cash on delivery',
     //New
   },
 };

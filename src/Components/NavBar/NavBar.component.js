@@ -125,20 +125,21 @@ const Header = (props) => {
           />
         </TouchableOpacity>
       )}
-      {screen.toString() === 'Shop' && !showSearch && (
-        <TouchableOpacity
-          style={styles.eventsIndicator}
-          onPress={() => Actions.cart()}>
-          <Icons
-            name="ios-cart-outline"
-            size={25}
-            color={theme.PRIMARY_COLOR}
-          />
-          <View style={styles.eventsCountContainer}>
-            <Text style={styles.eventsCount}>88</Text>
-          </View>
-        </TouchableOpacity>
-      )}
+      {(screen.toString() === 'Shop' || screen.toString() === 'checkout') &&
+        !showSearch && (
+          <TouchableOpacity
+            style={styles.eventsIndicator}
+            onPress={() => Actions.cart()}>
+            <Icons
+              name="ios-cart-outline"
+              size={25}
+              color={theme.PRIMARY_COLOR}
+            />
+            <View style={styles.eventsCountContainer}>
+              <Text style={styles.eventsCount}>88</Text>
+            </View>
+          </TouchableOpacity>
+        )}
       {search && (
         <View
           style={[
