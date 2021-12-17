@@ -8,6 +8,8 @@ import FAQs from './FAQs/FAQs.section';
 import Contact from './Contact/Contact.section';
 import ItemDetail from './ItemDetail/ItemDetail.section';
 import ItemsDetail from './ItemDetail/ItemsDetail.section';
+import ChangePassword from './ChangePassword/ChangePassword.section';
+import ImageCapture from './Image/ImageCapture.section';
 
 export {
   EventDetails,
@@ -20,4 +22,6 @@ export {
   Contact,
   ItemDetail,
   ItemsDetail,
+  ChangePassword,
+  ImageCapture,
 };

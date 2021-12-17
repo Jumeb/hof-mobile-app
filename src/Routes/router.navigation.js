@@ -19,6 +19,7 @@ import {
   Order,
   Wallet,
   ForgotPassword,
+  Profile,
 } from '../Screens';
 import {EventDetails, OrderDetails} from '../sections';
 import {TabBarTwo, TabBar} from '../Components';
@@ -66,12 +67,20 @@ const Routes = () => {
               hideTabBar
             />
           </Scene>
-          <Scene
-            key="settings"
-            component={Settings}
-            title="Settings"
-            hideNavBar
-          />
+          <Scene key="settings">
+            <Scene
+              key="settings"
+              component={Settings}
+              title="Settings"
+              hideNavBar
+            />
+            <Scene
+              key="profile"
+              component={Profile}
+              title="Profile"
+              hideNavBar
+            />
+          </Scene>
         </Scene>
       </Stack>
     </Router>

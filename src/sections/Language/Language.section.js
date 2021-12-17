@@ -24,6 +24,12 @@ const Language = (props) => {
   ];
 
   useEffect(() => {
+    setTimeout(() => {
+      setLang(false);
+    }, 30000);
+  }, [lang, setLang]);
+
+  useEffect(() => {
     Storage.load({key: 'LOCALE'})
       .then((res) => {
         _setLanguage(res);

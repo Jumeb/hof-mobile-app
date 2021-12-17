@@ -90,7 +90,7 @@ const ChefInfo = (props) => {
             <Text style={styles.contactText}>: twitter handle</Text>
           </View>
           <GradientButton
-            title={'Shop'}
+            title={i18n.t('words.shop')}
             icon={'ios-cart-outline'}
             onPress={() => Actions.shop()}
           />

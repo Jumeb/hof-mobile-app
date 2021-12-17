@@ -35,7 +35,7 @@ const Home = (props) => {
     return (
       <View>
         <View style={styles.chefsContainer}>
-          <Text style={styles.topChefText}>Top Chefs</Text>
+          <Text style={styles.topChefText}>{i18n.t('phrases.topChefs')}</Text>
         </View>
         <FlatList
           horizontal={true}
@@ -43,12 +43,12 @@ const Home = (props) => {
           showsHorizontalScrollIndicator={false}
           data={best}
           renderItem={({item, key}) => (
-            <BestBaker data={item} onPress={() => Actions.shop()} />
+            <BestBaker data={item} onPress={() => Actions.shop()} i18n={i18n} />
           )}
           keyExtractor={(item) => item.id.toString()}
           ListFooterComponent={() => <View style={styles.footerStyle} />}
         />
-        <Text style={styles.chefText}>Our Chefs</Text>
+        <Text style={styles.chefText}>{i18n.t('phrases.ourChefs')}</Text>
       </View>
     );
   };
@@ -63,7 +63,12 @@ const Home = (props) => {
         columnWrapperStyle={styles.columnWrapperStyle}
         key={'flat'}
         renderItem={({item, key}) => (
-          <Baker baker={item} onPress={() => Actions.shop()} about="Ranking" />
+          <Baker
+            baker={item}
+            onPress={() => Actions.shop()}
+            about="Ranking"
+            i18n={i18n}
+          />
         )}
         keyExtractor={(item) => item.id.toString()}
         onScrollBeginDrag={(event) => handle(event)}

@@ -44,7 +44,9 @@ const Shop = (props) => {
       <View>
         <View>
           <View style={styles.pastriesContainer}>
-            <Text style={styles.topPastries}>Most Liked</Text>
+            <Text style={styles.topPastries}>
+              {i18n.t('phrases.mostLiked')}
+            </Text>
           </View>
           <FlatList
             horizontal={true}
@@ -62,7 +64,7 @@ const Shop = (props) => {
             ListFooterComponent={() => <View style={styles.footerStyle} />}
           />
         </View>
-        <Text style={styles.varietyText}>Varieties</Text>
+        <Text style={styles.varietyText}>{i18n.t('words.categories')}</Text>
         <ScrollView
           horizontal={true}
           showsHorizontalScrollIndicator={false}

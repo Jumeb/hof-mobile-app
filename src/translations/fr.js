@@ -56,15 +56,19 @@ export default {
     cancel: 'Annuler',
     remove: 'Supprimer',
     status: 'Statut',
+    variety: 'Variété',
+    category: 'Catégorie',
+    profile: 'Profil',
+    days: 'jours',
+    save: 'Sauver',
+    gallery: 'Galerie',
     //Translate
-    variety: 'Variety',
-    category: 'Category',
   },
   phrases: {
     welcomeToFlavours: 'Bienvenue à Flavours',
     restingPlaceOf: 'lieu de repos des chefs et arômes',
     contactUs: 'Contactez-nous',
-    privacyPolicy: 'Politique de confidentialité, Termes et Conditions',
+    privacyPolicyTerms: 'Politique de confidentialité, Termes et Conditions',
     chooseLanguage: 'Choisissez la langue',
     myWallet: 'Mon portefeuille',
     topUp: 'Recharger',
@@ -81,7 +85,6 @@ export default {
     chargesAndTax: 'Frais et taxes ?',
     onTheWay: 'En chemin',
     myOrders: 'Mes ordres',
-    //Translate
     inTheNameOf: 'au nom du bon goût.',
     login: 'Connexion',
     forgotPassword: 'Mot de passe oublié?',
@@ -135,5 +138,14 @@ export default {
     fromCart: 'du panier.',
     fromThisGroup: 'de ce groupe.',
     yourMessage: 'Votre message',
+    editProfile: 'Editer le profil',
+    personalInfo: 'Informations personnelles',
+    addOptionalProfile:
+      'Ajouter une image de profil facultative et modifier les informations personnelles',
+    takeAPhoto: 'Prendre une photo',
+    changeImage: "Changer l'image",
+    //Translate
+    privacyPolicy: 'Privacy Policy',
+    termsAndConditions: 'Terms and Conditions',
   },
 };

@@ -14,6 +14,7 @@ import {connect} from 'react-redux';
 import styles from './Setting.style';
 import {scrolling} from '../../redux/actions/ScrollActions';
 import {Contact, FAQs, Language, Terms} from '../../sections';
+import {Actions} from 'react-native-router-flux';
 
 const Setting = (props) => {
   const {i18n} = props;
@@ -36,11 +37,14 @@ const Setting = (props) => {
           <View style={styles.userImageBorder}>
             <Image
               style={styles.userImage}
-              // imageStyle={styles.userImage}
+              imageStyle={styles.userImage}
               source={require('../../../resources/images/vals-3.jpg')}
             />
           </View>
-          <TouchableOpacity style={styles.editProfile} activeOpacity={0.9}>
+          <TouchableOpacity
+            style={styles.editProfile}
+            activeOpacity={0.9}
+            onPress={() => Actions.profile()}>
             <Icons
               name="pencil-outline"
               size={18}
@@ -76,7 +80,7 @@ const Setting = (props) => {
             style={styles.subMenus}
             onPress={() => setTerms(true)}>
             <Text style={styles.subMenusText}>
-              {i18n.t('phrases.privacyPolicy')}
+              {i18n.t('phrases.privacyPolicyTerms')}
             </Text>
             <Icons name="ios-shield-checkmark-outline" size={20} />
           </TouchableOpacity>

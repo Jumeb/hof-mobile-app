@@ -11,15 +11,27 @@ const styles = StyleSheet.create({
   actionContainer: {
     borderTopLeftRadius: theme.BORDER_IMAGE + 6,
     borderTopRightRadius: theme.BORDER_IMAGE + 6,
-    backgroundColor: theme.TERTIARY_COLOR + 'aa',
+    backgroundColor: theme.WHITE_COLOR,
     paddingHorizontal: 10,
-    paddingVertical: 14,
+    paddingVertical: 8,
+    paddingBottom: 14,
+  },
+  downIndicator: {
+    position: 'absolute',
+    top: 0,
+    left: '50%',
+    paddingTop: 2.5,
+    zIndex: 9999,
   },
   actionInfo: {
-    color: theme.WHITE_COLOR,
-    textAlign: 'center',
-    fontSize: theme.FONT_SIZE_SMALL + 2,
-    marginBottom: 8,
+    fontSize: theme.FONT_SIZE_LARGE,
+    color: theme.TERTIARY_COLOR,
+    fontWeight: theme.FONT_WEIGHT_BOLD,
+    marginBottom: 5,
+    marginTop: 12,
+  },
+  inputContainer: {
+    marginTop: 10,
   },
   actionButton: {
     paddingVertical: 8,

@@ -7,7 +7,7 @@ import theme from '../../../resources/Colors/theme';
 import styles from './BakerCard.style';
 
 const Bakers = (props) => {
-  const {baker, onPress} = props;
+  const {baker, onPress, i18n} = props;
   return (
     <View style={styles.mainCard}>
       <View>
@@ -35,7 +35,9 @@ const Bakers = (props) => {
               </TouchableOpacity>
             </View>
             <View style={styles.rankContainer}>
-              <Text style={styles.rankText}>Rank: {baker.rank}</Text>
+              <Text style={styles.rankText}>
+                {i18n.t('words.rank')}: {baker.rank}
+              </Text>
               <TouchableOpacity
                 style={styles.shopSign}
                 activeOpacity={1}
@@ -51,7 +53,9 @@ const Bakers = (props) => {
         </View>
         <View style={styles.companyCredentials}>
           <Text style={styles.companyFounder}>{baker.company_name}</Text>
-          <Text style={styles.companyName}>{baker.rank} categories</Text>
+          <Text style={styles.companyName}>
+            {baker.rank} {i18n.t('words.categories')}
+          </Text>
         </View>
       </View>
     </View>

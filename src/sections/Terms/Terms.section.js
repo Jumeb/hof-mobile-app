@@ -5,9 +5,10 @@ import Modal from 'react-native-modal';
 import styles from './Terms.style';
 import {GradientButton, Text} from '../../Components';
 import theme from '../../../resources/Colors/theme';
+import {connect} from 'react-redux';
 
 const Terms = (props) => {
-  const {terms, setTerms} = props;
+  const {terms, setTerms, i18n} = props;
 
   return (
     <Modal
@@ -20,13 +21,13 @@ const Terms = (props) => {
       onBackdropPress={() => setTerms(false)}
       onBackButtonPress={() => setTerms(false)}>
       <ScrollView horizontal={false} showsVerticalScrollIndicator={false}>
-        <Text style={styles.title}>Terms and Conditions</Text>
+        <Text style={styles.title}>{i18n.t('phrases.termsAndConditions')}</Text>
         <Text style={styles.information}>
           Eu nulla ullamco veniam dolor aliqua et quis occaecat. Officia laboris
           laboris nulla pariatur tempor cupidatat dolor magna. Deserunt qui
           incididunt labore aliquip eiusmod velit.
         </Text>
-        <Text style={styles.subtitle}>Charges and Tax?</Text>
+        <Text style={styles.subtitle}>{i18n.t('phrases.chargesAndTax')}</Text>
         <Text style={styles.information}>
           Adipisicing mollit esse commodo enim enim exercitation aliqua sint
           nostrud et ea. Laborum qui est duis officia consectetur non non aliqua
@@ -35,13 +36,13 @@ const Terms = (props) => {
           aliqua. Aliqua minim voluptate eiusmod qui. Laborum esse Lorem dolor
           in enim non aliquip et ipsum reprehenderit excepteur consequat.
         </Text>
-        <Text style={styles.title}>Privacy Policy</Text>
+        <Text style={styles.title}>{i18n.t('phrases.privacyPolicy')}</Text>
         <Text style={styles.information}>
           Eu nulla ullamco veniam dolor aliqua et quis occaecat. Officia laboris
           laboris nulla pariatur tempor cupidatat dolor magna. Deserunt qui
           incididunt labore aliquip eiusmod velit.
         </Text>
-        <Text style={styles.subtitle}>Charges and Tax?</Text>
+        <Text style={styles.subtitle}>{i18n.t('phrases.chargesAndTax')}</Text>
         <Text style={styles.information}>
           Adipisicing mollit esse commodo enim enim exercitation aliqua sint
           nostrud et ea. Laborum qui est duis officia consectetur non non aliqua
@@ -56,4 +57,10 @@ const Terms = (props) => {
   );
 };
 
-export default Terms;
+const mapStateToProps = ({i18n}) => {
+  return {
+    i18n: i18n.i18n,
+  };
+};
+
+export default connect(mapStateToProps)(Terms);

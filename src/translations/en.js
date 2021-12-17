@@ -55,15 +55,20 @@ export default {
     cancel: 'Cancel',
     remove: 'Remove',
     status: 'Status',
-    //New
     variety: 'Variety',
     category: 'Category',
+    profile: 'Profile',
+    days: 'Days',
+    save: 'Save',
+    gallery: 'Gallery',
+    //New
+    contacts: 'Contacts',
   },
   phrases: {
     welcomeToFlavours: 'Welcome to Flavours',
     restingPlaceOf: 'resting place of chefs & aromas',
     contactUs: 'Contact us',
-    privacyPolicy: 'Privacy Policy, Terms and Conditions',
+    privacyPolicyTerms: 'Privacy Policy, Terms and Conditions',
     chooseLanguage: 'Choose Language',
     myWallet: 'My Wallet',
     topUp: 'Top up',
@@ -132,6 +137,13 @@ export default {
     fromCart: 'from cart.',
     fromThisGroup: 'from this group.',
     yourMessage: 'Your message',
+    editProfile: 'Edit Profile',
+    personalInfo: 'Personal Info',
+    addOptionalProfile: 'Add optional profile image and edit personal info',
+    takeAPhoto: 'Take a photo',
+    changeImage: 'Change Image',
+    privacyPolicy: 'Privacy Policy',
+    termsAndConditions: 'Terms and Conditions',
     //New
   },
 };

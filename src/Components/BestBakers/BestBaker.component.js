@@ -14,7 +14,7 @@ import theme from '../../../resources/Colors/theme.js';
 import styles from './BestBaker.style.js';
 
 const BestBaker = (props) => {
-  const {data, onPress} = props;
+  const {data, onPress, i18n} = props;
   return (
     <View style={styles.mainContainer}>
       <ImageBackground
@@ -48,7 +48,9 @@ const BestBaker = (props) => {
             </TouchableOpacity>
           </View>
           <View style={styles.bestDetail}>
-            <Text style={styles.chefRank}>Categories: {data.rank}</Text>
+            <Text style={styles.chefRank}>
+              {i18n.t('words.categories')}: {data.rank}
+            </Text>
             <Text style={styles.chefName}>{data.ceo_name}</Text>
           </View>
           <View style={styles.infoContainer}>
@@ -70,7 +72,7 @@ const BestBaker = (props) => {
             </TouchableOpacity>
             <TouchableOpacity style={styles.likesContainer}>
               <Icons
-                name="ios-heart-outline"
+                name="ios-person-add-outline"
                 size={16}
                 color={theme.WHITE_COLOR}
               />

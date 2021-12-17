@@ -15,6 +15,7 @@ import Favourite from './Favourites/Favourite.screen';
 import Order from './Order/Order.screen';
 import Wallet from './Wallet/Wallet.screen';
 import ForgotPassword from './ForgotPassword/ForgotPassword.screen';
+import Profile from './Profile/Profile.screen';
 
 export {
   Home,
@@ -34,4 +35,5 @@ export {
   Order,
   Wallet,
   ForgotPassword,
+  Profile,
 };
