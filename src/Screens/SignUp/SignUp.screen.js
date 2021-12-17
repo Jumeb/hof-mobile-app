@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   ImageBackground,
   Image,
@@ -32,6 +32,30 @@ const SignUp = (props) => {
   const [userNameError, setUserNameError] = useState(false);
   const [telError, setTelError] = useState(false);
   const [conPasswordError, setConPasswordError] = useState(false);
+  const [icon, setIcon] = useState(
+    require('../../../resources/images/favicon-1.png'),
+  );
+
+  useEffect(() => {
+    const favicon = [
+      {
+        key: 'en',
+        image: require('../../../resources/images/favicon-1.png'),
+      },
+      {
+        key: 'fr',
+        image: require('../../../resources/images/favicon-fr.png'),
+      },
+      {
+        key: 'de',
+        image: require('../../../resources/images/favicon-de.png'),
+      },
+    ];
+    setIcon(favicon.filter((i) => i?.key === i18n?.locale)[0]?.image);
+    return () => {
+      setIcon(require('../../../resources/images/favicon-1.png'));
+    };
+  }, [i18n]);
 
   let hasError = false;
 
@@ -67,10 +91,7 @@ const SignUp = (props) => {
           style={[{height: h / 3.4}, styles.ImageBackground]}
           source={require('../../../resources/images/cups-5.jpg')}>
           <View style={styles.messageContainer}>
-            <Image
-              source={require('../../../resources/images/favicon-1.png')}
-              style={styles.logoImage}
-            />
+            <Image source={icon} style={styles.logoImage} />
             <View style={styles.welcomeContainer}>
               <Text style={styles.welcomeTitle}>ARØMA</Text>
               <Text style={styles.welcomeSlogan}>

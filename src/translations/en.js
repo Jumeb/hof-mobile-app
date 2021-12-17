@@ -51,6 +51,7 @@ export default {
     search: 'Search',
     chefs: 'Chefs',
     cart: 'Cart',
+    cart1: 'Cart',
     delete: 'Delete',
     cancel: 'Cancel',
     remove: 'Remove',
@@ -152,6 +153,7 @@ export default {
     searchAddress: 'Search address',
     paymentMethod: 'Payment Method',
     cashOnDelivery: 'Cash on delivery',
+    enterMomoNumber: 'Enter MOMO number.',
     //New
   },
 };

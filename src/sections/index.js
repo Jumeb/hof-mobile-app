@@ -11,6 +11,8 @@ import ItemsDetail from './ItemDetail/ItemsDetail.section';
 import ChangePassword from './ChangePassword/ChangePassword.section';
 import ImageCapture from './Image/ImageCapture.section';
 import Location from './Locations/Location.section';
+import Momo from './Momo/Momo.section';
+import Card from './Card/Card.section';
 
 export {
   EventDetails,
@@ -26,4 +28,6 @@ export {
   ChangePassword,
   ImageCapture,
   Location,
+  Momo,
+  Card,
 };

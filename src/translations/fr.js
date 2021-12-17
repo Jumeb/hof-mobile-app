@@ -64,7 +64,7 @@ export default {
     gallery: 'Galerie',
     contacts: 'Contacts',
     items: 'Articles',
-    confirm: 'Confirm',
+    confirm: 'Confirmer',
     //Translate
   },
   phrases: {
@@ -155,6 +155,7 @@ export default {
     searchAddress: "Rechercher  l'adresse",
     paymentMethod: 'Mode de paiement',
     cashOnDelivery: 'Paiement à la livraison',
+    enterMomoNumber: 'Enter MOMO number.',
     //Translate
   },
 };

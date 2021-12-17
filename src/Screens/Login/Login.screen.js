@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   ImageBackground,
   Image,
@@ -27,6 +27,30 @@ const Login = (props) => {
   const [password, setPassword] = useState('');
   const [emailError, setEmailError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
+  const [icon, setIcon] = useState(
+    require('../../../resources/images/favicon-1.png'),
+  );
+
+  useEffect(() => {
+    const favicon = [
+      {
+        key: 'en',
+        image: require('../../../resources/images/favicon-1.png'),
+      },
+      {
+        key: 'fr',
+        image: require('../../../resources/images/favicon-fr.png'),
+      },
+      {
+        key: 'de',
+        image: require('../../../resources/images/favicon-de.png'),
+      },
+    ];
+    setIcon(favicon.filter((i) => i?.key === i18n?.locale)[0]?.image);
+    return () => {
+      setIcon(require('../../../resources/images/favicon-1.png'));
+    };
+  }, [i18n]);
 
   const authenticate = () => {
     if (!AuthMail(email)) {
@@ -53,10 +77,7 @@ const Login = (props) => {
           style={[{height: h / 2.7}, styles.welcomeImageBackground]}
           source={require('../../../resources/images/weds-2.jpg')}>
           <View style={styles.messageContainer}>
-            <Image
-              source={require('../../../resources/images/favicon-1.png')}
-              style={styles.logoImage}
-            />
+            <Image source={icon} style={styles.logoImage} />
             <View style={styles.welcomeContainer}>
               <Text style={styles.welcomeTitle}>FLAVØURS</Text>
               <Text style={styles.welcomeSlogan}>

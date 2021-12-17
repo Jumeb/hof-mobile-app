@@ -20,7 +20,7 @@ import {NavBar, OrderDetailsCard, Text} from '../../Components';
 import best from '../../../resources/Dummy/best.json';
 import Thousand from '../../utils/kSeparator';
 import styles from './Checkout.style';
-import {ItemsDetail, Location} from '../../sections';
+import {Card, ItemsDetail, Location, Momo} from '../../sections';
 
 if (
   Platform.OS === 'android' &&
@@ -33,8 +33,13 @@ const Checkout = (props) => {
   const {i18n} = props;
   const [info, setInfo] = useState(false);
   const [showAddress, setShowAddress] = useState(false);
-  const [selectedPayment, setSelectedOption] = useState('');
   const [isAddress, setIsAddress] = useState(false);
+  const [isMomo, setIsMomo] = useState(false);
+  const [momo, setMomo] = useState('');
+  const [isCard, setIsCard] = useState(false);
+  const [card, setCard] = useState({});
+  const [isPay, setIsPay] = useState(false);
+  const [pay, setPay] = useState('');
 
   const animatedHeight = {
     height: showAddress ? 180 : 0,
@@ -48,6 +53,11 @@ const Checkout = (props) => {
       LayoutAnimation.Properties.opacity,
     ),
   );
+
+  const SetCard = () => {
+    setIsCard(true);
+    setIsMomo(false);
+  };
 
   return (
     <SafeAreaView style={styles.mainContainer}>
@@ -105,24 +115,28 @@ const Checkout = (props) => {
               <Text style={styles.opText}>Aroma Coins</Text>
             </View>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.opContainer}>
+          <TouchableOpacity
+            style={styles.opContainer}
+            onPress={() => setIsMomo(true)}>
             <View style={styles.opCard}>
               <Icons
                 name="ios-swap-horizontal-outline"
                 size={25}
                 color={theme.PRIMARY_COLOR}
               />
-              <Text style={styles.opText}>MTN MOMO</Text>
+              <Text style={styles.opText}>Mobile Money</Text>
             </View>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.opContainer}>
+          <TouchableOpacity
+            style={styles.opContainer}
+            onPress={() => SetCard()}>
             <View style={styles.opCard}>
               <Icons
-                name="ios-cash-outline"
+                name="ios-warning-outline"
                 size={25}
                 color={theme.PRIMARY_COLOR}
               />
-              <Text style={styles.opText}>Orange Money</Text>
+              <Text style={styles.opText}>CARD</Text>
             </View>
           </TouchableOpacity>
           <TouchableOpacity style={styles.opContainer}>
@@ -134,31 +148,13 @@ const Checkout = (props) => {
           <TouchableOpacity style={styles.opContainer}>
             <View style={styles.opCard}>
               <Icons
-                name="ios-warning-outline"
-                size={25}
-                color={theme.PRIMARY_COLOR}
-              />
-              <Text style={styles.opText}>VISA</Text>
-            </View>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.opContainer}>
-            <View style={styles.opCard}>
-              <Icons
                 name="ios-information-outline"
                 size={25}
                 color={theme.PRIMARY_COLOR}
               />
-              <Text style={styles.opText}>Master Card</Text>
-            </View>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.opContainer}>
-            <View style={styles.opCard}>
-              <Icons
-                name="ios-information-outline"
-                size={25}
-                color={theme.PRIMARY_COLOR}
-              />
-              <Text style={styles.opText}>{i18n.t('words.cash')}</Text>
+              <Text style={styles.opText}>
+                {i18n.t('phrases.cashOnDelivery')}
+              </Text>
             </View>
           </TouchableOpacity>
         </ScrollView>
@@ -204,6 +200,19 @@ const Checkout = (props) => {
         </View>
       </ScrollView>
       <ItemsDetail info={info} setInfo={setInfo} />
+      <Card
+        isCard={isCard}
+        setIsCard={setIsCard}
+        setCard={setCard}
+        i18n={i18n}
+      />
+      <Momo
+        isMomo={isMomo}
+        setIsMomo={setIsMomo}
+        setMomo={setMomo}
+        momo={momo}
+        i18n={i18n}
+      />
       <Location isAddress={isAddress} setIsAddress={setIsAddress} i18n={i18n} />
     </SafeAreaView>
   );

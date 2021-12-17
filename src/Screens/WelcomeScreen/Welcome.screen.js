@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   Image,
   ImageBackground,
@@ -18,9 +18,34 @@ import {Actions} from 'react-native-router-flux';
 import {connect} from 'react-redux';
 
 const WelcomeScreen = (props) => {
-  const {i18n} = props;
+  const {i18n, locale} = props;
   let h = useWindowDimensions().height;
   const [image, setImage] = useState(true);
+  const [icon, setIcon] = useState(
+    require('../../../resources/images/favicon-1.png'),
+  );
+
+  useEffect(() => {
+    const favicon = [
+      {
+        key: 'en',
+        image: require('../../../resources/images/favicon-1.png'),
+      },
+      {
+        key: 'fr',
+        image: require('../../../resources/images/favicon-fr.png'),
+      },
+      {
+        key: 'de',
+        image: require('../../../resources/images/favicon-de.png'),
+      },
+    ];
+    setIcon(favicon.filter((i) => i?.key === i18n?.locale)[0]?.image);
+    return () => {
+      setIcon(require('../../../resources/images/favicon-1.png'));
+    };
+  }, [i18n]);
+
   return (
     <SafeAreaView style={styles.mainContainer}>
       <StatusBar
@@ -40,10 +65,7 @@ const WelcomeScreen = (props) => {
                 }
           }>
           <View style={styles.messageContainer}>
-            <Image
-              source={require('../../../resources/images/favicon-1.png')}
-              style={styles.logoImage}
-            />
+            <Image source={icon} style={styles.logoImage} />
             <View style={styles.welcomeContainer}>
               <Text style={styles.welcomeTitle}>
                 {i18n.t('phrases.welcomeToFlavours')}
@@ -88,6 +110,7 @@ const WelcomeScreen = (props) => {
 const mapStateToProps = ({i18n}) => {
   return {
     i18n: i18n.i18n,
+    locale: i18n.i18n.locale,
   };
 };
 

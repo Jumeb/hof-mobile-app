@@ -32,7 +32,7 @@ const Header = (props) => {
       ? i18n.t('words.shop')
       : screen.toString() === 'Order'
       ? i18n.t('phrases.myOrders')
-      : i18n.t('words.cart');
+      : i18n.t('words.cart1');
 
   const animatedWidth = {
     width: showSearch ? 180 : 0,
