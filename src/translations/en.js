@@ -154,6 +154,13 @@ export default {
     paymentMethod: 'Payment Method',
     cashOnDelivery: 'Cash on delivery',
     enterMomoNumber: 'Enter MOMO number.',
+    checkCredentials: 'Check your credentials.',
+    inValidEmailOrPassword: 'Invalid Email or Password.',
+    accountSuspendedContact: 'Account has been suspended. Contact support.',
+    validationFailedTryAgain: 'Validation failed. Try again.',
+    unexpectedError: 'Unexpected Error.',
+    pleaseCheckInternet: 'Please check your internet connection.',
+    daysIsRequiredForDelivery: 'days is required for delivery',
     //New
   },
 };

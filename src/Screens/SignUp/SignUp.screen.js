@@ -9,21 +9,24 @@ import {
   TouchableOpacity,
   useWindowDimensions,
   StatusBar,
+  ActivityIndicator,
 } from 'react-native';
 import {Actions} from 'react-native-router-flux';
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
+import LinearGradient from 'react-native-linear-gradient';
 
-import {InputComponent} from '../../Components/index';
+import {InputComponent, Notification} from '../../Components';
 import styles from './SignUp.style';
 import theme from '../../../resources/Colors/theme';
-import {AuthMail} from '../../utils';
-import LinearGradient from 'react-native-linear-gradient';
-import {connect} from 'react-redux';
+import {AuthMail, AuthTel, BASE_URL, Storage} from '../../utils';
+import {setUser, setToken} from '../../redux/actions/AuthActions';
 
 const SignUp = (props) => {
   const {i18n} = props;
   let h = useWindowDimensions().height + 240;
-  const [userName, setUserName] = useState('');
-  const [tel, setTel] = useState('');
+  const [name, setName] = useState('');
+  const [telNumber, setTelNumber] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [conPassword, setConPassword] = useState('');
@@ -35,6 +38,9 @@ const SignUp = (props) => {
   const [icon, setIcon] = useState(
     require('../../../resources/images/favicon-1.png'),
   );
+  const [notify, setNotify] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [info, setInfo] = useState({});
 
   useEffect(() => {
     const favicon = [
@@ -57,29 +63,116 @@ const SignUp = (props) => {
     };
   }, [i18n]);
 
-  let hasError = false;
-
   const authenticate = () => {
+    let hasError = false;
+    setLoading(true);
+
     if (!AuthMail(email)) {
       setEmailError(true);
       hasError = true;
     }
-    if (userName.length < 5) {
+    if (name.length < 5) {
       setUserNameError(true);
       hasError = true;
     }
-    if (tel.length !== 9) {
+    if (telNumber.length !== 9 && !AuthTel(telNumber)) {
       setTelError(true);
       hasError = true;
     }
-    if (password.length !== conPassword.length || password.length < 6) {
+    if (
+      password.length !== conPassword.length ||
+      password.length < 6 ||
+      password !== conPassword
+    ) {
       setPasswordError(true);
       setConPasswordError(true);
       hasError = true;
     }
-    if (!hasError) {
-      Actions.main();
+
+    if (password !== conPassword) {
+      hasError = true;
+      setPasswordError(true);
+      setConPasswordError(true);
     }
+
+    if (hasError) {
+      setLoading(false);
+      setNotify(true);
+      setInfo({
+        type: 'success',
+        msg: i18n.t('phrases.checkCredentials'),
+      });
+      return false;
+    }
+
+    const body = {
+      email,
+      password,
+      telNumber,
+      name,
+    };
+
+    let statusCode, responseJson;
+    fetch(`${BASE_URL}/user/register`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(body),
+    })
+      .then((res) => {
+        statusCode = res.status;
+        responseJson = res.json();
+        return Promise.all([statusCode, responseJson]);
+      })
+      .then((res) => {
+        setLoading(false);
+        statusCode = res[0];
+        responseJson = res[1];
+        console.log(statusCode);
+
+        if (statusCode === 201) {
+          props.setUser(responseJson.user);
+          props.setToken(responseJson.token);
+          Storage.storeInfo('USER', responseJson.user);
+          Storage.storeInfo('TOKEN', responseJson.token);
+          return Actions.main();
+        }
+
+        if (statusCode === 422) {
+          setNotify(true);
+          setInfo({
+            type: 'error',
+            msg: i18n.t('phrases.validationFailedTryAgain'),
+          });
+          return false;
+        }
+
+        if (statusCode === 500) {
+          setNotify(true);
+          setInfo({
+            type: 'error',
+            msg: i18n.t('phrases.unexpectedError'),
+          });
+          return false;
+        }
+      })
+      .catch((err) => {
+        if (err) {
+          console.log(err);
+          setLoading(false);
+          setNotify(true);
+          setInfo({
+            type: 'error',
+            title: 'Unexpected Error',
+            msg: i18n.t('phrases.pleaseCheckInternet'),
+          });
+        }
+      })
+      .finally((fin) => {
+        setLoading(false);
+        console.log('finished');
+      });
   };
 
   return (
@@ -110,9 +203,9 @@ const SignUp = (props) => {
             capitalize="words"
             secure={false}
             inputError={userNameError}
-            value={userName}
+            value={name}
             toggleError={() => setUserNameError(false)}
-            setValue={(text) => setUserName(text)}
+            setValue={(text) => setName(text)}
             errorMessage={i18n.t('phrases.userNameShort')}
           />
           <InputComponent
@@ -121,9 +214,9 @@ const SignUp = (props) => {
             capitalize="none"
             secure={false}
             inputError={telError}
-            value={tel}
+            value={telNumber}
             toggleError={() => setTelError(false)}
-            setValue={(text) => setTel(text)}
+            setValue={(text) => setTelNumber(text)}
             errorMessage={i18n.t('phrases.invalidPhoneNumber')}
           />
           <InputComponent
@@ -167,9 +260,13 @@ const SignUp = (props) => {
             <TouchableOpacity
               onPress={() => authenticate()}
               style={styles.gradientButton}>
-              <Text style={styles.gradientButtonText}>
-                {i18n.t('phrases.signUp').toUpperCase()}
-              </Text>
+              {loading ? (
+                <ActivityIndicator size={'small'} color={theme.WHITE_COLOR} />
+              ) : (
+                <Text style={styles.gradientButtonText}>
+                  {i18n.t('phrases.signUp').toUpperCase()}
+                </Text>
+              )}
             </TouchableOpacity>
           </LinearGradient>
           <View style={styles.forgotContainer}>
@@ -182,6 +279,7 @@ const SignUp = (props) => {
           </View>
         </View>
       </ScrollView>
+      <Notification notify={notify} setNotify={setNotify} info={info} />
     </SafeAreaView>
   );
 };
@@ -192,4 +290,8 @@ const mapStateToProps = ({i18n}) => {
   };
 };
 
-export default connect(mapStateToProps)(SignUp);
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({setUser, setToken}, dispatch);
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignUp);

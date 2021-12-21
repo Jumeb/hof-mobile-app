@@ -7,7 +7,7 @@ import {Text} from '..';
 import theme from '../../../resources/Colors/theme';
 
 const Notification = (props) => {
-  const {notify, setNotify, type, msg} = props;
+  const {notify, setNotify, info} = props;
   useEffect(() => {
     setTimeout(() => {
       setNotify(false);
@@ -26,9 +26,9 @@ const Notification = (props) => {
       <View
         style={[
           styles.notifyContainer,
-          type === 'success' ? styles.success : styles.danger,
+          info?.type === 'success' ? styles.success : styles.danger,
         ]}>
-        <Text style={styles.notifyText}>{msg}</Text>
+        <Text style={styles.notifyText}>{info?.msg}</Text>
       </View>
     </Modal>
   );

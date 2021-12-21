@@ -3,7 +3,7 @@ import {ImageBackground, Text, TouchableOpacity, View} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import Icons from 'react-native-vector-icons/Ionicons';
 import theme from '../../../resources/Colors/theme';
-import {FormatUnits} from '../../utils';
+import {BASE_URL, FormatUnits} from '../../utils';
 import Thousand from '../../utils/kSeparator';
 
 import styles from './Best.style';
@@ -15,7 +15,11 @@ const Best = (props) => {
       <ImageBackground
         imageStyle={styles.bestBackground}
         style={styles.bestBackground}
-        source={require('../../../resources/images/pans-2.jpg')}>
+        source={
+          data?.image
+            ? {uri: BASE_URL + '/' + data?.image}
+            : require('../../../resources/images/pans-2.jpg')
+        }>
         <LinearGradient
           style={styles.bestContainer}
           start={{x: 1, y: 0}}
@@ -26,17 +30,19 @@ const Best = (props) => {
             theme.PRIMARY_COLOR + 'aa',
           ]}>
           <View style={styles.bestInfo}>
-            <View style={styles.bestDiscount}>
-              <Icons
-                name="ios-trending-down-outline"
-                size={16}
-                color={theme.SUCCESS_COLOR}
-              />
-              <Text style={styles.bestDiscountText}>20%</Text>
-            </View>
+            {data?.discount !== 0 && (
+              <View style={styles.bestDiscount}>
+                <Icons
+                  name="ios-trending-down-outline"
+                  size={16}
+                  color={theme.SUCCESS_COLOR}
+                />
+                <Text style={styles.bestDiscountText}>{data?.discount}%</Text>
+              </View>
+            )}
             <TouchableOpacity
               style={styles.bestInfoButton}
-              onPress={() => onPress()}>
+              onPress={() => onPress(data)}>
               <Icons
                 name="ios-information-circle-outline"
                 size={16}
@@ -51,7 +57,9 @@ const Best = (props) => {
                 size={16}
                 color={theme.WHITE_COLOR}
               />
-              <Text style={styles.pastryLikes}>{data.rank}</Text>
+              <Text style={styles.pastryLikes}>
+                {FormatUnits(data?.likes?.users.length)}
+              </Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.likesContainer}>
               <Icons
@@ -59,7 +67,9 @@ const Best = (props) => {
                 size={16}
                 color={theme.WHITE_COLOR}
               />
-              <Text style={styles.pastryLikes}>{FormatUnits(data.rank)}</Text>
+              <Text style={styles.pastryLikes}>
+                {FormatUnits(data?.dislikes?.users.length)}
+              </Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.likesContainer2}>
               <Icons
@@ -73,8 +83,8 @@ const Best = (props) => {
       </ImageBackground>
       <View style={styles.bestDetail}>
         <View>
-          <Text style={styles.pastryName}>{data.ceo_name}</Text>
-          <Text style={styles.pastryPrice}>{Thousand(2000)} XAF</Text>
+          <Text style={styles.pastryName}>{data?.name}</Text>
+          <Text style={styles.pastryPrice}>{Thousand(data?.price)} XAF</Text>
         </View>
         <TouchableOpacity
           style={styles.addToCartButton}

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   SafeAreaView,
   View,
@@ -15,16 +15,22 @@ import theme from '../../../resources/Colors/theme';
 import {ChangePassword, ImageCapture} from '../../sections';
 
 const Profile = (props) => {
-  const {i18n} = props;
+  const {i18n, user} = props;
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-  const [tel, setTel] = useState('');
+  const [telNumber, setTelNumber] = useState('');
   const [emailError, setEmailError] = useState(false);
   const [telError, setTelError] = useState(false);
   const [nameError, setNameError] = useState(false);
   const [changePassword, setChangePassword] = useState(false);
   const [image, setImage] = useState(false);
   const [notify, setNotify] = useState(false);
+
+  useEffect(() => {
+    setName(user?.name);
+    setEmail(user?.email);
+    setTelNumber(user?.telNumber.toString());
+  }, [user]);
 
   return (
     <SafeAreaView style={styles.mainContainer}>
@@ -68,7 +74,7 @@ const Profile = (props) => {
               holder={i18n.t('words.name')}
               type="default"
               capitalize="none"
-              secure={true}
+              secure={false}
               inputError={nameError}
               toggleError={() => setNameError(false)}
               value={name}
@@ -79,7 +85,7 @@ const Profile = (props) => {
               holder={i18n.t('words.email')}
               type="default"
               capitalize="none"
-              secure={true}
+              secure={false}
               inputError={emailError}
               toggleError={() => setEmailError(false)}
               value={email}
@@ -90,11 +96,11 @@ const Profile = (props) => {
               holder={i18n.t('phrases.phoneNumber')}
               type="phone-pad"
               capitalize="none"
-              secure={true}
+              secure={false}
               inputError={telError}
               toggleError={() => setTelError(false)}
-              value={tel}
-              setValue={(text) => setTel(text)}
+              value={telNumber}
+              setValue={(text) => setTelNumber(text)}
               errorMessage={i18n.t('phrases.invalidPhoneNumber')}
             />
           </View>
@@ -126,9 +132,10 @@ const Profile = (props) => {
   );
 };
 
-const mapStateToProps = ({i18n}) => {
+const mapStateToProps = ({i18n, auth}) => {
   return {
     i18n: i18n.i18n,
+    user: auth.user,
   };
 };
 

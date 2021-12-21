@@ -18,7 +18,7 @@ import {Actions} from 'react-native-router-flux';
 import {connect} from 'react-redux';
 
 const WelcomeScreen = (props) => {
-  const {i18n, locale} = props;
+  const {i18n} = props;
   let h = useWindowDimensions().height;
   const [image, setImage] = useState(true);
   const [icon, setIcon] = useState(
@@ -110,7 +110,6 @@ const WelcomeScreen = (props) => {
 const mapStateToProps = ({i18n}) => {
   return {
     i18n: i18n.i18n,
-    locale: i18n.i18n.locale,
   };
 };
 

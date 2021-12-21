@@ -15,9 +15,10 @@ import styles from './Setting.style';
 import {scrolling} from '../../redux/actions/ScrollActions';
 import {Contact, FAQs, Language, Terms} from '../../sections';
 import {Actions} from 'react-native-router-flux';
+import HNumber from '../../utils/telSeparator';
 
 const Setting = (props) => {
-  const {i18n} = props;
+  const {i18n, user} = props;
   const [lang, setLang] = useState(false);
   const [terms, setTerms] = useState(false);
   const [faqs, setFaqs] = useState(false);
@@ -51,8 +52,8 @@ const Setting = (props) => {
               style={styles.editProfileIcon}
             />
           </TouchableOpacity>
-          <Text style={styles.userName}>Jume Njah</Text>
-          <Text style={styles.userNumber}>+237 681 726 633</Text>
+          <Text style={styles.userName}>{user.name}</Text>
+          <Text style={styles.userNumber}>+237 {HNumber(user?.telNumber)}</Text>
         </View>
         <View>
           <TouchableOpacity
@@ -102,9 +103,10 @@ const Setting = (props) => {
   );
 };
 
-const mapStateToProps = ({i18n}) => {
+const mapStateToProps = ({i18n, auth}) => {
   return {
     i18n: i18n.i18n,
+    user: auth.user,
   };
 };
 

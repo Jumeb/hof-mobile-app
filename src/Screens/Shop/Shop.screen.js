@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   View,
   Text,
@@ -24,20 +24,71 @@ import best from '../../../resources/Dummy/best.json';
 import bakers from '../../../resources/Dummy/bakers.json';
 import theme from '../../../resources/Colors/theme';
 import {scrolling} from '../../redux/actions/ScrollActions';
+import {BASE_URL} from '../../utils';
 
 const Shop = (props) => {
-  const {i18n} = props;
+  const {i18n, baker, user, token} = props;
   const [active, setActive] = useState(0);
   const [layout, setLayout] = useState(0);
   const [notify, setNotify] = useState(false);
+  const [categories, setCategories] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [articles, setArticles] = useState([]);
+  const [info, setInfo] = useState({});
 
-  const handle = (event) => {
-    props.scrolling(true);
-  };
+  useEffect(() => {
+    setCategories(baker.categories);
+    console.log(categories);
+  }, [baker, categories]);
 
-  const hide = (event) => {
-    props.scrolling(false);
-  };
+  useEffect(() => {
+    setLoading(true);
+    setLoading(true);
+    fetch(`${BASE_URL}/superpastriesmob`, {
+      method: 'GET',
+      headers: {
+        Authorization: `Basic ${token}`,
+      },
+    })
+      .then((res) => {
+        const statusCode = res.status;
+        const response = res.json();
+        return Promise.all([statusCode, response]);
+      })
+      .then((res) => {
+        const statusCode = res[0];
+        const response = res[1];
+        setLoading(false);
+
+        if (statusCode === 200) {
+          setArticles(
+            response.pastries.filter(
+              (pastry) =>
+                pastry?.creatorId?._id.toString() === baker._id.toString(),
+            ),
+          );
+        }
+
+        if (statusCode === 500) {
+          setNotify(true);
+          setInfo({
+            type: 'error',
+            msg: i18n.t('phrases.unexpectedError'),
+          });
+          return false;
+        }
+      })
+      .catch((err) => {
+        if (err) {
+          setLoading(false);
+          setNotify(true);
+          setInfo({
+            type: 'error',
+            msg: i18n.t('phrases.pleaseCheckInternet'),
+          });
+        }
+      });
+  }, [props, i18n, token, baker._id]);
 
   const renderHeader = () => {
     return (
@@ -52,15 +103,15 @@ const Shop = (props) => {
             horizontal={true}
             style={styles.listStyle}
             showsHorizontalScrollIndicator={false}
-            data={best}
+            data={articles.slice(0, 5)}
             renderItem={({item, key}) => (
               <Best
                 data={item}
-                onPress={() => Actions.pastryInfo()}
+                onPress={(data) => Actions.pastryInfo({data})}
                 setNotify={setNotify}
               />
             )}
-            keyExtractor={(item) => item.id.toString()}
+            keyExtractor={(item) => item._id.toString()}
             ListFooterComponent={() => <View style={styles.footerStyle} />}
           />
         </View>
@@ -69,13 +120,13 @@ const Shop = (props) => {
           horizontal={true}
           showsHorizontalScrollIndicator={false}
           style={styles.paddingContent}>
-          {varieties.map((variety, key) => {
+          {categories.map((category, key) => {
             return (
               <Categories
                 key={key}
                 categoryIndex={key}
                 activeIndex={active}
-                variety={variety}
+                category={category}
                 setActiveIndex={setActive}
               />
             );
@@ -110,26 +161,30 @@ const Shop = (props) => {
 
   return (
     <SafeAreaView style={styles.mainContainer}>
-      <NavBar screen={'Shop'} search={true} pop={true} />
+      <NavBar
+        screen={'Shop'}
+        search={true}
+        pop={true}
+        cartNumber={user?.cart?.pastries.length}
+      />
       <FlatList
         ListHeaderComponent={renderHeader()}
         horizontal={false}
         numColumns={layout === 0 ? 2 : 1}
-        data={bakers}
+        data={articles.length <= 5 ? articles : articles.slice(5)}
         renderItem={({item, key}) => (
           <PastryCard
             layout={layout}
+            data={item}
             key={key}
             setNotify={setNotify}
-            onPress={() => Actions.pastryInfo()}
+            onPress={(data) => Actions.pastryInfo({data})}
           />
         )}
-        keyExtractor={(item) => item.id.toString()}
+        keyExtractor={(item) => item._id.toString()}
         showsVerticalScrollIndicator={false}
         columnWrapperStyle={layout === 0 ? styles.columnWrapperStyle : null}
         key={layout === 0 ? 'grid' : 'flat'}
-        onScrollBeginDrag={(event) => handle(event)}
-        onScrollEndDrag={(event) => hide(event)}
       />
       <Notification
         notify={notify}
@@ -141,9 +196,11 @@ const Shop = (props) => {
   );
 };
 
-const mapStateToProps = ({i18n}) => {
+const mapStateToProps = ({i18n, auth}) => {
   return {
     i18n: i18n.i18n,
+    user: auth.user,
+    token: auth.token,
   };
 };
 

@@ -4,10 +4,11 @@ import {Actions} from 'react-native-router-flux';
 import Icons from 'react-native-vector-icons/Ionicons';
 
 import theme from '../../../resources/Colors/theme';
+import {BASE_URL} from '../../utils';
 import styles from './BakerCard.style';
 
 const Bakers = (props) => {
-  const {baker, onPress, i18n} = props;
+  const {baker, rank, onPress, i18n} = props;
   return (
     <View style={styles.mainCard}>
       <View>
@@ -15,13 +16,21 @@ const Bakers = (props) => {
           <View style={styles.companyImageContainer}>
             <Image
               style={styles.companyImage}
-              source={require('../../../resources/images/vals-3.jpg')}
+              source={
+                baker?.ceoImage
+                  ? {uri: BASE_URL + '/' + baker?.ceoImage}
+                  : require('../../../resources/images/vals-3.jpg')
+              }
             />
             <View style={styles.chefInfo}>
               <View style={styles.companySign}>
                 <Image
                   style={styles.companyLogo}
-                  source={require('../../../resources/images/favicon.png')}
+                  source={
+                    baker?.companyImage
+                      ? {uri: BASE_URL + '/' + baker?.companyImage}
+                      : require('../../../resources/images/favicon.png')
+                  }
                 />
               </View>
               <TouchableOpacity
@@ -36,7 +45,7 @@ const Bakers = (props) => {
             </View>
             <View style={styles.rankContainer}>
               <Text style={styles.rankText}>
-                {i18n.t('words.rank')}: {baker.rank}
+                {i18n.t('words.rank')}: {rank}
               </Text>
               <TouchableOpacity
                 style={styles.shopSign}
@@ -52,9 +61,9 @@ const Bakers = (props) => {
           </View>
         </View>
         <View style={styles.companyCredentials}>
-          <Text style={styles.companyFounder}>{baker.company_name}</Text>
+          <Text style={styles.companyFounder}>{baker?.name}</Text>
           <Text style={styles.companyName}>
-            {baker.rank} {i18n.t('words.categories')}
+            {i18n.t('words.categories')}: {baker?.categories.length}
           </Text>
         </View>
       </View>

@@ -23,7 +23,7 @@ if (
 }
 
 const Header = (props) => {
-  const {screen, search, pop, right, i18n, action} = props;
+  const {screen, search, pop, right, i18n, action, cartNumber} = props;
   const [showSearch, setShowSearch] = useState(false);
   const searchScreen =
     screen.toString() === 'Home'
@@ -136,7 +136,9 @@ const Header = (props) => {
               color={theme.PRIMARY_COLOR}
             />
             <View style={styles.eventsCountContainer}>
-              <Text style={styles.eventsCount}>88</Text>
+              <Text style={styles.eventsCount}>
+                {cartNumber < 100 ? cartNumber : '99+'}
+              </Text>
             </View>
           </TouchableOpacity>
         )}

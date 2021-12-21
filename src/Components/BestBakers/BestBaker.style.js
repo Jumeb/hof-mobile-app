@@ -78,6 +78,7 @@ const styles = StyleSheet.create({
     backgroundColor: theme.WHITE_COLOR,
     justifyContent: 'center',
     alignItems: 'center',
+    overflow: 'hidden',
     shadowOffset: {width: 0, height: 2},
     shadowColor: theme.LIGHT_GREY,
     shadowOpacity: 0.8,

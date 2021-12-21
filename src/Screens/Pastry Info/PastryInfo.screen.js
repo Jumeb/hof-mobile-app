@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   Image,
   SafeAreaView,
@@ -22,11 +22,19 @@ import {
 } from '../../Components';
 import theme from '../../../resources/Colors/theme';
 import Thousand from '../../utils/kSeparator';
+import {BASE_URL} from '../../utils';
 
 const PastryInfo = (props) => {
-  const {i18n} = props;
+  const {i18n, data} = props;
   const [notify, setNotify] = useState(false);
   const [msg, setMsg] = useState('');
+  const [images, setImages] = useState([]);
+
+  useEffect(() => {
+    let _images = [];
+    _images.push(data?.image);
+    setImages(_images);
+  }, [data?.image]);
 
   const AddToCart = () => {
     setNotify(true);
@@ -46,27 +54,6 @@ const PastryInfo = (props) => {
     props.scrolling(false);
   };
 
-  const [data] = useState([
-    {
-      image: require('../../../resources/images/bds-7.jpg'),
-    },
-    {
-      image: require('../../../resources/images/cups-5.jpg'),
-    },
-    // {
-    //   image: require('../../../resources/images/pans-2.jpg'),
-    // },
-    // {
-    //   image: require('../../../resources/images/bds-12.jpg'),
-    // },
-    // {
-    //   image: require('../../../resources/images/cups-12.jpg'),
-    // },
-    // {
-    //   image: require('../../../resources/images/weds-2.jpg'),
-    // },
-  ]);
-
   return (
     <SafeAreaView style={styles.mainContainer}>
       <NavBar screen="pastryInfo" pop={true} action={AddToFavourite} />
@@ -77,33 +64,32 @@ const PastryInfo = (props) => {
         onScrollBeginDrag={(event) => handle(event)}
         onScrollEndDrag={(event) => hide(event)}>
         <SwiperFlatList autoplay autoplayDelay={10} autoplayLoop>
-          {data.map((d, key) => {
+          {images.map((d, key) => {
             return (
-              <Header data={d} index={key + 1} length={data.length} key={key} />
+              <Header
+                data={d}
+                index={key + 1}
+                length={images.length}
+                key={key}
+              />
             );
           })}
         </SwiperFlatList>
         <View style={styles.infoContainer}>
-          <Text style={styles.categoryName}>Category Name</Text>
+          <Text style={styles.categoryName}>{data?.type}</Text>
           <View style={styles.detailContainer}>
-            <Text style={styles.pastryName}>Pastry Name</Text>
-            <Text style={styles.pastryPrice}>3,000 XAF</Text>
+            <Text style={styles.pastryName}>{data?.name}</Text>
+            <Text style={styles.pastryPrice}>{Thousand(data?.price)} XAF</Text>
           </View>
           <Text style={styles.aboutTitle}>{i18n.t('words.description')}</Text>
-          <Text style={styles.aboutText}>
-            Voluptate consequat in magna anim consectetur qui exercitation
-            voluptate mollit laboris sint eiusmod eiusmod proident. Commodo amet
-            ea ex sunt. Minim in id aliquip pariatur aliquip est elit
-            reprehenderit mollit officia cupidatat consectetur aute. Mollit duis
-            anim minim ipsum.
-          </Text>
+          <Text style={styles.aboutText}>{data?.description}</Text>
           <Text style={styles.aboutTitle}>
             {i18n.t('phrases.requiredDays')}
           </Text>
           <Text style={styles.aboutText}>
             {i18n.t('phrases.aMinimumOf')}{' '}
-            <Text style={styles.date}> 2 days </Text>{' '}
-            {i18n.t('phrases.isRequiredForDelivery')}
+            <Text style={styles.date}>{data?.daysRequired}</Text>{' '}
+            {i18n.t('phrases.daysIsRequiredForDelivery')}
           </Text>
           <Text style={styles.aboutTitle}>{i18n.t('words.stats')}</Text>
           <View style={styles.rateContainer}>
@@ -165,7 +151,11 @@ const Header = (props) => {
   return (
     <View style={styles.pastryContainer}>
       <Image
-        source={data.image}
+        source={
+          data
+            ? {uri: BASE_URL + '/' + data}
+            : require('../../../resources/images/bds-7.jpg')
+        }
         style={styles.pastryImage}
         imageStyle={styles.pastryImage}
       />

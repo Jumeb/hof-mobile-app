@@ -9,15 +9,18 @@ import {
   TouchableOpacity,
   useWindowDimensions,
   StatusBar,
+  ActivityIndicator,
 } from 'react-native';
 import {Actions} from 'react-native-router-flux';
 import LinearGradient from 'react-native-linear-gradient';
+import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
 import styles from './Login.style';
 import theme from '../../../resources/Colors/theme';
-import {InputComponent} from '../../Components/index';
-import {AuthMail} from '../../utils/';
+import {InputComponent, Notification} from '../../Components';
+import {AuthMail, BASE_URL, Storage} from '../../utils';
+import {setUser, setToken} from '../../redux/actions/AuthActions';
 
 const Login = (props) => {
   const {i18n} = props;
@@ -27,6 +30,9 @@ const Login = (props) => {
   const [password, setPassword] = useState('');
   const [emailError, setEmailError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [notify, setNotify] = useState(false);
+  const [info, setInfo] = useState({});
   const [icon, setIcon] = useState(
     require('../../../resources/images/favicon-1.png'),
   );
@@ -53,19 +59,111 @@ const Login = (props) => {
   }, [i18n]);
 
   const authenticate = () => {
+    let hasError = false;
+    setLoading(true);
+
     if (!AuthMail(email)) {
       setEmailError(true);
+      hasError = true;
     }
     if (password.length < 5) {
       setPasswordError(true);
-    } else if (
-      password.length > 4 &&
-      !passwordError &&
-      !emailError &&
-      AuthMail(email)
-    ) {
-      Actions.main();
+      hasError = true;
     }
+
+    if (hasError) {
+      setLoading(false);
+      setNotify(true);
+      setInfo({
+        type: 'success',
+        msg: i18n.t('phrases.checkCredentials'),
+      });
+      return false;
+    }
+
+    const body = {
+      email,
+      password,
+    };
+
+    let statusCode, responseJson;
+    fetch(`${BASE_URL}/user/login`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(body),
+    })
+      .then((res) => {
+        statusCode = res.status;
+        responseJson = res.json();
+        return Promise.all([statusCode, responseJson]);
+      })
+      .then((res) => {
+        setLoading(false);
+        statusCode = res[0];
+        responseJson = res[1];
+        // console.log(statusCode);
+
+        if (statusCode === 200) {
+          props.setUser(responseJson.user);
+          props.setToken(responseJson.token);
+          Storage.storeInfo('USER', responseJson.user);
+          Storage.storeInfo('TOKEN', responseJson.token);
+          return Actions.main();
+        }
+
+        if (statusCode === 401) {
+          setNotify(true);
+          setInfo({
+            type: 'error',
+            msg: i18n.t('phrases.inValidEmailOrPassword'),
+          });
+          return false;
+        }
+
+        if (statusCode === 402) {
+          setNotify(true);
+          setInfo({
+            type: 'error',
+            msg: i18n.t('phrases.accountSuspendedContact'),
+          });
+          return false;
+        }
+
+        if (statusCode === 422) {
+          setNotify(true);
+          setInfo({
+            type: 'error',
+            msg: i18n.t('phrases.validationFailedTryAgain'),
+          });
+          return false;
+        }
+
+        if (statusCode === 500) {
+          setNotify(true);
+          setInfo({
+            type: 'error',
+            msg: i18n.t('phrases.unexpectedError'),
+          });
+          return false;
+        }
+      })
+      .catch((err) => {
+        if (err) {
+          setLoading(false);
+          setNotify(true);
+          setInfo({
+            type: 'error',
+            title: 'Unexpected Error',
+            msg: i18n.t('phrases.pleaseCheckInternet'),
+          });
+        }
+      })
+      .finally((fin) => {
+        setLoading(false);
+        console.log('finished');
+      });
   };
 
   return (
@@ -113,9 +211,13 @@ const Login = (props) => {
           <TouchableOpacity
             style={styles.Button}
             onPress={() => authenticate()}>
-            <Text style={styles.ButtonText}>
-              {i18n.t('phrases.login').toUpperCase()}
-            </Text>
+            {loading ? (
+              <ActivityIndicator size={'small'} color={theme.PRIMARY_COLOR} />
+            ) : (
+              <Text style={styles.ButtonText}>
+                {i18n.t('phrases.login').toUpperCase()}
+              </Text>
+            )}
           </TouchableOpacity>
           <View style={styles.forgotContainer}>
             <Text style={styles.forgotPasswordText}>
@@ -140,6 +242,7 @@ const Login = (props) => {
           </LinearGradient>
         </View>
       </ScrollView>
+      <Notification notify={notify} setNotify={setNotify} info={info} />
     </SafeAreaView>
   );
 };
@@ -150,4 +253,8 @@ const mapStateToProps = ({i18n}) => {
   };
 };
 
-export default connect(mapStateToProps)(Login);
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({setUser, setToken}, dispatch);
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

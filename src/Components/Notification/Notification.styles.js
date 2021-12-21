@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
   },
   notifyText: {
     color: theme.WHITE_COLOR,
-    fontSize: theme.FONT_SIZE_LARGE - 3,
+    fontSize: theme.FONT_SIZE_SMALL,
     textAlign: 'center',
   },
   success: {

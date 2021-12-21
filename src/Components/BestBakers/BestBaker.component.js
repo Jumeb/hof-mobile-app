@@ -10,6 +10,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import {Actions} from 'react-native-router-flux';
 import Icons from 'react-native-vector-icons/Ionicons';
 import theme from '../../../resources/Colors/theme.js';
+import BASE_URL from '../../utils/globalVariable.js';
 
 import styles from './BestBaker.style.js';
 
@@ -20,7 +21,11 @@ const BestBaker = (props) => {
       <ImageBackground
         imageStyle={styles.bestBackground}
         style={styles.bestBackground}
-        source={require('../../../resources/images/bds-14.jpg')}>
+        source={
+          data?.ceoImage
+            ? {uri: BASE_URL + '/' + data?.ceoImage}
+            : require('../../../resources/images/bds-14.jpg')
+        }>
         <LinearGradient
           style={styles.bestContainer}
           start={{x: 1, y: 0}}
@@ -33,7 +38,11 @@ const BestBaker = (props) => {
           <View style={styles.bestInfo}>
             <View style={styles.companySign}>
               <Image
-                source={require('../../../resources/images/favicon.png')}
+                source={
+                  data?.companyImage
+                    ? {uri: BASE_URL + '/' + data?.companyImage}
+                    : require('../../../resources/images/favicon.png')
+                }
                 style={styles.logo}
               />
             </View>
@@ -49,9 +58,9 @@ const BestBaker = (props) => {
           </View>
           <View style={styles.bestDetail}>
             <Text style={styles.chefRank}>
-              {i18n.t('words.categories')}: {data.rank}
+              {i18n.t('words.categories')}: {data?.categories.length}
             </Text>
-            <Text style={styles.chefName}>{data.ceo_name}</Text>
+            <Text style={styles.chefName}>{data?.name}</Text>
           </View>
           <View style={styles.infoContainer}>
             <TouchableOpacity style={styles.likesContainer}>
@@ -60,7 +69,7 @@ const BestBaker = (props) => {
                 size={16}
                 color={theme.WHITE_COLOR}
               />
-              <Text style={styles.chefLikes}>{data.rank}</Text>
+              <Text style={styles.chefLikes}>{data?.likes?.users.length}</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.likesContainer}>
               <Icons
@@ -68,7 +77,9 @@ const BestBaker = (props) => {
                 size={16}
                 color={theme.WHITE_COLOR}
               />
-              <Text style={styles.chefLikes}>{data.rank}</Text>
+              <Text style={styles.chefLikes}>
+                {data?.dislikes?.users.length}
+              </Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.likesContainer}>
               <Icons
@@ -76,7 +87,9 @@ const BestBaker = (props) => {
                 size={16}
                 color={theme.WHITE_COLOR}
               />
-              <Text style={styles.chefLikes}>{data.rank}</Text>
+              <Text style={styles.chefLikes}>
+                {data?.followers?.users.length}
+              </Text>
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.shopSign}

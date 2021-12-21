@@ -6,7 +6,7 @@ import theme from '../../../resources/Colors/theme';
 import styles from './Categories.style';
 
 const Categories = (props) => {
-  const {variety, activeIndex, setActiveIndex, categoryIndex} = props;
+  const {category, activeIndex, setActiveIndex, categoryIndex} = props;
   const colors = {
     white: [theme.WHITE_COLOR, theme.WHITE_COLOR],
     activeCategory: [theme.SECONDARY_COLOR, theme.PRIMARY_COLOR],
@@ -14,7 +14,7 @@ const Categories = (props) => {
   return (
     <View style={styles.mainContainer}>
       <LinearGradient
-        style={styles.variety}
+        style={styles.category}
         start={{x: 0, y: 1}}
         end={{x: 1, y: 1}}
         colors={
@@ -33,7 +33,7 @@ const Categories = (props) => {
                     : theme.SECONDARY_COLOR,
               },
             ]}>
-            {variety.type}
+            {category}
           </Text>
         </TouchableOpacity>
       </LinearGradient>
