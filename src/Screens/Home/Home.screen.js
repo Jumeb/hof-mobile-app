@@ -13,18 +13,17 @@ import {connect} from 'react-redux';
 
 import {Baker, BestBaker, NavBar, Notification} from '../../Components';
 import styles from './Home.style';
-import best from '../../../resources/Dummy/best.json';
-import bakers from '../../../resources/Dummy/bakers.json';
 import {setEntry, setChefs} from '../../redux/actions/AuthActions';
 import theme from '../../../resources/Colors/theme';
-import {BASE_URL} from '../../utils';
+import {BASE_URL, Search} from '../../utils';
 
 const Home = (props) => {
-  const {i18n, firstTime, token} = props;
+  const {i18n, firstTime, token, _chefs, setChefs} = props;
   const [notify, setNotify] = useState(false);
   const [info, setInfo] = useState({});
-  const [chefs, setChefs] = useState([]);
+  const [chefs, setCheffs] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [text, setText] = useState('');
 
   useEffect(() => {
     if (firstTime) {
@@ -61,8 +60,8 @@ const Home = (props) => {
         setLoading(false);
 
         if (statusCode === 200) {
-          props.setChefs(response.bakers);
           setChefs(response.bakers);
+          setCheffs(response.bakers);
         }
 
         if (statusCode === 500) {
@@ -89,7 +88,7 @@ const Home = (props) => {
       setNotify(false);
       setInfo({});
     };
-  }, [i18n, props, token]);
+  }, [i18n, token, setChefs]);
 
   const onRefresh = () => {
     props.setChefs([]);
@@ -111,7 +110,7 @@ const Home = (props) => {
 
         if (statusCode === 200) {
           props.setChefs(response.bakers);
-          setChefs(response.bakers);
+          setCheffs(response.bakers);
         }
 
         if (statusCode === 500) {
@@ -134,6 +133,10 @@ const Home = (props) => {
         }
       });
   };
+
+  useEffect(() => {
+    Search(text, _chefs, setCheffs, 'name');
+  }, [text, _chefs]);
 
   const render = () => {
     return (
@@ -164,9 +167,17 @@ const Home = (props) => {
   return (
     <SafeAreaView style={styles.mainContainer}>
       <StatusBar animated={true} backgroundColor={theme.PRIMARY_COLOR} />
-      <NavBar screen="Home" search={true} />
+      <NavBar screen="Home" search={true} text={text} setText={setText} />
       <FlatList
-        ListHeaderComponent={render()}
+        ListHeaderComponent={
+          text.length === 0 ? (
+            render()
+          ) : (
+            <Text style={styles.chefText}>
+              {i18n.t('phrases.searchResults')}
+            </Text>
+          )
+        }
         numColumns={2}
         data={chefs.length <= 5 ? chefs : chefs.slice(5)}
         columnWrapperStyle={styles.columnWrapperStyle}
@@ -195,6 +206,7 @@ const mapStateToProps = ({i18n, auth}) => {
     firstTime: auth.firstTime,
     user: auth.user,
     token: auth.token,
+    _chefs: auth.chefs,
   };
 };
 

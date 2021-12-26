@@ -134,8 +134,10 @@ const SignUp = (props) => {
         if (statusCode === 201) {
           props.setUser(responseJson.user);
           props.setToken(responseJson.token);
-          Storage.storeInfo('USER', responseJson.user);
-          Storage.storeInfo('TOKEN', responseJson.token);
+          Storage.storeInfo('USER', responseJson?.user);
+          Storage.storeInfo('FAVOURITES', responseJson?.user?.favourites);
+          Storage.storeInfo('CART', responseJson?.user?.cart);
+          Storage.storeInfo('TOKEN', responseJson?.token);
           return Actions.main();
         }
 
@@ -159,7 +161,6 @@ const SignUp = (props) => {
       })
       .catch((err) => {
         if (err) {
-          console.log(err);
           setLoading(false);
           setNotify(true);
           setInfo({

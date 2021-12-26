@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {Image, SafeAreaView, ScrollView, View} from 'react-native';
 import {SwiperFlatList} from 'react-native-swiper-flatlist';
 import theme from '../../../resources/Colors/theme';
@@ -8,32 +8,17 @@ import {Text, NavBar, RateButton, GradientButton} from '../../Components';
 import styles from './ChefInfo.styles';
 import {Actions} from 'react-native-router-flux';
 import {connect} from 'react-redux';
+import {BASE_URL} from '../../utils';
 
 const ChefInfo = (props) => {
-  const {i18n} = props;
-  const [data] = useState([
-    {
-      image: require('../../../resources/images/chef1.jpg'),
-      logo: require('../../../resources/images/favicon.png'),
-    },
-    {
-      image: require('../../../resources/images/chef2.jpg'),
-      logo: require('../../../resources/images/favicon-2.png'),
-    },
-    {
-      image: require('../../../resources/images/chef3.jpg'),
-      logo: require('../../../resources/images/favicon-1.png'),
-    },
-    // {
-    //   image: require('../../../resources/images/bds-12.jpg'),
-    // },
-    // {
-    //   image: require('../../../resources/images/cups-12.jpg'),
-    // },
-    // {
-    //   image: require('../../../resources/images/weds-2.jpg'),
-    // },
-  ]);
+  const {i18n, chef} = props;
+  const [images, setImages] = useState([]);
+
+  useEffect(() => {
+    let _images = [];
+    _images.push(chef?.ceoImage);
+    setImages(_images);
+  }, [chef?.ceoImage]);
 
   return (
     <SafeAreaView style={styles.mainContainer}>
@@ -43,30 +28,29 @@ const ChefInfo = (props) => {
         showsHorizontalScrollIndicator={false}
         style={styles.scrollView}>
         <SwiperFlatList autoplay autoplayDelay={10} autoplayLoop>
-          {data.map((d, key) => {
+          {images.map((d, index) => {
             return (
-              <Header data={d} index={key + 1} length={data.length} key={key} />
+              <Header
+                data={d}
+                index={index + 1}
+                length={images.length}
+                key={index}
+                logo={chef?.companyImage}
+              />
             );
           })}
         </SwiperFlatList>
         <View style={styles.infoContainer}>
-          <Text style={styles.companyName}>Company Name</Text>
-          <Text style={styles.ceoName}>Ceo Name</Text>
+          <Text style={styles.companyName}>{chef?.companyName}</Text>
+          <Text style={styles.ceoName}>{chef?.name}</Text>
           <Text style={styles.aboutTitle}>{i18n.t('words.about')}</Text>
-          <Text style={styles.aboutText}>
-            Voluptate consequat in magna anim consectetur qui exercitation
-            voluptate mollit laboris sint eiusmod eiusmod proident. Commodo amet
-            ea ex sunt. Minim in id aliquip pariatur aliquip est elit
-            reprehenderit mollit officia cupidatat consectetur aute. Mollit duis
-            anim minim ipsum.
-          </Text>
+          <Text style={styles.aboutText}>{chef?.about}</Text>
           <Text style={styles.aboutTitle}>{i18n.t('words.categories')}</Text>
-          <View style={styles.contactContainer}>
-            <Text style={styles.contactText}>Birthday cakes</Text>
-          </View>
-          <View style={styles.contactContainer}>
-            <Text style={styles.contactText}>Pies</Text>
-          </View>
+          {chef?.categories.map((category, index) => (
+            <View style={styles.contactContainer} key={index}>
+              <Text style={styles.contactText}>{category}</Text>
+            </View>
+          ))}
           <Text style={styles.aboutTitle}>{i18n.t('words.stats')}</Text>
           <View style={styles.rateContainer}>
             <RateButton title={120} icon={'ios-thumbs-up-outline'} />
@@ -92,7 +76,7 @@ const ChefInfo = (props) => {
           <GradientButton
             title={i18n.t('words.shop')}
             icon={'ios-cart-outline'}
-            onPress={() => Actions.shop()}
+            onPress={() => Actions.shop({baker: chef})}
           />
         </View>
       </ScrollView>
@@ -109,17 +93,25 @@ const mapStateToProps = ({i18n}) => {
 export default connect(mapStateToProps)(ChefInfo);
 
 const Header = (props) => {
-  const {length, index, data} = props;
+  const {length, index, data, logo} = props;
   return (
     <View style={styles.chefContainer}>
       <Image
-        source={data.image}
+        source={
+          data
+            ? {uri: BASE_URL + '/' + data}
+            : require('../../../resources/images/bds-7.jpg')
+        }
         style={styles.chefImage}
         imageStyle={styles.chefImage}
       />
       <View style={styles.chefLogoContainer}>
         <Image
-          source={data.logo}
+          source={
+            logo
+              ? {uri: BASE_URL + '/' + logo}
+              : require('../../../resources/images/favicon.png')
+          }
           style={styles.chefLogo}
           imageStyle={styles.chefLogo}
         />

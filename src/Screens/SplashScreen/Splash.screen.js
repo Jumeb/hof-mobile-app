@@ -11,7 +11,9 @@ import colorScheme from '../../../resources/Colors/theme';
 import {Text} from '../../Components';
 import {setLanguage} from '../../redux/actions/TranslationAction';
 import {setUser, setToken} from '../../redux/actions/AuthActions';
-import {Storage} from '../../utils';
+import {addToCart} from '../../redux/actions/CartAction';
+import {addToFavourites} from '../../redux/actions/FavouritesActions';
+import {BASE_URL, Storage} from '../../utils';
 
 let currentDeviceLocale = RNLocalize.getLocales()[0];
 
@@ -26,13 +28,21 @@ class SplashScreen extends Component {
   componentDidMount() {
     this.SetDeviceLanguage();
 
-    Storage.load({key: 'USER'})
-      .then((user) => this.props.setUser(user))
-      .catch((e) => console.log(e));
+    Storage.load({key: 'USER'}).then((user) => {
+      this.props.setUser(user);
+    });
 
-    Storage.load({key: 'TOKEN'})
-      .then((token) => this.props.setToken(token))
-      .catch((e) => console.log(e));
+    Storage.load({key: 'TOKEN'}).then((token) => this.props.setToken(token));
+
+    Storage.load({key: 'CART'})
+      .then((cart) => {
+        this.props.addToCart(cart);
+      })
+      .catch((er) => this.props.addToCart([]));
+
+    Storage.load({key: 'FAVOURITES'})
+      .then((favourites) => this.props.addToFavourites(favourites))
+      .catch((err) => this.props.addToFavourites([]));
 
     Storage.load({key: 'isNotFirstTime'})
       .then((res) => {
@@ -99,14 +109,19 @@ class SplashScreen extends Component {
   }
 }
 
-const mapStateToProps = ({i18n}) => {
+const mapStateToProps = ({i18n, auth}) => {
   return {
     i18n: i18n.i18n,
+    user: auth.user,
+    token: auth.token,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({setLanguage, setUser, setToken}, dispatch);
+  return bindActionCreators(
+    {setLanguage, setUser, setToken, addToCart, addToFavourites},
+    dispatch,
+  );
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SplashScreen);

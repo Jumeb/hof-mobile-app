@@ -35,7 +35,7 @@ const Bakers = (props) => {
               </View>
               <TouchableOpacity
                 style={styles.companyInfoButton}
-                onPress={() => Actions.chefInfo()}>
+                onPress={() => Actions.chefInfo({chef: baker})}>
                 <Icons
                   name="ios-information-circle-outline"
                   size={16}

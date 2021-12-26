@@ -1,27 +1,51 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Icons from 'react-native-vector-icons/Ionicons';
 import {Image, TouchableOpacity, View} from 'react-native';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
 
 import styles from './CartCard.style';
 import {Text} from '..';
 import theme from '../../../resources/Colors/theme';
+import {BASE_URL, KSeparator, Storage} from '../../utils';
+import {setUser} from '../../redux/actions/AuthActions';
+import {addToCart} from '../../redux/actions/CartAction';
 
 const CartCard = (props) => {
-  const {onPress, setInfo, setDelete} = props;
+  const {item, setItem, setIsItem, setDelete, setIsDelete} = props;
+
+  const [loading, setLoading] = useState(false);
+  const [notify, setNotify] = useState(false);
+  const [info, setInfo] = useState({});
+
+  const itemDetail = (data) => {
+    setIsItem(true);
+    setItem(data);
+  };
+
+  const itemDelete = (data) => {
+    setDelete(data);
+    setIsDelete(true);
+  };
+
   return (
     <View style={styles.cardContainer}>
       <View style={styles.cardImageContainer}>
         <Image
-          source={require('../../../resources/images/vals-3.jpg')}
+          source={
+            item?.pastryId?.image
+              ? {uri: BASE_URL + '/' + item?.pastryId?.image}
+              : require('../../../resources/images/logo-1.png')
+          }
           imageStyle={styles.cardImage}
           style={styles.cardImage}
         />
       </View>
       <View style={styles.infoContainer}>
         <View style={styles.cardDetails}>
-          <Text style={styles.cardPastryName}>Love Aurora</Text>
+          <Text style={styles.cardPastryName}>{item?.pastryId?.name}</Text>
           <TouchableOpacity
-            onPress={() => setInfo()}
+            onPress={() => itemDetail(item)}
             style={styles.bestInfoButton2}>
             <Icons
               name="ios-information-circle-outline"
@@ -31,7 +55,16 @@ const CartCard = (props) => {
           </TouchableOpacity>
         </View>
         <View style={styles.cardDetails}>
-          <Text style={styles.amount}>XAF 3,000</Text>
+          <Text style={styles.amount}>
+            {KSeparator(
+              item.pastryId.discount > 0
+                ? ((100 - item.pastryId.discount) / 100) *
+                    item.pastryId.price *
+                    item.quantity
+                : item.quantity * item.pastryId.price,
+            )}{' '}
+            XAF
+          </Text>
         </View>
         <View style={styles.cardControls}>
           <View style={styles.amountContainer}>
@@ -42,7 +75,7 @@ const CartCard = (props) => {
                 color={theme.WHITE_COLOR}
               />
             </TouchableOpacity>
-            <Text style={styles.quantity}>2</Text>
+            <Text style={styles.quantity}>{KSeparator(item?.quantity)}</Text>
             <TouchableOpacity style={styles.actionButton}>
               <Icons
                 name="ios-add-outline"
@@ -53,7 +86,7 @@ const CartCard = (props) => {
           </View>
           <TouchableOpacity
             style={styles.trashButton}
-            onPress={() => setDelete()}>
+            onPress={() => itemDelete(item)}>
             <Icons
               name="ios-trash-outline"
               size={18}
@@ -65,5 +98,15 @@ const CartCard = (props) => {
     </View>
   );
 };
+const mapStateToProps = ({i18n, auth}) => {
+  return {
+    i18n: i18n.i18n,
+    user: auth.user,
+  };
+};
 
-export default CartCard;
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({setUser, addToCart}, dispatch);
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(CartCard);

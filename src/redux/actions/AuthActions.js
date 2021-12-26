@@ -1,4 +1,11 @@
-import {SET_USER, SET_TOKEN, RESET, ENTRY, SET_CHEFS} from '../types';
+import {
+  SET_USER,
+  SET_TOKEN,
+  RESET,
+  ENTRY,
+  SET_CHEFS,
+  SET_ITEMS,
+} from '../types';
 
 export const setUser = (user) => {
   return {
@@ -18,6 +25,13 @@ export const setChefs = (chefs) => {
   return {
     type: SET_CHEFS,
     payload: chefs,
+  };
+};
+
+export const setItems = (items) => {
+  return {
+    type: SET_ITEMS,
+    payload: items,
   };
 };
 

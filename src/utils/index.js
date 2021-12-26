@@ -5,6 +5,8 @@ import TelSeparator from './telSeparator';
 import FormatUnits from './UnitSeparator';
 import BASE_URL from './globalVariable';
 import AuthTel from './authTel';
+import Search from './search';
+import SearchObj from './searchObj';
 
 export {
   AuthMail,
@@ -14,4 +16,6 @@ export {
   FormatUnits,
   BASE_URL,
   AuthTel,
+  Search,
+  SearchObj,
 };

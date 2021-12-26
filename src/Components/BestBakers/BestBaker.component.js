@@ -48,7 +48,7 @@ const BestBaker = (props) => {
             </View>
             <TouchableOpacity
               style={styles.bestInfoButton}
-              onPress={() => Actions.chefInfo()}>
+              onPress={() => Actions.chefInfo({chef: data})}>
               <Icons
                 name="ios-information-circle-outline"
                 size={16}

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Image, TouchableOpacity, View} from 'react-native';
 import Modal from 'react-native-modal';
 import SwiperFlatList from 'react-native-swiper-flatlist';
@@ -7,10 +7,19 @@ import {connect} from 'react-redux';
 
 import theme from '../../../resources/Colors/theme';
 import {RateButton, Text} from '../../Components';
+import {BASE_URL, KSeparator} from '../../utils';
 import styles from './ItemDetail.style';
 
 const ItemDetail = (props) => {
-  const {info, setInfo, i18n} = props;
+  const {info, setInfo, i18n, item} = props;
+
+  const [images, setImages] = useState([]);
+
+  useEffect(() => {
+    let _images = [];
+    _images.push(item?.pastryId?.image);
+    setImages(_images);
+  }, [item?.pastryId?.image]);
 
   const [data] = useState([
     {
@@ -22,9 +31,9 @@ const ItemDetail = (props) => {
     // {
     //   image: require('../../../resources/images/pans-2.jpg'),
     // },
-    {
-      image: require('../../../resources/images/bds-12.jpg'),
-    },
+    // {
+    //   image: require('../../../resources/images/bds-12.jpg'),
+    // },
     {
       image: require('../../../resources/images/cups-12.jpg'),
     },
@@ -57,27 +66,37 @@ const ItemDetail = (props) => {
           />
         </TouchableOpacity>
         <SwiperFlatList autoplay autoplayDelay={7} autoplayLoop>
-          {data.map((d, key) => {
+          {images.map((d, key) => {
             return (
-              <Header data={d} index={key + 1} length={data.length} key={key} />
+              <Header
+                data={d}
+                index={key + 1}
+                length={images?.length}
+                key={key}
+              />
             );
           })}
         </SwiperFlatList>
         <View style={styles.infoContainer}>
-          <Text style={styles.categoryName}>Category Name</Text>
+          <Text style={styles.categoryName}>{item?.pastryId?.type}</Text>
           <View style={styles.detsContainer}>
-            <Text style={styles.pastryName}>Pastry Name</Text>
-            <Text style={styles.pastryPrice}>3,000 XAF</Text>
+            <Text style={styles.pastryName}>{item?.pastryId?.name}</Text>
+            <Text style={styles.pastryPrice}>
+              {KSeparator(item?.pastryId?.price ? item?.pastryId?.price : 0)}{' '}
+              XAF
+            </Text>
           </View>
           <Text style={styles.aboutTitle}>{i18n.t('phrases.yourMessage')}</Text>
-          <Text style={styles.aboutText}>Diner at 7PM. I love you. </Text>
+          <Text style={styles.aboutText}>
+            {item?.message ? item?.message : i18n.t('phrases.addYourMessage')}{' '}
+          </Text>
           <Text style={styles.aboutTitle}>
             {i18n.t('phrases.requiredDays')}
           </Text>
           <Text style={styles.aboutText}>
             {i18n.t('phrases.aMinimumOf')}{' '}
-            <Text style={styles.date}>2 days</Text>{' '}
-            {i18n.t('phrases.isRequiredForDelivery')}
+            <Text style={styles.date}>{item?.pastryId?.daysRequired}</Text>{' '}
+            {i18n.t('phrases.daysIsRequiredForDelivery')}
           </Text>
           <View style={styles.rateContainer}>
             <RateButton title={120} icon={'ios-thumbs-up-outline'} />
@@ -86,7 +105,18 @@ const ItemDetail = (props) => {
         </View>
         <View style={styles.controlsContainer}>
           <View style={styles.qtyContainer}>
-            <Text style={styles.accumelatedPrice}>6,000 XAF</Text>
+            <Text style={styles.accumelatedPrice}>
+              {KSeparator(
+                item?.pastryId?.discount > 0
+                  ? ((100 - item?.pastryId?.discount) / 100) *
+                      item?.pastryId?.price *
+                      item?.quantity
+                  : item?.pastryId?.price
+                  ? item?.quantity * item?.pastryId?.price
+                  : 0,
+              )}{' '}
+              XAF
+            </Text>
             <View style={styles.buttonContainer}>
               <TouchableOpacity style={styles.qtyButton}>
                 <Icons
@@ -95,7 +125,7 @@ const ItemDetail = (props) => {
                   color={theme.WHITE_COLOR}
                 />
               </TouchableOpacity>
-              <Text style={styles.qtyText}>2</Text>
+              <Text style={styles.qtyText}>{item?.quantity}</Text>
               <TouchableOpacity style={styles.qtyButton}>
                 <Icons
                   name="ios-add-outline"
@@ -123,7 +153,11 @@ const Header = (props) => {
   return (
     <View style={styles.pastryContainer}>
       <Image
-        source={data.image}
+        source={
+          data
+            ? {uri: BASE_URL + '/' + data}
+            : require('../../../resources/images/logo-1.png')
+        }
         style={styles.pastryImage}
         imageStyle={styles.pastryImage}
       />

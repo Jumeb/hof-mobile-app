@@ -108,8 +108,10 @@ const Login = (props) => {
         if (statusCode === 200) {
           props.setUser(responseJson.user);
           props.setToken(responseJson.token);
-          Storage.storeInfo('USER', responseJson.user);
-          Storage.storeInfo('TOKEN', responseJson.token);
+          Storage.storeInfo('USER', responseJson?.user);
+          Storage.storeInfo('CART', responseJson?.user?.cart);
+          Storage.storeInfo('FAVOURITES', responseJson?.user?.favourites);
+          Storage.storeInfo('TOKEN', responseJson?.token);
           return Actions.main();
         }
 

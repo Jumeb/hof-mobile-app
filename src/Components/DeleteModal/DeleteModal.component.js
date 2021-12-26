@@ -8,13 +8,21 @@ import theme from '../../../resources/Colors/theme';
 import {Text} from '..';
 
 const DeleteModal = (props) => {
-  const {_delete, setDelete, i18n, setNotify, location} = props;
+  const {
+    _delete,
+    setDelete,
+    isDelete,
+    setIsDelete,
+    i18n,
+    location,
+    onPress,
+  } = props;
 
   useEffect(() => {
     setTimeout(() => {
-      setDelete(false);
+      setIsDelete(false);
     }, 60000);
-  }, [_delete, setDelete]);
+  }, [isDelete, setIsDelete]);
 
   const removeString =
     location === 'cart'
@@ -23,14 +31,9 @@ const DeleteModal = (props) => {
       ? i18n.t('phrases.fromFavourites')
       : i18n.t('phrases.fromThisGroup');
 
-  const Confirm = () => {
-    setDelete(false);
-    setNotify(true);
-  };
-
   return (
     <Modal
-      isVisible={_delete}
+      isVisible={isDelete}
       style={styles.mainContainer}
       animationInTiming={500}
       animationOutTiming={400}
@@ -42,16 +45,16 @@ const DeleteModal = (props) => {
       onSwipeComplete={() => setDelete(false)}>
       <View style={styles.actionContainer}>
         <Text style={styles.actionInfo}>
-          {i18n.t('words.remove')} pastryname {removeString}
+          {i18n.t('words.remove')} {_delete?.pastryId?.name} {removeString}
         </Text>
         <TouchableOpacity
           style={[styles.actionButton, styles.danger]}
-          onPress={() => Confirm()}>
+          onPress={() => onPress(_delete)}>
           <Text style={styles.actionButtonText}>{i18n.t('words.remove')}</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={[styles.actionButton, styles.success]}
-          onPress={() => setDelete(false)}>
+          onPress={() => setIsDelete(false)}>
           <Text style={styles.actionButtonText}>{i18n.t('words.cancel')}</Text>
         </TouchableOpacity>
       </View>

@@ -20,14 +20,14 @@ import {
   PastryCard,
 } from '../../Components';
 import styles from './Shop.style';
-import best from '../../../resources/Dummy/best.json';
-import bakers from '../../../resources/Dummy/bakers.json';
 import theme from '../../../resources/Colors/theme';
 import {scrolling} from '../../redux/actions/ScrollActions';
-import {BASE_URL} from '../../utils';
+import {BASE_URL, Search} from '../../utils';
+import {addToCart} from '../../redux/actions/CartAction';
+import {setItems} from '../../redux/actions/AuthActions';
 
 const Shop = (props) => {
-  const {i18n, baker, user, token} = props;
+  const {i18n, baker, token, cart, items, setItems} = props;
   const [active, setActive] = useState(0);
   const [layout, setLayout] = useState(0);
   const [notify, setNotify] = useState(false);
@@ -35,14 +35,68 @@ const Shop = (props) => {
   const [loading, setLoading] = useState(false);
   const [articles, setArticles] = useState([]);
   const [info, setInfo] = useState({});
+  const [text, setText] = useState('');
 
   useEffect(() => {
     setCategories(baker.categories);
-    console.log(categories);
-  }, [baker, categories]);
+    //console.log(cart);
+  }, [baker, categories, cart]);
 
   useEffect(() => {
     setLoading(true);
+    fetch(`${BASE_URL}/superpastriesmob`, {
+      method: 'GET',
+      headers: {
+        Authorization: `Basic ${token}`,
+      },
+    })
+      .then((res) => {
+        const statusCode = res.status;
+        const response = res.json();
+        return Promise.all([statusCode, response]);
+      })
+      .then((res) => {
+        const statusCode = res[0];
+        const response = res[1];
+        setLoading(false);
+
+        if (statusCode === 200) {
+          setArticles(
+            response.pastries.filter(
+              (pastry) =>
+                pastry?.creatorId?._id.toString() === baker._id.toString(),
+            ),
+          );
+          setItems(
+            response.pastries.filter(
+              (pastry) =>
+                pastry?.creatorId?._id.toString() === baker._id.toString(),
+            ),
+          );
+        }
+
+        if (statusCode === 500) {
+          setNotify(true);
+          setInfo({
+            type: 'error',
+            msg: i18n.t('phrases.unexpectedError'),
+          });
+          return false;
+        }
+      })
+      .catch((err) => {
+        if (err) {
+          setLoading(false);
+          setNotify(true);
+          setInfo({
+            type: 'error',
+            msg: i18n.t('phrases.pleaseCheckInternet'),
+          });
+        }
+      });
+  }, [setItems, i18n, token, baker._id]);
+
+  const onRefresh = () => {
     setLoading(true);
     fetch(`${BASE_URL}/superpastriesmob`, {
       method: 'GET',
@@ -88,7 +142,11 @@ const Shop = (props) => {
           });
         }
       });
-  }, [props, i18n, token, baker._id]);
+  };
+
+  useEffect(() => {
+    Search(text, items, setArticles, 'name');
+  }, [text, items]);
 
   const renderHeader = () => {
     return (
@@ -109,6 +167,7 @@ const Shop = (props) => {
                 data={item}
                 onPress={(data) => Actions.pastryInfo({data})}
                 setNotify={setNotify}
+                i18n={i18n}
               />
             )}
             keyExtractor={(item) => item._id.toString()}
@@ -165,10 +224,22 @@ const Shop = (props) => {
         screen={'Shop'}
         search={true}
         pop={true}
-        cartNumber={user?.cart?.pastries.length}
+        cartNumber={cart?.pastries.length}
+        text={text}
+        setText={setText}
       />
       <FlatList
-        ListHeaderComponent={renderHeader()}
+        ListHeaderComponent={
+          text.length === 0 ? (
+            renderHeader()
+          ) : (
+            <View style={styles.pastriesContainer}>
+              <Text style={styles.varietyText}>
+                {i18n.t('phrases.searchResult')}
+              </Text>
+            </View>
+          )
+        }
         horizontal={false}
         numColumns={layout === 0 ? 2 : 1}
         data={articles.length <= 5 ? articles : articles.slice(5)}
@@ -177,6 +248,7 @@ const Shop = (props) => {
             layout={layout}
             data={item}
             key={key}
+            i18n={i18n}
             setNotify={setNotify}
             onPress={(data) => Actions.pastryInfo({data})}
           />
@@ -185,6 +257,8 @@ const Shop = (props) => {
         showsVerticalScrollIndicator={false}
         columnWrapperStyle={layout === 0 ? styles.columnWrapperStyle : null}
         key={layout === 0 ? 'grid' : 'flat'}
+        refreshing={loading}
+        onRefresh={() => onRefresh()}
       />
       <Notification
         notify={notify}
@@ -196,26 +270,18 @@ const Shop = (props) => {
   );
 };
 
-const mapStateToProps = ({i18n, auth}) => {
+const mapStateToProps = ({i18n, auth, cart}) => {
   return {
     i18n: i18n.i18n,
     user: auth.user,
     token: auth.token,
+    cart: cart.cart,
+    items: auth.items,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({scrolling}, dispatch);
+  return bindActionCreators({scrolling, addToCart, setItems}, dispatch);
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Shop);
-
-const varieties = [
-  {id: 1, type: 'Birthday Cakes'},
-  {id: 2, type: 'Wedding Cakes'},
-  {id: 3, type: 'Cookies'},
-  {id: 4, type: 'Pancakes'},
-  {id: 5, type: 'Valentine'},
-  {id: 6, type: 'Doughnuts'},
-  {id: 7, type: 'Cup Cakes'},
-];

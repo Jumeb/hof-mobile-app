@@ -15,6 +15,11 @@ const styles = StyleSheet.create({
   cartContainer: {
     marginTop: 5,
   },
+  loadingContainer: {
+    height: theme.HEIGHT_100,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   cartTitleContainer: {
     flex: 1,
     paddingHorizontal: 14,
@@ -25,6 +30,13 @@ const styles = StyleSheet.create({
     fontSize: theme.FONT_SIZE_EXTRA_LARGE - 1.5,
     fontWeight: theme.FONT_WEIGHT_BOLD,
     color: theme.TERTIARY_COLOR,
+  },
+  chefTitle: {
+    fontSize: theme.FONT_SIZE_NORMAL + 2,
+    fontWeight: theme.FONT_WEIGHT_BOLD,
+    paddingHorizontal: 12,
+    color: theme.TERTIARY_COLOR,
+    marginBottom: 2,
   },
   cartSubTitle: {
     fontSize: theme.FONT_SIZE_EXTRA_LARGE - 1.5,
@@ -100,6 +112,13 @@ const styles = StyleSheet.create({
     borderWidth: 0.9,
     marginVertical: 12,
     borderColor: theme.PRIMARY_COLOR,
+  },
+  suspended: {
+    color: theme.DANGER_COLOR,
+    fontSize: theme.FONT_SIZE_SMALL,
+    fontWeight: theme.FONT_WEIGHT_BOLD,
+    marginTop: -4,
+    marginBottom: 4,
   },
 });
 

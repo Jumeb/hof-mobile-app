@@ -23,7 +23,17 @@ if (
 }
 
 const Header = (props) => {
-  const {screen, search, pop, right, i18n, action, cartNumber} = props;
+  const {
+    screen,
+    search,
+    pop,
+    right,
+    i18n,
+    action,
+    cartNumber,
+    setText,
+    text,
+  } = props;
   const [showSearch, setShowSearch] = useState(false);
   const searchScreen =
     screen.toString() === 'Home'
@@ -156,6 +166,8 @@ const Header = (props) => {
                 styles.searchBar,
                 showSearch ? styles.showSearch : styles.hideSearch,
               ]}
+              value={text}
+              onChangeText={(txt) => setText(txt)}
             />
           </View>
           <TouchableOpacity

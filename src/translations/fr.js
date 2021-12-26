@@ -65,6 +65,7 @@ export default {
     contacts: 'Contacts',
     items: 'Articles',
     confirm: 'Confirmer',
+    chef: 'Chef',
     //Translate
   },
   phrases: {
@@ -162,7 +163,27 @@ export default {
     validationFailedTryAgain: 'Validation échouée. Essayer à nouveau.',
     unexpectedError: 'Erreur inattendue.',
     pleaseCheckInternet: "S'il vous plait, vérifiez votre connexion internet.",
-    daysIsRequiredForDelivery: 'jours est requis pour la livraison',
+    daysIsRequiredForDelivery: 'heures est nécessaire pour la livraison.',
+    couldNotLikeItem: "Impossible d'aimer l'article.",
+    createAccoutToDislike: 'Créer un compte pour ne pas aimer',
+    createAccountToLike: 'Créez un compte pour aimer',
+    createAccountToAdd: 'Créez un compte à ajouter aux favoris.',
+    anErrorOccured: "Désolé, une erreur s'est produite.",
+    createToAddToCart: 'Créez un compte à ajouter au panier.',
+    couldNotDislikeItem: "Impossible de ne pas aimer l'article.",
+    sorryIsNotYou: "Désolé, ce n'est pas toi, c'est de notre faute.",
+    couldNotLoadChefs: 'Désolé, impossible de charger les chefs.',
+    sorryChefNotFound: "Désolé, nous n'avons pas pu trouver votre chef.",
+    sorryItemNotFound: "Désolé, nous n'avons pas pu trouver votre article.",
+    couldNotAddToFavourites: "Désolé, impossible d'ajouter aux favoris.",
+    couldNotLoadCart: 'Désolé, impossible de charger le panier.',
+    pleaseGetAnAccount: 'Veuillez vous inscrire et obtenir un compte gratuit.',
+    platformTax: 'Taxe de plate-forme',
+    addYourMessage: 'Ajoutez votre message.',
+    couldNotRemoveFromCart:
+      "Désolé, impossible de supprimer l'article du panier.",
+    suspendedOrderAt: 'Suspendu, commandez à votre discrétion.',
+    searchResults: 'Résultats de recherche',
     //Translate
   },
 };

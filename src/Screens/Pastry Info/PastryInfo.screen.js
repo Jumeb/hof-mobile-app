@@ -46,23 +46,13 @@ const PastryInfo = (props) => {
     setMsg(i18n.t('phrases.addedToFavourite'));
   };
 
-  const handle = (event) => {
-    props.scrolling(true);
-  };
-
-  const hide = (event) => {
-    props.scrolling(false);
-  };
-
   return (
     <SafeAreaView style={styles.mainContainer}>
       <NavBar screen="pastryInfo" pop={true} action={AddToFavourite} />
       <ScrollView
         horizontal={false}
         showsHorizontalScrollIndicator={false}
-        style={styles.scrollView}
-        onScrollBeginDrag={(event) => handle(event)}
-        onScrollEndDrag={(event) => hide(event)}>
+        style={styles.scrollView}>
         <SwiperFlatList autoplay autoplayDelay={10} autoplayLoop>
           {images.map((d, key) => {
             return (
