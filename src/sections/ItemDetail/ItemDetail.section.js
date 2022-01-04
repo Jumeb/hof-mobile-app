@@ -4,16 +4,30 @@ import Modal from 'react-native-modal';
 import SwiperFlatList from 'react-native-swiper-flatlist';
 import Icons from 'react-native-vector-icons/Ionicons';
 import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
 
 import theme from '../../../resources/Colors/theme';
 import {RateButton, Text} from '../../Components';
 import {BASE_URL, KSeparator} from '../../utils';
 import styles from './ItemDetail.style';
+import {addCartObj, addToCart} from '../../redux/actions/CartAction';
 
 const ItemDetail = (props) => {
-  const {info, setInfo, i18n, item} = props;
+  const {info, setInfo, i18n, item, user, cart} = props;
 
   const [images, setImages] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [qty, setQty] = useState(false);
+  const [notify, setNotify] = useState(false);
+  const [dislikes, setDislikes] = useState(
+    item?.pastryId?.dislikes?.users?.length,
+  );
+  const [likes, setLikes] = useState(item?.pastryId?.likes?.users?.length);
+
+  useEffect(() => {
+    setDislikes(item.pastryId?.dislikes.users.length);
+    setLikes(item.pastryId?.likes.users.length);
+  }, [item]);
 
   useEffect(() => {
     let _images = [];
@@ -21,26 +35,233 @@ const ItemDetail = (props) => {
     setImages(_images);
   }, [item?.pastryId?.image]);
 
-  const [data] = useState([
-    {
-      image: require('../../../resources/images/bds-7.jpg'),
-    },
-    // {
-    //   image: require('../../../resources/images/cups-5.jpg'),
-    // },
-    // {
-    //   image: require('../../../resources/images/pans-2.jpg'),
-    // },
-    // {
-    //   image: require('../../../resources/images/bds-12.jpg'),
-    // },
-    {
-      image: require('../../../resources/images/cups-12.jpg'),
-    },
-    // {
-    //   image: require('../../../resources/images/weds-2.jpg'),
-    // },
-  ]);
+  useEffect(() => {
+    console.log(item);
+    if (item && item?.pastryId) {
+      setQty(item?.quantity);
+    }
+  }, [cart, item?.pastryId?._id, item]);
+
+  const addToUserCart = (id) => {
+    setLoading(true);
+    if (!user.hasOwnProperty('name')) {
+      setNotify(true);
+      setInfo({
+        type: 'success',
+        msg: i18n.t('phrases.pleaseGetAnAccount'),
+      });
+      return false;
+    }
+    fetch(`${BASE_URL}/user/addToCart/${id}?user=${user._id}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((res) => {
+        const statusCode = res.status;
+        const response = res.json();
+        return Promise.all([statusCode, response]);
+      })
+      .then((res) => {
+        const statusCode = res[0];
+        const response = res[1];
+        setLoading(false);
+
+        if (statusCode === 200) {
+          props.addToCart(response?.user?.cart);
+          props.addCartObj(response?.cart);
+          setQty(qty + 1);
+          if (qty === 0) {
+            setNotify(true);
+            setInfo({
+              type: 'success',
+              msg: `${item?.pastryId?.name} added to cart`,
+            });
+          }
+        }
+
+        if (statusCode === 422) {
+          setNotify(true);
+          setInfo({
+            type: 'error',
+            msg: `${item?.pastryId?.name} not added to cart.`,
+          });
+        }
+      })
+      .catch((err) => {
+        if (err) {
+          setNotify(true);
+          setInfo({
+            type: 'error',
+            msg: i18n.t('phrases.pleaseCheckInternet'),
+          });
+        }
+      });
+  };
+
+  const subFromCart = (id) => {
+    setLoading(true);
+    fetch(`${BASE_URL}/user/subFromCart/${id}?user=${user._id}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((res) => {
+        const statusCode = res.status;
+        const response = res.json();
+        return Promise.all([statusCode, response]);
+      })
+      .then((res) => {
+        const statusCode = res[0];
+        const response = res[1];
+        setLoading(false);
+
+        if (statusCode === 200) {
+          props.addToCart(response?.user?.cart);
+          props.addCartObj(response?.cart);
+          if (qty !== 0) {
+            setQty(qty - 1);
+          }
+        }
+
+        if (statusCode === 422) {
+          setNotify(true);
+          setInfo({
+            type: 'error',
+            msg: i18n.t('phrases.couldNotAddToCart'),
+          });
+        }
+      })
+      .catch((err) => {
+        if (err) {
+          setNotify(true);
+          setInfo({
+            type: 'error',
+            msg: i18n.t('phrases.pleaseCheckInternet'),
+          });
+        }
+      });
+  };
+
+  const disLikeItem = (id) => {
+    setLoading(true);
+    if (!user?.hasOwnProperty('name')) {
+      setNotify(true);
+      setInfo({
+        type: 'success',
+        msg:
+          i18n.t('phrases.createAccountToDislike') +
+          ' ' +
+          item?.pastryid?.name +
+          '.',
+      });
+      return false;
+    }
+    fetch(`${BASE_URL}/pastry/dislike/${id}?user=${user._id}`, {
+      method: 'POST',
+    })
+      .then((res) => {
+        const statusCode = res.status;
+        const response = res.json();
+        return Promise.all([statusCode, response]);
+      })
+      .then((res) => {
+        const statusCode = res[0];
+        const response = res[1].response;
+        setLoading(false);
+
+        if (statusCode === 200) {
+          setLikes(response.likes.users.length);
+          setDislikes(response.dislikes.users.length);
+          // addLikes(response?.dislikes?.users);
+          // addDislikes(response?.likes?.users);
+        }
+
+        if (statusCode === 500) {
+          setNotify(true);
+          setInfo({
+            type: 'error',
+            msg: i18n.t('phrases.anErrorOccured'),
+          });
+        }
+      })
+      .catch((err) => {
+        if (err) {
+          setLoading(false);
+          setNotify(true);
+          setInfo({
+            type: 'error',
+            title: 'Unexpected Error',
+            msg: i18n.t('phrases.pleaseCheckInternet'),
+          });
+        }
+      });
+  };
+
+  const likeItem = (id) => {
+    setLoading(true);
+    if (!user?.hasOwnProperty('name')) {
+      setNotify(true);
+      setInfo({
+        type: 'success',
+        msg:
+          i18n.t('phrases.createAccountToLike') +
+          ' ' +
+          item?.pastryId?.name +
+          '.',
+      });
+      return false;
+    }
+    fetch(`${BASE_URL}/pastry/like/${id}?user=${user._id}`, {
+      method: 'POST',
+    })
+      .then((res) => {
+        const statusCode = res.status;
+        const response = res.json();
+        return Promise.all([statusCode, response]);
+      })
+      .then((res) => {
+        const statusCode = res[0];
+        const response = res[1].response;
+        setLoading(false);
+
+        if (statusCode === 200) {
+          setLikes(response.likes.users.length);
+          setDislikes(response.dislikes.users.length);
+          // addLikes(response?.dislikes?.users);
+          // addDislikes(response?.likes?.users);
+        }
+
+        if (statusCode === 422) {
+          setNotify(true);
+          setInfo({
+            type: 'error',
+            msg: i18n.t('phrases.couldNotLikeItem'),
+          });
+        }
+
+        if (statusCode === 500) {
+          setNotify(true);
+          setInfo({
+            type: 'error',
+            msg: i18n.t('phrases.anErrorOccured'),
+          });
+        }
+      })
+      .catch((err) => {
+        if (err) {
+          setLoading(false);
+          setNotify(true);
+          setInfo({
+            type: 'error',
+            title: 'Unexpected Error',
+            msg: i18n.t('phrases.pleaseCheckInternet'),
+          });
+        }
+      });
+  };
 
   return (
     <Modal
@@ -86,10 +307,18 @@ const ItemDetail = (props) => {
               XAF
             </Text>
           </View>
-          <Text style={styles.aboutTitle}>{i18n.t('phrases.yourMessage')}</Text>
-          <Text style={styles.aboutText}>
-            {item?.message ? item?.message : i18n.t('phrases.addYourMessage')}{' '}
-          </Text>
+          {item?.quantity && (
+            <>
+              <Text style={styles.aboutTitle}>
+                {i18n.t('phrases.yourMessage')}
+              </Text>
+              <Text style={styles.aboutText}>
+                {item?.message
+                  ? item?.message
+                  : i18n.t('phrases.addYourMessage')}{' '}
+              </Text>
+            </>
+          )}
           <Text style={styles.aboutTitle}>
             {i18n.t('phrases.requiredDays')}
           </Text>
@@ -99,54 +328,89 @@ const ItemDetail = (props) => {
             {i18n.t('phrases.daysIsRequiredForDelivery')}
           </Text>
           <View style={styles.rateContainer}>
-            <RateButton title={120} icon={'ios-thumbs-up-outline'} />
-            <RateButton title={14} icon={'ios-thumbs-down-outline'} />
+            <RateButton
+              title={likes}
+              icon={
+                item &&
+                item?.pastryId?.likes?.users?.findIndex(
+                  (p) => p.userId?.toString() === user?._id.toString(),
+                ) >= 0
+                  ? 'ios-thumbs-up-sharp'
+                  : 'ios-thumbs-up-outline'
+              }
+              onPress={() => likeItem(item?.pastryId?._id)}
+            />
+            <RateButton
+              title={dislikes}
+              icon={
+                item &&
+                item?.pastryId?.dislikes?.users?.findIndex(
+                  (p) => p.userId?.toString() === user?._id.toString(),
+                ) >= 0
+                  ? 'ios-thumbs-down-sharp'
+                  : 'ios-thumbs-down-outline'
+              }
+              onPress={() => disLikeItem(item?.pastryId?._id)}
+            />
           </View>
         </View>
         <View style={styles.controlsContainer}>
-          <View style={styles.qtyContainer}>
-            <Text style={styles.accumelatedPrice}>
-              {KSeparator(
-                item?.pastryId?.discount > 0
-                  ? ((100 - item?.pastryId?.discount) / 100) *
-                      item?.pastryId?.price *
-                      item?.quantity
-                  : item?.pastryId?.price
-                  ? item?.quantity * item?.pastryId?.price
-                  : 0,
-              )}{' '}
-              XAF
-            </Text>
-            <View style={styles.buttonContainer}>
-              <TouchableOpacity style={styles.qtyButton}>
-                <Icons
-                  name="ios-remove-outline"
-                  size={16}
-                  color={theme.WHITE_COLOR}
-                />
-              </TouchableOpacity>
-              <Text style={styles.qtyText}>{item?.quantity}</Text>
-              <TouchableOpacity style={styles.qtyButton}>
-                <Icons
-                  name="ios-add-outline"
-                  size={16}
-                  color={theme.WHITE_COLOR}
-                />
-              </TouchableOpacity>
+          {item?.quantity && (
+            <View style={styles.qtyContainer}>
+              <Text style={styles.accumelatedPrice}>
+                {KSeparator(
+                  item?.pastryId?.discount > 0
+                    ? ((100 - item?.pastryId?.discount) / 100) *
+                        item?.pastryId?.price *
+                        qty
+                    : item?.pastryId?.price
+                    ? qty * item?.pastryId?.price
+                    : 0,
+                )}{' '}
+                XAF
+              </Text>
+
+              <View style={styles.buttonContainer}>
+                <TouchableOpacity
+                  style={styles.qtyButton}
+                  onPress={() => subFromCart(item?.pastryId._id)}>
+                  <Icons
+                    name="ios-remove-outline"
+                    size={16}
+                    color={theme.WHITE_COLOR}
+                  />
+                </TouchableOpacity>
+                <Text style={styles.qtyText}>{qty}</Text>
+                <TouchableOpacity
+                  style={styles.qtyButton}
+                  onPress={() => addToUserCart(item?.pastryId._id)}>
+                  <Icons
+                    name="ios-add-outline"
+                    size={16}
+                    color={theme.WHITE_COLOR}
+                  />
+                </TouchableOpacity>
+              </View>
             </View>
-          </View>
+          )}
         </View>
       </View>
     </Modal>
   );
 };
-const mapStateToProps = ({i18n}) => {
+const mapStateToProps = ({i18n, auth, cart}) => {
   return {
     i18n: i18n.i18n,
+    user: auth.user,
+    cart: cart.cart,
   };
 };
 
-export default connect(mapStateToProps)(ItemDetail);
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({addCartObj, addToCart}, dispatch);
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ItemDetail);
 
 const Header = (props) => {
   const {length, index, data} = props;

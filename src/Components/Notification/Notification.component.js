@@ -21,7 +21,9 @@ const Notification = (props) => {
       animationOutTiming={600}
       backdropOpacity={0}
       backdropColor={theme.TRANSPARENT}
+      swipeDirection={['down', 'left', 'right', 'up']}
       animationIn="fadeInDown"
+      onSwipeComplete={() => setNotify(false)}
       animationOut="fadeOutUp">
       <View
         style={[

@@ -1,13 +1,20 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Image, TouchableOpacity, View} from 'react-native';
 import Icons from 'react-native-vector-icons/Ionicons';
 
 import {Text} from '..';
 import theme from '../../../resources/Colors/theme';
+import {setItems} from '../../redux/actions/AuthActions';
+import {ItemsDetail} from '../../sections';
 import styles from './OrderCard.style';
 
 const OrderCard = (props) => {
-  const {onPress, i18n} = props;
+  const {i18n} = props;
+  const [info, setInfo] = useState(false);
+
+  const SetItem = () => {
+    setInfo(true);
+  };
   return (
     <View style={styles.mainContainer}>
       <View style={styles.orderImageContainer}>
@@ -50,7 +57,7 @@ const OrderCard = (props) => {
         <View style={styles.pastryDetails}>
           <TouchableOpacity
             style={styles.addToCartButton}
-            onPress={() => onPress()}>
+            onPress={() => SetItem()}>
             <Icons
               name="ios-document-outline"
               size={16}
@@ -59,6 +66,7 @@ const OrderCard = (props) => {
           </TouchableOpacity>
         </View>
       </View>
+      <ItemsDetail info={info} setInfo={setInfo} />
     </View>
   );
 };

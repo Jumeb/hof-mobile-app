@@ -66,6 +66,7 @@ export default {
     items: 'Items',
     confirm: 'Confirm',
     chef: 'Chef',
+    suspended: 'Suspended',
     //New
   },
   phrases: {
@@ -181,6 +182,18 @@ export default {
     couldNotRemoveFromCart: 'Sorry, could not remove item from cart.',
     suspendedOrderAt: 'Suspended, order at your own discretion.',
     searchResults: 'Search results',
+    walletNotFound: 'Wallet not found.',
+    couldNotGetFavourites: 'Sorry, we could not load you favourites.',
+    noChefFound: 'Sorry, no chef met your search.',
+    noItemFound: 'Sorry, no item met your search.',
+    couldNotLoadItems: "Sorry, we could not find your chef's items",
+    couldNotLoadFavourites: 'Sorry, we could not load your favourites',
+    noFavouriteFound: 'Sorry, none of your favourites met the search.',
+    couldNotRemoveFromFavourites:
+      'Sorry, we could not remove item from favourites',
+    couldNotAddToCart: 'Sorry, could not add to cart.',
+    noItemInCart: 'No item in cart matched the search.',
+    enterYourMessage: 'Enter custom message',
     //New
   },
 };

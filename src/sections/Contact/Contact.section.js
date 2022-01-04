@@ -41,7 +41,7 @@ const Contact = (props) => {
         })
         .catch((err) => console.error('An error occurred', err));
     } else {
-      console.log('sendWhatsAppMessage -----> ', 'message link is undefined');
+      // console.log('sendWhatsAppMessage -----> ', 'message link is undefined');
     }
   };
   const chatTwitter = (link) => {
@@ -56,7 +56,7 @@ const Contact = (props) => {
         })
         .catch((err) => console.error('An error occurred', err));
     } else {
-      console.log('sendWhatsAppMessage -----> ', 'message link is undefined');
+      // console.log('sendWhatsAppMessage -----> ', 'message link is undefined');
     }
   };
 
@@ -72,7 +72,7 @@ const Contact = (props) => {
         })
         .catch((err) => console.error('An error occurred', err));
     } else {
-      console.log('sendWhatsAppMessage -----> ', 'message link is undefined');
+      // console.log('sendWhatsAppMessage -----> ', 'message link is undefined');
     }
   };
 
@@ -88,7 +88,7 @@ const Contact = (props) => {
         })
         .catch((err) => console.error('An error occurred', err));
     } else {
-      console.log('sendWhatsAppMessage -----> ', 'message link is undefined');
+      // console.log('sendWhatsAppMessage -----> ', 'message link is undefined');
     }
   };
 

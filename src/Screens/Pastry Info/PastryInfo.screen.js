@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import {bindActionCreators} from 'redux';
 import Icons from 'react-native-vector-icons/Ionicons';
+import {Actions} from 'react-native-router-flux';
 import {connect} from 'react-redux';
 import {SwiperFlatList} from 'react-native-swiper-flatlist';
 
@@ -23,12 +24,132 @@ import {
 import theme from '../../../resources/Colors/theme';
 import Thousand from '../../utils/kSeparator';
 import {BASE_URL} from '../../utils';
+import {addToCart} from '../../redux/actions/CartAction';
+import {addToFavourites} from '../../redux/actions/FavouritesActions';
 
 const PastryInfo = (props) => {
-  const {i18n, data} = props;
+  const {i18n, data, user, cart, addToFavourites} = props;
   const [notify, setNotify] = useState(false);
   const [msg, setMsg] = useState('');
   const [images, setImages] = useState([]);
+  const [info, setInfo] = useState({});
+  const [loading, setLoading] = useState(false);
+  const [qty, setQty] = useState(0);
+  const [dislikes, setDislikes] = useState(data.dislikes.users.length);
+  const [likes, setLikes] = useState(data.likes.users.length);
+
+  useEffect(() => {
+    setQty(
+      cart?.pastries.filter(
+        (items) => items?.pastryId?._id.toString() === data?._id.toString(),
+      ).length > 0
+        ? cart?.pastries.filter(
+            (items) => items?.pastryId?._id.toString() === data?._id.toString(),
+          )[0].quantity
+        : 0,
+    );
+  }, [cart, data?._id]);
+
+  const addToUserCart = (id) => {
+    setLoading(true);
+    if (!user.hasOwnProperty('name')) {
+      setNotify(true);
+      setInfo({
+        type: 'success',
+        msg: i18n.t('phrases.pleaseGetAnAccount'),
+      });
+      return false;
+    }
+    fetch(`${BASE_URL}/user/addToCart/${id}?user=${user._id}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((res) => {
+        const statusCode = res.status;
+        const response = res.json();
+        return Promise.all([statusCode, response]);
+      })
+      .then((res) => {
+        const statusCode = res[0];
+        const response = res[1];
+        setLoading(false);
+
+        if (statusCode === 200) {
+          props.addToCart(response?.user?.cart);
+          setQty(qty + 1);
+          if (qty === 0) {
+            setNotify(true);
+            setInfo({
+              type: 'success',
+              msg: `${data?.name} added to cart`,
+            });
+          }
+        }
+
+        if (statusCode === 422) {
+          setNotify(true);
+          setInfo({
+            type: 'error',
+            msg: `${data?.name} not added to cart.`,
+          });
+        }
+      })
+      .catch((err) => {
+        if (err) {
+          setNotify(true);
+          setInfo({
+            type: 'error',
+            msg: i18n.t('phrases.pleaseCheckInternet'),
+          });
+        }
+      });
+  };
+
+  const subFromCart = (id) => {
+    setLoading(true);
+    fetch(`${BASE_URL}/user/subFromCart/${id}?user=${user._id}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((res) => {
+        const statusCode = res.status;
+        const response = res.json();
+        return Promise.all([statusCode, response]);
+      })
+      .then((res) => {
+        const statusCode = res[0];
+        const response = res[1];
+        setLoading(false);
+
+        if (statusCode === 200) {
+          props.addToCart(response?.user?.cart);
+          if (qty !== 0) {
+            setQty(qty - 1);
+          }
+        }
+
+        if (statusCode === 422) {
+          setNotify(true);
+          setInfo({
+            type: 'error',
+            msg: i18n.t('phrases.couldNotAddToCart'),
+          });
+        }
+      })
+      .catch((err) => {
+        if (err) {
+          setNotify(true);
+          setInfo({
+            type: 'error',
+            msg: i18n.t('phrases.pleaseCheckInternet'),
+          });
+        }
+      });
+  };
 
   useEffect(() => {
     let _images = [];
@@ -38,17 +159,189 @@ const PastryInfo = (props) => {
 
   const AddToCart = () => {
     setNotify(true);
-    setMsg(i18n.t('phrases.addedToCart'));
+    setInfo({
+      type: 'success',
+      msg: i18n.t('phrases.addedToCart'),
+    });
+    setTimeout(() => {
+      Actions.cart();
+    }, 1500);
   };
 
-  const AddToFavourite = () => {
-    setNotify(true);
-    setMsg(i18n.t('phrases.addedToFavourite'));
+  const addToFavourite = () => {
+    setLoading(true);
+    if (!user?.hasOwnProperty('name')) {
+      setNotify(true);
+      setInfo({
+        type: 'success',
+        msg: i18n.t('phrases.createAccountToAdd') + ' ' + data?.name + '.',
+      });
+      return false;
+    }
+    fetch(`${BASE_URL}/user/addToFavourite/${data?._id}?userId=${user._id}`, {
+      method: 'POST',
+    })
+      .then((res) => {
+        const statusCode = res.status;
+        const responseJson = res.json();
+        return Promise.all([statusCode, responseJson]);
+      })
+      .then((res) => {
+        const statusCode = res[0];
+        const response = res[1];
+        setLoading(false);
+        if (statusCode === 200) {
+          addToFavourites(response?.user?.favourites);
+
+          setNotify(true);
+          setInfo({
+            type: 'success',
+            msg: i18n.t('phrases.addedToFavourite'),
+          });
+        }
+
+        if (statusCode === 422) {
+          setNotify(true);
+          setInfo({
+            type: 'error',
+            msg: i18n.t('phrases.couldNotLikeItem'),
+          });
+        }
+
+        if (statusCode === 500) {
+          setNotify(true);
+          setInfo({
+            type: 'error',
+            msg: i18n.t('phrases.anErrorOccured'),
+          });
+        }
+      })
+      .catch((err) => {
+        if (err) {
+          setLoading(false);
+          setNotify(true);
+          setInfo({
+            type: 'error',
+            msg: i18n.t('phrases.pleaseCheckInternet'),
+          });
+        }
+      });
+  };
+
+  const disLikeItem = (id) => {
+    setLoading(true);
+    if (!user?.hasOwnProperty('name')) {
+      setNotify(true);
+      setInfo({
+        type: 'success',
+        msg: i18n.t('phrases.createAccountToDislike') + ' ' + data?.name + '.',
+      });
+      return false;
+    }
+    fetch(`${BASE_URL}/pastry/dislike/${id}?user=${user._id}`, {
+      method: 'POST',
+    })
+      .then((res) => {
+        const statusCode = res.status;
+        const response = res.json();
+        return Promise.all([statusCode, response]);
+      })
+      .then((res) => {
+        const statusCode = res[0];
+        const response = res[1].response;
+        setLoading(false);
+
+        if (statusCode === 200) {
+          setLikes(response.likes.users.length);
+          setDislikes(response.dislikes.users.length);
+        }
+
+        if (statusCode === 500) {
+          setNotify(true);
+          setInfo({
+            type: 'error',
+            msg: i18n.t('phrases.anErrorOccured'),
+          });
+        }
+      })
+      .catch((err) => {
+        if (err) {
+          setLoading(false);
+          setNotify(true);
+          setInfo({
+            type: 'error',
+            title: 'Unexpected Error',
+            msg: i18n.t('phrases.pleaseCheckInternet'),
+          });
+        }
+      });
+  };
+
+  const likeItem = (id) => {
+    setLoading(true);
+    if (!user?.hasOwnProperty('name')) {
+      setNotify(true);
+      setInfo({
+        type: 'success',
+        msg: i18n.t('phrases.createAccountToLike') + ' ' + data?.name + '.',
+      });
+      return false;
+    }
+    fetch(`${BASE_URL}/pastry/like/${id}?user=${user._id}`, {
+      method: 'POST',
+    })
+      .then((res) => {
+        const statusCode = res.status;
+        const response = res.json();
+        return Promise.all([statusCode, response]);
+      })
+      .then((res) => {
+        const statusCode = res[0];
+        const response = res[1].response;
+        setLoading(false);
+
+        if (statusCode === 200) {
+          setLikes(response.likes.users.length);
+          setDislikes(response.dislikes.users.length);
+        }
+
+        if (statusCode === 422) {
+          setNotify(true);
+          setInfo({
+            type: 'error',
+            msg: i18n.t('phrases.couldNotLikeItem'),
+          });
+        }
+
+        if (statusCode === 500) {
+          setNotify(true);
+          setInfo({
+            type: 'error',
+            msg: i18n.t('phrases.anErrorOccured'),
+          });
+        }
+      })
+      .catch((err) => {
+        if (err) {
+          setLoading(false);
+          setNotify(true);
+          setInfo({
+            type: 'error',
+            title: 'Unexpected Error',
+            msg: i18n.t('phrases.pleaseCheckInternet'),
+          });
+        }
+      });
   };
 
   return (
     <SafeAreaView style={styles.mainContainer}>
-      <NavBar screen="pastryInfo" pop={true} action={AddToFavourite} />
+      <NavBar
+        screen="pastryInfo"
+        pop={true}
+        data={data}
+        action={addToFavourite}
+      />
       <ScrollView
         horizontal={false}
         showsHorizontalScrollIndicator={false}
@@ -83,23 +376,58 @@ const PastryInfo = (props) => {
           </Text>
           <Text style={styles.aboutTitle}>{i18n.t('words.stats')}</Text>
           <View style={styles.rateContainer}>
-            <RateButton title={120} icon={'ios-thumbs-up-outline'} />
-            <RateButton title={14} icon={'ios-thumbs-down-outline'} />
+            <RateButton
+              title={likes}
+              icon={
+                data &&
+                data?.likes?.users?.findIndex(
+                  (p) => p.userId?.toString() === user?._id.toString(),
+                ) >= 0
+                  ? 'ios-thumbs-up-sharp'
+                  : 'ios-thumbs-up-outline'
+              }
+              onPress={() => likeItem(data?._id)}
+            />
+            <RateButton
+              title={dislikes}
+              icon={
+                data &&
+                data?.dislikes?.users?.findIndex(
+                  (p) => p.userId?.toString() === user?._id.toString(),
+                ) >= 0
+                  ? 'ios-thumbs-down-sharp'
+                  : 'ios-thumbs-down-outline'
+              }
+              onPress={() => disLikeItem(data?._id)}
+            />
           </View>
         </View>
         <View style={styles.controlsContainer}>
           <View style={styles.qtyContainer}>
-            <Text style={styles.accumelatedPrice}>{Thousand(6000)} XAF</Text>
+            <Text style={styles.accumelatedPrice}>
+              {data?.discount > 0
+                ? Thousand(
+                    qty >= 1
+                      ? ((100 - data?.discount) / 100) * qty * data?.price
+                      : 0,
+                  )
+                : Thousand(qty >= 1 ? qty * data?.price : 0)}{' '}
+              XAF
+            </Text>
             <View style={styles.buttonContainer}>
-              <TouchableOpacity style={styles.qtyButton}>
+              <TouchableOpacity
+                style={styles.qtyButton}
+                onPress={() => subFromCart(data?._id)}>
                 <Icons
                   name="ios-remove-outline"
                   size={16}
                   color={theme.WHITE_COLOR}
                 />
               </TouchableOpacity>
-              <Text style={styles.qtyText}>2</Text>
-              <TouchableOpacity style={styles.qtyButton}>
+              <Text style={styles.qtyText}>{qty}</Text>
+              <TouchableOpacity
+                style={styles.qtyButton}
+                onPress={() => addToUserCart(data?._id)}>
                 <Icons
                   name="ios-add-outline"
                   size={16}
@@ -114,24 +442,21 @@ const PastryInfo = (props) => {
           />
         </View>
       </ScrollView>
-      <Notification
-        notify={notify}
-        setNotify={setNotify}
-        type="success"
-        msg={msg}
-      />
+      <Notification notify={notify} setNotify={setNotify} info={info} />
     </SafeAreaView>
   );
 };
 
-const mapStateToProps = ({i18n}) => {
+const mapStateToProps = ({i18n, auth, cart}) => {
   return {
     i18n: i18n.i18n,
+    user: auth.user,
+    cart: cart.cart,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({scrolling}, dispatch);
+  return bindActionCreators({scrolling, addToFavourites, addToCart}, dispatch);
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(PastryInfo);

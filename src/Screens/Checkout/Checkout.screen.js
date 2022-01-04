@@ -30,7 +30,7 @@ if (
 }
 
 const Checkout = (props) => {
-  const {i18n} = props;
+  const {i18n, cart} = props;
   const [info, setInfo] = useState(false);
   const [showAddress, setShowAddress] = useState(false);
   const [isAddress, setIsAddress] = useState(false);
@@ -61,7 +61,11 @@ const Checkout = (props) => {
 
   return (
     <SafeAreaView style={styles.mainContainer}>
-      <NavBar screen="checkout" pop={true} />
+      <NavBar
+        screen="checkout"
+        pop={true}
+        cartNumber={cart?.pastries ? cart?.pastries.length : 0}
+      />
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.editProfileContainer}>
           <Text style={styles.editProfile}>{i18n.t('words.checkout')}</Text>
@@ -218,9 +222,10 @@ const Checkout = (props) => {
   );
 };
 
-const mapStateToProps = ({i18n}) => {
+const mapStateToProps = ({i18n, cart}) => {
   return {
     i18n: i18n.i18n,
+    cart: cart.cart,
   };
 };
 export default connect(mapStateToProps)(Checkout);

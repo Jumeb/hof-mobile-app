@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   Platform,
   UIManager,
@@ -33,8 +33,12 @@ const Header = (props) => {
     cartNumber,
     setText,
     text,
+    user,
+    favourites,
+    data,
   } = props;
   const [showSearch, setShowSearch] = useState(false);
+  const [_data, setData] = useState([]);
   const searchScreen =
     screen.toString() === 'Home'
       ? i18n.t('words.chefs')
@@ -42,12 +46,22 @@ const Header = (props) => {
       ? i18n.t('words.shop')
       : screen.toString() === 'Order'
       ? i18n.t('phrases.myOrders')
+      : screen.toString() === 'favourite'
+      ? i18n.t('phrases.myFavourites')
       : i18n.t('words.cart1');
 
   const animatedWidth = {
     width: showSearch ? 180 : 0,
     opacity: showSearch ? 1 : 0,
   };
+
+  useEffect(() => {
+    setData(favourites);
+    // return () => {
+    //   setData([]);
+    //   setShowSearch(false);
+    // };
+  }, [favourites]);
 
   const toggleShow = () => {
     LayoutAnimation.configureNext(
@@ -117,7 +131,13 @@ const Header = (props) => {
           style={styles.actionIndicator}
           onPress={() => action()}>
           <Icons
-            name="ios-heart-outline"
+            name={
+              _data?.findIndex(
+                (p) => p.pastryId.toString() === data?._id.toString(),
+              ) >= 0
+                ? 'ios-heart-sharp'
+                : 'ios-heart-outline'
+            }
             size={20}
             color={theme.PRIMARY_COLOR}
           />
@@ -185,9 +205,11 @@ const Header = (props) => {
   );
 };
 
-const mapStateToProps = ({i18n}) => {
+const mapStateToProps = ({i18n, auth, favourites}) => {
   return {
     i18n: i18n.i18n,
+    user: auth.user,
+    favourites: favourites.favourites,
   };
 };
 

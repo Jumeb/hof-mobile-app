@@ -6,6 +6,8 @@ import {
   Text,
   StatusBar,
   ActivityIndicator,
+  Image,
+  TouchableOpacity,
 } from 'react-native';
 import {Actions} from 'react-native-router-flux';
 import {bindActionCreators} from 'redux';
@@ -18,12 +20,37 @@ import theme from '../../../resources/Colors/theme';
 import {BASE_URL, Search} from '../../utils';
 
 const Home = (props) => {
-  const {i18n, firstTime, token, _chefs, setChefs} = props;
+  const {i18n, firstTime, token, _chefs, setChefs, user} = props;
   const [notify, setNotify] = useState(false);
   const [info, setInfo] = useState({});
   const [chefs, setCheffs] = useState([]);
   const [loading, setLoading] = useState(false);
   const [text, setText] = useState('');
+  const [sorry, setSorry] = useState(false);
+  const [icon, setIcon] = useState(
+    require('../../../resources/images/favicon-1.png'),
+  );
+
+  useEffect(() => {
+    const favicon = [
+      {
+        key: 'en',
+        image: require('../../../resources/images/favicon-1.png'),
+      },
+      {
+        key: 'fr',
+        image: require('../../../resources/images/favicon-fr.png'),
+      },
+      {
+        key: 'de',
+        image: require('../../../resources/images/favicon-de.png'),
+      },
+    ];
+    setIcon(favicon.filter((i) => i?.key === i18n?.locale)[0]?.image);
+    return () => {
+      setIcon(require('../../../resources/images/favicon-1.png'));
+    };
+  }, [i18n]);
 
   useEffect(() => {
     if (firstTime) {
@@ -31,7 +58,7 @@ const Home = (props) => {
         setNotify(true);
         setInfo({
           type: 'success',
-          msg: i18n.t('phrases.welcomeBack') + ', ' + 'Jume Brice',
+          msg: i18n.t('phrases.welcomeBack') + ', ' + user?.name,
         });
       }, 100);
       props.setEntry();
@@ -39,7 +66,7 @@ const Home = (props) => {
     setTimeout(() => {
       setNotify(false);
     }, 5000);
-  }, [props, firstTime, i18n]);
+  }, [props, firstTime, i18n, user?.name]);
 
   useEffect(() => {
     setLoading(true);
@@ -65,6 +92,7 @@ const Home = (props) => {
         }
 
         if (statusCode === 500) {
+          setSorry(true);
           setNotify(true);
           setInfo({
             type: 'error',
@@ -75,6 +103,7 @@ const Home = (props) => {
       })
       .catch((err) => {
         if (err) {
+          setSorry(true);
           setLoading(false);
           setNotify(true);
           setInfo({
@@ -84,13 +113,14 @@ const Home = (props) => {
         }
       });
 
-    return () => {
-      setNotify(false);
-      setInfo({});
-    };
+    // return () => {
+    //   setNotify(false);
+    //   setInfo({});
+    // };
   }, [i18n, token, setChefs]);
 
   const onRefresh = () => {
+    setSorry(false);
     props.setChefs([]);
     fetch(`${BASE_URL}/bakersmob`, {
       method: 'GET',
@@ -110,10 +140,12 @@ const Home = (props) => {
 
         if (statusCode === 200) {
           props.setChefs(response.bakers);
+          setSorry(false);
           setCheffs(response.bakers);
         }
 
         if (statusCode === 500) {
+          setSorry(true);
           setNotify(true);
           setInfo({
             type: 'error',
@@ -124,6 +156,7 @@ const Home = (props) => {
       })
       .catch((err) => {
         if (err) {
+          setSorry(true);
           setLoading(false);
           setNotify(true);
           setInfo({
@@ -168,33 +201,55 @@ const Home = (props) => {
     <SafeAreaView style={styles.mainContainer}>
       <StatusBar animated={true} backgroundColor={theme.PRIMARY_COLOR} />
       <NavBar screen="Home" search={true} text={text} setText={setText} />
-      <FlatList
-        ListHeaderComponent={
-          text.length === 0 ? (
-            render()
-          ) : (
-            <Text style={styles.chefText}>
-              {i18n.t('phrases.searchResults')}
-            </Text>
-          )
-        }
-        numColumns={2}
-        data={chefs.length <= 5 ? chefs : chefs.slice(5)}
-        columnWrapperStyle={styles.columnWrapperStyle}
-        key={'flat'}
-        renderItem={({item, index}) => (
-          <Baker
-            baker={item}
-            onPress={() => Actions.shop({baker: item})}
-            about="Ranking"
-            i18n={i18n}
-            rank={chefs.length <= 5 ? index + 1 : index + 5}
+      {!sorry ? (
+        chefs.length === 0 && text.length > 0 && !loading ? (
+          <View style={styles.sorryContainer}>
+            <TouchableOpacity onPress={() => onRefresh()}>
+              <Image source={icon} style={styles.sorryImage} />
+              <Text style={styles.sorryText}>
+                {i18n.t('phrases.noChefFound')}
+              </Text>
+            </TouchableOpacity>
+          </View>
+        ) : (
+          <FlatList
+            ListHeaderComponent={
+              text.length === 0 ? (
+                render()
+              ) : (
+                <Text style={styles.chefText}>
+                  {i18n.t('phrases.searchResults')}
+                </Text>
+              )
+            }
+            numColumns={2}
+            data={chefs.length <= 5 ? chefs : chefs.slice(5)}
+            columnWrapperStyle={styles.columnWrapperStyle}
+            key={'flat'}
+            renderItem={({item, index}) => (
+              <Baker
+                baker={item}
+                onPress={() => Actions.shop({baker: item})}
+                about="Ranking"
+                i18n={i18n}
+                rank={chefs.length <= 5 ? index + 1 : index + 5}
+              />
+            )}
+            keyExtractor={(item) => item._id.toString()}
+            refreshing={loading}
+            onRefresh={() => onRefresh()}
           />
-        )}
-        keyExtractor={(item) => item._id.toString()}
-        refreshing={loading}
-        onRefresh={() => onRefresh()}
-      />
+        )
+      ) : (
+        <View style={styles.sorryContainer}>
+          <TouchableOpacity onPress={() => onRefresh()}>
+            <Image source={icon} style={styles.sorryImage} />
+            <Text style={styles.sorryText}>
+              {i18n.t('phrases.couldNotLoadChefs')}
+            </Text>
+          </TouchableOpacity>
+        </View>
+      )}
       <Notification notify={notify} setNotify={setNotify} info={info} />
     </SafeAreaView>
   );

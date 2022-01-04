@@ -41,9 +41,9 @@ const WelcomeScreen = (props) => {
       },
     ];
     setIcon(favicon.filter((i) => i?.key === i18n?.locale)[0]?.image);
-    return () => {
-      setIcon(require('../../../resources/images/favicon-1.png'));
-    };
+    // return () => {
+    //   setIcon(require('../../../resources/images/favicon-1.png'));
+    // };
   }, [i18n]);
 
   return (

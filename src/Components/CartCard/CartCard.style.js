@@ -37,6 +37,13 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     marginLeft: 2,
   },
+  cardDetail: {
+    width: '100%',
+    flexDirection: 'column',
+    alignItems: 'flex-start',
+    justifyContent: 'space-between',
+    marginLeft: 2,
+  },
   cardControls: {
     width: '100%',
     flexDirection: 'row',

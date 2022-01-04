@@ -135,6 +135,7 @@ const styles = StyleSheet.create({
     borderRadius: theme.BORDER_IMAGE,
     height: 130,
     width: 130,
+    resizeMode: 'cover',
   },
   infoContainer: {
     flex: 1,

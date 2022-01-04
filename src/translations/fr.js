@@ -66,6 +66,7 @@ export default {
     items: 'Articles',
     confirm: 'Confirmer',
     chef: 'Chef',
+    suspended: 'Suspendue',
     //Translate
   },
   phrases: {
@@ -184,6 +185,21 @@ export default {
       "Désolé, impossible de supprimer l'article du panier.",
     suspendedOrderAt: 'Suspendu, commandez à votre discrétion.',
     searchResults: 'Résultats de recherche',
+    walletNotFound: 'Portefeuille introuvable.',
+    couldNotGetFavourites:
+      "Désolé, nous n'avons pas pu vous charger de favoris.",
+    noChefFound: "Désolé, aucun chef n'a répondu à votre recherche.",
+    noItemFound: 'Désolé, aucun article ne correspond à votre recherche.',
+    couldNotLoadItems:
+      "Désolé, nous n'avons pas pu trouver les articles de votre chef",
+    couldNotLoadFavourites: "Désolé, nous n'avons pas pu charger vos favoris",
+    noFavouriteFound:
+      "Désolé, aucun de vos favoris n'a répondu à la recherche.",
+    couldNotRemoveFromFavourites:
+      "Désolé, nous n'avons pas pu supprimer l'élément des favoris",
+    couldNotAddToCart: "Désolé, impossible d'ajouter au panier.",
+    noItemInCart: 'Aucun article dans le panier ne correspond à la recherche.',
+    enterYourMessage: 'Entrez un message personnalisé.',
     //Translate
   },
 };

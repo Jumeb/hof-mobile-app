@@ -42,7 +42,11 @@ class SplashScreen extends Component {
 
     Storage.load({key: 'FAVOURITES'})
       .then((favourites) => this.props.addToFavourites(favourites))
-      .catch((err) => this.props.addToFavourites([]));
+      .catch((err) => {
+        if (err) {
+          this.props.addToFavourites([]);
+        }
+      });
 
     Storage.load({key: 'isNotFirstTime'})
       .then((res) => {

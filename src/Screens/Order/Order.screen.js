@@ -17,7 +17,7 @@ const colors = {
 };
 
 const Order = (props) => {
-  const {i18n} = props;
+  const {i18n, cart} = props;
   const [index, setIndex] = useState(0);
   const [info, setInfo] = useState(false);
   const [routes] = useState([
@@ -71,7 +71,11 @@ const Order = (props) => {
 
   return (
     <SafeAreaView style={styles.mainContainer}>
-      <NavBar screen="Order" search={true} />
+      <NavBar
+        screen="Order"
+        search={true}
+        cartNumber={cart?.pastries ? cart?.pastries.length : 0}
+      />
       <View style={styles.tabTitle}>
         <Text style={styles.tabBarTitle}>{i18n.t('phrases.myOrders')}</Text>
       </View>
@@ -118,9 +122,10 @@ const Order = (props) => {
   );
 };
 
-const mapStateToProps = ({i18n}) => {
+const mapStateToProps = ({i18n, cart}) => {
   return {
     i18n: i18n.i18n,
+    cart: cart.cart,
   };
 };
 

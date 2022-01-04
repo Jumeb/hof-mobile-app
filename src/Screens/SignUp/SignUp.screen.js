@@ -58,9 +58,9 @@ const SignUp = (props) => {
       },
     ];
     setIcon(favicon.filter((i) => i?.key === i18n?.locale)[0]?.image);
-    return () => {
-      setIcon(require('../../../resources/images/favicon-1.png'));
-    };
+    // return () => {
+    //   setIcon(require('../../../resources/images/favicon-1.png'));
+    // };
   }, [i18n]);
 
   const authenticate = () => {
@@ -129,7 +129,7 @@ const SignUp = (props) => {
         setLoading(false);
         statusCode = res[0];
         responseJson = res[1];
-        console.log(statusCode);
+        // console.log(statusCode);
 
         if (statusCode === 201) {
           props.setUser(responseJson.user);
@@ -172,7 +172,7 @@ const SignUp = (props) => {
       })
       .finally((fin) => {
         setLoading(false);
-        console.log('finished');
+        // console.log('finished');
       });
   };
 

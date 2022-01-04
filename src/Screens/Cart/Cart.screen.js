@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {
   ActivityIndicator,
+  Image,
   SafeAreaView,
   ScrollView,
   TouchableOpacity,
@@ -31,7 +32,7 @@ const Cart = (props) => {
   const {i18n, user, cart, cartObj, addCartObj} = props;
   const [msg, setMsg] = useState('');
   const [isDelete, setIsDelete] = useState(false);
-  const [_delete, setDelete] = useState(false);
+  const [_delete, setDelete] = useState({});
   const [loading, setLoading] = useState(false);
   const [_user, setUser] = useState([]);
   const [info, setInfo] = useState({});
@@ -40,6 +41,31 @@ const Cart = (props) => {
   const [isItem, setIsItem] = useState(false);
   const [text, setText] = useState('');
   const [_item, setItem] = useState({});
+  const [sorry, setSorry] = useState(false);
+  const [icon, setIcon] = useState(
+    require('../../../resources/images/favicon-1.png'),
+  );
+
+  useEffect(() => {
+    const favicon = [
+      {
+        key: 'en',
+        image: require('../../../resources/images/favicon-1.png'),
+      },
+      {
+        key: 'fr',
+        image: require('../../../resources/images/favicon-fr.png'),
+      },
+      {
+        key: 'de',
+        image: require('../../../resources/images/favicon-de.png'),
+      },
+    ];
+    setIcon(favicon.filter((i) => i?.key === i18n?.locale)[0]?.image);
+    return () => {
+      setIcon(require('../../../resources/images/favicon-1.png'));
+    };
+  }, [i18n]);
 
   useEffect(() => {
     setLoading(true);
@@ -76,7 +102,7 @@ const Cart = (props) => {
           setInfo({
             type: 'error',
             title: 'Unexpected Error',
-            msg: response.msg,
+            msg: i18n.t('phrases.couldNotLoadCart'),
           });
         }
 
@@ -85,7 +111,7 @@ const Cart = (props) => {
           setInfo({
             type: 'error',
             title: 'Unexpected Error',
-            msg: response.msg,
+            msg: i18n.t('phrases.unexpectedError'),
           });
         }
       })
@@ -100,13 +126,11 @@ const Cart = (props) => {
         }
       });
 
-    return () => {
-      setLoading(false);
-      // setUser([]);
-      setNotify(false);
-      setInfo({});
-      // setCart({});
-    };
+    // return () => {
+    //   setLoading(false);
+    //   setNotify(false);
+    //   setInfo({});
+    // };
   }, [user, i18n, cart, addCartObj]);
 
   const Trash = (data) => {
@@ -131,7 +155,6 @@ const Cart = (props) => {
           Storage.storeInfo('USER', response?.user);
           props.addToCart(response?.user?.cart);
           props.addToFavourites(response?.user?.favourites);
-          Storage.storeInfo('FAVOURITES', response?.user?.favourites);
           setIsDelete(false);
           setNotify(true);
           setInfo({
@@ -151,6 +174,68 @@ const Cart = (props) => {
       .catch((err) => {
         if (err) {
           setIsDelete(false);
+          setLoading(false);
+          setNotify(true);
+          setInfo({
+            type: 'error',
+            msg: i18n.t('phrases.pleaseCheckInternet'),
+          });
+        }
+      });
+  };
+
+  const onRefresh = () => {
+    setSorry(false);
+    setLoading(true);
+    if (!user.hasOwnProperty('name')) {
+      setLoading(false);
+      setNotify(true);
+      setInfo({
+        type: 'success',
+        msg: i18n.t('phrases.pleaseGetAnAccount'),
+      });
+      return false;
+    }
+    fetch(`${BASE_URL}/user/getcart/${user._id}`, {
+      method: 'GET',
+    })
+      .then((res) => {
+        const statusCode = res.status;
+        const response = res.json();
+        return Promise.all([statusCode, response]);
+      })
+      .then((res) => {
+        const statusCode = res[0];
+        const response = res[1];
+        setLoading(false);
+
+        if (statusCode === 200) {
+          setUser(response.user);
+          setCart(response.bakers);
+          console.log(response.user, 'user');
+          addCartObj(response.bakers);
+        }
+
+        if (statusCode === 404) {
+          setNotify(true);
+          setInfo({
+            type: 'error',
+            title: 'Unexpected Error',
+            msg: i18n.t('phrases.couldNotLoadCart'),
+          });
+        }
+
+        if (statusCode === 500) {
+          setNotify(true);
+          setInfo({
+            type: 'error',
+            title: 'Unexpected Error',
+            msg: i18n.t('phrases.unexpectedError'),
+          });
+        }
+      })
+      .catch((err) => {
+        if (err) {
           setLoading(false);
           setNotify(true);
           setInfo({
@@ -211,10 +296,10 @@ const Cart = (props) => {
                     <Text style={styles.paymentTitle}>
                       {i18n.t('phrases.paymentDetails')}
                     </Text>
-                    {cart.length > 0 &&
+                    {_user.length > 0 &&
                       _user.find(
-                        (d) =>
-                          d?.pastryId?.creatorId?.companyName ===
+                        (data) =>
+                          data.pastryId.creatorId.companyName ===
                           `${Object.keys(_cart)[ind]}`,
                       ).pastryId.creatorId.suspend && (
                         <Text style={styles.suspended}>
@@ -299,9 +384,23 @@ const Cart = (props) => {
                   </View>
                 </View>
               ))
+            ) : sorry ? (
+              <View style={styles.sorryContainer}>
+                <TouchableOpacity onPress={() => onRefresh()}>
+                  <Image source={icon} style={styles.sorryImage} />
+                  <Text style={styles.sorryText}>
+                    {i18n.t('phrases.couldNotLoadCart')}
+                  </Text>
+                </TouchableOpacity>
+              </View>
             ) : (
-              <View>
-                <Text>{i18n.t('phrases.couldNotLoadCart')}</Text>
+              <View style={styles.sorryContainer}>
+                <TouchableOpacity onPress={() => Actions.main()}>
+                  <Image source={icon} style={styles.sorryImage} />
+                  <Text style={styles.sorryText}>
+                    {i18n.t('phrases.noItemInCart')}
+                  </Text>
+                </TouchableOpacity>
               </View>
             )}
           </View>

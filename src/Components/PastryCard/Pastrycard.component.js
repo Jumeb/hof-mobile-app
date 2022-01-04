@@ -11,20 +11,44 @@ import {BASE_URL, FormatUnits, Storage} from '../../utils';
 import Thousand from '../../utils/kSeparator';
 import styles from './Pastrycard.style';
 import {addToCart} from '../../redux/actions/CartAction';
+import {
+  addToFavourites,
+  addLikes,
+  addDislikes,
+} from '../../redux/actions/FavouritesActions';
 
 const PastryCard = (props) => {
-  const {layout, onPress, data, user, i18n} = props;
+  const {
+    layout,
+    onPress,
+    data,
+    user,
+    i18n,
+    favourites,
+    addToFavourites,
+    addDislikes,
+    addLikes,
+    _likes,
+    _dislikes,
+  } = props;
   const [loading, setLoading] = useState(false);
-  const [dislikes, setDislikes] = useState(data.dislikes.users.length);
-  const [likes, setLikes] = useState(data.likes.users.length);
+  const [dislikes, setDislikes] = useState(data?.dislikes?.users?.length);
+  const [likes, setLikes] = useState(data?.likes?.users?.length);
   const [notify, setNotify] = useState(false);
+  const [userLikes, setUserLikes] = useState([]);
+  const [userDislikes, setUserDislikes] = useState([]);
   const [info, setInfo] = useState({});
 
   useEffect(() => {
-    // //console.log(user);
     setDislikes(data.dislikes.users.length);
     setLikes(data.likes.users.length);
   }, [data]);
+
+  useEffect(() => {
+    // console.log(_likes);
+    setUserLikes(_likes);
+    setUserDislikes(_dislikes);
+  }, [_likes, _dislikes]);
 
   const addToFavourite = (id) => {
     setLoading(true);
@@ -46,8 +70,12 @@ const PastryCard = (props) => {
       })
       .then((res) => {
         const statusCode = res[0];
+        const response = res[1];
         setLoading(false);
         if (statusCode === 200) {
+          // console.log(response);
+          addToFavourites(response?.user?.favourites);
+
           setNotify(true);
           setInfo({
             type: 'success',
@@ -77,7 +105,6 @@ const PastryCard = (props) => {
           setNotify(true);
           setInfo({
             type: 'error',
-            title: 'Unexpected Error',
             msg: i18n.t('phrases.pleaseCheckInternet'),
           });
         }
@@ -110,6 +137,8 @@ const PastryCard = (props) => {
         if (statusCode === 200) {
           setLikes(response.likes.users.length);
           setDislikes(response.dislikes.users.length);
+          // addLikes(id);
+          // addDislikes(id);
         }
 
         if (statusCode === 500) {
@@ -126,7 +155,6 @@ const PastryCard = (props) => {
           setNotify(true);
           setInfo({
             type: 'error',
-            title: 'Unexpected Error',
             msg: i18n.t('phrases.pleaseCheckInternet'),
           });
         }
@@ -159,6 +187,8 @@ const PastryCard = (props) => {
         if (statusCode === 200) {
           setLikes(response.likes.users.length);
           setDislikes(response.dislikes.users.length);
+          // addLikes(id);
+          // addDislikes(id);
         }
 
         if (statusCode === 422) {
@@ -183,7 +213,6 @@ const PastryCard = (props) => {
           setNotify(true);
           setInfo({
             type: 'error',
-            title: 'Unexpected Error',
             msg: i18n.t('phrases.pleaseCheckInternet'),
           });
         }
@@ -290,7 +319,14 @@ const PastryCard = (props) => {
                 style={styles.likesContainer2}
                 onPress={() => likeItem(data?._id)}>
                 <Icons
-                  name="ios-thumbs-up-outline"
+                  name={
+                    data &&
+                    data?.likes?.users?.findIndex(
+                      (p) => p.userId?.toString() === user?._id.toString(),
+                    ) >= 0
+                      ? 'ios-thumbs-up-sharp'
+                      : 'ios-thumbs-up-outline'
+                  }
                   size={16}
                   color={theme.WHITE_COLOR}
                 />
@@ -300,7 +336,14 @@ const PastryCard = (props) => {
                 style={styles.likesContainer2}
                 onPress={() => disLikeItem(data?._id)}>
                 <Icons
-                  name="ios-thumbs-down-outline"
+                  name={
+                    data &&
+                    data?.dislikes?.users?.findIndex(
+                      (p) => p.userId?.toString() === user?._id.toString(),
+                    ) >= 0
+                      ? 'ios-thumbs-down-sharp'
+                      : 'ios-thumbs-down-outline'
+                  }
                   size={16}
                   color={theme.WHITE_COLOR}
                 />
@@ -310,7 +353,13 @@ const PastryCard = (props) => {
                 style={styles.likesContainer2}
                 onPress={() => addToFavourite(data?._id)}>
                 <Icons
-                  name="ios-heart-outline"
+                  name={
+                    favourites?.findIndex(
+                      (p) => p.pastryId.toString() === data?._id.toString(),
+                    ) >= 0
+                      ? 'ios-heart-sharp'
+                      : 'ios-heart-outline'
+                  }
                   size={16}
                   color={theme.WHITE_COLOR}
                 />
@@ -329,7 +378,10 @@ const PastryCard = (props) => {
           </View>
           <View style={styles.pastryDetails2}>
             <View style={styles.grid2}>
-              <Text style={styles.pastryName2}>{data?.name}</Text>
+              <Text style={styles.pastryName2}>
+                {data?.name?.substr(0, 15)}
+                {data?.name?.length >= 15 && '...'}
+              </Text>
               <View style={styles.pastryStats2}>
                 <Text style={styles.pastryPrice2}>{Thousand(data?.price)}</Text>
                 <Text style={styles.currency2}>XAF</Text>
@@ -361,7 +413,10 @@ const PastryCard = (props) => {
           </View>
           <View style={styles.infoContainer}>
             <View style={styles.pastryDetails}>
-              <Text style={styles.pastryName}>{data?.name}</Text>
+              <Text style={styles.pastryName}>
+                {data?.name?.substr(0, 20)}
+                {data?.name?.length >= 20 && '...'}
+              </Text>
               <TouchableOpacity
                 style={styles.bestInfoButton}
                 onPress={() => onPress(data)}>
@@ -393,31 +448,47 @@ const PastryCard = (props) => {
                 style={styles.likesContainer}
                 onPress={() => likeItem(data?._id)}>
                 <Icons
-                  name="ios-thumbs-up-outline"
+                  name={
+                    data &&
+                    data?.likes?.users?.findIndex(
+                      (p) => p.userId?.toString() === user?._id.toString(),
+                    ) >= 0
+                      ? 'ios-thumbs-up-sharp'
+                      : 'ios-thumbs-up-outline'
+                  }
                   size={16}
                   color={theme.SECONDARY_COLOR}
                 />
-                <Text style={styles.pastryLikes}>
-                  {FormatUnits(data?.likes?.users.length)}
-                </Text>
+                <Text style={styles.pastryLikes}>{FormatUnits(likes)}</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 style={styles.likesContainer}
                 onPress={() => disLikeItem(data?._id)}>
                 <Icons
-                  name="ios-thumbs-down-outline"
+                  name={
+                    data &&
+                    data?.dislikes?.users?.findIndex(
+                      (p) => p.userId?.toString() === user?._id.toString(),
+                    ) >= 0
+                      ? 'ios-thumbs-down-sharp'
+                      : 'ios-thumbs-down-outline'
+                  }
                   size={16}
                   color={theme.SECONDARY_COLOR}
                 />
-                <Text style={styles.pastryLikes}>
-                  {FormatUnits(data?.dislikes?.users.length)}
-                </Text>
+                <Text style={styles.pastryLikes}>{FormatUnits(dislikes)}</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 style={styles.likesContainer}
                 onPress={() => addToFavourite(data?._id)}>
                 <Icons
-                  name="ios-heart-outline"
+                  name={
+                    favourites?.findIndex(
+                      (p) => p.pastryId.toString() === data?._id.toString(),
+                    ) >= 0
+                      ? 'ios-heart-sharp'
+                      : 'ios-heart-outline'
+                  }
                   size={16}
                   color={theme.SECONDARY_COLOR}
                 />
@@ -440,13 +511,19 @@ const PastryCard = (props) => {
   );
 };
 
-const mapStateToProps = ({auth}) => {
+const mapStateToProps = ({auth, favourites}) => {
   return {
     user: auth.user,
+    favourites: favourites.favourites,
+    _likes: favourites.likes,
+    _dislikes: favourites.dislikes,
   };
 };
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({addToCart}, dispatch);
+  return bindActionCreators(
+    {addToCart, addToFavourites, addLikes, addDislikes},
+    dispatch,
+  );
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(PastryCard);

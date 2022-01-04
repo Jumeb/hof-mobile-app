@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   Image,
   SafeAreaView,
@@ -8,18 +8,78 @@ import {
 } from 'react-native';
 import Icons from 'react-native-vector-icons/Ionicons';
 import {connect} from 'react-redux';
+import {Actions} from 'react-native-router-flux';
+import LinearGradient from 'react-native-linear-gradient';
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
 
 import styles from './Wallet.style';
-import {Text} from '../../Components';
-import LinearGradient from 'react-native-linear-gradient';
+import {Notification, Text} from '../../Components';
 import theme from '../../../resources/Colors/theme';
 import {AromaDetails} from '../../sections';
-import {Actions} from 'react-native-router-flux';
+import {BASE_URL, KSeparator} from '../../utils';
 
 const Wallet = (props) => {
-  const {i18n} = props;
+  const {i18n, user} = props;
   const [details, setDetails] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [wallet, setWallet] = useState({});
+  const [info, setInfo] = useState({});
+  const [notify, setNotify] = useState(false);
+
+  useEffect(() => {
+    setLoading(true);
+    fetch(`${BASE_URL}/user/getwallet/${user._id}`, {
+      method: 'GET',
+    })
+      .then((res) => {
+        const statusCode = res.status;
+        const response = res.json();
+        return Promise.all([statusCode, response]);
+      })
+      .then((res) => {
+        const status = res[0];
+        const response = res[1];
+
+        if (status === 200) {
+          setWallet(response?.wallet);
+          setLoading(false);
+        }
+
+        if (status === 404) {
+          setNotify(true);
+          setInfo({
+            type: 'error',
+            msg: i18n.t('phrases.walletNotFound'),
+          });
+          return false;
+        }
+
+        if (status === 500) {
+          setNotify(true);
+          setInfo({
+            type: 'error',
+            msg: i18n.t('phrases.unexpectedError'),
+          });
+          return false;
+        }
+      })
+      .catch((err) => {
+        if (err) {
+          setLoading(false);
+          setNotify(true);
+          setInfo({
+            type: '',
+            msg: i18n.t('phrases.pleaseCheckInternet'),
+          });
+        }
+      });
+    // return () => {
+    //   setWallet({});
+    //   setLoading(false);
+    //   setDetails(false);
+    // };
+  }, [user._id, i18n]);
+
   return (
     <SafeAreaView style={styles.mainContainer}>
       <View style={styles.idContainer}>
@@ -29,7 +89,7 @@ const Wallet = (props) => {
           imageStyle={styles.idImage}
         />
         <Text style={styles.idGreetings}>Hello,</Text>
-        <Text style={styles.idName}> Jume</Text>
+        <Text style={styles.idName}> {user.name}</Text>
       </View>
       <ScrollView
         horizontal={false}
@@ -53,12 +113,16 @@ const Wallet = (props) => {
             {i18n.t('phrases.totalBalance')}
           </Text>
           <View style={styles.infoContainer}>
-            <Text style={styles.walletInfo}>9,394</Text>
+            <Text style={styles.walletInfo}>
+              {wallet && wallet?.amount && KSeparator(wallet?.amount)}
+            </Text>
             <Text style={styles.walletCoin}> AC</Text>
           </View>
           <View style={styles.infoContainer}>
             <Text style={styles.walletEq}>Eq: </Text>
-            <Text style={styles.walletCash}>XAF 9,394</Text>
+            <Text style={styles.walletCash}>
+              {wallet && wallet?.amount && KSeparator(wallet?.amount)} XAF
+            </Text>
           </View>
           <TouchableOpacity style={styles.topupButton}>
             <Icons name="ios-add-outline" size={16} color={theme.WHITE_COLOR} />
@@ -171,13 +235,15 @@ const Wallet = (props) => {
         </View>
       </ScrollView>
       <AromaDetails details={details} setDetails={setDetails} />
+      <Notification info={info} notify={notify} setNotify={setNotify} />
     </SafeAreaView>
   );
 };
 
-const mapStateToProps = ({i18n}) => {
+const mapStateToProps = ({i18n, auth}) => {
   return {
     i18n: i18n.i18n,
+    user: auth.user,
   };
 };
 

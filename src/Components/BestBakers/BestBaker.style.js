@@ -98,6 +98,20 @@ const styles = StyleSheet.create({
     shadowRadius: 6,
     elevation: 3,
   },
+  suspended: {
+    position: 'absolute',
+    backgroundColor: theme.DANGER_COLOR,
+    borderRadius: theme.BORDER_IMAGE - 4,
+    paddingHorizontal: 5,
+    paddingVertical: 2,
+    top: '70%',
+    right: 10,
+    transform: [{rotateZ: '-25deg'}],
+  },
+  suspendedText: {
+    fontSize: theme.FONT_SIZE_EXTRA_SMALL,
+    color: theme.WHITE_COLOR,
+  },
 });
 
 export default styles;

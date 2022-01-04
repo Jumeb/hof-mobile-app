@@ -120,6 +120,25 @@ const styles = StyleSheet.create({
     marginTop: -4,
     marginBottom: 4,
   },
+  sorryContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: theme.HEIGHT_100 * 0.82,
+  },
+  sorryImage: {
+    resizeMode: 'contain',
+    height: 60,
+    tintColor: theme.PRIMARY_COLOR,
+    marginVertical: 10,
+  },
+  sorryText: {
+    fontSize: theme.FONT_SIZE_SMALL,
+    color: theme.TERTIARY_COLOR,
+    fontWeight: theme.FONT_WEIGHT_BOLD,
+    letterSpacing: 0.7,
+    textAlign: 'center',
+  },
 });
 
 export default styles;

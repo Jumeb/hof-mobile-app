@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {ScrollView, TouchableOpacity, View} from 'react-native';
 import Modal from 'react-native-modal';
 import Icons from 'react-native-vector-icons/Ionicons';

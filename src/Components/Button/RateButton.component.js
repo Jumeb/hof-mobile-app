@@ -9,7 +9,7 @@ import styles from './Button.style';
 const RateButton = (props) => {
   const {title, onPress, icon} = props;
   return (
-    <TouchableOpacity style={styles.rateButton}>
+    <TouchableOpacity style={styles.rateButton} onPress={() => onPress()}>
       <Icons name={icon} size={16} color={theme.WHITE_COLOR} />
       <Text style={styles.rateButtonText}>{title}</Text>
     </TouchableOpacity>

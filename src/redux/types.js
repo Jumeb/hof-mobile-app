@@ -13,3 +13,7 @@ export const DELETE_FROM_CART = 'delete_from_cart';
 export const ADD_TO_FAVOURITE = 'add_to_favourite';
 export const DELETE_FROM_FAVOURITE = 'delete_from_favourite';
 export const ADD_CARTOBJ = 'add_cartobj';
+export const ADD_LIKES = 'add_likes';
+export const ADD_ALL_LIKES = 'add_likes';
+export const ADD_DISLIKES = 'add_dislikes';
+export const ADD_ALL_DISLIKES = 'add_all_dislikes';

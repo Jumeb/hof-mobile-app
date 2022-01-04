@@ -1,14 +1,171 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Image, Text, TouchableOpacity, View} from 'react-native';
 import {Actions} from 'react-native-router-flux';
 import Icons from 'react-native-vector-icons/Ionicons';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
 
 import theme from '../../../resources/Colors/theme';
 import {BASE_URL} from '../../utils';
 import styles from './BakerCard.style';
 
 const Bakers = (props) => {
-  const {baker, rank, onPress, i18n} = props;
+  const {baker, rank, onPress, i18n, user, token} = props;
+  const [followers, setFollowers] = useState(0);
+  const [notify, setNotify] = useState(false);
+  const [info, setInfo] = useState({});
+  const [likes, setLikes] = useState(0);
+  const [dislikes, setDislikes] = useState(0);
+
+  const disLikeChef = (id) => {
+    if (!user.hasOwnProperty('name')) {
+      setInfo(true);
+      setInfo({
+        type: 'success',
+        msg: `Please create your account to dislike ${baker.companyName}`,
+        title: 'Unsuccessful',
+      });
+      return false;
+    }
+    fetch(`${BASE_URL}/baker/dislike/${id}?user=${user._id}`, {
+      method: 'POST',
+      headers: {
+        Authorization: `Basic ${token}`,
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((res) => {
+        const statusCode = res.status;
+        const response = res.json();
+        return Promise.all([statusCode, response]);
+      })
+      .then((res) => {
+        const statusCode = res[0];
+        const response = res[1].baker;
+
+        if (statusCode === 200) {
+          setLikes(response.likes.users.length);
+          setDislikes(response.dislikes.users.length);
+          props.setRefresh(true);
+        }
+
+        if (statusCode === 500) {
+          console.log('error');
+        }
+      })
+      .catch((err) => {
+        if (err) {
+          setInfo(true);
+          setInfo({
+            type: 'error',
+            title: 'Unexpected Error',
+            msg: 'Please check your internet connection.',
+          });
+        }
+      });
+  };
+
+  const likeChef = (id) => {
+    if (!user.hasOwnProperty('name')) {
+      setInfo(true);
+      setInfo({
+        type: 'success',
+        msg: `Please create your account to like ${baker.companyName}`,
+        title: 'Unsuccessful',
+      });
+      return false;
+    }
+    fetch(`${BASE_URL}/baker/like/${id}?user=${user._id}`, {
+      method: 'POST',
+      headers: {
+        Authorization: `Basic ${token}`,
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((res) => {
+        const statusCode = res.status;
+        const response = res.json();
+        return Promise.all([statusCode, response]);
+      })
+      .then((res) => {
+        const statusCode = res[0];
+        const response = res[1].baker;
+        if (statusCode === 200) {
+          setLikes(response.likes.users.length);
+          setDislikes(response.dislikes.users.length);
+          props.setRefresh(true);
+        }
+
+        if (statusCode === 404) {
+          console.log('response');
+        }
+
+        if (statusCode === 500) {
+          console.log('error 500');
+        }
+      })
+      .catch((err) => {
+        if (err) {
+          setInfo(true);
+          setInfo({
+            type: 'error',
+            title: 'Unexpected Error',
+            msg: 'Please check your internet connection.',
+          });
+        }
+      });
+  };
+
+  const followChef = (id) => {
+    console.log('posting');
+    if (!user.hasOwnProperty('name')) {
+      setInfo(true);
+      setInfo({
+        type: 'success',
+        msg: `Please create your account to follow ${baker.companyName}`,
+        title: 'Unsuccessful',
+      });
+      return false;
+    }
+    fetch(`${BASE_URL}/baker/follow/${id}?user=${user._id}`, {
+      method: 'POST',
+      headers: {
+        Authorization: `Basic ${token}`,
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((res) => {
+        const statusCode = res.status;
+        const response = res.json();
+        return Promise.all([statusCode, response]);
+      })
+      .then((res) => {
+        const statusCode = res[0];
+        const response = res[1].baker;
+        if (statusCode === 200) {
+          setFollowers(response.followers.users.length);
+          props.setRefresh(true);
+        }
+
+        if (statusCode === 404) {
+          console.log('response');
+        }
+
+        if (statusCode === 500) {
+          console.log('error 500');
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        setInfo(true);
+        setInfo({
+          type: 'error',
+          title: 'Unexpected Error',
+          msg: 'Please check your internet connection.',
+        });
+      });
+  };
+
   return (
     <View style={styles.mainCard}>
       <View>
@@ -59,6 +216,13 @@ const Bakers = (props) => {
               </TouchableOpacity>
             </View>
           </View>
+          {baker?.suspend && (
+            <View style={styles.suspended}>
+              <Text style={styles.suspendedText}>
+                {i18n.t('words.suspended')}
+              </Text>
+            </View>
+          )}
         </View>
         <View style={styles.companyCredentials}>
           <Text style={styles.companyFounder}>{baker?.name}</Text>
@@ -71,4 +235,15 @@ const Bakers = (props) => {
   );
 };
 
-export default Bakers;
+const mapStateToProps = ({auth}) => {
+  return {
+    user: auth.user,
+    token: auth.token,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({}, dispatch);
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Bakers);

@@ -111,6 +111,7 @@ const styles = StyleSheet.create({
     shadowRadius: 8,
     shadowOpacity: 0.6,
     elevation: 3,
+    marginLeft: 'auto',
   },
 });
 

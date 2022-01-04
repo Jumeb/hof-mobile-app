@@ -11,9 +11,23 @@ import {BASE_URL, FormatUnits, Storage} from '../../utils';
 import Thousand from '../../utils/kSeparator';
 import styles from './Best.style';
 import {addToCart} from '../../redux/actions/CartAction';
+import {
+  addToFavourites,
+  addDislikes,
+  addLikes,
+} from '../../redux/actions/FavouritesActions';
 
 const Best = (props) => {
-  const {data, onPress, i18n, user} = props;
+  const {
+    data,
+    onPress,
+    i18n,
+    user,
+    favourites,
+    addToFavourites,
+    _likes,
+    _dislikes,
+  } = props;
   const [loading, setLoading] = useState(false);
   const [dislikes, setDislikes] = useState(data.dislikes.users.length);
   const [likes, setLikes] = useState(data.likes.users.length);
@@ -49,6 +63,7 @@ const Best = (props) => {
         const response = res[1];
         setLoading(false);
         if (statusCode === 200) {
+          addToFavourites(response?.user?.favourites);
           setNotify(true);
           setInfo({
             type: 'success',
@@ -295,7 +310,14 @@ const Best = (props) => {
               style={styles.likesContainer}
               onPress={() => likeItem(data?._id)}>
               <Icons
-                name="ios-thumbs-up-outline"
+                name={
+                  data &&
+                  data?.likes?.users?.findIndex(
+                    (p) => p.userId?.toString() === user?._id.toString(),
+                  ) >= 0
+                    ? 'ios-thumbs-up-sharp'
+                    : 'ios-thumbs-up-outline'
+                }
                 size={16}
                 color={theme.WHITE_COLOR}
               />
@@ -305,7 +327,14 @@ const Best = (props) => {
               style={styles.likesContainer}
               onPress={() => disLikeItem(data?._id)}>
               <Icons
-                name="ios-thumbs-down-outline"
+                name={
+                  data &&
+                  data?.dislikes?.users?.findIndex(
+                    (p) => p.userId?.toString() === user?._id.toString(),
+                  ) >= 0
+                    ? 'ios-thumbs-down-sharp'
+                    : 'ios-thumbs-down-outline'
+                }
                 size={16}
                 color={theme.WHITE_COLOR}
               />
@@ -315,7 +344,15 @@ const Best = (props) => {
               style={styles.likesContainer2}
               onPress={() => addToFavourite(data?._id)}>
               <Icons
-                name="ios-heart-outline"
+                name={
+                  favourites &&
+                  favourites?.findIndex(
+                    (p) => p.pastryId?.toString() === data?._id.toString(),
+                  ) >= 0
+                    ? 'ios-heart-sharp'
+                    : 'ios-heart-outline'
+                }
+                // name="ios-heart-outline"
                 size={16}
                 color={theme.WHITE_COLOR}
               />
@@ -325,7 +362,10 @@ const Best = (props) => {
       </ImageBackground>
       <View style={styles.bestDetail}>
         <View>
-          <Text style={styles.pastryName}>{data?.name}</Text>
+          <Text style={styles.pastryName}>
+            {data?.name?.substr(0, 22)}
+            {data?.name?.length >= 22 && '...'}
+          </Text>
           <Text style={styles.pastryPrice}>{Thousand(data?.price)} XAF</Text>
         </View>
         <TouchableOpacity
@@ -339,14 +379,20 @@ const Best = (props) => {
   );
 };
 
-const mapStateToProps = ({auth}) => {
+const mapStateToProps = ({auth, favourites}) => {
   return {
     user: auth.user,
+    favourites: favourites.favourites,
+    _likes: favourites.likes,
+    _dislikes: favourites.dislikes,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({addToCart}, dispatch);
+  return bindActionCreators(
+    {addToCart, addToFavourites, addLikes, addDislikes},
+    dispatch,
+  );
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Best);

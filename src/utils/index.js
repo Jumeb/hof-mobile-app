@@ -7,7 +7,7 @@ import BASE_URL from './globalVariable';
 import AuthTel from './authTel';
 import Search from './search';
 import SearchObj from './searchObj';
-
+import SearchPop from './searchPopulate';
 export {
   AuthMail,
   Storage,
@@ -18,4 +18,5 @@ export {
   AuthTel,
   Search,
   SearchObj,
+  SearchPop,
 };
