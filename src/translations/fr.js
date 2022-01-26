@@ -69,6 +69,8 @@ export default {
     suspended: 'Suspendue',
     order: 'Commande',
     //Translate
+    recipe: 'Recette',
+    by: 'Par',
   },
   phrases: {
     welcomeToFlavours: 'Bienvenue à Flavours',
@@ -202,5 +204,8 @@ export default {
     noItemInCart: 'Aucun article dans le panier ne correspond à la recherche.',
     enterYourMessage: 'Entrez un message personnalisé.',
     //Translate
+    notAvailable: 'Indisponible',
+    availableDays: 'Jours disponibles',
+    availableDay: 'Jour disponible',
   },
 };

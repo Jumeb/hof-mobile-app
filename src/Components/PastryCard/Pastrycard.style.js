@@ -214,6 +214,25 @@ const styles = StyleSheet.create({
   marginRight: {
     marginRight: 7,
   },
+  naContainer: {
+    paddingHorizontal: 7,
+    paddingVertical: 1,
+    borderRadius: theme.BORDER_IMAGE - 2,
+    transform: [{rotateZ: '-25deg'}],
+    backgroundColor: theme.DANGER_COLOR,
+  },
+  naContainer1: {
+    paddingHorizontal: 7,
+    paddingVertical: 1,
+    borderRadius: theme.BORDER_IMAGE - 2,
+    transform: [{rotateZ: '-25deg'}],
+    backgroundColor: theme.DANGER_COLOR,
+    marginBottom: 5,
+  },
+  naText: {
+    fontSize: theme.FONT_SIZE_EXTRA_SMALL - 1,
+    color: theme.WHITE_COLOR,
+  },
 });
 
 export default styles;

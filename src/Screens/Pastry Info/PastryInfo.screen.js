@@ -26,6 +26,7 @@ import Thousand from '../../utils/kSeparator';
 import {BASE_URL} from '../../utils';
 import {addToCart} from '../../redux/actions/CartAction';
 import {addToFavourites} from '../../redux/actions/FavouritesActions';
+import {Today} from '../../utils/date';
 
 const PastryInfo = (props) => {
   const {i18n, data, user, cart, addToFavourites} = props;
@@ -361,7 +362,9 @@ const PastryInfo = (props) => {
             })}
         </SwiperFlatList>
         <View style={styles.infoContainer}>
-          <Text style={styles.categoryName}>{data?.type}</Text>
+          <Text style={styles.categoryName}>
+            {data?.type} {i18n.t('words.by')} {data?.creatorId?.name}
+          </Text>
           <View style={styles.detailContainer}>
             <Text style={styles.pastryName}>{data?.name}</Text>
             <Text style={styles.pastryPrice}>{Thousand(data?.price)} XAF</Text>
@@ -376,6 +379,20 @@ const PastryInfo = (props) => {
             <Text style={styles.date}>{data?.daysRequired}</Text>{' '}
             {i18n.t('phrases.daysIsRequiredForDelivery')}
           </Text>
+          <Text style={styles.aboutTitle}>
+            {data?.daysAvailable && data?.daysAvailable.length > 1
+              ? i18n.t('phrases.availableDays')
+              : i18n.t('phrases.availableDay')}
+          </Text>
+          <View style={styles.dayContainer}>
+            {data?.daysAvailable &&
+              data?.daysAvailable.map((day, index) => (
+                <Text key={index} style={styles.aboutText}>
+                  {day}
+                  {', '}
+                </Text>
+              ))}
+          </View>
           <Text style={styles.aboutTitle}>{i18n.t('words.stats')}</Text>
           <View style={styles.rateContainer}>
             <RateButton
@@ -416,32 +433,54 @@ const PastryInfo = (props) => {
                 : Thousand(qty >= 1 ? qty * data?.price : 0)}{' '}
               XAF
             </Text>
-            <View style={styles.buttonContainer}>
-              <TouchableOpacity
-                style={styles.qtyButton}
-                onPress={() => subFromCart(data?._id)}>
-                <Icons
-                  name="ios-remove-outline"
-                  size={16}
-                  color={theme.WHITE_COLOR}
-                />
-              </TouchableOpacity>
-              <Text style={styles.qtyText}>{qty}</Text>
-              <TouchableOpacity
-                style={styles.qtyButton}
-                onPress={() => addToUserCart(data?._id)}>
-                <Icons
-                  name="ios-add-outline"
-                  size={16}
-                  color={theme.WHITE_COLOR}
-                />
-              </TouchableOpacity>
-            </View>
+            {data?.isAvailable &&
+            data?.daysAvailable.findIndex((day) => {
+              return day === Today(new Date());
+            }) >= 0 ? (
+              <View style={styles.buttonContainer}>
+                <TouchableOpacity
+                  style={styles.qtyButton}
+                  onPress={() => subFromCart(data?._id)}>
+                  <Icons
+                    name="ios-remove-outline"
+                    size={16}
+                    color={theme.WHITE_COLOR}
+                  />
+                </TouchableOpacity>
+                <Text style={styles.qtyText}>{qty}</Text>
+                <TouchableOpacity
+                  style={styles.qtyButton}
+                  onPress={() => addToUserCart(data?._id)}>
+                  <Icons
+                    name="ios-add-outline"
+                    size={16}
+                    color={theme.WHITE_COLOR}
+                  />
+                </TouchableOpacity>
+              </View>
+            ) : (
+              <View style={styles.naContainer}>
+                <Text style={styles.naText}>
+                  {i18n.t('phrases.notAvailable')}
+                </Text>
+              </View>
+            )}
           </View>
-          <GradientButton
-            title={i18n.t('phrases.addToCart')}
-            onPress={() => AddToCart()}
-          />
+          {data?.isAvailable &&
+            data?.daysAvailable.findIndex((day) => {
+              return day === Today(new Date());
+            }) >= 0 && (
+              <GradientButton
+                title={i18n.t('phrases.addToCart')}
+                onPress={() => AddToCart()}
+              />
+            )}
+          <Text style={styles.pastryName}>{i18n.t('words.recipe')}</Text>
+          <Text style={styles.aboutText}>
+            {data?.recipe && data?.recipe.length > 1
+              ? data?.recipe
+              : i18n.t('phrases.notAvailable')}
+          </Text>
         </View>
       </ScrollView>
       <Notification notify={notify} setNotify={setNotify} info={info} />

@@ -104,9 +104,12 @@ class SplashScreen extends Component {
             />
             <Text style={styles.appName}>Flavours</Text>
           </View>
-          <Text style={styles.madeText}>
-            {this.props.i18n.t('words.from')} JB Inc.
-          </Text>
+          <View>
+            <Image
+              source={require('../../../resources/images/jbInc.png')}
+              style={styles.appCreatorLogo}
+            />
+          </View>
         </LinearGradient>
       </SafeAreaView>
     );

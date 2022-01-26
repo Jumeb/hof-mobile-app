@@ -16,6 +16,7 @@ import {
   addDislikes,
   addLikes,
 } from '../../redux/actions/FavouritesActions';
+import {Today} from '../../utils/date';
 
 const Best = (props) => {
   const {
@@ -368,11 +369,20 @@ const Best = (props) => {
           </Text>
           <Text style={styles.pastryPrice}>{Thousand(data?.price)} XAF</Text>
         </View>
-        <TouchableOpacity
-          style={styles.addToCartButton}
-          onPress={() => addToUserCart(data?._id)}>
-          <Icons name="ios-add-outline" size={16} color={theme.WHITE_COLOR} />
-        </TouchableOpacity>
+        {data?.isAvailable &&
+        data?.daysAvailable.findIndex((day) => {
+          return day === Today(new Date());
+        }) >= 0 ? (
+          <TouchableOpacity
+            style={styles.addToCartButton}
+            onPress={() => addToUserCart(data?._id)}>
+            <Icons name="ios-add-outline" size={16} color={theme.WHITE_COLOR} />
+          </TouchableOpacity>
+        ) : (
+          <View style={styles.naContainer}>
+            <Text style={styles.naText}>{i18n.t('phrases.notAvailable')}</Text>
+          </View>
+        )}
       </View>
       <Notification notify={notify} setNotify={setNotify} info={info} />
     </View>

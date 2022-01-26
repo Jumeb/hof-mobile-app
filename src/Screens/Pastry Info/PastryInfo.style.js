@@ -132,6 +132,21 @@ const styles = StyleSheet.create({
     fontSize: theme.FONT_SIZE_SMALL,
     fontWeight: theme.FONT_WEIGHT_BOLD,
   },
+  naContainer: {
+    paddingHorizontal: 7,
+    paddingVertical: 1,
+    borderRadius: theme.BORDER_IMAGE - 2,
+    transform: [{rotateZ: '-10deg'}],
+    backgroundColor: theme.DANGER_COLOR,
+  },
+  naText: {
+    fontSize: theme.FONT_SIZE_EXTRA_SMALL,
+    color: theme.WHITE_COLOR,
+  },
+  dayContainer: {
+    flex: 1,
+    flexDirection: 'row',
+  },
 });
 
 export default styles;

@@ -113,6 +113,17 @@ const styles = StyleSheet.create({
     elevation: 3,
     marginLeft: 'auto',
   },
+  naContainer: {
+    paddingHorizontal: 7,
+    paddingVertical: 1,
+    borderRadius: theme.BORDER_IMAGE - 2,
+    transform: [{rotateZ: '-15deg'}],
+    backgroundColor: theme.DANGER_COLOR,
+  },
+  naText: {
+    fontSize: theme.FONT_SIZE_EXTRA_SMALL - 2,
+    color: theme.WHITE_COLOR,
+  },
 });
 
 export default styles;

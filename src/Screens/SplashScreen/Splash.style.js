@@ -19,6 +19,13 @@ const styles = StyleSheet.create({
     tintColor: colorTheme.WHITE_COLOR,
     alignSelf: 'center',
   },
+  appCreatorLogo: {
+    resizeMode: 'contain',
+    height: 90,
+    width: 90,
+    tintColor: colorTheme.WHITE_COLOR,
+    alignSelf: 'center',
+  },
   appName: {
     fontSize: theme.FONT_SIZE_LARGE,
     color: theme.WHITE_COLOR,
@@ -29,7 +36,6 @@ const styles = StyleSheet.create({
   },
   madeText: {
     textAlign: 'center',
-    padding: 12,
     fontSize: colorTheme.FONT_SIZE_SMALL + 1,
     color: colorTheme.WHITE_COLOR,
     fontWeight: '800',

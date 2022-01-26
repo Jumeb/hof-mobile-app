@@ -13,6 +13,21 @@ const month = [
   'December',
 ];
 
+const fullDay = [
+  'Sunday',
+  'Monday',
+  'Tuesday',
+  'Wednesday',
+  'Thursday',
+  'Friday',
+  'Saturday',
+];
+
+export const Today = (date) => {
+  const myDate = new Date(date);
+  return fullDay[myDate.getDay()];
+};
+
 let yesterday = new Date();
 yesterday.setDate(yesterday.getDate() - 1);
 

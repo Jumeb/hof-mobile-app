@@ -16,6 +16,7 @@ import {
   addLikes,
   addDislikes,
 } from '../../redux/actions/FavouritesActions';
+import {Today} from '../../utils/date';
 
 const PastryCard = (props) => {
   const {
@@ -387,15 +388,24 @@ const PastryCard = (props) => {
                 <Text style={styles.currency2}>XAF</Text>
               </View>
             </View>
-            <TouchableOpacity
-              style={styles.addToCartButton}
-              onPress={() => addToUserCart(data?._id)}>
-              <Icons
-                name="ios-add-outline"
-                size={16}
-                color={theme.WHITE_COLOR}
-              />
-            </TouchableOpacity>
+            {data?.isAvailable &&
+            data?.daysAvailable.findIndex((day) => {
+              return day === Today(new Date());
+            }) >= 0 ? (
+              <TouchableOpacity
+                style={styles.addToCartButton}
+                onPress={() => addToUserCart(data?._id)}>
+                <Icons
+                  name="ios-add-outline"
+                  size={16}
+                  color={theme.WHITE_COLOR}
+                />
+              </TouchableOpacity>
+            ) : (
+              <View style={styles.naContainer}>
+                <Text style={styles.naText}>N/A</Text>
+              </View>
+            )}
           </View>
         </View>
       ) : (
@@ -493,15 +503,24 @@ const PastryCard = (props) => {
                   color={theme.SECONDARY_COLOR}
                 />
               </TouchableOpacity>
-              <TouchableOpacity
-                style={styles.addToCartButton}
-                onPress={() => addToUserCart(data?._id)}>
-                <Icons
-                  name="ios-add-outline"
-                  size={16}
-                  color={theme.WHITE_COLOR}
-                />
-              </TouchableOpacity>
+              {data?.isAvailable &&
+              data?.daysAvailable.findIndex((day) => {
+                return day === Today(new Date());
+              }) >= 0 ? (
+                <TouchableOpacity
+                  style={styles.addToCartButton}
+                  onPress={() => addToUserCart(data?._id)}>
+                  <Icons
+                    name="ios-add-outline"
+                    size={16}
+                    color={theme.WHITE_COLOR}
+                  />
+                </TouchableOpacity>
+              ) : (
+                <View style={styles.naContainer1}>
+                  <Text style={styles.naText}>N/A</Text>
+                </View>
+              )}
             </View>
           </View>
         </View>

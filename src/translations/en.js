@@ -69,6 +69,8 @@ export default {
     suspended: 'Suspended',
     order: 'Order',
     //New
+    recipe: 'Recipe',
+    by: 'By',
   },
   phrases: {
     welcomeToFlavours: 'Welcome to Flavours',
@@ -196,5 +198,8 @@ export default {
     noItemInCart: 'No item in cart matched the search.',
     enterYourMessage: 'Enter custom message',
     //New
+    notAvailable: 'Not available',
+    availableDays: 'Available Days',
+    availableDay: 'Available Day',
   },
 };
