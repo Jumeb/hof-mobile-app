@@ -153,7 +153,7 @@ const PastryInfo = (props) => {
 
   useEffect(() => {
     let _images = [];
-    _images.push(data?.image);
+    _images = data?.image;
     setImages(_images);
   }, [data?.image]);
 
@@ -347,16 +347,18 @@ const PastryInfo = (props) => {
         showsHorizontalScrollIndicator={false}
         style={styles.scrollView}>
         <SwiperFlatList autoplay autoplayDelay={10} autoplayLoop>
-          {images.map((d, key) => {
-            return (
-              <Header
-                data={d}
-                index={key + 1}
-                length={images.length}
-                key={key}
-              />
-            );
-          })}
+          {images &&
+            images.length >= 1 &&
+            images.map((d, key) => {
+              return (
+                <Header
+                  data={d}
+                  index={key + 1}
+                  length={images.length}
+                  key={key}
+                />
+              );
+            })}
         </SwiperFlatList>
         <View style={styles.infoContainer}>
           <Text style={styles.categoryName}>{data?.type}</Text>
@@ -468,7 +470,7 @@ const Header = (props) => {
       <Image
         source={
           data
-            ? {uri: BASE_URL + '/' + data}
+            ? {uri: `${BASE_URL}/${data}`}
             : require('../../../resources/images/bds-7.jpg')
         }
         style={styles.pastryImage}

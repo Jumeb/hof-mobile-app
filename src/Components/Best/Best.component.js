@@ -272,7 +272,7 @@ const Best = (props) => {
         style={styles.bestBackground}
         source={
           data?.image
-            ? {uri: BASE_URL + '/' + data?.image}
+            ? {uri: `${BASE_URL}/${data?.image[0]}`}
             : require('../../../resources/images/pans-2.jpg')
         }>
         <LinearGradient

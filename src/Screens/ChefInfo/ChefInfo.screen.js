@@ -28,17 +28,19 @@ const ChefInfo = (props) => {
         showsHorizontalScrollIndicator={false}
         style={styles.scrollView}>
         <SwiperFlatList autoplay autoplayDelay={10} autoplayLoop>
-          {images.map((d, index) => {
-            return (
-              <Header
-                data={d}
-                index={index + 1}
-                length={images.length}
-                key={index}
-                logo={chef?.companyImage}
-              />
-            );
-          })}
+          {images &&
+            images.length >= 1 &&
+            images.map((d, index) => {
+              return (
+                <Header
+                  data={d}
+                  index={index + 1}
+                  length={images.length}
+                  key={index}
+                  logo={chef?.companyImage}
+                />
+              );
+            })}
         </SwiperFlatList>
         <View style={styles.infoContainer}>
           <Text style={styles.companyName}>{chef?.companyName}</Text>

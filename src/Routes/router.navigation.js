@@ -35,9 +35,9 @@ const Routes = () => {
         <Scene key="forgotPassword" component={ForgotPassword} hideNavBar />
         <Scene key="SignUp" component={SignUpScreen} hideNavBar />
         <Scene key="main" tabs tabBarComponent={TabBar} hideNavBar>
-          <Scene key="home" hideNavBar>
+          <Scene key="shop" hideNavBar>
+            <Scene key="shop" component={Shop} baker={{_id: '12'}} />
             <Scene key="home" component={Home} title="home" />
-            <Scene key="shop" component={Shop} />
             <Scene key="cart" component={Cart} />
             <Scene key="checkout" component={Checkout} />
             <Scene key="pastryInfo" component={PastryInfo} hideNavBar />

@@ -22,7 +22,7 @@ const Categories = (props) => {
         }>
         <TouchableOpacity
           style={styles.varietyButton}
-          onPress={() => setActiveIndex(categoryIndex)}>
+          onPress={() => setActiveIndex(category, categoryIndex)}>
           <Text
             style={[
               styles.varietyButtonText,

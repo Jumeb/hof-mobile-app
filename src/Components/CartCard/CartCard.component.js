@@ -147,7 +147,7 @@ const CartCard = (props) => {
         <Image
           source={
             item?.pastryId?.image
-              ? {uri: BASE_URL + '/' + item?.pastryId?.image}
+              ? {uri: `${BASE_URL}/${item?.pastryId?.image[0]}`}
               : require('../../../resources/images/logo-1.png')
           }
           imageStyle={styles.cardImage}

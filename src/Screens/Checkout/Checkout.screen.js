@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   Platform,
   UIManager,
@@ -21,6 +21,7 @@ import best from '../../../resources/Dummy/best.json';
 import Thousand from '../../utils/kSeparator';
 import styles from './Checkout.style';
 import {Card, ItemsDetail, Location, Momo} from '../../sections';
+import {BASE_URL, KSeparator} from '../../utils';
 
 if (
   Platform.OS === 'android' &&
@@ -30,16 +31,20 @@ if (
 }
 
 const Checkout = (props) => {
-  const {i18n, cart} = props;
-  const [info, setInfo] = useState(false);
+  const {i18n, cart, user, token, order} = props;
+  const [itemDet, setItemDet] = useState(false);
   const [showAddress, setShowAddress] = useState(false);
   const [isAddress, setIsAddress] = useState(false);
+  const [address, setAddress] = useState({});
   const [isMomo, setIsMomo] = useState(false);
   const [momo, setMomo] = useState('');
   const [isCard, setIsCard] = useState(false);
   const [card, setCard] = useState({});
   const [isPay, setIsPay] = useState(false);
   const [pay, setPay] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [notify, setNotify] = useState(false);
+  const [info, setInfo] = useState({});
 
   const animatedHeight = {
     height: showAddress ? 180 : 0,
@@ -59,6 +64,47 @@ const Checkout = (props) => {
     setIsMomo(false);
   };
 
+  const Order = (creatorId) => {
+    fetch(`${BASE_URL}/create/order/${user._id}?baker=${creatorId}`, {
+      method: 'POST',
+      headers: {
+        Authorization: `Basic ${token}`,
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((res) => {
+        const statusCode = res.status;
+        const response = res.json();
+        return Promise.all([statusCode, response]);
+      })
+      .then((res) => {
+        const statusCode = res[0];
+        const response = res[1];
+        setLoading(false);
+
+        if (statusCode === 200) {
+          setNotify(true);
+          setInfo({
+            type: 'success',
+            msg: 'Successfully placed your order',
+          });
+          setTimeout(() => {
+            props.setRefresh(true);
+          }, 2000);
+        }
+      })
+      .catch((err) => {
+        if (err) {
+          setLoading(false);
+          setNotify(true);
+          setInfo({
+            type: 'error',
+            msg: i18n.t('phrases.pleaseCheckInternet'),
+          });
+        }
+      });
+  };
+
   return (
     <SafeAreaView style={styles.mainContainer}>
       <NavBar
@@ -70,17 +116,17 @@ const Checkout = (props) => {
         <View style={styles.editProfileContainer}>
           <Text style={styles.editProfile}>{i18n.t('words.checkout')}</Text>
         </View>
-        <Text style={styles.title}>{i18n.t('words.items')}</Text>
+        <Text style={styles.title}>{i18n.t('words.order')}</Text>
         <FlatList
           horizontal={true}
           showsHorizontalScrollIndicator={false}
-          data={best}
+          data={order}
           numColumns={1}
           key={'flat'}
           renderItem={({item, key}) => (
-            <OrderDetailsCard key={key} onPress={() => setInfo(true)} />
+            <OrderDetailsCard key={key} item={item} i18n={i18n} />
           )}
-          keyExtractor={(item) => item.id.toString()}
+          keyExtractor={(item) => item._id.toString()}
         />
         <View style={styles.addressContainer}>
           <TouchableOpacity
@@ -168,7 +214,21 @@ const Checkout = (props) => {
           </Text>
           <View style={styles.budgetContainer}>
             <Text style={styles.budgetTitle}>{i18n.t('words.subtotal')}</Text>
-            <Text style={styles.budgetPrice}>XAF {Thousand(50000)}</Text>
+            <Text style={styles.budgetPrice}>
+              {KSeparator(
+                order.reduce(
+                  (sum, item) =>
+                    sum +
+                    (item.pastryId.discount
+                      ? ((100 - item.pastryId.discount) / 100) *
+                        item.pastryId.price *
+                        item.quantity
+                      : item.pastryId.price * item.quantity),
+                  0,
+                ),
+              )}{' '}
+              XAF{' '}
+            </Text>
           </View>
           <View style={styles.budgetContainer}>
             <Text style={styles.budgetTitle}>{i18n.t('words.delivery')}</Text>
@@ -176,14 +236,28 @@ const Checkout = (props) => {
           </View>
           <View style={styles.budgetContainer}>
             <Text style={styles.budgetTitle}>
-              {i18n.t('phrases.estimatedTax')}
+              {i18n.t('phrases.platformTax')}
             </Text>
-            <Text style={styles.budgetPrice}>XAF {Thousand(50000)}</Text>
+            <Text style={styles.budgetPrice}>XAF {KSeparator(0)}</Text>
           </View>
           <View style={styles.horizontalLine} />
           <View style={styles.budgetContainer}>
             <Text style={styles.budgetTitleTotal}>{i18n.t('words.total')}</Text>
-            <Text style={styles.budgetPriceTotal}>XAF {Thousand(50000)}</Text>
+            <Text style={styles.budgetPriceTotal}>
+              {KSeparator(
+                order.reduce(
+                  (sum, item) =>
+                    sum +
+                    (item.pastryId.discount
+                      ? ((100 - item.pastryId.discount) / 100) *
+                        item.pastryId.price *
+                        item.quantity
+                      : item.pastryId.price * item.quantity),
+                  Number(address.deliveryFee),
+                ),
+              )}
+              XAF{' '}
+            </Text>
           </View>
           <LinearGradient
             style={styles.gradient}
@@ -203,7 +277,7 @@ const Checkout = (props) => {
           </LinearGradient>
         </View>
       </ScrollView>
-      <ItemsDetail info={info} setInfo={setInfo} />
+      <ItemsDetail info={itemDet} setInfo={setItemDet} />
       <Card
         isCard={isCard}
         setIsCard={setIsCard}
@@ -222,10 +296,12 @@ const Checkout = (props) => {
   );
 };
 
-const mapStateToProps = ({i18n, cart}) => {
+const mapStateToProps = ({i18n, cart, auth}) => {
   return {
     i18n: i18n.i18n,
     cart: cart.cart,
+    user: auth.user,
+    token: auth.token,
   };
 };
 export default connect(mapStateToProps)(Checkout);

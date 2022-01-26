@@ -234,7 +234,7 @@ const BestFavourite = (props) => {
         style={styles.bestBackground}
         source={
           item?.pastryId?.image
-            ? {uri: BASE_URL + '/' + item?.pastryId?.image}
+            ? {uri: `${BASE_URL}/${item?.pastryId?.image[0]}`}
             : require('../../../resources/images/logo-1.png')
         }>
         <LinearGradient

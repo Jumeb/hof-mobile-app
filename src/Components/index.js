@@ -27,6 +27,7 @@ import OrderDetailsCard from './OrderCard/OrderDetailsCard.component';
 import Notification from './Notification/Notification.component';
 import DeleteModal from './DeleteModal/DeleteModal.component';
 import Status from './Status/Status.component';
+import FloatingButton from './FloatingButton/FloatingButton.component';
 
 export {
   Text,
@@ -58,4 +59,5 @@ export {
   Notification,
   DeleteModal,
   Status,
+  FloatingButton,
 };

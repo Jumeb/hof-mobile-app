@@ -67,6 +67,7 @@ export default {
     confirm: 'Confirm',
     chef: 'Chef',
     suspended: 'Suspended',
+    order: 'Order',
     //New
   },
   phrases: {

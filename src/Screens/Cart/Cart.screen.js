@@ -131,7 +131,7 @@ const Cart = (props) => {
     //   setNotify(false);
     //   setInfo({});
     // };
-  }, [user, i18n, cart, addCartObj]);
+  }, [user, i18n, cart, addCartObj, isDelete]);
 
   const Trash = (data) => {
     setLoading(true);
@@ -212,7 +212,6 @@ const Cart = (props) => {
         if (statusCode === 200) {
           setUser(response.user);
           setCart(response.bakers);
-          console.log(response.user, 'user');
           addCartObj(response.bakers);
         }
 
@@ -220,7 +219,6 @@ const Cart = (props) => {
           setNotify(true);
           setInfo({
             type: 'error',
-            title: 'Unexpected Error',
             msg: i18n.t('phrases.couldNotLoadCart'),
           });
         }
@@ -296,12 +294,9 @@ const Cart = (props) => {
                     <Text style={styles.paymentTitle}>
                       {i18n.t('phrases.paymentDetails')}
                     </Text>
-                    {_user.length > 0 &&
-                      _user.find(
-                        (data) =>
-                          data.pastryId.creatorId.companyName ===
-                          `${Object.keys(_cart)[ind]}`,
-                      ).pastryId.creatorId.suspend && (
+                    {items[ind] &&
+                      items[ind]?.pastryId &&
+                      items[ind]?.pastryId?.creatorId?.suspend && (
                         <Text style={styles.suspended}>
                           {i18n.t('phrases.suspendedOrderAt')}
                         </Text>
@@ -370,7 +365,11 @@ const Cart = (props) => {
                       colors={[theme.SECONDARY_COLOR, theme.TERTIARY_COLOR]}>
                       <TouchableOpacity
                         style={styles.checkoutButton}
-                        onPress={() => Actions.checkout()}>
+                        onPress={() =>
+                          Actions.checkout({
+                            order: items,
+                          })
+                        }>
                         <Text style={styles.checkoutButtonText}>
                           {i18n.t('words.checkout')}
                         </Text>

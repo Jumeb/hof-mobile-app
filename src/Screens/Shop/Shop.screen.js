@@ -5,6 +5,7 @@ import {
   SafeAreaView,
   FlatList,
   ScrollView,
+  StatusBar,
   TouchableOpacity,
   Image,
 } from 'react-native';
@@ -16,12 +17,14 @@ import {Actions} from 'react-native-router-flux';
 import {
   Best,
   Categories,
+  FloatingButton,
   NavBar,
   Notification,
   PastryCard,
 } from '../../Components';
 import styles from './Shop.style';
 import theme from '../../../resources/Colors/theme';
+import {setEntry} from '../../redux/actions/AuthActions';
 import {scrolling} from '../../redux/actions/ScrollActions';
 import {BASE_URL, Search} from '../../utils';
 import {addToCart} from '../../redux/actions/CartAction';
@@ -40,15 +43,18 @@ const Shop = (props) => {
     token,
     cart,
     items,
+    firstTime,
     setItems,
+    setEntry,
     addAllDislikes,
     addAllLikes,
     user,
   } = props;
-  const [active, setActive] = useState(0);
+  const [active, setActive] = useState(-1);
   const [layout, setLayout] = useState(0);
   const [notify, setNotify] = useState(false);
   const [categories, setCategories] = useState([]);
+  const [show, setShow] = useState(false);
   const [loading, setLoading] = useState(false);
   const [articles, setArticles] = useState([]);
   const [info, setInfo] = useState({});
@@ -57,6 +63,22 @@ const Shop = (props) => {
   const [icon, setIcon] = useState(
     require('../../../resources/images/favicon-1.png'),
   );
+
+  useEffect(() => {
+    if (firstTime) {
+      setTimeout(() => {
+        setNotify(true);
+        setInfo({
+          type: 'success',
+          msg: i18n.t('phrases.welcomeBack') + ', ' + user?.name,
+        });
+      }, 100);
+      setEntry();
+    }
+    setTimeout(() => {
+      setNotify(false);
+    }, 5000);
+  }, [firstTime, i18n, user?.name, setEntry]);
 
   useEffect(() => {
     const favicon = [
@@ -79,11 +101,43 @@ const Shop = (props) => {
     // };
   }, [i18n]);
 
-  useEffect(() => {
-    setCategories(baker.categories);
-  }, [baker, categories, cart]);
+  const Filter = (filter, i) => {
+    setActive(i);
+    if (filter !== 'all') {
+      let Pastries = items.filter(
+        (data) => data.type.toLowerCase() === filter.toLowerCase(),
+      );
+      setArticles(Pastries);
+    }
+    if (filter === 'all') {
+      setArticles(items);
+    }
+  };
 
   useEffect(() => {
+    if (baker?._id.toString().length > 5) {
+      setCategories(baker.categories);
+      return;
+    }
+    setCategories([
+      'Birthday cakes',
+      'Food',
+      'Valentines',
+      'Wedding cakes',
+      'Doughnuts',
+      'Pancakes',
+      'Cup cakes',
+      'Gift Baskets',
+      'Pies',
+      'Pizzas',
+      'Cookies',
+    ]);
+  }, [baker?._id, baker?.categories]);
+
+  useEffect(() => {
+    if (baker?._id.toString().length < 5) {
+      setShow(true);
+    }
     setLoading(true);
     fetch(`${BASE_URL}/superpastriesmob`, {
       method: 'GET',
@@ -102,18 +156,23 @@ const Shop = (props) => {
         setLoading(false);
 
         if (statusCode === 200) {
-          setArticles(
-            response.pastries.filter(
-              (pastry) =>
-                pastry?.creatorId?._id.toString() === baker._id.toString(),
-            ),
-          );
-          setItems(
-            response.pastries.filter(
-              (pastry) =>
-                pastry?.creatorId?._id.toString() === baker._id.toString(),
-            ),
-          );
+          if (baker._id.length > 4) {
+            setItems(
+              response.pastries.filter(
+                (pastry) =>
+                  pastry?.creatorId?._id.toString() === baker._id.toString(),
+              ),
+            );
+            setArticles(
+              response.pastries.filter(
+                (pastry) =>
+                  pastry?.creatorId?._id.toString() === baker._id.toString(),
+              ),
+            );
+            return;
+          }
+          setItems(response.pastries);
+          setArticles(response.pastries);
         }
 
         if (statusCode === 500) {
@@ -137,7 +196,7 @@ const Shop = (props) => {
           });
         }
       });
-  }, [setItems, i18n, token, baker._id, user?._id]);
+  }, [setItems, i18n, token, baker?._id, user?._id]);
 
   const onRefresh = () => {
     setSorry(false);
@@ -200,7 +259,7 @@ const Shop = (props) => {
     return (
       <View>
         <View>
-          <View style={styles.pastriesContainer}>
+          <View style={[styles.pastriesContainer, show && {marginTop: 8}]}>
             <Text style={styles.topPastries}>
               {i18n.t('phrases.mostLiked')}
             </Text>
@@ -227,14 +286,20 @@ const Shop = (props) => {
           horizontal={true}
           showsHorizontalScrollIndicator={false}
           style={styles.paddingContent}>
-          {categories.map((category, key) => {
+          <Categories
+            categoryIndex={-1}
+            activeIndex={active}
+            category={'All'}
+            setActiveIndex={() => Filter('all', -1)}
+          />
+          {categories.sort().map((category, key) => {
             return (
               <Categories
                 key={key}
                 categoryIndex={key}
                 activeIndex={active}
                 category={category}
-                setActiveIndex={setActive}
+                setActiveIndex={(f, i) => Filter(f, i)}
               />
             );
           })}
@@ -268,11 +333,12 @@ const Shop = (props) => {
 
   return (
     <SafeAreaView style={styles.mainContainer}>
+      <StatusBar animated={true} backgroundColor={theme.PRIMARY_COLOR} />
       <NavBar
         screen={'Shop'}
         search={true}
-        pop={true}
-        cartNumber={cart?.pastries.length}
+        pop={show ? false : true}
+        cartNumber={cart?.pastries ? cart?.pastries.length : 0}
         text={text}
         setText={setText}
       />
@@ -330,12 +396,8 @@ const Shop = (props) => {
           </TouchableOpacity>
         </View>
       )}
-      <Notification
-        notify={notify}
-        setNotify={setNotify}
-        msg={i18n.t('phrases.addedToCart')}
-        type="success"
-      />
+      <Notification notify={notify} setNotify={setNotify} info={info} />
+      <FloatingButton show={show} />
     </SafeAreaView>
   );
 };
@@ -346,6 +408,7 @@ const mapStateToProps = ({i18n, auth, cart, favourites}) => {
     user: auth.user,
     token: auth.token,
     cart: cart.cart,
+    firstTime: auth.firstTime,
     items: auth.items,
     favourites: favourites.favourites,
   };
@@ -361,6 +424,7 @@ const mapDispatchToProps = (dispatch) => {
       addDislikes,
       addAllLikes,
       addAllDislikes,
+      setEntry,
     },
     dispatch,
   );

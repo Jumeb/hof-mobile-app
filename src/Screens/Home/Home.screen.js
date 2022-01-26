@@ -53,22 +53,6 @@ const Home = (props) => {
   }, [i18n]);
 
   useEffect(() => {
-    if (firstTime) {
-      setTimeout(() => {
-        setNotify(true);
-        setInfo({
-          type: 'success',
-          msg: i18n.t('phrases.welcomeBack') + ', ' + user?.name,
-        });
-      }, 100);
-      props.setEntry();
-    }
-    setTimeout(() => {
-      setNotify(false);
-    }, 5000);
-  }, [props, firstTime, i18n, user?.name]);
-
-  useEffect(() => {
     setLoading(true);
     fetch(`${BASE_URL}/bakersmob`, {
       method: 'GET',
@@ -250,7 +234,6 @@ const Home = (props) => {
           </TouchableOpacity>
         </View>
       )}
-      <Notification notify={notify} setNotify={setNotify} info={info} />
     </SafeAreaView>
   );
 };

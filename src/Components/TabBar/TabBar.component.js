@@ -78,7 +78,7 @@ const TabIcon = (props) => {
   // if (title === 'orders') {
   //   icon = 'ios-receipt-outline';
   // }
-  if (title === 'home') {
+  if (title === 'shop') {
     icon = 'ios-home-outline';
     index = 0;
   }
@@ -102,7 +102,7 @@ const TabIcon = (props) => {
             ? styles.tabTabTextSelected
             : styles.tabTabText
         }>
-        {title === 'home'
+        {title === 'shop'
           ? i18n.t('words.home').toUpperCase()
           : title === 'settings'
           ? i18n.t('words.settings').toUpperCase()

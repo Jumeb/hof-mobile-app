@@ -139,7 +139,7 @@ const Wallet = (props) => {
           <TouchableOpacity
             style={styles.opContainer}
             activeOpacity={0.7}
-            onPress={() => Actions.home()}>
+            onPress={() => Actions.shop()}>
             <View style={styles.opCard}>
               <Icons
                 name="ios-cart-outline"

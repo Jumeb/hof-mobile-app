@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
     backgroundColor: theme.WHITE_COLOR,
     paddingHorizontal: 8,
     paddingBottom: 12,
-    maxHeight: theme.HEIGHT_100 * 0.75,
+    maxHeight: theme.HEIGHT_100 * 0.8,
   },
   title: {
     fontSize: theme.FONT_SIZE_LARGE,
@@ -57,6 +57,14 @@ const styles = StyleSheet.create({
   },
   success: {
     backgroundColor: theme.TERTIARY_COLOR,
+  },
+  fee: {
+    marginLeft: 'auto',
+    fontSize: theme.FONT_SIZE_SMALL,
+  },
+  feeContainer: {
+    width: 300,
+    flexDirection: 'row',
   },
 });
 

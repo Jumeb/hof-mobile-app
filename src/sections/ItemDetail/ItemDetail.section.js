@@ -31,7 +31,7 @@ const ItemDetail = (props) => {
 
   useEffect(() => {
     let _images = [];
-    _images.push(item?.pastryId?.image);
+    _images = item?.pastryId?.image;
     setImages(_images);
   }, [item?.pastryId?.image]);
 
@@ -287,16 +287,18 @@ const ItemDetail = (props) => {
           />
         </TouchableOpacity>
         <SwiperFlatList autoplay autoplayDelay={7} autoplayLoop>
-          {images.map((d, key) => {
-            return (
-              <Header
-                data={d}
-                index={key + 1}
-                length={images?.length}
-                key={key}
-              />
-            );
-          })}
+          {images &&
+            images.length >= 1 &&
+            images.map((d, key) => {
+              return (
+                <Header
+                  data={d}
+                  index={key + 1}
+                  length={images?.length}
+                  key={key}
+                />
+              );
+            })}
         </SwiperFlatList>
         <View style={styles.infoContainer}>
           <Text style={styles.categoryName}>{item?.pastryId?.type}</Text>
@@ -419,7 +421,7 @@ const Header = (props) => {
       <Image
         source={
           data
-            ? {uri: BASE_URL + '/' + data}
+            ? {uri: `${BASE_URL}/${data}`}
             : require('../../../resources/images/logo-1.png')
         }
         style={styles.pastryImage}

@@ -285,7 +285,7 @@ const PastryCard = (props) => {
             <Image
               source={
                 data?.image
-                  ? {uri: BASE_URL + '/' + data?.image}
+                  ? {uri: `${BASE_URL}/${data?.image[0]}`}
                   : require('../../../resources/images/weds-2.jpg')
               }
               imageStyle={styles.pastryImage2}
@@ -404,7 +404,7 @@ const PastryCard = (props) => {
             <Image
               source={
                 data?.image
-                  ? {uri: BASE_URL + '/' + data?.image}
+                  ? {uri: `${BASE_URL}/${data?.image[0]}`}
                   : require('../../../resources/images/vals-3.jpg')
               }
               imageStyle={styles.pastryImage}

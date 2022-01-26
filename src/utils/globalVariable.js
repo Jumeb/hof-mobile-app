@@ -1,6 +1,6 @@
 // Development API
 
-const BASE_URL = 'http://192.168.250.13:8082';
+const BASE_URL = 'http://192.168.105.13:8082';
 
 //Launch API
 
